@@ -1,0 +1,28 @@
+{
+  "name": "selective-edit",
+  "version": "0.1.0",
+  "description": "Selective structured text editor.",
+  "main": "src/index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grow/selective-edit.git"
+  },
+  "keywords": [
+    "structured",
+    "document",
+    "ui",
+    "editor"
+  ],
+  "author": "Grow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grow/selective-edit/issues"
+  },
+  "homepage": "https://github.com/grow/selective-edit#readme"
+}
