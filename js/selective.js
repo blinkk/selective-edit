@@ -68,10 +68,8 @@ export default class Selective {
       fieldConfig = new Config(fieldConfig || {})
     }
 
-    let fieldEl = document.createElement('div')
+    const fieldEl = document.createElement('div')
     this.fieldsEl.appendChild(fieldEl)
-    // Doesn't work without selecting the added child?!?
-    fieldEl = this.fieldsEl.children[this.fieldsEl.children.length - 1]
     const fieldType = this.getFieldType(fieldConfig.type)
     const field = new Field(fieldEl, fieldType, fieldConfig)
     this.fields.push(field)
