@@ -6,11 +6,11 @@
 
 export default class DeepObject {
   constructor(obj) {
-    this._obj = obj || {}
+    this.obj = obj || {}
   }
 
   get(key) {
-    let root = this._obj
+    let root = this.obj
     for (const part of key.split('.')) {
       if (!root) {
         return undefined

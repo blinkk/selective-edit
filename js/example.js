@@ -30,7 +30,6 @@ new MDCTextField(dataMdc)
 new MDCTextField(valueMdc)
 
 const handleValueChange = (e) => {
-  console.log(valueEl);
   valueEl.textContent = JSON.stringify(exampleSelective.value, null, 2)
 }
 handleValueChange()

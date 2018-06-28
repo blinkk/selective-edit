@@ -2,6 +2,7 @@
  * Selective structure content editor.
  */
 
+import * as extend from 'deep-extend'
 import {
   autoConfig
 } from './utility/config'
@@ -69,7 +70,7 @@ export default class Selective {
       value[field.key] = field.value
     }
 
-    return value
+    return extend(value, this.data.obj, {})
   }
 
   addField(fieldConfig) {
