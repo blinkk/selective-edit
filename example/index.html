@@ -12,28 +12,38 @@
     <div class="container">
       <div class="content">
         <div class="content__data">
-          <h2>Data:</h2>
-          <textarea id="data">{
-  "title": "The stuff dreams are made of.",
-  "description": "Fluffy stuff. Wispy stuff. Flying stuff. Falling stuff. Weird stuff."
-}</textarea>
+          <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--upgraded">
+            <textarea id="data" class="mdc-text-field__input" rows="6">{
+    "title": "The stuff dreams are made of.",
+    "description": "Fluffy stuff. Wispy stuff. Flying stuff. Falling stuff. Weird stuff."
+  }</textarea>
+            <label for="data" class="mdc-floating-label">Configuration</label>
+          </div>
         </div>
         <div class="content__config">
-          <h2>Config:</h2>
-          <textarea id="config">{
-  "fields": [
-    {
-      "type": "text",
-      "key": "title",
-      "label": "Title"
-    },
-    {
-      "type": "textarea",
-      "key": "description",
-      "label": "Description"
-    }
-  ]
-}</textarea>
+          <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--upgraded">
+            <textarea id="config" class="mdc-text-field__input" rows="6">{
+    "fields": [
+      {
+        "type": "text",
+        "key": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "key": "description",
+        "label": "Description"
+      }
+    ]
+  }</textarea>
+            <label for="config" class="mdc-floating-label">Configuration</label>
+          </div>
+        </div>
+        <div class="content__value">
+          <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--upgraded">
+            <textarea id="value" class="mdc-text-field__input" rows="6">{value}</textarea>
+            <label for="value" class="mdc-floating-label">Edited value</label>
+          </div>
         </div>
       </div>
       <div class="sidebar">
