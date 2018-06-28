@@ -62,6 +62,16 @@ export default class Selective {
     return true
   }
 
+  get value() {
+    const value = {}
+
+    for (const field of this.fields) {
+      value[field.key] = field.value
+    }
+
+    return value
+  }
+
   addField(fieldConfig) {
     fieldConfig = autoConfig(fieldConfig)
     const fieldEl = document.createElement('div')

@@ -31,8 +31,16 @@ export default class Field {
     return this._cleanValue == this.value
   }
 
+  get key() {
+    return this.config.get('key')
+  }
+
+  get value() {
+    return this.fieldType.getValue(this.fieldEl)
+  }
+
   render(data) {
-    const value = data.get(this.config.get('key'))
+    const value = data.get(this.key)
     this.fieldType.render(this.fieldEl, this.config, value)
   }
 }

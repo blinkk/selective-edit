@@ -13,6 +13,7 @@ import {
   MDCTextField
 } from '@material/textfield'
 
+
 export default class FieldType {
   constructor(type, config, template) {
     this.config = config
@@ -26,6 +27,14 @@ export default class FieldType {
 
   set config(value) {
     this._config = autoConfig(value)
+  }
+
+  getValue(element) {
+    const valueSelector = this.config.get('valueSelector')
+    if (valueSelector) {
+      return element.querySelector(valueSelector).value
+    }
+    return null
   }
 
   render(element, config, value) {
@@ -69,6 +78,7 @@ export const markdownFieldType = new FieldType('markdown', {}, (id, label, value
 export const textFieldType = new FieldType('text', {
   uiClass: MDCTextField,
   uiClassSelector: '.mdc-text-field',
+  valueSelector: 'input',
 }, (id, label, value) => html`<div class="field field__text">
   <div class="mdc-text-field mdc-text-field--upgraded">
     <input type="text" id="${id}" class="mdc-text-field__input" value="${value}">
@@ -81,6 +91,7 @@ export const textFieldType = new FieldType('text', {
 export const textareaFieldType = new FieldType('textarea', {
   uiClass: MDCTextField,
   uiClassSelector: '.mdc-text-field',
+  valueSelector: 'textarea',
 }, (id, label, value) => html`<div class="field field__textarea">
   <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--upgraded">
     <textarea id="${id}" class="mdc-text-field__input" rows="6">${value}</textarea>
