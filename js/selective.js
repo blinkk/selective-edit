@@ -2,9 +2,15 @@
  * Selective structure content editor.
  */
 
-import {autoConfig} from './utility/config'
-import {autoDeepObject} from './utility/deepObject'
-import {defaultFieldTypes} from './editor/fieldType'
+import {
+  autoConfig
+} from './utility/config'
+import {
+  autoDeepObject
+} from './utility/deepObject'
+import {
+  defaultFieldTypes
+} from './editor/fieldType'
 import expandObject from './utility/expandObject'
 import Field from './editor/field'
 
@@ -87,7 +93,7 @@ export default class Selective {
 
   getFieldType(type) {
     if (!this._fieldTypes || !type in this._fieldTypes) {
-      throw(`Unknown field type: ${type}`)
+      throw (`Unknown field type: ${type}`)
     }
 
     return this._fieldTypes[type]

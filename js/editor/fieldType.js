@@ -2,8 +2,16 @@
  * Field Type for the editor.
  */
 
-import Config from '../utility/config'
-import {html, render} from 'lit-html'
+import {
+  autoConfig
+} from '../utility/config'
+import {
+  html,
+  render
+} from 'lit-html'
+import {
+  MDCTextField
+} from '@material/textfield'
 
 export default class FieldType {
   constructor(type, config, template) {
@@ -17,14 +25,16 @@ export default class FieldType {
   }
 
   set config(value) {
-    if (!(value instanceof Config)) {
-      value = new Config(value || {})
-    }
-    this._config = value
+    this._config = autoConfig(value)
   }
 
   render(element, config, value) {
     render(this.template(config.id, config.label, value), element)
+
+    if (this.config.uiClass && this.config.uiClassSelector && !this.fieldUi) {
+      this.fieldUi = new this.config.uiClass(
+        element.querySelector(this.config.uiClassSelector))
+    }
   }
 }
 
@@ -56,20 +66,26 @@ export const markdownFieldType = new FieldType('markdown', {}, (id, label, value
 </div>`)
 
 
-export const textFieldType = new FieldType('text', {}, (id, label, value) => html`<div class="field field__text">
- <div class="mdc-text-field mdc-text-field--upgraded">
-   <input type="text" id="${id}" class="mdc-text-field__input" value="${value}">
-   <label class="mdc-floating-label" for="${id}">${label}</label>
-   <div class="mdc-line-ripple"></div>
- </div>
+export const textFieldType = new FieldType('text', {
+  uiClass: MDCTextField,
+  uiClassSelector: '.mdc-text-field',
+}, (id, label, value) => html`<div class="field field__text">
+  <div class="mdc-text-field mdc-text-field--upgraded">
+    <input type="text" id="${id}" class="mdc-text-field__input" value="${value}">
+    <label class="mdc-floating-label" for="${id}">${label}</label>
+    <div class="mdc-line-ripple" style="transform-origin: 88px center 0px;"></div>
+  </div>
 </div>`)
 
 
-export const textareaFieldType = new FieldType('textarea', {}, (id, label, value) => html`<div class="field field__textarea">
- <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense">
-   <textarea id="${id}" class="mdc-text-field__input" rows="4">${value}</textarea>
-   <label for="${id}" class="mdc-floating-label">${label}</label>
- </div>
+export const textareaFieldType = new FieldType('textarea', {
+  uiClass: MDCTextField,
+  uiClassSelector: '.mdc-text-field',
+}, (id, label, value) => html`<div class="field field__textarea">
+  <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--upgraded">
+    <textarea id="${id}" class="mdc-text-field__input" rows="6">${value}</textarea>
+    <label for="${id}" class="mdc-floating-label">${label}</label>
+  </div>
 </div>`)
 
 

@@ -2,7 +2,9 @@
  * Fields for the editor.
  */
 
-import {autoConfig} from '../utility/config'
+import {
+  autoConfig
+} from '../utility/config'
 
 export default class Field {
   constructor(fieldEl, fieldType, config) {
