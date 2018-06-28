@@ -23,3 +23,11 @@ export default class DeepObject {
     return root
   }
 }
+
+
+export const autoDeepObject = (value) => {
+  if (value instanceof DeepObject) {
+    return value
+  }
+  return new DeepObject(value)
+}

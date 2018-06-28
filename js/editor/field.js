@@ -2,7 +2,7 @@
  * Fields for the editor.
  */
 
-import Config from '../utility/config'
+import {autoConfig} from '../utility/config'
 
 export default class Field {
   constructor(fieldEl, fieldType, config) {
@@ -18,10 +18,7 @@ export default class Field {
   }
 
   set config(value) {
-    if (!(value instanceof Config)) {
-      value = new Config(value || {})
-    }
-    this._config = value
+    this._config = autoConfig(value)
   }
 
   get id() {

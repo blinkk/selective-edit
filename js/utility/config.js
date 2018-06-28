@@ -25,3 +25,11 @@ export default class Config {
     return this[key] = value
   }
 }
+
+
+export const autoConfig = value => {
+  if (value instanceof Config) {
+    return value
+  }
+  return new Config(value)
+}

@@ -2,8 +2,8 @@
  * Selective structure content editor.
  */
 
-import Config from './utility/config'
-import DeepObject from './utility/deepObject'
+import {autoConfig} from './utility/config'
+import {autoDeepObject} from './utility/deepObject'
 import {defaultFieldTypes} from './editor/fieldType'
 import expandObject from './utility/expandObject'
 import Field from './editor/field'
@@ -30,11 +30,7 @@ export default class Selective {
   }
 
   set config(value) {
-    if (!(value instanceof Config)) {
-      value = new Config(value || {})
-    }
-    this._config = value
-
+    this._config = autoConfig(value)
     this.clearFields()
 
     for (const fieldConfig of this._config.get('fields', [])) {
@@ -47,10 +43,7 @@ export default class Selective {
   }
 
   set data(value) {
-    if (!(value instanceof DeepObject)) {
-      value = new DeepObject(value || {})
-    }
-    this._data = value
+    this._data = autoDeepObject(value)
     this.render()
   }
 
@@ -64,10 +57,7 @@ export default class Selective {
   }
 
   addField(fieldConfig) {
-    if (!(fieldConfig instanceof Config)) {
-      fieldConfig = new Config(fieldConfig || {})
-    }
-
+    fieldConfig = autoConfig(fieldConfig)
     const fieldEl = document.createElement('div')
     this.fieldsEl.appendChild(fieldEl)
     const fieldType = this.getFieldType(fieldConfig.type)
