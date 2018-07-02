@@ -24,6 +24,9 @@ exampleSelective.data = JSON.parse(dataEl.value)
 // Functionality for making the example page function.
 // -----------------------------------------------------------
 
+// Make the object available in the global scope for ad lib testing.
+window.selective = exampleSelective
+
 // Create the example MDC components.
 new MDCTextField(configMdc)
 new MDCTextField(dataMdc)
@@ -33,3 +36,8 @@ const handleValueChange = (e) => {
   valueEl.textContent = JSON.stringify(exampleSelective.value, null, 2)
 }
 handleValueChange()
+
+const handleCleanCheck = (e) => {
+  console.log('Is Clean?', exampleSelective.isClean);
+}
+window.setTimeout(handleCleanCheck, 5000)

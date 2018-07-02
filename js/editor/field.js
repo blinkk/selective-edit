@@ -41,6 +41,7 @@ export default class Field {
 
   render(data) {
     const value = data.get(this.key)
+    this._cleanValue = value
     this.fieldType.render(this.fieldEl, this.config, value)
   }
 }
