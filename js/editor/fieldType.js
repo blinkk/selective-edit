@@ -9,6 +9,9 @@ import {
   html,
   render
 } from 'lit-html'
+import marked from 'marked'
+import pell from 'pell'
+import TurndownService from 'turndown'
 import {
   MDCTextField
 } from '@material/textfield'
@@ -29,6 +32,24 @@ export default class FieldType {
     this._config = autoConfig(value)
   }
 
+  /**
+   * Bind the field for any events or modification.
+   */
+  bindField(field, element) {
+    const inputEls = this.inputEls
+    if (inputEls && inputEls.length) {
+      for (const inputEl of inputEls) {
+        // Bind the blur and focus to keep track of when it is being edited.
+        inputEl.addEventListener('blur', () => {
+          field.isFocused = false
+        })
+        inputEl.addEventListener('focus', () => {
+          field.isFocused = true
+        })
+      }
+    }
+  }
+
   getInputEls(element) {
     const inputEls = []
 
@@ -45,7 +66,7 @@ export default class FieldType {
     return inputEls
   }
 
-  getValue(element) {
+  getValue(field, element) {
     const valueSelector = this.config.get('valueSelector')
     if (valueSelector) {
       return element.querySelector(valueSelector).value
@@ -53,13 +74,56 @@ export default class FieldType {
     return null
   }
 
-  render(element, config, value) {
+  postRender(field, element, config, value) {
+    // Do nothing by default after rendering.
+  }
+
+  render(field, element, config, value) {
     render(this.template(config.id, config.label, value), element)
 
     if (this.config.uiClass && this.config.uiClassSelector && !this.fieldUi) {
       this.fieldUi = new this.config.uiClass(
         element.querySelector(this.config.uiClassSelector))
     }
+  }
+
+  setValue(field, element, config, value) {
+    this.render(field, element, config, value)
+  }
+}
+
+
+export class MarkdownFieldType extends FieldType {
+  constructor(type, config, template) {
+    super(type, config, template)
+    this.turndownService = new TurndownService({ headingStyle: 'atx' })
+  }
+
+  bindField(field, element) {
+    super.bindField(field, element)
+
+    const actions = this.config.get('pellActions', [
+      'bold', 'italic', 'heading1', 'heading2', 'olist', 'ulist', 'link'])
+
+    if (!field.editor) {
+      field.editor = pell.init({
+        element: field.inputEls[0],
+        actions: actions,
+        onChange: () => {}
+      })
+    }
+  }
+
+  getValue(field, element) {
+    return this.turndownService.turndown(field.editor.content.innerHTML)
+  }
+
+  postRender(field, element, config, value) {
+    this.setValue(field, element, config, value)
+  }
+
+  setValue(field, element, config, value) {
+    field.editor.content.innerHTML = marked(value || '')
   }
 }
 
@@ -85,9 +149,13 @@ export const listFieldType = new FieldType('list', {}, (id, label, value) => htm
 </div>`)
 
 
-export const markdownFieldType = new FieldType('markdown', {}, (id, label, value) => html`<div class="field field__markdown">
+export const markdownFieldType = new MarkdownFieldType('markdown', {
+  inputSelectors: [
+    '.pell',
+  ],
+}, (id, label, value) => html`<div class="field field__markdown">
   <div class="field__markdown__label">${label}</div>
-  <div id="${id}" class="pell">${value}</div>
+  <div id="${id}" class="pell"></div>
 </div>`)
 
 
