@@ -70,7 +70,7 @@ export default class Selective {
       value[field.key] = field.value
     }
 
-    return extend(value, this.data.obj, {})
+    return extend({}, this.data.obj, value)
   }
 
   addField(fieldConfig) {
@@ -121,5 +121,17 @@ export default class Selective {
    */
   reset() {
     this.data = {}
+  }
+
+  /**
+   * Apply an update to the existing data without losing the unchanged values.
+   */
+  update(value) {
+    value = extend({}, this.data.obj, value)
+    this._data = autoDeepObject(value)
+
+    for (const field of this.fields) {
+      field.update(this.data)
+    }
   }
 }

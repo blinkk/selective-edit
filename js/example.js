@@ -36,8 +36,18 @@ const handleValueChange = (e) => {
   valueEl.textContent = JSON.stringify(exampleSelective.value, null, 2)
 }
 handleValueChange()
+window.setInterval(handleValueChange, 2000)
+
 
 const handleCleanCheck = (e) => {
   console.log('Is Clean?', exampleSelective.isClean);
 }
-window.setTimeout(handleCleanCheck, 5000)
+window.setTimeout(handleCleanCheck, 3000)
+
+const handleUpdate = () => {
+  exampleSelective.update({
+    "title": "The stuff nightmares are made of.",
+  })
+  console.log('Updated data. Is Clean?', exampleSelective.isClean);
+}
+window.setTimeout(handleUpdate, 6000)

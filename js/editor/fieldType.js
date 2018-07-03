@@ -29,6 +29,22 @@ export default class FieldType {
     this._config = autoConfig(value)
   }
 
+  getInputEls(element) {
+    const inputEls = []
+
+    const selectors = this.config.get('inputSelectors')
+    if (selectors) {
+      for (const selector of selectors) {
+        const inputEl = element.querySelector(selector)
+        if (inputEl) {
+          inputEls.push(inputEl)
+        }
+      }
+    }
+
+    return inputEls
+  }
+
   getValue(element) {
     const valueSelector = this.config.get('valueSelector')
     if (valueSelector) {
@@ -78,6 +94,9 @@ export const markdownFieldType = new FieldType('markdown', {}, (id, label, value
 export const textFieldType = new FieldType('text', {
   uiClass: MDCTextField,
   uiClassSelector: '.mdc-text-field',
+  inputSelectors: [
+    'input',
+  ],
   valueSelector: 'input',
 }, (id, label, value) => html`<div class="field field__text">
   <div class="mdc-text-field mdc-text-field--upgraded">
@@ -91,6 +110,9 @@ export const textFieldType = new FieldType('text', {
 export const textareaFieldType = new FieldType('textarea', {
   uiClass: MDCTextField,
   uiClassSelector: '.mdc-text-field',
+  inputSelectors: [
+    'textarea',
+  ],
   valueSelector: 'textarea',
 }, (id, label, value) => html`<div class="field field__textarea">
   <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--upgraded">
