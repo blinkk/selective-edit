@@ -35,8 +35,8 @@ export default class FieldType {
   /**
    * Bind the field for any events or modification.
    */
-  bindField(field, element) {
-    const inputEls = this.inputEls
+  bindField(field, element, inputEls) {
+    inputEls = inputEls || this.inputEls
     if (inputEls && inputEls.length) {
       for (const inputEl of inputEls) {
         // Bind the blur and focus to keep track of when it is being edited.
@@ -100,8 +100,6 @@ export class MarkdownFieldType extends FieldType {
   }
 
   bindField(field, element) {
-    super.bindField(field, element)
-
     const actions = this.config.get('pellActions', [
       'bold', 'italic', 'heading1', 'heading2', 'olist', 'ulist', 'link'])
 
@@ -112,6 +110,8 @@ export class MarkdownFieldType extends FieldType {
         onChange: () => {}
       })
     }
+
+    super.bindField(field, element, [field.editor.content])
   }
 
   getValue(field, element) {
