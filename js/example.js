@@ -47,6 +47,7 @@ window.setTimeout(handleCleanCheck, 3000)
 const handleUpdate = () => {
   exampleSelective.update({
     "title": "The stuff nightmares are made of.",
+    "body": "Truffle snifflers.",
   })
   console.log('Updated data. Is Clean?', exampleSelective.isClean);
 }
