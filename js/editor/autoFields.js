@@ -25,7 +25,7 @@ export default class AutoFields {
 
     if (this.dataType.isArray(data)) {
       const firstValue = data.length ? data[0] : null
-      fields.push(this._fieldConfig(keyBase.join('.'), firstValue))
+      fields.push(this._fieldConfig('', firstValue))
     } else {
       for (const key in data) {
         if (!data.hasOwnProperty(key)) {
