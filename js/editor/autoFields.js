@@ -23,17 +23,22 @@ export default class AutoFields {
     let fields = []
     keyBase = keyBase || []
 
-    for (const key in data) {
-      if (!data.hasOwnProperty(key)) {
-        continue
-      }
+    if (this.dataType.isArray(data)) {
+      const firstValue = data.length ? data[0] : null
+      fields.push(this._fieldConfig(keyBase.join('.'), firstValue))
+    } else {
+      for (const key in data) {
+        if (!data.hasOwnProperty(key)) {
+          continue
+        }
 
-      const newKeyBase = keyBase.concat([key])
-      if (this.dataType.isObject(data[key])) {
-        fields = fields.concat(this._deepGuess(data[key], newKeyBase))
-      } else {
-        const fullKey = newKeyBase.join('.')
-        fields.push(this._fieldConfig(fullKey, data[key]))
+        const newKeyBase = keyBase.concat([key])
+        if (this.dataType.isObject(data[key])) {
+          fields = fields.concat(this._deepGuess(data[key], newKeyBase))
+        } else {
+          const fullKey = newKeyBase.join('.')
+          fields.push(this._fieldConfig(fullKey, data[key]))
+        }
       }
     }
 
@@ -49,8 +54,7 @@ export default class AutoFields {
     }
 
     if (fieldConfig.type == 'list') {
-      const firstValue = value.length ? value[0] : null
-      fieldConfig['field'] = this._fieldConfig(key, firstValue)
+      fieldConfig['fields'] = this._deepGuess(value, key.split('.'))
     }
 
     return fieldConfig
