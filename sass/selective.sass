@@ -10,3 +10,33 @@
 $pell-content-height: 20vh
 
 @import '../node_modules/pell/src/pell'
+
+// Make Pell look material.
+// TODO Use material mixins.
+.field__markdown
+  position: relative
+
+.field__markdown__label
+  bottom: auto
+  color: rgba(0,0,0,0.6)
+  font-size: .813rem
+  font-weight: 400
+  left: 1px
+  letter-spacing: .00937em
+  margin-left: 18px
+  pointer-events: none
+  position: absolute
+  right: 0
+  transform: translateY(-50%) scale(.923)
+  top: 38px
+
+.pell
+  border-color: rgba(0,0,0,0.73)
+  border-radius: 4px
+  padding-top: 38px
+
+.pell-actionbar
+  padding-left: 16px
+
+.pell-content
+  padding: 0px 16px 8px 16px
