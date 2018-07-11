@@ -13,6 +13,7 @@ import {
   defaultFieldTypes
 } from './editor/fieldType'
 import expandObject from './utility/expandObject'
+import AutoFields from './editor/autoFields'
 import Field from './editor/field'
 
 
@@ -20,6 +21,7 @@ export default class Selective {
   constructor(fieldsEl, config) {
     this._fieldTypes = {}
     this.fields = []
+    this.autoFields = null
 
     // Start with built-in field types.
     // Can be overwritten by adding fields of the same type.
@@ -50,6 +52,7 @@ export default class Selective {
   }
 
   set data(value) {
+    this.autoFields = new AutoFields(value)
     this._data = autoDeepObject(value)
     this.render()
   }
@@ -108,6 +111,10 @@ export default class Selective {
     }
 
     return this._fieldTypes[type]
+  }
+
+  guessFields() {
+    return this.autoFields.config
   }
 
   render() {

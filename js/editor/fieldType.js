@@ -81,8 +81,8 @@ export default class FieldType {
   render(field, element, config, value) {
     render(this.template(config.id, config.label, value), element)
 
-    if (this.config.uiClass && this.config.uiClassSelector && !this.fieldUi) {
-      this.fieldUi = new this.config.uiClass(
+    if (this.config.uiClass && this.config.uiClassSelector && !field.fieldUi) {
+      field.fieldUi = new this.config.uiClass(
         element.querySelector(this.config.uiClassSelector))
     }
   }

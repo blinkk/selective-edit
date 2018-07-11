@@ -51,13 +51,16 @@ body
   flex-flow: column
   flex-grow: 1
 
-.content__data,
-.content__config,
-.content__value
+.content__section
   align-items: stretch
   display: flex
   flex-flow: column
   flex-grow: 1
+  padding: 0 $pad
+
+.content__data__actions
+  flex-grow: 0
+  flex-shrink: 1
   padding: $pad
 
 .content textarea
@@ -127,6 +130,7 @@ body
   font-size: 1.2rem
 
 @import "./selective"
+@import "../node_modules/@material/button/mdc-button"
 
 .mdc-icon-toggle--toggled
   @include mdc-icon-toggle-ink-color($color-s)

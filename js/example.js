@@ -2,12 +2,17 @@ import Selective from './selective'
 import {
   MDCTextField
 } from '@material/textfield'
+import {
+  MDCRipple
+} from '@material/ripple'
 
 const configEl = document.querySelector('#config')
 const configMdc = document.querySelector('.content__config .mdc-text-field')
 const dataEl = document.querySelector('#data')
 const dataMdc = document.querySelector('.content__data .mdc-text-field')
 const fieldsEl = document.querySelector('#fields')
+const guessEl = document.querySelector('.content__data__actions .mdc-button')
+const guessMdc = document.querySelector('.content__data__actions .mdc-button')
 const valueEl = document.querySelector('#value')
 const valueMdc = document.querySelector('.content__value .mdc-text-field')
 
@@ -31,6 +36,20 @@ window.selective = exampleSelective
 new MDCTextField(configMdc)
 new MDCTextField(dataMdc)
 new MDCTextField(valueMdc)
+new MDCRipple(guessMdc)
+
+const handleDataChange = (e) => {
+  exampleSelective.data = JSON.parse(dataEl.value)
+}
+dataEl.addEventListener('change', handleDataChange)
+
+const handleGuessConfig = (e) => {
+  const newConfig = exampleSelective.autoFields.config
+  exampleSelective.config = newConfig
+  configEl.textContent = JSON.stringify(newConfig, null, 2)
+}
+guessEl.addEventListener('click', handleGuessConfig)
+
 
 const handleValueChange = (e) => {
   valueEl.textContent = JSON.stringify(exampleSelective.value, null, 2)
