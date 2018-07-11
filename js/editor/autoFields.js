@@ -49,8 +49,8 @@ export default class AutoFields {
     }
 
     if (fieldConfig.type == 'list') {
-
-      console.log('List!', fieldConfig);
+      const firstValue = value.length ? value[0] : null
+      fieldConfig['field'] = this._fieldConfig(key, firstValue)
     }
 
     return fieldConfig
