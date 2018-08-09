@@ -67,13 +67,13 @@ export default class Selective {
   }
 
   get value() {
-    const value = {}
+    const value = autoDeepObject({})
 
     for (const field of this.fields) {
-      value[field.key] = field.value
+      value.set(field.key, field.value)
     }
 
-    return extend({}, this.data.obj, value)
+    return extend({}, this.data.obj, value.obj)
   }
 
   addField(fieldConfig) {

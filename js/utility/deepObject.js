@@ -22,6 +22,19 @@ export default class DeepObject {
     }
     return root
   }
+
+  set(key, value) {
+    let root = this.obj
+    const parts = key.split('.')
+    for (let i = 0; i < parts.length - 1; i++) {
+      const part = parts[i]
+      if (!(part in root)) {
+        root[part] = {}
+      }
+      root = root[part]
+    }
+    root[parts[parts.length - 1]] = value
+  }
 }
 
 
