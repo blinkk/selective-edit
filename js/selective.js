@@ -106,7 +106,7 @@ export default class Selective {
   }
 
   getFieldType(type) {
-    if (!this._fieldTypes || !type in this._fieldTypes) {
+    if (!this._fieldTypes || !(type in this._fieldTypes)) {
       throw (`Unknown field type: ${type}`)
     }
 
