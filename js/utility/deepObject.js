@@ -39,7 +39,9 @@ export default class DeepObject {
 
 
 export const autoDeepObject = (value) => {
-  if (value instanceof DeepObject) {
+  // Allow for duck typing and external objects that define a get.
+  const has_get = value.get && typeof value.get === 'function'
+  if (has_get || value instanceof DeepObject) {
     return value
   }
   return new DeepObject(value)
