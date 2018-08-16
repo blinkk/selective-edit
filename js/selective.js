@@ -15,6 +15,7 @@ import {
 import expandObject from './utility/expandObject'
 import AutoFields from './editor/autoFields'
 import Field from './editor/field'
+import FieldType from './editor/fieldType'
 
 
 export default class Selective {
@@ -142,3 +143,5 @@ export default class Selective {
     }
   }
 }
+
+export { Field,  FieldType }
