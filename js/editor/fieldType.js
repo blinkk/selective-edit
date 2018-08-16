@@ -75,16 +75,14 @@ export default class FieldType {
   }
 
   postRender(field, element, config, value) {
-    // Do nothing by default after rendering.
-  }
-
-  render(field, element, config, value) {
-    render(this.template(config.id, config.label, value), element)
-
     if (this.config.uiClass && this.config.uiClassSelector && !field.fieldUi) {
       field.fieldUi = new this.config.uiClass(
         element.querySelector(this.config.uiClassSelector))
     }
+  }
+
+  render(field, element, config, value) {
+    render(this.template(config.id, config.label, value), element)
   }
 
   setValue(field, element, config, value) {
