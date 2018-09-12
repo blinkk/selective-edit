@@ -38,7 +38,7 @@
     "gulp-autoprefixer": "^5.0.0",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
-    "lit-html": "^0.10.2",
+    "lit-html": "^0.11.2",
     "marked": "^0.4.0",
     "pell": "^1.0.4",
     "superagent": "^3.8.3",
