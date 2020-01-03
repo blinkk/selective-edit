@@ -82,7 +82,7 @@ export default class FieldType {
   }
 
   render(field, element, config, value) {
-    render(this.template(config.id, config.label, value), element)
+    render(this.template(config.id, config.label, value, config.options || {}), element)
   }
 
   setValue(field, element, config, value) {
@@ -126,7 +126,7 @@ export class MarkdownFieldType extends FieldType {
 }
 
 
-export const listFieldType = new FieldType('list', {}, (id, label, value) => html`<div class="field field__list">
+export const listFieldType = new FieldType('list', {}, (id, label, value, options) => html`<div class="field field__list">
   <div class="list">
     <div class="list__label"></div>
     <div class="list__items">
@@ -151,7 +151,7 @@ export const markdownFieldType = new MarkdownFieldType('markdown', {
   inputSelectors: [
     '.pell',
   ],
-}, (id, label, value) => html`<div class="field field__markdown">
+}, (id, label, value, options) => html`<div class="field field__markdown">
   <div class="field__markdown__label">${label}</div>
   <div id="${id}" class="pell"></div>
 </div>`)
@@ -164,11 +164,11 @@ export const textFieldType = new FieldType('text', {
     'input',
   ],
   valueSelector: 'input',
-}, (id, label, value) => html`<div class="field field__text">
-  <div class="mdc-text-field mdc-text-field--upgraded">
+}, (id, label, value, options) => html`<div class="field field__text">
+  <div class="mdc-text-field">
     <input type="text" id="${id}" class="mdc-text-field__input" value="${value}">
     <label class="mdc-floating-label" for="${id}">${label}</label>
-    <div class="mdc-line-ripple" style="transform-origin: 88px center 0px;"></div>
+    <div class="mdc-line-ripple"></div>
   </div>
 </div>`)
 
@@ -180,10 +180,16 @@ export const textareaFieldType = new FieldType('textarea', {
     'textarea',
   ],
   valueSelector: 'textarea',
-}, (id, label, value) => html`<div class="field field__textarea">
-  <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--upgraded">
-    <textarea id="${id}" class="mdc-text-field__input" rows="6">${value}</textarea>
-    <label for="${id}" class="mdc-floating-label">${label}</label>
+}, (id, label, value, options) => html`<div class="field field__textarea">
+  <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth">
+    <textarea id="${id}" class="mdc-text-field__input" rows="${options.rows || 6}">${value}</textarea>
+    <div class="mdc-notched-outline">
+      <div class="mdc-notched-outline__leading"></div>
+      <div class="mdc-notched-outline__notch">
+        <label for="${id}" class="mdc-floating-label">${label}</label>
+      </div>
+      <div class="mdc-notched-outline__trailing"></div>
+    </div>
   </div>
 </div>`)
 

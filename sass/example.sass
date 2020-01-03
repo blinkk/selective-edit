@@ -56,7 +56,7 @@ body
   display: flex
   flex-flow: column
   flex-grow: 1
-  padding: 0 $pad
+  padding: $pad
 
 .content__data__actions
   flex-grow: 0
@@ -132,6 +132,6 @@ body
 @import "./selective"
 @import "../node_modules/@material/button/mdc-button"
 
-.mdc-icon-toggle--toggled
-  @include mdc-icon-toggle-ink-color($color-s)
-  @include mdc-states-base-color($color-s)
+// .mdc-icon-toggle--toggled
+//   @include mdc-icon-toggle-ink-color($color-s)
+//   @include mdc-states-base-color($color-s)
