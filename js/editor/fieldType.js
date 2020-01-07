@@ -77,6 +77,8 @@ export default class FieldType {
     if (this.config.uiClass && this.config.uiClassSelector && !field.fieldUi) {
       field.fieldUi = new this.config.uiClass(
         element.querySelector(this.config.uiClassSelector))
+    } else if (this.config.uiCallback && !field.fieldUi) {
+      field.fieldUi = this.config.uiCallback(element)
     }
   }
 

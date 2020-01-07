@@ -4,6 +4,9 @@
 
 import * as extend from 'deep-extend'
 import {
+  html
+} from 'lit-html'
+import {
   autoConfig
 } from './utility/config'
 import {
@@ -170,4 +173,4 @@ export default class Selective {
   }
 }
 
-export { Field,  FieldType }
+export { Field,  FieldType, html }
