@@ -79,11 +79,27 @@ export default class Field {
  * registered with the editor.
  */
 export class PlaceholderField extends Field {
+  constructor(fieldEl, fieldType, config) {
+    super(fieldEl, fieldType, config)
+    this.warningTimeout = null
+  }
+
   render(data) {
-    console.log(`Skipping rendering for placeholder field: ${this.fieldType}`)
+    // If it has been a bit since the first render and the field type is still
+    // not defined log a warning about the missing field type.
+    this.warningTimeout = window.setTimeout(() => {
+      console.warn(`Missing field type, skipping: ${this.fieldType}`)
+    }, 3500)
   }
 
   get isPlaceholder() {
     return true
+  }
+
+  remove() {
+    if (this.warningTimeout) {
+      window.clearTimeout(this.warningTimeout)
+      this.warningTimeout = null
+    }
   }
 }

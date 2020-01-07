@@ -114,8 +114,11 @@ export default class Selective {
       if (field.isPlaceholder && field.fieldType == fieldType.type) {
         this.fields[i] = new Field(field.fieldEl, fieldType, field.config)
 
+        // Tell the placeholder it is being removed.
+        field.remove()
+
         if (this.data) {
-          field.render(this.data)
+          this.fields[i].render(this.data)
         }
       }
     }
