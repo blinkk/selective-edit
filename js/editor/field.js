@@ -36,6 +36,10 @@ export default class Field {
     return this._cleanValue == this.value
   }
 
+  get isPlaceholder() {
+    return false
+  }
+
   get key() {
     return this.config.get('key')
   }
@@ -66,5 +70,20 @@ export default class Field {
     if (!this.isFocused) {
       this.fieldType.setValue(this, this.fieldEl, this.config, value)
     }
+  }
+}
+
+
+/**
+ * Placeholder Field to save the spot for a field type that has not been
+ * registered with the editor.
+ */
+export class PlaceholderField extends Field {
+  render(data) {
+    console.log(`Skipping rendering for placeholder field: ${this.fieldType}`)
+  }
+
+  get isPlaceholder() {
+    return true
   }
 }

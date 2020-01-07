@@ -14,8 +14,7 @@ import pell from 'pell'
 import TurndownService from 'turndown'
 import {
   MDCTextField
-} from '@material/textfield'
-
+} from '@material/textfield/index'
 
 export default class FieldType {
   constructor(type, config, template) {

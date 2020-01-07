@@ -15,6 +15,9 @@ import {
 import expandObject from './utility/expandObject'
 import AutoFields from './editor/autoFields'
 import Field from './editor/field'
+import {
+  PlaceholderField
+} from './editor/field'
 import FieldType from './editor/fieldType'
 
 
@@ -81,8 +84,16 @@ export default class Selective {
     fieldConfig = autoConfig(fieldConfig)
     const fieldEl = document.createElement('div')
     this.fieldsEl.appendChild(fieldEl)
+
+    let field = null
     const fieldType = this.getFieldType(fieldConfig.type)
-    const field = new Field(fieldEl, fieldType, fieldConfig)
+    if (!fieldType) {
+      // Field type has not been defined yet. Add a placeholder until the field
+      // is defined for the editor.
+      field = new PlaceholderField(fieldEl, fieldConfig.type, fieldConfig)
+    } else {
+      field = new Field(fieldEl, fieldType, fieldConfig)
+    }
     this.fields.push(field)
 
     if (this.data) {
@@ -92,6 +103,19 @@ export default class Selective {
 
   addFieldType(fieldType) {
     this._fieldTypes[fieldType.type] = fieldType
+
+    // Check each field for placeholder and replace if found a matching field.
+    for (let i = 0; i < this.fields.length; i++) {
+      const field = this.fields[i]
+
+      if (field.isPlaceholder && field.fieldType == fieldType.type) {
+        this.fields[i] = new Field(field.fieldEl, fieldType, field.config)
+
+        if (this.data) {
+          field.render(this.data)
+        }
+      }
+    }
   }
 
   clearFields() {
@@ -107,8 +131,10 @@ export default class Selective {
   }
 
   getFieldType(type) {
+    // Missing types are not an error since they can be defined by external
+    // scripts.
     if (!this._fieldTypes || !(type in this._fieldTypes)) {
-      throw (`Unknown field type: ${type}`)
+      return null
     }
 
     return this._fieldTypes[type]
