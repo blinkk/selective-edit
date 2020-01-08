@@ -4,8 +4,11 @@
 
 import * as extend from 'deep-extend'
 import {
-  html
+  html,
 } from 'lit-html'
+import {
+  repeat,
+} from 'lit-html/directives/repeat'
 import {
   autoConfig
 } from './utility/config'
@@ -176,4 +179,4 @@ export default class Selective {
   }
 }
 
-export { Field,  FieldType, html }
+export { Field,  FieldType, html, repeat }

@@ -83,7 +83,7 @@ export default class FieldType {
   }
 
   render(field, element, config, value) {
-    render(this.template(config.id, config.label, value, config.options || {}), element)
+    render(this.template(config.id, config.label, value, config.options || {}, this), element)
   }
 
   setValue(field, element, config, value) {
@@ -127,7 +127,7 @@ export class MarkdownFieldType extends FieldType {
 }
 
 
-export const listFieldType = new FieldType('list', {}, (id, label, value, options) => html`<div class="field field__list">
+export const listFieldType = new FieldType('list', {}, (id, label, value, options, fieldType) => html`<div class="field field__list">
   <div class="list">
     <div class="list__label"></div>
     <div class="list__items">
@@ -152,7 +152,7 @@ export const markdownFieldType = new MarkdownFieldType('markdown', {
   inputSelectors: [
     '.pell',
   ],
-}, (id, label, value, options) => html`<div class="field field__markdown">
+}, (id, label, value, options, fieldType) => html`<div class="field field__markdown">
   <div class="field__markdown__label">${label}</div>
   <div id="${id}" class="pell"></div>
 </div>`)
@@ -165,7 +165,7 @@ export const textFieldType = new FieldType('text', {
     'input',
   ],
   valueSelector: 'input',
-}, (id, label, value, options) => html`<div class="field field__text">
+}, (id, label, value, options, fieldType) => html`<div class="field field__text">
   <div class="mdc-text-field">
     <input type="text" id="${id}" class="mdc-text-field__input" value="${value}">
     <label class="mdc-floating-label" for="${id}">${label}</label>
@@ -181,7 +181,7 @@ export const textareaFieldType = new FieldType('textarea', {
     'textarea',
   ],
   valueSelector: 'textarea',
-}, (id, label, value, options) => html`<div class="field field__textarea">
+}, (id, label, value, options, fieldType) => html`<div class="field field__textarea">
   <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth">
     <textarea id="${id}" class="mdc-text-field__input" rows="${options.rows || 6}">${value}</textarea>
     <div class="mdc-notched-outline">
