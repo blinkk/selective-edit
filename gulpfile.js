@@ -11,7 +11,6 @@ const {
 } = require('gulp');
 const gulpAutoprefixer = require('gulp-autoprefixer');
 const path = require('path');
-const readdirRecursive = require('fs-readdir-recursive');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
 const webpack = require('webpack');
@@ -36,14 +35,10 @@ const config = {
   SASS_OUT_DIR: './dist/css/'
 };
 
-const jsFiles = readdirRecursive(config.JS_SOURCE_DIR);
-const entry = {};
-jsFiles.forEach(function(value) {
-  if (value.endsWith('.js')) {
-    const key = value.substring(0, value.length - 3);
-    entry[key] = config.JS_SOURCE_DIR + value;
-  }
-});
+const entry = {
+  'example': './js/example.js',
+  'selective': './js/selective.js',
+};
 
 const webpackConfig = {
   entry: entry,

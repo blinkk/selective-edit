@@ -58,16 +58,16 @@ handleValueChange()
 window.setInterval(handleValueChange, 2000)
 
 
-const handleCleanCheck = (e) => {
-  console.log('Is Clean?', exampleSelective.isClean);
-}
-window.setTimeout(handleCleanCheck, 3000)
+// const handleCleanCheck = (e) => {
+//   console.log('Is Clean?', exampleSelective.isClean);
+// }
+// window.setTimeout(handleCleanCheck, 3000)
 
-const handleUpdate = () => {
-  exampleSelective.update({
-    "title": "The stuff nightmares are made of.",
-    "body": "Truffle snifflers.",
-  })
-  console.log('Updated data. Is Clean?', exampleSelective.isClean);
-}
-window.setTimeout(handleUpdate, 6000)
+// const handleUpdate = () => {
+//   exampleSelective.update({
+//     "title": "The stuff nightmares are made of.",
+//     "body": "Truffle snifflers.",
+//   })
+//   console.log('Updated data. Is Clean?', exampleSelective.isClean);
+// }
+// window.setTimeout(handleUpdate, 6000)
