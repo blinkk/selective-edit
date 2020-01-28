@@ -21,4 +21,12 @@ export default class FieldTypes extends compose(ConfigMixin,)(Base) {
       value.initialize(containerEl)
     }
   }
+
+  newField(type, ...args) {
+    if ( type in this.fieldTypes ) {
+      return new this.fieldTypes[type](...args)
+    }
+
+    // TODO: Placeholder field.
+  }
 }

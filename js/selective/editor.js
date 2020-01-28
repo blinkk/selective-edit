@@ -66,7 +66,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     // Initialize any new fields.
     this._fieldTypes.initialize(this.containerEl)
 
-    // Trigger any processing that needs to happen after rendering.
+    // Trigger any field specific actions.
     this.fields.postRender(this.containerEl)
   }
 
