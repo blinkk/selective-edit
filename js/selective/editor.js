@@ -10,6 +10,7 @@ import {
  render,
 } from 'lit-html'
 import ConfigMixin from '../mixin/config'
+import { autoDeepObject } from '../utility/deepObject'
 import { Base, compose } from '../utility/compose'
 import { defaultFields } from './field'
 import Fields from './fields'
@@ -20,7 +21,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     super()
     this._fieldTypes = new FieldTypes()
     this._fields = null
-    this._data = {}
+    this._data = autoDeepObject({})
 
     // Start with built-in field types.
     // Can be overwritten by adding fields with the same `fieldType`.
@@ -61,6 +62,12 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
 
   render() {
     render(this.template(this, this.data), this.containerEl)
+
+    // Initialize any new fields.
+    this._fieldTypes.initialize(this.containerEl)
+
+    // Trigger any processing that needs to happen after rendering.
+    this.fields.postRender(this.containerEl)
   }
 
   setConfig(value) {
@@ -77,7 +84,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
   }
 
   set data(value) {
-    this._data = value
+    this._data = autoDeepObject(value)
     this.render()
     return this._data
   }

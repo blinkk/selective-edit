@@ -9,7 +9,7 @@
   .mdc-floating-label
     background-color: transparent
 
-.field__text .mdc-text-field
+.selective__field__text .mdc-text-field
   width: 100%
 
 // Pell Editor
@@ -19,10 +19,21 @@ $pell-content-height: 20vh
 
 // Make Pell look material.
 // TODO Use material mixins.
-.field__markdown
+.selective__field__markdown
   position: relative
 
-.field__markdown__label
+  .pell
+    border-color: rgba(0,0,0,0.73)
+    border-radius: 4px
+    padding-top: 38px
+
+  .pell-actionbar
+    padding-left: 16px
+
+  .pell-content
+    padding: 0px 16px 8px 16px
+
+.selective__field__markdown__label
   bottom: auto
   color: rgba(0,0,0,0.6)
   font-size: .813rem
@@ -35,14 +46,3 @@ $pell-content-height: 20vh
   right: 0
   transform: translateY(-50%) scale(.923)
   top: 38px
-
-.pell
-  border-color: rgba(0,0,0,0.73)
-  border-radius: 4px
-  padding-top: 38px
-
-.pell-actionbar
-  padding-left: 16px
-
-.pell-content
-  padding: 0px 16px 8px 16px

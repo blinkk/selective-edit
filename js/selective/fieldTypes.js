@@ -15,4 +15,10 @@ export default class FieldTypes extends compose(ConfigMixin,)(Base) {
   addFieldType(key, FieldCls) {
     this.fieldTypes[key] = FieldCls
   }
+
+  initialize(containerEl) {
+    for (const [key, value] of Object.entries(this.fieldTypes)) {
+      value.initialize(containerEl)
+    }
+  }
 }

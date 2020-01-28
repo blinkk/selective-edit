@@ -32,9 +32,15 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
 
   addField(fieldConfig) {
     // TODO: Create the field based on the config.
-    // console.log('field', field);
     // this.fields.push(field)
-    this.fields.push(new this.fieldTypes.fieldTypes['text']())
+    this.fields.push(new this.fieldTypes.fieldTypes['text'](fieldConfig))
+  }
+
+  postRender(containerEl) {
+    // Pass it along to the fields.
+    for( const field of this.fields ) {
+      field.postRender(containerEl)
+    }
   }
 
   reset() {
