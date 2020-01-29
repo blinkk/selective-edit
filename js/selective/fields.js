@@ -2,6 +2,7 @@
  * Fields defined for editing.
  */
 
+import * as extend from 'deep-extend'
 import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import ConfigMixin from '../mixin/config'
@@ -15,9 +16,12 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
     super()
     this.fieldTypes = fieldTypes
     this.fields = []
+    this._dataValue = undefined
+    this._value = undefined
     this.setConfig(config)
 
     this.template = (editor, fields, data) => html`<div class="selective__fields">
+      ${fields.valueFromData(data)}
       ${repeat(fields.fields, (field) => field.getUid(), (field, index) => html`
         ${field.template(editor, field, data)}
       `)}
@@ -41,7 +45,11 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
       value.set(field.key, field.value)
     }
 
-    return value.obj
+    return extend({}, this._dataValue.obj, value.obj)
+  }
+
+  set value(value) {
+    // Setting value doesn't actually do anything.
   }
 
   addField(fieldConfig) {
@@ -61,5 +69,9 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
 
   reset() {
     this.fields = []
+  }
+
+  valueFromData(data) {
+    this._dataValue = autoDeepObject(data)
   }
 }

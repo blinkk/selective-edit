@@ -5,7 +5,6 @@
  * the data.
  */
 
-import * as extend from 'deep-extend'
 import {
  html,
  render,
@@ -64,7 +63,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
   }
 
   get value() {
-    return extend({}, this.data.obj, this.fields.value)
+    return this.fields.value
   }
 
   set data(value) {
