@@ -9,10 +9,10 @@ import {
   repeat,
 } from 'lit-html/directives/repeat'
 import Editor from './selective/editor'
-import Field from './editor/field'
-import FieldType from './editor/fieldType'
+import Field from './selective/field'
+import Fields from './selective/fields'
 
 const Selective = Editor
 
 export default Selective
-export { Field,  FieldType, html, repeat }
+export { Field, Fields,  html, repeat }

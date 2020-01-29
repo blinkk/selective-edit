@@ -189,10 +189,8 @@ export class TextareaField extends Field {
   }
 }
 
-const defaultFields = {
+export const defaultFields = {
   'markdown': MarkdownField,
   'text': TextField,
   'textarea': TextareaField,
 }
-
-export { defaultFields }

@@ -21,26 +21,26 @@ import FieldTypes from './fieldTypes'
 export default class Editor extends compose(ConfigMixin,)(Base) {
   constructor(containerEl, config) {
     super()
-    this._fieldTypes = new FieldTypes()
+    this.fieldTypes = new FieldTypes()
     this._fields = null
     this._data = autoDeepObject({})
 
     // Start with built-in field types.
     // Can be overwritten by adding fields with the same `fieldType`.
     for (const key of Object.keys(defaultFields)) {
-      this._fieldTypes.addFieldType(key, defaultFields[key])
+      this.fieldTypes.addFieldType(key, defaultFields[key])
     }
 
     // Needs to be defined before the config is set.
     this.template = (editor, data) => html`<div class="selective">
-      ${editor.fields.template(editor, data)}
+      ${editor.fields.template(editor, editor.fields, data)}
     </div>`
 
     this.containerEl = containerEl
     this.setConfig(config)
 
     // Allow triggering a re-render.
-    this.containerEl.addEventListener('selective.render', () => {
+    document.addEventListener('selective.render', () => {
       this.render()
     })
 
@@ -54,7 +54,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
   get fields() {
     if (!this._fields) {
       const FieldsCls = this.getConfig().get('FieldsCls', Fields)
-      this._fields = new FieldsCls(this._fieldTypes)
+      this._fields = new FieldsCls(this.fieldTypes)
     }
     return this._fields
   }
@@ -77,6 +77,10 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     this.fields.addField(...args)
   }
 
+  addFieldType(key, FieldCls) {
+    this.fieldTypes.addFieldType(key, FieldCls)
+  }
+
   guessFields() {
     const autoFields = new AutoFields(this.data.obj)
     return autoFields.config
@@ -86,7 +90,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     render(this.template(this, this.data), this.containerEl)
 
     // Initialize any new fields.
-    this._fieldTypes.initialize(this.containerEl)
+    this.fieldTypes.initialize(this.containerEl)
 
     // Trigger any field specific actions.
     this.fields.postRender(this.containerEl)

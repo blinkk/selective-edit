@@ -20,8 +20,8 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
     this.fields = []
     this.setConfig(config)
 
-    this.template = (editor, data) => html`<div class="selective__fields">
-      ${repeat(editor.fields.fields, (field) => field.id, (field, index) => html`
+    this.template = (editor, fields, data) => html`<div class="selective__fields">
+      ${repeat(fields.fields, (field) => field.getUid(), (field, index) => html`
         ${field.template(editor, field, data)}
       `)}
     </div>`
