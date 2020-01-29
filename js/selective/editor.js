@@ -65,6 +65,12 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     return extend({}, this.data.obj, this.fields.value)
   }
 
+  set data(value) {
+    this._data = autoDeepObject(value)
+    this.render()
+    return this._data
+  }
+
   addField(...args) {
     this.fields.addField(...args)
   }
@@ -92,9 +98,8 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     }
   }
 
-  set data(value) {
-    this._data = autoDeepObject(value)
-    this.render()
-    return this._data
+  update(value) {
+    this.data = extend({}, this.data.obj, value)
+    return this.data
   }
 }
