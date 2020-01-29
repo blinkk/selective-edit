@@ -2,15 +2,12 @@
  * Fields defined for editing.
  */
 
-import {
- html,
-} from 'lit-html'
-import {
- repeat,
-} from 'lit-html/directives/repeat'
+import { html } from 'lit-html'
+import { repeat } from 'lit-html/directives/repeat'
 import ConfigMixin from '../mixin/config'
 import UidMixin from '../mixin/uid'
 import { Base, compose } from '../utility/compose'
+import { autoConfig } from '../utility/config'
 import { autoDeepObject } from '../utility/deepObject'
 
 export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
@@ -48,6 +45,7 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   addField(fieldConfig) {
+    fieldConfig = autoConfig(fieldConfig)
     const newField = this.fieldTypes.newField(fieldConfig.type, fieldConfig)
     if (newField) {
       this.fields.push(newField)

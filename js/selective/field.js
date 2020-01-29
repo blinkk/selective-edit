@@ -11,6 +11,7 @@ import TurndownService from 'turndown'
 import ConfigMixin from '../mixin/config'
 import UidMixin from '../mixin/uid'
 import { Base, compose } from '../utility/compose'
+import { autoDeepObject } from '../utility/deepObject'
 
 export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   constructor(config) {
@@ -72,6 +73,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   valueFromData(data) {
+    data = autoDeepObject(data)
     const newDataValue = data.get(this.key)
 
     if (!this.isClean) {
