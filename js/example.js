@@ -43,8 +43,8 @@ dataEl.addEventListener('change', (e) => {
 })
 
 guessEl.addEventListener('click', (e) => {
-  const newConfig = exampleSelective.autoFields.config
-  exampleSelective.config = newConfig
+  const newConfig = exampleSelective.guessFields()
+  exampleSelective.setConfig(newConfig)
   configEl.textContent = JSON.stringify(newConfig, null, 2)
 })
 
