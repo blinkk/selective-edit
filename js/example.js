@@ -38,18 +38,15 @@ new MDCTextField(dataMdc)
 new MDCTextField(valueMdc)
 new MDCRipple(guessMdc)
 
-const handleDataChange = (e) => {
+dataEl.addEventListener('change', (e) => {
   exampleSelective.data = JSON.parse(dataEl.value)
-}
-dataEl.addEventListener('change', handleDataChange)
+})
 
-const handleGuessConfig = (e) => {
+guessEl.addEventListener('click', (e) => {
   const newConfig = exampleSelective.autoFields.config
   exampleSelective.config = newConfig
   configEl.textContent = JSON.stringify(newConfig, null, 2)
-}
-guessEl.addEventListener('click', handleGuessConfig)
-
+})
 
 const handleValueChange = (e) => {
   valueEl.textContent = JSON.stringify(exampleSelective.value, null, 2)
@@ -57,11 +54,9 @@ const handleValueChange = (e) => {
 handleValueChange()
 window.setInterval(handleValueChange, 2000)
 
-
-// const handleCleanCheck = (e) => {
-//   console.log('Is Clean?', exampleSelective.isClean);
-// }
-// window.setTimeout(handleCleanCheck, 3000)
+window.setTimeout((e) => {
+  console.log('Is Clean?', exampleSelective.isClean);
+}, 3000)
 
 // const handleUpdate = () => {
 //   exampleSelective.update({

@@ -17,10 +17,20 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     super()
     this.fieldType = 'Field'
     this.setConfig(config)
+    this._dataValue = undefined
+    this.value = undefined
 
     this.template = (editor, field, data) => html`<div class="selective__field" data-field-type="${field.fieldType}">
       Missing template.
     </div>`
+  }
+
+  get isClean() {
+    return this._dataValue == this.value
+  }
+
+  get key() {
+    return this.getConfig().key
   }
 
   get label() {
@@ -62,9 +72,18 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   valueFromData(data) {
-    // TODO: Use the last known value if the field is dirty.
-    const key = this.getConfig().key
-    this.value = data.get(key)
+    const newDataValue = data.get(this.key)
+
+    if (!this.isClean) {
+      // The value has changed since the last update.
+      // Update the stored data value, but don't change the actual value.
+      // isClean uses the _dataValue, so don't change until after the compare
+      // is complete.
+      this._dataValue = newDataValue
+      return this.value
+    }
+    this._dataValue = newDataValue
+    this.value = newDataValue
     return this.value
   }
 }
@@ -93,7 +112,9 @@ export class MarkdownField extends Field {
         fieldInstance.pellEditor = pell.init({
           element: pellEl,
           actions: actions,
-          onChange: () => {}
+          onChange: (html) => {
+            this.value = this.turndownService.turndown(html)
+          }
         })
       }
 
@@ -102,12 +123,10 @@ export class MarkdownField extends Field {
   }
 
   valueFromData(data) {
-    // TODO: Use the last known value if the field is dirty.
-    const key = this.getConfig().key
-    this.value = data.get(key)
+    super.valueFromData(data)
 
     // Do not return anything for markdown editor.
-    // The content is updated in the postRender.
+    // The content is updated in the postRender and should not be displayed.
   }
 }
 
@@ -118,7 +137,7 @@ export class TextField extends Field {
 
     this.template = (editor, field, data) => html`<div class="selective__field selective__field__text" data-field-type="${field.fieldType}">
       <div class="mdc-text-field">
-        <input type="text" id="${field.getUid()}" class="mdc-text-field__input" value="${field.valueFromData(data)}">
+        <input type="text" id="${field.getUid()}" class="mdc-text-field__input" value="${field.valueFromData(data)}" @input=${field.handleInput.bind(field)}>
         <label class="mdc-floating-label" for="${field.getUid()}">${field.label}</label>
         <div class="mdc-line-ripple"></div>
       </div>
@@ -130,6 +149,12 @@ export class TextField extends Field {
     this.intializeMaterialComponents(
       fieldInstances, '.mdc-text-field', MDCTextField)
   }
+
+  handleInput(evt) {
+    // Update the value to what is being typed.
+    // Helps mark the field as dirty.
+    this.value = evt.target.value
+  }
 }
 
 export class TextareaField extends Field {
@@ -139,7 +164,7 @@ export class TextareaField extends Field {
 
     this.template = (editor, field, data) => html`<div class="selective__field selective__field__textarea">
       <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth">
-        <textarea id="${field.getUid()}" class="mdc-text-field__input" rows="${field.options.rows || 6}">${field.valueFromData(data) || ' '}</textarea>
+        <textarea id="${field.getUid()}" class="mdc-text-field__input" rows="${field.options.rows || 6}" @input=${field.handleInput.bind(field)}>${field.valueFromData(data) || ' '}</textarea>
         <div class="mdc-notched-outline">
           <div class="mdc-notched-outline__leading"></div>
           <div class="mdc-notched-outline__notch">
@@ -155,6 +180,12 @@ export class TextareaField extends Field {
     const fieldInstances = containerEl.querySelectorAll('.selective__field__textarea')
     this.intializeMaterialComponents(
       fieldInstances, '.mdc-text-field', MDCTextField)
+  }
+
+  handleInput(evt) {
+    // Update the value to what is being typed.
+    // Helps mark the field as dirty.
+    this.value = evt.target.value
   }
 }
 

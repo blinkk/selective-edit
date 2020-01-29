@@ -11,6 +11,7 @@ import {
 import ConfigMixin from '../mixin/config'
 import UidMixin from '../mixin/uid'
 import { Base, compose } from '../utility/compose'
+import { autoDeepObject } from '../utility/deepObject'
 
 export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
   constructor(fieldTypes, config) {
@@ -26,8 +27,24 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
     </div>`
   }
 
+  get isClean() {
+    for (const field of this.fields) {
+      if (!field.isClean) {
+        return false
+      }
+    }
+
+    return true
+  }
+
   get value() {
-    // TODO: Cycle through each field to get the value from the form.
+    const value = autoDeepObject({})
+
+    for (const field of this.fields) {
+      value.set(field.key, field.value)
+    }
+
+    return value.obj
   }
 
   addField(fieldConfig) {
