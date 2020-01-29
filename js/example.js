@@ -58,11 +58,12 @@ window.setTimeout((e) => {
   console.log('Is Clean?', exampleSelective.isClean);
 }, 3000)
 
-const handleUpdate = () => {
-  exampleSelective.update({
-    "title": "The stuff nightmares are made of.",
-    "body": "Truffle snifflers.",
-  })
-  console.log('Updated data. Is Clean?', exampleSelective.isClean);
-}
-window.setTimeout(handleUpdate, 6000)
+// Use to test that updating part of the data works correctly.
+// const handleUpdate = () => {
+//   exampleSelective.update({
+//     "title": "The stuff nightmares are made of.",
+//     "body": "Truffle snifflers.",
+//   })
+//   console.log('Updated data. Is Clean?', exampleSelective.isClean);
+// }
+// window.setTimeout(handleUpdate, 6000)
