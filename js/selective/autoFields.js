@@ -1,9 +1,7 @@
 /**
  * Automatically guess the field configuration from data.
  */
-import {
-  autoDeepObject
-} from '../utility/deepObject'
+import { autoDeepObject } from '../utility/deepObject'
 import DataType from '../utility/dataType'
 
 export default class AutoFields {
