@@ -86,6 +86,9 @@ export default class AutoFields {
    * From a value guess the type of field.
    */
   typeFromValue(value) {
+    if (value === null || value === undefined) {
+      return 'text'
+    }
     if (this.dataType.isArray(value)) {
       return 'list'
     }
