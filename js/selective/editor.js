@@ -20,6 +20,7 @@ import FieldTypes from './fieldTypes'
 export default class Editor extends compose(ConfigMixin,)(Base) {
   constructor(containerEl, config) {
     super()
+    this.containerEl = containerEl
     this.fieldTypes = new FieldTypes()
     this._fields = null
     this._data = autoDeepObject({})
@@ -35,14 +36,8 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
       ${editor.fields.template(editor, editor.fields, data)}
     </div>`
 
-    this.containerEl = containerEl
     this.setConfig(config)
-
-    // Allow triggering a re-render.
-    document.addEventListener('selective.render', () => {
-      this.render()
-    })
-
+    this.bindEvents()
     this.render()
   }
 
@@ -60,6 +55,11 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
 
   get isClean() {
     return this.fields.isClean
+  }
+
+  get selfRender() {
+    // Determine if we are self rendering or being externally rendered.
+    return this.containerEl !== null
   }
 
   get value() {
@@ -80,19 +80,43 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     this.fieldTypes.addFieldType(key, FieldCls)
   }
 
+  bindEvents() {
+    // Skip binding if externally rendering.
+    if (!this.selfRender) {
+      return
+    }
+
+    // Allow triggering a re-render.
+    document.addEventListener('selective.render', () => {
+      this.render()
+    })
+  }
+
   guessFields() {
     const autoFields = new AutoFields(this.data.obj)
     return autoFields.config
   }
 
-  render() {
-    render(this.template(this, this.data), this.containerEl)
+  postRender(containerEl) {
+    // Allow for using without explicitly calling the render
+    // This supports external rendering using the template.
+    containerEl = containerEl || this.containerEl
 
     // Initialize any new fields.
-    this.fieldTypes.initialize(this.containerEl)
+    this.fieldTypes.initialize(containerEl)
 
     // Trigger any field specific actions.
-    this.fields.postRender(this.containerEl)
+    this.fields.postRender(containerEl)
+  }
+
+  render() {
+    // Do nothing when not self rendering.
+    if (!this.selfRender) {
+      return
+    }
+
+    render(this.template(this, this.data), this.containerEl)
+    this.postRender()
   }
 
   setConfig(value) {

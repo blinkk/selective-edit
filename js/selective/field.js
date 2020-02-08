@@ -42,6 +42,12 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     return this.getConfig().options || {}
   }
 
+  handleInput(evt) {
+    // Update the value to what is being typed.
+    // Helps mark the field as dirty.
+    this.value = evt.target.value
+  }
+
   static initialize(containerEl) {
     // Pass.
   }
@@ -97,7 +103,7 @@ export class MarkdownField extends Field {
     this.turndownService = new TurndownService({ headingStyle: 'atx' })
     this._value = ''
 
-    this.template = (editor, field, data) => html`<div class="selective__field selective__field__markdown">
+    this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
       <div class="selective__field__markdown__label">${field.label}</div>
       <div id="${field.getUid()}" class="pell">${field.valueFromData(data)}</div>
     </div>`
@@ -137,7 +143,7 @@ export class TextField extends Field {
     super(config)
     this.fieldType = 'text'
 
-    this.template = (editor, field, data) => html`<div class="selective__field selective__field__text" data-field-type="${field.fieldType}">
+    this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
       <div class="mdc-text-field">
         <input type="text" id="${field.getUid()}" class="mdc-text-field__input" value="${field.valueFromData(data)}" @input=${field.handleInput.bind(field)}>
         <label class="mdc-floating-label" for="${field.getUid()}">${field.label}</label>
@@ -151,12 +157,6 @@ export class TextField extends Field {
     this.intializeMaterialComponents(
       fieldInstances, '.mdc-text-field', MDCTextField)
   }
-
-  handleInput(evt) {
-    // Update the value to what is being typed.
-    // Helps mark the field as dirty.
-    this.value = evt.target.value
-  }
 }
 
 export class TextareaField extends Field {
@@ -164,7 +164,7 @@ export class TextareaField extends Field {
     super(config)
     this.fieldType = 'textarea'
 
-    this.template = (editor, field, data) => html`<div class="selective__field selective__field__textarea">
+    this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}">
       <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth">
         <textarea id="${field.getUid()}" class="mdc-text-field__input" rows="${field.options.rows || 6}" @input=${field.handleInput.bind(field)}>${field.valueFromData(data) || ' '}</textarea>
         <div class="mdc-notched-outline">
@@ -182,12 +182,6 @@ export class TextareaField extends Field {
     const fieldInstances = containerEl.querySelectorAll('.selective__field__textarea')
     this.intializeMaterialComponents(
       fieldInstances, '.mdc-text-field', MDCTextField)
-  }
-
-  handleInput(evt) {
-    // Update the value to what is being typed.
-    // Helps mark the field as dirty.
-    this.value = evt.target.value
   }
 }
 
