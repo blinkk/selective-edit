@@ -138,6 +138,163 @@ export class MarkdownField extends Field {
   }
 }
 
+export class SortableField extends Field {
+  constructor(config) {
+    super(config)
+    this.fieldType = 'sortable'
+    this._dragOriginElement = null
+    this._dragHoverElement = null
+    this._dataValue = []
+    this._value = []
+    this.template = (editor, field, data) => html`<div>
+      <p>Sortable Field sub class needs a custom template.</p>
+      <p>Add the 'draggable="true"' attribute to the sortable containers.</p>
+      <p>Add the 'data-index="X"' attribute to any sortable container with the current index.</p>
+      <p>Add the '@dragenter=\${this.handleDragEnter.bind(this)}' event binding to the sortable container.</p>
+      <p>Add the '@dragleave=\${this.handleDragLeave.bind(this)}' event binding to the sortable container.</p>
+      <p>Add the '@dragstart=\${this.handleDragStart.bind(this)}' event binding to the sortable container.</p>
+      <p>Add the '@dragover=\${this.handleDragOver.bind(this)}' event binding to the sortable container.</p>
+      <p>Add the '@drop=\${this.handleDrop.bind(this)}' event binding to the sortable container.</p>
+      <p>Use the 'sortable--hover' class to style the hovering element.</p>
+      <p>Use the 'sortable--above' class to style the hovering element that is above the dragged element.</p>
+      <p>Use the 'sortable--below' class to style the hovering element that is below the dragged element.</p>
+    </div>`
+  }
+
+  _findDraggable(target) {
+    // Use the event target to traverse until the draggable element is found.
+    let isDraggable = false
+    while (target && !isDraggable) {
+      isDraggable = target.getAttribute('draggable') == 'true'
+      if (!isDraggable) {
+        target = target.parentElement
+      }
+    }
+    return target
+  }
+
+  _reorderValues(currentIndex, startIndex) {
+    // Dropped on self, ignore.
+    if (currentIndex == startIndex) {
+      return false
+    }
+
+    // Rework the array to have the items in the correct position.
+    const newValue = []
+    const oldValue = this._value
+    const maxIndex = Math.max(currentIndex, startIndex)
+    const minIndex = Math.min(currentIndex, startIndex)
+
+    // Determine which direction to shift misplaced items.
+    let modifier = 1
+    if (startIndex > currentIndex) {
+      modifier = -1
+    }
+
+    for (let i = 0; i < oldValue.length; i++) {
+      if (i < minIndex || i > maxIndex) {
+        // Leave in the same order.
+        newValue[i] = oldValue[i]
+      } else if (i == currentIndex) {
+        // This element is being moved to, place the moved value here.
+        newValue[i] = oldValue[startIndex]
+      } else {
+        // Shift the old index using the modifier to determine direction.
+        newValue[i] = oldValue[i+modifier]
+      }
+    }
+
+    this._value = newValue
+
+    return true
+  }
+
+  _shouldHandleDrag(evt) {
+    return (this._dragOriginElement
+      && evt.dataTransfer.types.includes('selective/index'))
+  }
+
+  handleDragStart(evt) {
+    this._dragOriginElement = evt.target
+    evt.dataTransfer.setData('text/plain', evt.target.dataset.index)
+    evt.dataTransfer.setData('selective/index', evt.target.dataset.index)
+    evt.dataTransfer.effectAllowed = 'move'
+  }
+
+  handleDragEnter(evt) {
+    if (this._shouldHandleDrag(evt)) {
+      const target = this._findDraggable(evt.target)
+      if (!target) {
+        return
+      }
+
+      const currentIndex = parseInt(evt.target.dataset.index)
+      const startIndex = parseInt(this._dragOriginElement.dataset.index)
+
+      // Show that the element is hovering.
+      // Also prevent sub elements from triggering more drag events.
+      target.classList.add('sortable--hover')
+
+      // Hovering over self, ignore.
+      if (currentIndex == startIndex) {
+        return
+      }
+
+      if (currentIndex < startIndex) {
+        target.classList.add('sortable--above')
+      } else {
+        target.classList.add('sortable--below')
+      }
+    }
+  }
+
+  handleDragLeave(evt) {
+    if (this._shouldHandleDrag(evt)) {
+      const target = this._findDraggable(evt.target)
+      if (!target) {
+        return
+      }
+
+      // No longer hovering.
+      target.classList.remove(
+        'sortable--hover', 'sortable--above', 'sortable--below')
+    }
+  }
+
+  handleDragOver(evt) {
+    if (this._shouldHandleDrag(evt)) {
+      // Flag to the browser that this is a valid drop target.
+      evt.preventDefault()
+    }
+  }
+
+  handleDrop(evt) {
+    // Trying to drag from outside the list.
+    if (!this._dragOriginElement) {
+      return
+    }
+
+    const target = this._findDraggable(evt.target)
+    const currentIndex = parseInt(evt.target.dataset.index)
+    const startIndex = parseInt(evt.dataTransfer.getData("text/plain"))
+
+    // No longer hovering.
+    target.classList.remove(
+      'sortable--hover', 'sortable--above', 'sortable--below')
+
+    // Reset the drag element.
+    this._dragOriginElement = null
+
+    if (!this._reorderValues(currentIndex, startIndex)) {
+      // If false nothing changed, so don't re-render.
+      return
+    }
+
+    // Trigger a re-render after moving.
+    document.dispatchEvent(new CustomEvent('selective.render'))
+  }
+}
+
 export class TextField extends Field {
   constructor(config) {
     super(config)
