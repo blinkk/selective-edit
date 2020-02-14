@@ -13,6 +13,9 @@ import UidMixin from '../mixin/uid'
 import { Base, compose } from '../utility/compose'
 import { autoDeepObject } from '../utility/deepObject'
 
+// ========================================
+// === Base Field
+// ========================================
 export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   constructor(config) {
     super()
@@ -96,6 +99,9 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 }
 
+// ========================================
+// === Markdown Field
+// ========================================
 export class MarkdownField extends Field {
   constructor(config) {
     super(config)
@@ -138,6 +144,23 @@ export class MarkdownField extends Field {
   }
 }
 
+// ========================================
+// === Sortable Field
+// ========================================
+//
+// The following are required as part of the template to make the sorting work:
+//
+// - Add 'draggable="true"' attribute to the sortable containers.
+// - Add 'data-index="X"' attribute to any sortable container with the current index.
+// - Add '@dragenter=${this.handleDragEnter.bind(this)}' event binding to the sortable container.
+// - Add '@dragleave=${this.handleDragLeave.bind(this)}' event binding to the sortable container.
+// - Add '@dragstart=${this.handleDragStart.bind(this)}' event binding to the sortable container.
+// - Add '@dragover=${this.handleDragOver.bind(this)}' event binding to the sortable container.
+// - Add '@drop=${this.handleDrop.bind(this)}' event binding to the sortable container.
+// - Use 'sortable--hover' class to style the currently hovering drop target.
+// - Use 'sortable--above' class to style the hovering element that is above the dragged element.
+// - Use 'sortable--below' class to style the hovering element that is below the dragged element.
+//
 export class SortableField extends Field {
   constructor(config) {
     super(config)
@@ -147,17 +170,7 @@ export class SortableField extends Field {
     this._dataValue = []
     this._value = []
     this.template = (editor, field, data) => html`<div>
-      <p>Sortable Field sub class needs a custom template.</p>
-      <p>Add the 'draggable="true"' attribute to the sortable containers.</p>
-      <p>Add the 'data-index="X"' attribute to any sortable container with the current index.</p>
-      <p>Add the '@dragenter=\${this.handleDragEnter.bind(this)}' event binding to the sortable container.</p>
-      <p>Add the '@dragleave=\${this.handleDragLeave.bind(this)}' event binding to the sortable container.</p>
-      <p>Add the '@dragstart=\${this.handleDragStart.bind(this)}' event binding to the sortable container.</p>
-      <p>Add the '@dragover=\${this.handleDragOver.bind(this)}' event binding to the sortable container.</p>
-      <p>Add the '@drop=\${this.handleDrop.bind(this)}' event binding to the sortable container.</p>
-      <p>Use the 'sortable--hover' class to style the hovering element.</p>
-      <p>Use the 'sortable--above' class to style the hovering element that is above the dragged element.</p>
-      <p>Use the 'sortable--below' class to style the hovering element that is below the dragged element.</p>
+      Sortable Field sub class needs a custom template.
     </div>`
   }
 
@@ -295,6 +308,9 @@ export class SortableField extends Field {
   }
 }
 
+// ========================================
+// === Text Field
+// ========================================
 export class TextField extends Field {
   constructor(config) {
     super(config)
@@ -316,6 +332,9 @@ export class TextField extends Field {
   }
 }
 
+// ========================================
+// === Textarea Field
+// ========================================
 export class TextareaField extends Field {
   constructor(config) {
     super(config)
