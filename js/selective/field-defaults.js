@@ -133,6 +133,15 @@ export class ListField extends SortableField {
       'isExpanded': false,
     })
 
+    if (fieldConfigs.length > 1) {
+      this.value.push({})
+    } else {
+      this.value.push('')
+    }
+
+    // Expanded by default.
+    this._expandedIndexes.push(index)
+
     document.dispatchEvent(new CustomEvent('selective.render'))
   }
 
@@ -290,9 +299,11 @@ export class TextField extends Field {
     this.fieldType = 'text'
 
     this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
-      <div class="mdc-text-field">
+      <div class="mdc-text-field ${field.label ? '' : 'mdc-text-field--no-label'}">
         <input type="text" id="${field.getUid()}" class="mdc-text-field__input" value="${field.valueFromData(data) || ''}" @input=${field.handleInput.bind(field)}>
-        <label class="mdc-floating-label" for="${field.getUid()}">${field.label}</label>
+        ${field.label
+          ? html`<label class="mdc-floating-label" for="${field.getUid()}">${field.label}</label>`
+          : ''}
         <div class="mdc-line-ripple"></div>
       </div>
     </div>`
