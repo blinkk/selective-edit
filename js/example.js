@@ -1,4 +1,5 @@
 import Selective from './selective'
+import { defaultFieldTypes } from './selective-defaults'
 import {
   MDCTextField
 } from '@material/textfield'
@@ -20,7 +21,16 @@ const valueMdc = document.querySelector('.content__value .mdc-text-field')
 // Basic example of using Selective.
 // -----------------------------------------------------------
 
-const exampleSelective = new Selective(fieldsEl, JSON.parse(configEl.value))
+// TODO: Bring back the simple version when placeholders work correctly.
+// const exampleSelective = new Selective(fieldsEl, JSON.parse(configEl.value))
+
+// exampleSelective.addFieldTypes(defaultFieldTypes)
+const editorConfig = JSON.parse(configEl.value)
+const exampleSelective = new Selective(fieldsEl)
+exampleSelective.addFieldTypes(defaultFieldTypes)
+// Set the config after the default field types are added untile placeholders
+// are working again.
+exampleSelective.setConfig(editorConfig)
 
 exampleSelective.data = JSON.parse(dataEl.value)
 

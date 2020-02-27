@@ -12,7 +12,6 @@ import {
 import ConfigMixin from '../mixin/config'
 import { autoDeepObject } from '../utility/deepObject'
 import { Base, compose } from '../utility/compose'
-import { defaultFields } from './field'
 import AutoFields from './autoFields'
 import Fields from './fields'
 import FieldTypes from './fieldTypes'
@@ -24,12 +23,6 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     this.fieldTypes = new FieldTypes()
     this._fields = null
     this._data = autoDeepObject({})
-
-    // Start with built-in field types.
-    // Can be overwritten by adding fields with the same `fieldType`.
-    for (const key of Object.keys(defaultFields)) {
-      this.fieldTypes.addFieldType(key, defaultFields[key])
-    }
 
     // Needs to be defined before the config is set.
     this.template = (editor, data) => html`<div class="selective">
@@ -78,6 +71,14 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
 
   addFieldType(key, FieldCls) {
     this.fieldTypes.addFieldType(key, FieldCls)
+    this.render()
+  }
+
+  addFieldTypes(fieldTypes) {
+    for (const key of Object.keys(fieldTypes)) {
+      this.fieldTypes.addFieldType(key, fieldTypes[key])
+    }
+    this.render()
   }
 
   bindEvents() {
