@@ -230,7 +230,8 @@ export class SortableField extends Field {
   }
 
   handleDragStart(evt) {
-    this._dragOriginElement = evt.target
+    const target = this._findDraggable(evt.target)
+    this._dragOriginElement = target
     evt.dataTransfer.setData('text/plain', evt.target.dataset.index)
     evt.dataTransfer.setData('selective/index', evt.target.dataset.index)
     evt.dataTransfer.effectAllowed = 'move'
@@ -243,12 +244,12 @@ export class SortableField extends Field {
         return
       }
 
-      const currentIndex = parseInt(evt.target.dataset.index)
-      const startIndex = parseInt(this._dragOriginElement.dataset.index)
-
       // Show that the element is hovering.
       // Also prevent sub elements from triggering more drag events.
       target.classList.add('sortable--hover')
+
+      const currentIndex = parseInt(evt.target.dataset.index)
+      const startIndex = parseInt(this._dragOriginElement.dataset.index)
 
       // Hovering over self, ignore.
       if (currentIndex == startIndex) {
@@ -267,6 +268,11 @@ export class SortableField extends Field {
     if (this._shouldHandleDrag(evt)) {
       const target = this._findDraggable(evt.target)
       if (!target) {
+        return
+      }
+
+      //  Make sure that the event target comes from the main element.
+      if (target !== evt.target) {
         return
       }
 
@@ -511,8 +517,8 @@ export class ListField extends SortableField {
           data-index=${listItem['index']}
           @dragenter=${this.handleDragEnter.bind(this)}
           @dragleave=${this.handleDragLeave.bind(this)}
-          @dragstart=${this.handleDragStart.bind(this)}
           @dragover=${this.handleDragOver.bind(this)}
+          @dragstart=${this.handleDragStart.bind(this)}
           @drop=${this.handleDrop.bind(this)}>
         ${listItem['isExpanded']
           ? this.renderExpandedItem(editor, listItem)
