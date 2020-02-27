@@ -39,6 +39,10 @@ export default class DeepObject {
 
 
 export const autoDeepObject = (value) => {
+  if (value === undefined) {
+    return value
+  }
+
   let has_get = false
   if (value.get && typeof value.get === 'function') {
     has_get = true

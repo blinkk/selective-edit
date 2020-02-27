@@ -5,6 +5,7 @@
 import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import marked from 'marked'
+import { MDCRipple } from '@material/ripple/index'
 import { MDCTextField } from '@material/textfield/index'
 import pell from 'pell'
 import TurndownService from 'turndown'
@@ -60,11 +61,18 @@ export class ListField extends SortableField {
         </div>
       </div>
       <div class="selective__footer">
-        <button class="selective__action__toggle" @click=${field.handleToggleExpand.bind(field)}>
-          Add
+        <button class="mdc-button" @click=${(evt) => {field.handleAddItem(evt, editor)}}>
+          <div class="mdc-button__ripple"></div>
+          <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+          <span class="mdc-button__label">Add</span>
         </button>
       </div>
     </div>`
+  }
+
+  static initialize(containerEl) {
+    const fieldInstances = containerEl.querySelectorAll('.selective__field__list')
+    intializeMaterialComponents(fieldInstances, '.mdc-button', MDCRipple)
   }
 
   get isExpanded() {
@@ -81,14 +89,15 @@ export class ListField extends SortableField {
     if (!this.value) {
       return []
     }
+
+    // Use the field config for the list items to create the correct field types.
+    const fieldConfigs = this.getConfig().get('fields', [])
+
     let index = 0
     const items = []
     for (const itemData of this.value) {
       const itemFields = new Fields(editor.fieldTypes)
       itemFields.valueFromData(itemData)
-
-      // TODO: Use the field config for the list items to create the correct field types.
-      const fieldConfigs = this.getConfig().get('fields', [])
 
       for (const fieldConfig of fieldConfigs || []) {
         itemFields.addField(fieldConfig)
@@ -104,6 +113,27 @@ export class ListField extends SortableField {
       index += 1
     }
     return items
+  }
+
+  handleAddItem(evt, editor) {
+    const index = this.value.length
+    const itemFields = new Fields(editor.fieldTypes)
+
+    // TODO: Use the field config for the list items to create the correct field types.
+    const fieldConfigs = this.getConfig().get('fields', [])
+
+    for (const fieldConfig of fieldConfigs || []) {
+      itemFields.addField(fieldConfig)
+    }
+
+    this._listItems.push({
+      'id': `${this.getUid()}-${index}`,
+      'index': index,
+      'itemFields': itemFields,
+      'isExpanded': false,
+    })
+
+    document.dispatchEvent(new CustomEvent('selective.render'))
   }
 
   handleItemCollapse(evt) {
@@ -144,8 +174,9 @@ export class ListField extends SortableField {
 
     // Allow collapsing and expanding of sub fields.
     return html`<div class="selective__actions">
-      <button class="selective__action__toggle" @click=${field.handleToggleExpand.bind(field)}>
-        ${field.isExpanded ? 'Collapse' : 'Expand'}
+      <button class="mdc-button selective__action__toggle" @click=${field.handleToggleExpand.bind(field)}>
+        <div class="mdc-button__ripple"></div>
+        <span class="mdc-button__label">${field.isExpanded ? 'Collapse' : 'Expand'}</span>
       </button>
     </div>`
   }
@@ -260,7 +291,7 @@ export class TextField extends Field {
 
     this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
       <div class="mdc-text-field">
-        <input type="text" id="${field.getUid()}" class="mdc-text-field__input" value="${field.valueFromData(data)}" @input=${field.handleInput.bind(field)}>
+        <input type="text" id="${field.getUid()}" class="mdc-text-field__input" value="${field.valueFromData(data) || ''}" @input=${field.handleInput.bind(field)}>
         <label class="mdc-floating-label" for="${field.getUid()}">${field.label}</label>
         <div class="mdc-line-ripple"></div>
       </div>
