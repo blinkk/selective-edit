@@ -161,6 +161,7 @@ export class MarkdownField extends Field {
 // - Use 'sortable--hover' class to style the currently hovering drop target.
 // - Use 'sortable--above' class to style the hovering element that is above the dragged element.
 // - Use 'sortable--below' class to style the hovering element that is below the dragged element.
+// - Optionally add 'sortable__preview' class to a child elmeent to use as the dragging preview.
 //
 export class SortableField extends Field {
   constructor(config) {
@@ -233,6 +234,12 @@ export class SortableField extends Field {
     evt.dataTransfer.setData('text/plain', evt.target.dataset.index)
     evt.dataTransfer.setData('selective/index', evt.target.dataset.index)
     evt.dataTransfer.effectAllowed = 'move'
+
+    // Allow for custom preview for dragging.
+    const previewEl = target.querySelector('.sortable__preview')
+    if (previewEl) {
+      evt.dataTransfer.setDragImage(previewEl, 0, 0)
+    }
   }
 
   handleDragEnter(evt) {
@@ -478,7 +485,7 @@ export class ListField extends SortableField {
   renderCollapsedItem(editor, listItem) {
     return html`
       <div class="selective__list__item__drag"><i class="material-icons">drag_indicator</i></div>
-      <div class="selective__list__item__preview" data-index=${listItem['index']} @click=${this.handleItemExpand.bind(this)}>
+      <div class="selective__list__item__preview sortable__preview" data-index=${listItem['index']} @click=${this.handleItemExpand.bind(this)}>
         ${this.renderPreview(listItem)}
       </div>`
   }
