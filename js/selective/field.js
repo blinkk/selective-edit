@@ -116,7 +116,6 @@ export class MarkdownField extends Field {
     super(config)
     this.fieldType = 'markdown'
     this.turndownService = new TurndownService({ headingStyle: 'atx' })
-    this._value = ''
 
     this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
       <div class="selective__field__label selective__field__label--markdown">${field.label}</div>
@@ -170,7 +169,6 @@ export class SortableField extends Field {
     this._dragOriginElement = null
     this._dragHoverElement = null
     this._dataValue = []
-    this._value = []
     this.template = (editor, field, data) => html`<div>
       Sortable Field sub class needs a custom template.
     </div>`
@@ -196,7 +194,7 @@ export class SortableField extends Field {
 
     // Rework the array to have the items in the correct position.
     const newValue = []
-    const oldValue = this._value
+    const oldValue = this.value
     const maxIndex = Math.max(currentIndex, startIndex)
     const minIndex = Math.min(currentIndex, startIndex)
 
@@ -219,7 +217,7 @@ export class SortableField extends Field {
       }
     }
 
-    this._value = newValue
+    this.value = newValue
 
     return true
   }
