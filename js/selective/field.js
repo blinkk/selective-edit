@@ -10,6 +10,7 @@ import pell from 'pell'
 import TurndownService from 'turndown'
 import ConfigMixin from '../mixin/config'
 import UidMixin from '../mixin/uid'
+import Fields from './fields'
 import { Base, compose } from '../utility/compose'
 import { autoDeepObject } from '../utility/deepObject'
 
@@ -81,9 +82,17 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     // Pass.
   }
 
+  updateFromData(data) {
+    // Update the data, but do not return the value.
+    this.valueFromData(data)
+  }
+
   valueFromData(data) {
-    data = autoDeepObject(data)
-    const newDataValue = data.get(this.key)
+    let newDataValue = data
+    if (typeof data === 'object' && data !== null) {
+      data = autoDeepObject(data)
+      newDataValue = data.get(this.key)
+    }
 
     if (!this.isClean) {
       // The value has changed since the last update.
@@ -110,8 +119,8 @@ export class MarkdownField extends Field {
     this._value = ''
 
     this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
-      <div class="selective__field__markdown__label">${field.label}</div>
-      <div id="${field.getUid()}" class="pell">${field.valueFromData(data)}</div>
+      <div class="selective__field__label selective__field__label--markdown">${field.label}</div>
+      <div id="${field.getUid()}" class="pell">${field.updateFromData(data)}</div>
     </div>`
   }
 
@@ -134,13 +143,6 @@ export class MarkdownField extends Field {
 
       fieldInstance.pellEditor.content.innerHTML = marked(this.value || '')
     }
-  }
-
-  valueFromData(data) {
-    super.valueFromData(data)
-
-    // Do not return anything for markdown editor.
-    // The content is updated in the postRender and should not be displayed.
   }
 }
 
@@ -361,7 +363,179 @@ export class TextareaField extends Field {
   }
 }
 
+// ========================================
+// === List Field
+// ========================================
+export class ListField extends SortableField {
+  constructor(config) {
+    super(config)
+    this.fieldType = 'list'
+    this._listItems = []
+    this._isExpanded = false
+    this._expandedIndexes = []
+
+    this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
+      ${field.updateFromData(data)}
+      <div class="selective__header">
+        <div class="selective__field__label">${field.label}</div>
+        ${field.renderActions(editor, field, data)}
+      </div>
+      <div class="selective__list">
+        <div class="selective__list__items" id="${field.getUid()}">
+          ${field.renderItems(editor, data)}
+        </div>
+      </div>
+      <div class="selective__footer">
+        <div>TODO: Allow adding more items.</div>
+      </div>
+    </div>`
+  }
+
+  get isExpanded() {
+    // If all of the items are in the expanded list then consider it expanded.
+    if (this._listItems.length == this._expandedIndexes.length) {
+      return true
+    }
+
+    return this._isExpanded
+  }
+
+  createItems(editor) {
+    // No value yet.
+    if (!this.value) {
+      return []
+    }
+    let index = 0
+    const items = []
+    for (const itemData of this.value) {
+      const itemFields = new Fields(editor.fieldTypes)
+      itemFields.valueFromData(itemData)
+
+      // TODO: Use the field config for the list items to create the correct field types.
+      const fieldConfigs = this.getConfig().get('fields', [])
+
+      for (const fieldConfig of fieldConfigs || []) {
+        itemFields.addField(fieldConfig)
+      }
+
+      items.push({
+        'id': `${this.getUid()}-${index}`,
+        'index': index,
+        'itemFields': itemFields,
+        'isExpanded': false,
+      })
+
+      index += 1
+    }
+    return items
+  }
+
+  handleItemCollapse(evt) {
+    this.isExpanded = false
+    const index = parseInt(evt.target.dataset.index)
+    const expandIndex = this._expandedIndexes.indexOf(index)
+    if (expandIndex > -1) {
+      this._expandedIndexes.splice(expandIndex, 1)
+      document.dispatchEvent(new CustomEvent('selective.render'))
+    }
+  }
+
+  handleItemExpand(evt) {
+    const index = parseInt(evt.target.dataset.index)
+    this._expandedIndexes.push(index)
+    document.dispatchEvent(new CustomEvent('selective.render'))
+  }
+
+  handleToggleExpand(evt) {
+    if (this.isExpanded) {
+      // Clear out all expanded indexes when collapsing.
+      this._expandedIndexes = []
+      this._isExpanded = false
+    } else {
+      this._isExpanded = true
+    }
+
+    document.dispatchEvent(new CustomEvent('selective.render'))
+  }
+
+  renderActions(editor, field, data) {
+    // TODO: No actions to render if there is only 1 sub field.
+    return ''
+
+    // Allow collapsing and expanding of sub fields.
+
+    // return html`<div class="selective__actions">
+    //   <button class="selective__action__toggle" @click=${field.handleToggleExpand.bind(field)}>
+    //     ${field.isExpanded ? 'Collapse' : 'Expand'}
+    //   </button>
+    // </div>`
+  }
+
+  renderCollapsedItem(editor, listItem) {
+    return html`
+      <div class="selective__list__item__drag"><i class="material-icons">drag_indicator</i></div>
+      <div class="selective__list__item__preview" data-index=${listItem['index']} @click=${this.handleItemExpand.bind(this)}>
+        ${this.renderPreview(listItem)}
+      </div>`
+  }
+
+  renderExpandedItem(editor, listItem) {
+    return html`
+      <div class="selective__list__fields">
+        <div class="partial__fields__label"
+            data-index=${listItem['index']}
+            @click=${this.handleItemCollapse.bind(this)}>
+          ${listItem['itemFields'].label}
+        </div>
+        ${listItem['itemFields'].template(editor, listItem['itemFields'], this.value[listItem['index']])}
+      </div>`
+  }
+
+  renderItems(editor, data) {
+    // If the sub fields have not been created create them now.
+    if (!this._listItems.length) {
+      this._listItems = this.createItems(editor)
+    }
+
+    // Update the expanded state each render.
+    for (const listItem of this._listItems) {
+      const inIndex = this._expandedIndexes.indexOf(listItem['index']) > -1
+      const itemValue = this.value[listItem['index']]
+      const isSimpleValue = typeof itemValue !== 'object'
+      listItem['isExpanded'] = this.isExpanded || inIndex || isSimpleValue
+    }
+
+    return html`${repeat(this._listItems, (listItem) => listItem['id'], (listItem, index) => html`
+      <div class="selective__list__item selective__list__item--${listItem['isExpanded'] ? 'expanded' : 'collapsed'}"
+          draggable="true"
+          data-index=${listItem['index']}
+          @dragenter=${this.handleDragEnter.bind(this)}
+          @dragleave=${this.handleDragLeave.bind(this)}
+          @dragstart=${this.handleDragStart.bind(this)}
+          @dragover=${this.handleDragOver.bind(this)}
+          @drop=${this.handleDrop.bind(this)}>
+        ${listItem['isExpanded']
+          ? this.renderExpandedItem(editor, listItem)
+          : this.renderCollapsedItem(editor, listItem)}
+      </div>
+    `)}`
+  }
+
+  renderPreview(listItem) {
+    const preview_field = this.getConfig().get('preview_field')
+    const itemValue = this.value[listItem['index']]
+
+    if (preview_field) {
+      return autoDeepObject(itemValue).get(preview_field)
+    }
+
+    // Default to just previewing the value. May not be pretty.
+    return itemValue
+  }
+}
+
 export const defaultFields = {
+  'list': ListField,
   'markdown': MarkdownField,
   'text': TextField,
   'textarea': TextareaField,

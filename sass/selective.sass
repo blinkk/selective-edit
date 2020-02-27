@@ -34,16 +34,49 @@ $pell-content-height: 20vh
   .pell-content
     padding: 0px 16px 8px 16px
 
-.selective__field__markdown__label
-  bottom: auto
+.selective__field__label
   color: rgba(0,0,0,0.6)
   font-size: .813rem
   font-weight: 400
-  left: 1px
-  letter-spacing: .00937em
-  margin-left: 18px
-  pointer-events: none
-  position: absolute
-  right: 0
-  transform: translateY(-50%) scale(.923)
-  top: 38px
+
+  &--markdown
+    bottom: auto
+    left: 1px
+    letter-spacing: .00937em
+    margin-left: 18px
+    pointer-events: none
+    position: absolute
+    right: 0
+    transform: translateY(-50%) scale(.923)
+    top: 38px
+
+.selective__list
+  .selective__field
+    margin: .5em 0
+    padding: 0
+
+.selective__list__item
+  &--collapsed
+    align-items: center
+    display: flex
+    flex-flow: row
+    margin: .5em 0
+
+    &.sortable--above
+      border-top: 3px solid rgba(0,0,0,0.6)
+
+    &.sortable--below
+      border-bottom: 3px solid rgba(0,0,0,0.6)
+
+.selective__list__item__drag
+  margin-right: .5em
+
+  i
+    font-size: .9em
+
+.selective__list__item__label
+  .selective__list__item--collapsed &
+    width: 40%
+
+.selective__list__item__preview
+  flex-grow: 1

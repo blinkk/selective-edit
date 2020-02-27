@@ -25,7 +25,25 @@
       "A",
       "List"
     ]
-  }
+  },
+  "clouds": [
+    {
+      "title": "Cirrus fibratus radiatus",
+      "description": "They look like tire tracks."
+    },
+    {
+      "title": "Stratospheric nacreous",
+      "description": "Crazy cool textured clouds."
+    },
+    {
+      "title": "Altocumulus floccus",
+      "description": "Cotton everywhere!"
+    },
+    {
+      "title": "Fluctus",
+      "description": "Waves in the sky!"
+    }
+  ]
 }</textarea>
             <div class="mdc-notched-outline mdc-notched-outline--upgraded">
               <div class="mdc-notched-outline__leading"></div>
@@ -52,6 +70,34 @@
       "type": "textarea",
       "key": "description",
       "label": "Description"
+    },
+    {
+      "type": "list",
+      "key": "extra.listed",
+      "label": "Simple List",
+      "fields": [
+        {
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "list",
+      "key": "clouds",
+      "label": "Complex List",
+      "preview_field": "title",
+      "fields": [
+        {
+          "type": "text",
+          "key": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "key": "description",
+          "label": "Description"
+        }
+      ]
     },
     {
       "type": "markdown",
@@ -98,11 +144,6 @@
       </div>
       <div class="sidebar">
         <div class="sidebar__content">
-          <div class="sidebar__action">
-            <div class="info info__info mdc-elevation--z4">
-              Fields generated from data and configuration.
-            </div>
-          </div>
           <div id="fields"></div>
         </div>
       </div>
