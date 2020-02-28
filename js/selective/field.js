@@ -289,13 +289,11 @@ export class ListField extends SortableField {
   }
 
   _reorderValues(currentIndex, startIndex) {
-    if (!super._reorderValues(currentIndex, startIndex)) {
-      return false
-    }
-
     // Rework the expanded array to have the items in the correct position.
     const newExpanded = []
     const oldExpanded = this._expandedIndexes
+    const newItems = []
+    const oldItems = this._listItems
     const valueLen = this.value.length
     const maxIndex = Math.max(currentIndex, startIndex)
     const minIndex = Math.min(currentIndex, startIndex)
@@ -308,14 +306,25 @@ export class ListField extends SortableField {
 
     for (let i = 0; i < valueLen; i++) {
       if (i < minIndex || i > maxIndex) {
+        // Leave in the same order.
+        newItems[i] = oldItems[i]
+
         if (oldExpanded.includes(i)) {
           newExpanded.push(i)
         }
       } else if (i == currentIndex) {
+        // This element is being moved to, place the moved value here.
+        newItems[i] = oldItems[startIndex]
+        newItems[i]['index'] = i
+
         if (oldExpanded.includes(startIndex)) {
           newExpanded.push(i)
         }
       } else {
+        // Shift the old index using the modifier to determine direction.
+        newItems[i] = oldItems[i+modifier]
+        newItems[i]['index'] = i
+
         if (oldExpanded.includes(i+modifier)) {
           newExpanded.push(i)
         }
@@ -323,6 +332,7 @@ export class ListField extends SortableField {
     }
 
     this._expandedIndexes = newExpanded
+    this._listItems = newItems
     return true
   }
 
