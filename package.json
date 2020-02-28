@@ -26,11 +26,11 @@
   },
   "homepage": "https://github.com/grow/selective-edit#readme",
   "dependencies": {
-    "@babel/core": "^7.0.0",
-    "@material/button": "^4.0.0",
-    "@material/icon-button": "^4.0.0",
-    "@material/select": "^4.0.0",
-    "@material/textfield": "^4.0.0",
+    "@babel/core": "^7.8.6",
+    "@material/button": "^5.1.0",
+    "@material/icon-button": "^5.1.0",
+    "@material/select": "^5.1.0",
+    "@material/textfield": "^5.1.0",
     "babel-loader": "^8.0.6",
     "babili-webpack-plugin": "^0.1.2",
     "deep-extend": "^0.6.0",
@@ -42,9 +42,9 @@
     "lit-html": "^1.1.2",
     "marked": "^0.8.0",
     "pell": "^1.0.4",
-    "superagent": "^5.1.2",
+    "superagent": "^5.2.2",
     "turndown": "^5.0.3",
-    "webpack": "^4.16.5",
+    "webpack": "^4.41.6",
     "webpack-stream": "^5.1.1"
   },
   "devDependencies": {
