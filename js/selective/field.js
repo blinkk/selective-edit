@@ -326,6 +326,11 @@ export class ListField extends SortableField {
     return true
   }
 
+  get isClean() {
+    // TODO: Better array comparisons?
+    return JSON.stringify(this._dataValue) == JSON.stringify(this.value)
+  }
+
   get isExpanded() {
     // If all of the items are in the expanded list then consider it expanded.
     if (this._listItems.length == this._expandedIndexes.length) {
@@ -335,10 +340,28 @@ export class ListField extends SortableField {
     return this._isExpanded
   }
 
+  get value() {
+    if (!this._listItems || this._listItems.length < 1) {
+      return this._dataValue
+    }
+
+    // Loop through each fields and get the values.
+    const values = []
+    for (const item of this._listItems) {
+      values.push(item['itemFields'].value)
+    }
+
+    return values
+  }
+
   set isExpanded(value) {
     this._isExpanded = value
 
     // TODO: Save to local storage
+  }
+
+  set value(value) {
+    // no-op
   }
 
   _createItems(editor, data) {
