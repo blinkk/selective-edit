@@ -52,10 +52,13 @@ import Selective from 'selective-edit'
 import { defaultFieldTypes } from 'selective-edit/js/selective-defaults'
 
 editor = new Selective(document.querySelector('.editor'))
+
 editor.addFieldTypes(defaultFieldTypes)
+
 // TODO: Once the placeholder field type is working again it will not need to
 // have the config set after the field types are added.
 editor.setConfig(...)
+
 editor.data = {
   // ...
 }
