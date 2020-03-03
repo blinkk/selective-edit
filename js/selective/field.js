@@ -387,10 +387,16 @@ export class ListField extends SortableField {
     const items = []
     for (const itemData of this.value) {
       const itemFields = new Fields(editor.fieldTypes)
-      itemFields.valueFromData(itemData)
+      itemFields.valueFromData(itemData || {})
 
       for (const fieldConfig of fieldConfigs || []) {
         itemFields.addField(fieldConfig)
+      }
+
+      // When a partial is not expanded it does not get the value
+      // updated correctly so we need to manually call the data update.
+      for (const itemField of itemFields.fields) {
+        itemField.updateFromData(itemData || {})
       }
 
       items.push({
@@ -542,7 +548,7 @@ export class ListField extends SortableField {
     const itemValue = this.value[listItem['index']]
 
     if (preview_field) {
-      return autoDeepObject(itemValue).get(preview_field)
+      return autoDeepObject(itemValue).get(preview_field) || '____'
     }
 
     // Default to just previewing the value. May not be pretty.
