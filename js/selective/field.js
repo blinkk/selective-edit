@@ -167,6 +167,7 @@ export class SortableField extends Field {
   }
 
   handleDragStart(evt) {
+    evt.stopPropagation()
     const target = this._findDraggable(evt.target)
     this._dragOriginElement = target
     evt.dataTransfer.setData('text/plain', evt.target.dataset.index)
@@ -186,6 +187,8 @@ export class SortableField extends Field {
       if (!target) {
         return
       }
+
+      evt.stopPropagation()
 
       // Show that the element is hovering.
       // Also prevent sub elements from triggering more drag events.
@@ -219,6 +222,8 @@ export class SortableField extends Field {
         return
       }
 
+      evt.stopPropagation()
+
       // No longer hovering.
       target.classList.remove(
         'sortable--hover', 'sortable--above', 'sortable--below')
@@ -229,6 +234,7 @@ export class SortableField extends Field {
     if (this._shouldHandleDrag(evt)) {
       // Flag to the browser that this is a valid drop target.
       evt.preventDefault()
+      evt.stopPropagation()
     }
   }
 
@@ -237,6 +243,8 @@ export class SortableField extends Field {
     if (!this._dragOriginElement) {
       return
     }
+
+    evt.stopPropagation()
 
     const target = this._findDraggable(evt.target)
     const currentIndex = parseInt(evt.target.dataset.index)
