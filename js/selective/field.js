@@ -563,7 +563,11 @@ export class ListField extends SortableField {
       <div class="selective__list__item__preview sortable__preview" data-index=${listItem['index']} @click=${this.handleItemExpand.bind(this)}>
         ${this.renderPreview(listItem)}
       </div>
-      <div class="selective__list__item__delete" data-index=${listItem['index']} @click=${this.handleItemDelete.bind(this)}>
+      <div
+          class="selective__list__item__delete"
+          data-index=${listItem['index']}
+          @click=${this.handleItemDelete.bind(this)}
+          title="Delete item">
         <i class="material-icons">delete</i>
       </div>`
   }
