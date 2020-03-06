@@ -420,7 +420,7 @@ export class ListField extends SortableField {
   }
 
   handleAddItem(evt, editor) {
-    const index = this.value.length
+    const index = this.value ? this.value.length : 0
     const itemFields = new Fields(editor.fieldTypes)
 
     // Use the field config for the list items to create the correct field types.
