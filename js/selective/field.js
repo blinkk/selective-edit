@@ -7,6 +7,7 @@ import { repeat } from 'lit-html/directives/repeat'
 import ConfigMixin from '../mixin/config'
 import UidMixin from '../mixin/uid'
 import Fields from './fields'
+import AutoFields from './autoFields'
 import { Base, compose } from '../utility/compose'
 import { autoDeepObject } from '../utility/deepObject'
 import { findParentByClassname, findParentDraggable } from '../utility/dom'
@@ -266,23 +267,27 @@ export class ListField extends SortableField {
     this.fieldType = 'list'
     this._listItems = []
     this._isExpanded = false
+    this._useAutoFields = false
     this._expandedIndexes = []
 
-    this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
-      ${field.updateFromData(data)}
-      <div class="selective__header">
-        <div class="selective__field__label">${field.label}</div>
-        ${field.renderActionsHeader(editor, field, data)}
-      </div>
-      <div class="selective__list">
-        <div class="selective__list__items" id="${field.getUid()}">
-          ${field.renderItems(editor, data)}
+    this.template = (editor, field, data) => html`
+      <div
+          class="selective__field selective__field__${field.fieldType}"
+          data-field-type="${field.fieldType}">
+        ${field.updateFromData(data)}
+        <div class="selective__header">
+          <div class="selective__field__label">${field.label}</div>
+          ${field.renderActionsHeader(editor, field, data)}
         </div>
-      </div>
-      <div class="selective__footer">
-        ${field.renderActionsFooter(editor, field, data)}
-      </div>
-    </div>`
+        <div class="selective__list">
+          <div class="selective__list__items" id="${field.getUid()}">
+            ${field.renderItems(editor, data)}
+          </div>
+        </div>
+        <div class="selective__footer">
+          ${field.renderActionsFooter(editor, field, data)}
+        </div>
+      </div>`
   }
 
   _reorderValues(currentIndex, startIndex) {
@@ -378,13 +383,18 @@ export class ListField extends SortableField {
     }
 
     // Use the field config for the list items to create the correct field types.
-    const fieldConfigs = this.getConfig().get('fields', [])
-
+    let fieldConfigs = this.getConfig().get('fields', [])
+    this._useAutoFields = fieldConfigs.length == 0
     let index = 0
     const items = []
     for (const itemData of this.value) {
       const itemFields = new Fields(editor.fieldTypes)
       itemFields.valueFromData(itemData || {})
+
+      if (this._useAutoFields) {
+        // Auto guess the fields if they are not defined.
+        fieldConfigs = new AutoFields(itemData).config['fields']
+      }
 
       for (const fieldConfig of fieldConfigs || []) {
         itemFields.addField(fieldConfig)
@@ -406,6 +416,23 @@ export class ListField extends SortableField {
       index += 1
     }
     return items
+  }
+
+  _determineItemPreview(listItem) {
+    const defaultPreviewField = this.getConfig().get('preview_field')
+    const previewField = (listItem['partialConfig'] || {})['preview_field']
+    const itemValue = this.value[listItem['index']]
+    let previewValue = itemValue
+
+    if (previewField || defaultPreviewField) {
+      previewValue = autoDeepObject(itemValue).get(previewField || defaultPreviewField)
+    }
+
+    // Do not try to show preview for complex values.
+    if (typeof previewValue == 'object') {
+      previewValue = null
+    }
+    return previewValue
   }
 
   handleAddItem(evt, editor) {
@@ -568,7 +595,7 @@ export class ListField extends SortableField {
     }
 
     return html`${repeat(this._listItems, (listItem) => listItem['id'], (listItem, index) => html`
-      <div class="selective__list__item selective__list__item--${listItem['isExpanded'] ? 'expanded' : 'collapsed'}"
+      <div class="selective__list__item selective__list__item--${listItem['isExpanded'] ? 'expanded' : 'collapsed'} ${this._useAutoFields ? 'selective__list__item--auto' : ''}"
           draggable="true"
           data-index=${listItem['index']}
           @dragenter=${this.handleDragEnter.bind(this)}
@@ -584,14 +611,7 @@ export class ListField extends SortableField {
   }
 
   renderPreview(listItem) {
-    const preview_field = this.getConfig().get('preview_field')
-    const itemValue = this.value[listItem['index']]
-
-    if (preview_field) {
-      return autoDeepObject(itemValue).get(preview_field) || `Item ${listItem.index + 1}`
-    }
-
-    // Default to just previewing the value. May not be pretty.
-    return itemValue
+    const previewValue = this._determineItemPreview(listItem)
+    return previewValue || `Item ${listItem.index + 1}`
   }
 }

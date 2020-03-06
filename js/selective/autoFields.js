@@ -45,14 +45,17 @@ export default class AutoFields {
 
   _fieldConfig(key, value) {
     const fieldType = this.typeFromValue(value)
+    const label = this.labelFromKey(key)
     const fieldConfig = {
       "type": fieldType,
-      "key": key,
-      "label": this.labelFromKey(key),
     }
 
-    if (fieldConfig.type == 'list') {
-      fieldConfig['fields'] = this._deepGuess(value, key.split('.'))
+    if (key != '') {
+      fieldConfig['key'] = key
+    }
+
+    if (label != '') {
+      fieldConfig['label'] = label
     }
 
     return fieldConfig
