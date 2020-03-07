@@ -1,20 +1,35 @@
 /**
  * Automatically guess the field configuration from data.
  */
+
+import ConfigMixin from '../mixin/config'
+import { Base, compose } from '../utility/compose'
 import { autoDeepObject } from '../utility/deepObject'
 import DataType from '../utility/dataType'
 
-export default class AutoFields {
-  constructor(data) {
+export default class AutoFields extends compose(ConfigMixin,)(Base) {
+  constructor(data, config) {
+    super()
     this.data = data
     this._data = autoDeepObject(data)
     this.dataType = new DataType()
+    this.setConfig(config)
+
+    this._ignoredKeys = null
   }
 
   get config() {
     return {
       'fields': this.guessAll(),
     }
+  }
+
+  get ignoredKeys() {
+    if (this._ignoredKeys == null) {
+      const config = this.getConfig()
+      this._ignoredKeys = config.get('ignoredKeys', [])
+    }
+    return this._ignoredKeys
   }
 
   _deepGuess(data, keyBase) {
@@ -35,6 +50,12 @@ export default class AutoFields {
           fields = fields.concat(this._deepGuess(data[key], newKeyBase))
         } else {
           const fullKey = newKeyBase.join('.')
+
+          // Skip ignored keys.
+          if (this.ignoredKeys.includes(key)) {
+            continue
+          }
+
           fields.push(this._fieldConfig(fullKey, data[key]))
         }
       }
