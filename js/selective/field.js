@@ -385,6 +385,7 @@ export class ListField extends SortableField {
     // Use the field config for the list items to create the correct field types.
     let fieldConfigs = this.getConfig().get('fields', [])
     this._useAutoFields = fieldConfigs.length == 0
+
     let index = 0
     const items = []
     for (const itemData of this.value) {
