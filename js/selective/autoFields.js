@@ -116,7 +116,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
     if (this.dataType.isArray(value)) {
       return 'list'
     }
-    if (value.length > 150) {
+    if (value.length > 75) {
       return 'textarea'
     }
     return 'text'
