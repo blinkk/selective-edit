@@ -9,6 +9,7 @@ import UidMixin from '../mixin/uid'
 import Fields from './fields'
 import AutoFields from './autoFields'
 import { Base, compose } from '../utility/compose'
+import { autoConfig } from '../utility/config'
 import { autoDeepObject } from '../utility/deepObject'
 import { findParentByClassname, findParentDraggable } from '../utility/dom'
 
@@ -16,9 +17,10 @@ import { findParentByClassname, findParentDraggable } from '../utility/dom'
 // === Base Field
 // ========================================
 export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
-  constructor(config) {
+  constructor(config, extendedConfig) {
     super()
     this.fieldType = 'Field'
+    this.extendedConfig = extendedConfig || {}
     this.setConfig(config)
     this._dataValue = undefined
     this.value = undefined
@@ -104,8 +106,8 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
 // - Optionally add 'sortable__preview' class to a child elmeent to use as the dragging preview.
 //
 export class SortableField extends Field {
-  constructor(config) {
-    super(config)
+  constructor(config, extendedConfig) {
+    super(config, extendedConfig)
     this.fieldType = 'sortable'
     this._dragOriginElement = null
     this._dragHoverElement = null
@@ -262,8 +264,8 @@ export class SortableField extends Field {
 // === List Field
 // ========================================
 export class ListField extends SortableField {
-  constructor(config) {
-    super(config)
+  constructor(config, extendedConfig) {
+    super(config, extendedConfig)
     this.fieldType = 'list'
     this._listItems = []
     this._isExpanded = false
@@ -397,8 +399,9 @@ export class ListField extends SortableField {
         fieldConfigs = new AutoFields(itemData).config['fields']
       }
 
-      for (const fieldConfig of fieldConfigs || []) {
-        itemFields.addField(fieldConfig)
+      for (let fieldConfig of fieldConfigs || []) {
+        fieldConfig = autoConfig(fieldConfig, this.extendedConfig)
+        itemFields.addField(fieldConfig, this.extendedConfig)
       }
 
       // When a partial is not expanded it does not get the value
@@ -443,8 +446,9 @@ export class ListField extends SortableField {
     // Use the field config for the list items to create the correct field types.
     const fieldConfigs = this.getConfig().get('fields', [])
 
-    for (const fieldConfig of fieldConfigs || []) {
-      itemFields.addField(fieldConfig)
+    for (let fieldConfig of fieldConfigs || []) {
+      fieldConfig = autoConfig(fieldConfig, this.extendedConfig)
+      itemFields.addField(fieldConfig, this.extendedConfig)
     }
 
     if (fieldConfigs.length > 1) {

@@ -27,9 +27,9 @@ export default class Config {
 }
 
 
-export const autoConfig = value => {
+export const autoConfig = (value, defaultValues) => {
   if (value instanceof Config) {
     return value
   }
-  return new Config(value)
+  return new Config(value, defaultValues)
 }

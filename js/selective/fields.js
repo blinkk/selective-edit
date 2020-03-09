@@ -52,9 +52,10 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
     // Setting value doesn't actually do anything.
   }
 
-  addField(fieldConfig) {
-    fieldConfig = autoConfig(fieldConfig)
-    const newField = this.fieldTypes.newField(fieldConfig.type, fieldConfig)
+  addField(fieldConfig, extendedConfig) {
+    fieldConfig = autoConfig(fieldConfig, extendedConfig)
+    const newField = this.fieldTypes.newField(
+      fieldConfig.type, fieldConfig, extendedConfig)
     if (newField) {
       this.fields.push(newField)
     }

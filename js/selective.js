@@ -9,6 +9,7 @@ import Field from './selective/field'
 import { SortableField, ListField } from './selective/field'
 import Fields from './selective/fields'
 import AutoFields from './selective/autoFields'
+import { autoConfig } from './utility/config'
 import { autoDeepObject } from './utility/deepObject'
 
 const Selective = Editor
@@ -23,5 +24,6 @@ export {
   html,
   repeat,
   render,
+  autoConfig,
   autoDeepObject
 }
