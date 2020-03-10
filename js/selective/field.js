@@ -414,6 +414,7 @@ export class ListField extends SortableField {
         'id': `${this.getUid()}-${index}`,
         'index': index,
         'itemFields': itemFields,
+        'fieldConfigs': fieldConfigs,
         'isExpanded': false,
       })
 
@@ -444,7 +445,12 @@ export class ListField extends SortableField {
     const itemFields = new Fields(editor.fieldTypes)
 
     // Use the field config for the list items to create the correct field types.
-    const fieldConfigs = this.getConfig().get('fields', [])
+    let fieldConfigs = this.getConfig().get('fields', [])
+
+    // If no field configs, use the last item config if availble.
+    if (!fieldConfigs.length && index > 0) {
+      fieldConfigs = this._listItems[index-1].fieldConfigs
+    }
 
     for (let fieldConfig of fieldConfigs || []) {
       fieldConfig = autoConfig(fieldConfig, this.extendedConfig)
@@ -461,6 +467,7 @@ export class ListField extends SortableField {
       'id': `${this.getUid()}-${index}`,
       'index': index,
       'itemFields': itemFields,
+      'fieldConfigs': fieldConfigs,
       'isExpanded': false,
     })
 
