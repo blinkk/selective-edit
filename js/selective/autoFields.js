@@ -40,28 +40,41 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
       const firstValue = data.length ? data[0] : null
       fields.push(this._fieldConfig('', firstValue))
     } else {
-      for (const key in data) {
-        if (!data.hasOwnProperty(key)) {
-          continue
-        }
+      fields = fields.concat(this._deepGuessObject(data, keyBase))
+    }
 
-        const newKeyBase = keyBase.concat([key])
-        if (this.dataType.isObject(data[key])) {
-          fields = fields.concat(this._deepGuess(data[key], newKeyBase))
-        } else {
-          const fullKey = newKeyBase.join('.')
+    return fields
+  }
 
-          // Skip ignored keys.
-          if (this.ignoredKeys.includes(key)) {
-            continue
-          }
+  _deepGuessObject(data, keyBase) {
+    let fields = []
+    keyBase = keyBase || []
 
-          fields.push(this._fieldConfig(fullKey, data[key]))
-        }
+    for (const key in data) {
+      if (!data.hasOwnProperty(key)) {
+        continue
+      }
+
+      // Skip ignored keys.
+      if (this.ignoredKeys.includes(key)) {
+        continue
+      }
+
+      const newKeyBase = keyBase.concat([key])
+      const newData = data[key]
+      if (this.dataType.isObject(newData)) {
+        fields = fields.concat(this._deepGuessObject(newData, newKeyBase))
+      } else {
+        fields.push(this._deepGuessSimple(data[key], newKeyBase))
       }
     }
 
     return fields
+  }
+
+  _deepGuessSimple(data, keyBase) {
+    const fullKey = keyBase.join('.')
+    return this._fieldConfig(fullKey, data)
   }
 
   _fieldConfig(key, value) {
