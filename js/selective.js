@@ -2,7 +2,7 @@
  * Selective structure content editor.
  */
 
-import { html, render } from 'lit-html'
+import { directive, html, render } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import Editor from './selective/editor'
 import Field from './selective/field'
@@ -21,6 +21,7 @@ export {
   ListField,
   Fields,
   AutoFields,
+  directive,
   html,
   repeat,
   render,
