@@ -30,6 +30,10 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     </div>`
   }
 
+  get help() {
+    return this.getConfig().help
+  }
+
   get isClean() {
     return this._dataValue == this.value
   }
@@ -46,6 +50,10 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     return this.getConfig().options || {}
   }
 
+  get placeholder() {
+    return this.getConfig().placeholder
+  }
+
   handleInput(evt) {
     // Update the value to what is being typed.
     // Helps mark the field as dirty.
@@ -54,6 +62,14 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
 
   static initialize(containerEl) {
     // Pass.
+  }
+
+  renderHelp(editor, field, data) {
+    if (!field.help) {
+      return ''
+    }
+
+    return html`<div class="selective__field__help">${field.help}</div>`
   }
 
   postRender(containerEl) {
