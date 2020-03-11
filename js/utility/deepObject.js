@@ -46,6 +46,16 @@ export default class DeepObject {
     }
     root[parts[parts.length - 1]] = value
   }
+
+  update(value) {
+    if (!value) {
+      return
+    }
+
+    for (const key of Object.keys(value)) {
+      this.set(key, value[key])
+    }
+  }
 }
 
 

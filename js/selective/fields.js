@@ -42,7 +42,12 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
     const value = autoDeepObject({})
 
     for (const field of this.fields) {
-      value.set(field.key, field.value)
+      // When using field without a key it returns a subset of the data.
+      if (!field.key) {
+        value.update(field.value)
+      } else {
+        value.set(field.key, field.value)
+      }
     }
 
     return extend({}, this._dataValue.obj, value.obj)
