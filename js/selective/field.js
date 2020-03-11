@@ -51,7 +51,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   get placeholder() {
-    return this.getConfig().placeholder
+    return this.getConfig().placeholder || ''
   }
 
   handleInput(evt) {
