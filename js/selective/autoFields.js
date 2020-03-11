@@ -114,7 +114,10 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
    * From a key guess the label of the field.
    */
   labelFromKey(key) {
-    return key.replace('.', ' ').split(' ').map(function(word) {
+    key = key.replace(/\./g, ' ')
+    key = key.replace(/\-/g, ' ')
+    key = key.replace(/\_/g, ' ')
+    return key.split(' ').map(function(word) {
       return (word.charAt(0).toUpperCase() + word.slice(1));
     }).join(' ')
   }
