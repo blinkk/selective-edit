@@ -30,6 +30,10 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     </div>`
   }
 
+  get default() {
+    return this.getConfig().default
+  }
+
   get help() {
     return this.getConfig().help
   }
@@ -86,6 +90,14 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     if (typeof data === 'object' && data !== null) {
       data = autoDeepObject(data)
       newDataValue = data.get(this.key)
+    }
+
+    // Allow for using the config default value.
+    if (newDataValue == undefined) {
+      const defaultValue = this.default
+      if (defaultValue != undefined) {
+        newDataValue = defaultValue
+      }
     }
 
     if (!this.isClean) {
