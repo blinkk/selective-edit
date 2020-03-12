@@ -13,6 +13,8 @@ import { autoConfig } from '../utility/config'
 import { autoDeepObject } from '../utility/deepObject'
 import { findParentByClassname, findParentDraggable } from '../utility/dom'
 
+const WHITESPACE_RE = /^[\s]+|[\s]+$/g
+
 // ========================================
 // === Base Field
 // ========================================
@@ -61,7 +63,8 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   handleInput(evt) {
     // Update the value to what is being typed.
     // Helps mark the field as dirty.
-    this.value = evt.target.value
+    // Strip the whitespace as well.
+    this.value = evt.target.value.replace(WHITESPACE_RE, '')
   }
 
   static initialize(containerEl) {
