@@ -598,7 +598,13 @@ export class ListField extends SortableField {
     // No expand toggle action to render if there is only 1 sub field config.
     const fieldConfigs = this.getConfig().get('fields', [])
 
+    // No need to expand/collapse when there is only one field config.
     if (fieldConfigs.length <= 1) {
+      return ''
+    }
+
+    // Hide when there are no values to expand/collapse.
+    if ((this.value || []).length == 0) {
       return ''
     }
 
