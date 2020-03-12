@@ -307,6 +307,7 @@ export class ListField extends SortableField {
       <div
           class="selective__field selective__field__${field.fieldType}"
           data-field-type="${field.fieldType}">
+        ${field.ensureItems(editor, data)}
         ${field.updateFromData(data)}
         <div class="selective__header">
           <div class="selective__field__label">${field.label}</div>
@@ -389,6 +390,11 @@ export class ListField extends SortableField {
   get isExpanded() {
     // If all of the items are in the expanded list then consider it expanded.
     if (this._listItems.length == this._expandedIndexes.length) {
+      return true
+    }
+
+    // Expand if there is only one item.
+    if (this._listItems.length == 1) {
       return true
     }
 
@@ -479,6 +485,13 @@ export class ListField extends SortableField {
       previewValue = null
     }
     return previewValue
+  }
+
+  ensureItems(editor, data) {
+    // If the sub fields have not been created create them now.
+    if (!this._listItems.length) {
+      this._listItems = this._createItems(editor, data)
+    }
   }
 
   handleAddItem(evt, editor) {
@@ -644,10 +657,7 @@ export class ListField extends SortableField {
   }
 
   renderItems(editor, data) {
-    // If the sub fields have not been created create them now.
-    if (!this._listItems.length) {
-      this._listItems = this._createItems(editor, data)
-    }
+    this.ensureItems(editor, data)
 
     // Update the expanded state each render.
     for (const listItem of this._listItems) {
