@@ -372,8 +372,18 @@ export class ListField extends SortableField {
   }
 
   get isClean() {
-    // TODO: Better array comparisons?
-    return JSON.stringify(this._dataValue) == JSON.stringify(this.value)
+    // If there are no list items, it has not been changed.
+    if (!this._listItems || this._listItems.length < 1) {
+      return true
+    }
+
+    for (const item of this._listItems) {
+      if (!item['itemFields'].isClean) {
+        return false
+      }
+    }
+
+    return true
   }
 
   get isExpanded() {
