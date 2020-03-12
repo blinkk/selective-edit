@@ -41,11 +41,22 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
   get value() {
     const value = autoDeepObject({})
 
+    const setKeys = []
     for (const field of this.fields) {
       // When using field without a key it returns a subset of the data.
       if (!field.key) {
         value.update(field.value)
       } else {
+        // If a field is reusing a key combine the existing values
+        // and the new values. New values will overwrite conflicting keys.
+        if (setKeys.includes(field.key)) {
+          value.set(field.key, extend({}, value.get(field.key), field.value))
+          continue
+        }
+
+        // Mark that the field key was set.
+        setKeys.push(field.key)
+
         value.set(field.key, field.value)
       }
     }
