@@ -65,6 +65,8 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     // Helps mark the field as dirty.
     // Strip the whitespace as well.
     this.value = evt.target.value.replace(WHITESPACE_RE, '')
+
+    document.dispatchEvent(new CustomEvent('selective.render'))
   }
 
   static initialize(containerEl) {
