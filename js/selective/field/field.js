@@ -57,7 +57,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       }
     }
 
-    return this._originalValue == this.value
+    return this.originalValue == this.value
   }
 
   get key() {
@@ -75,6 +75,10 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     localizedValues[this.key] = this.value
 
     return extend({}, this._originalValues, localizedValues)
+  }
+
+  get originalValue() {
+    return this._originalValue
   }
 
   get template() {
@@ -96,6 +100,15 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       return this.value
     }
     return this.values[this.keyForLocale(locale)]
+  }
+
+  set originalValue(value) {
+    this._originalValue = value
+  }
+
+  // Original values may come back in a bad format for the editor.
+  _cleanOriginalValue(value) {
+    return value
   }
 
   handleInput(evt) {
@@ -190,6 +203,9 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     this.isLocalized = selective.localize
     this.defaultLocale = selective.config.defaultLocale || 'en'
 
+    // Certain formats in the data may need to be cleaned up
+    newValue = this._cleanOriginalValue(newValue)
+
     // Only if the field is clean, update the value.
     if (isClean) {
       this.value = newValue
@@ -199,7 +215,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       }
     }
 
-    this._originalValue = newValue
+    this.originalValue = newValue
 
     // Pull in localized values.
     if (this.isLocalized) {
@@ -212,7 +228,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
             continue
           }
           const localeKey = this.keyForLocale(locale)
-          newValues[localeKey] = data.get(localeKey)
+          newValues[localeKey] = this._cleanOriginalValue(data.get(localeKey))
         }
       }
 
