@@ -54,6 +54,7 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
   get value() {
     const value = autoDeepObject({})
 
+    // TODO: this logic is shared with the Groups class.
     const keySet = []
     for (const field of this.fields) {
       if (!field.key) {

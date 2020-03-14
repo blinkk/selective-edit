@@ -20,6 +20,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     this.fieldType = 'Field'
     this.globalConfig = globalConfig || {}
     this.isLocalized = false
+    this.ignoreLocalize = false
     this.defaultLocale = 'en'
 
     this.setConfig(config)
@@ -133,6 +134,11 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
   // TODO: Remove? Directives?
   postRender(containerEl) {}
 
+  render() {
+    // Trigger a render event.
+    document.dispatchEvent(new CustomEvent('selective.render'))
+  }
+
   renderField(selective, data) {
     return html`
       ${this.renderLabel(selective, data)}
@@ -163,8 +169,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
   }
 
   renderLocalization(selective, data) {
-    if (!selective.localize) {
-      // TODO: render just a single input.
+    if (this.ignoreLocalize || !selective.localize) {
       return this.renderInput(selective, data)
     }
 
@@ -192,7 +197,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       const localeKey = this.keyForLocale(locale)
       this.values[localeKey] = value
     }
-    document.dispatchEvent(new CustomEvent('selective.render'))
+    this.render()
   }
 
   // Use the data passed to render to update the original value.
@@ -257,7 +262,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
 
     if (isClean != this.isClean) {
       // Clean state has changed. Rerender.
-      document.dispatchEvent(new CustomEvent('selective.render'))
+      this.render()
     }
   }
 
