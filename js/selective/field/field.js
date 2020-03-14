@@ -150,8 +150,6 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       return this.renderInput(selective, data)
     }
 
-    this.defaultLocale = selective.config.defaultLocale || 'en'
-
     // Render the localization grid.
     return html`
       <div class="selective__field__localization">
@@ -190,6 +188,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
 
     const isClean = this.isClean
     this.isLocalized = selective.localize
+    this.defaultLocale = selective.config.defaultLocale || 'en'
 
     // Only if the field is clean, update the value.
     if (isClean) {
@@ -199,6 +198,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
         this.value = this.config.default
       }
     }
+
     this._originalValue = newValue
 
     // Pull in localized values.
@@ -208,6 +208,9 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       if (typeof data === 'object' && data !== null) {
         data = autoDeepObject(data)
         for (const locale of selective.config.locales || ['en', 'es']) {
+          if (locale == this.defaultLocale) {
+            continue
+          }
           const localeKey = this.keyForLocale(locale)
           newValues[localeKey] = data.get(localeKey)
         }
