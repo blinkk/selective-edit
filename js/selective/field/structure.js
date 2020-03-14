@@ -17,7 +17,6 @@ export class GroupField extends Field {
     this.fieldType = 'group'
     this.fields = null
     this.isExpanded = false
-    this.isExpanded = true  // TODO: remove
     this.ignoreLocalize = true
   }
 
@@ -41,40 +40,7 @@ export class GroupField extends Field {
       return this.originalValue
     }
 
-    const value = autoDeepObject({})
-
-    // TODO: this logic is shared with the Fields class.
-    const keySet = []
-    for (const field of this.fields.fields) {
-      if (!field.key) {
-        // When using field without a key it returns a subset of the data.
-        value.update(field.value)
-      } else {
-        if (field.isLocalized) {
-          // Mark that the field key was set.
-          keySet.push(field.key)
-
-          // Localized fields return an object of keys and values.
-          value.update(field.localizedValues)
-        } else {
-          // If a field is reusing a key combine the existing values
-          // and the new values. New values will overwrite conflicting keys.
-          if (keySet.includes(field.key)) {
-            value.set(
-              field.key,
-              extend({}, value.get(field.key), field.value))
-            continue
-          }
-
-          // Mark that the field key was set.
-          keySet.push(field.key)
-
-          value.set(field.key, field.value)
-        }
-      }
-    }
-
-    return extend({}, this.originalValue, value.obj)
+    return extend({}, this.originalValue, this.fields.value)
   }
 
   set value(value) {
