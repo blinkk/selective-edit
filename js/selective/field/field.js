@@ -32,7 +32,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     this.values = {}
   }
 
-  // TODO: Remove.
+  // TODO: Remove. Look into directives.
   static initialize(containerEl) {
     // Pass.
   }
@@ -55,6 +55,11 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       if (JSON.stringify(this.values) != JSON.stringify(this._originalValues)) {
         return false
       }
+    }
+
+    // Handle complex value.
+    if (Array.isArray(this.originalValue) || Array.isArray(this.value)) {
+      return JSON.stringify(this.value) == JSON.stringify(this.originalValue)
     }
 
     return this.originalValue == this.value
@@ -208,11 +213,21 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
 
     // Only if the field is clean, update the value.
     if (isClean) {
+      // Copy the array to prevent shared array.
+      if (Array.isArray(newValue)) {
+        newValue = [...newValue]
+      }
+
       this.value = newValue
 
       if (this.value == undefined) {
         this.value = this.config.default
       }
+    }
+
+    // Copy the array to prevent shared array.
+    if (Array.isArray(newValue)) {
+      newValue = [...newValue]
     }
 
     this.originalValue = newValue
