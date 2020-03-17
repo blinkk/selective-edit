@@ -415,11 +415,6 @@ export class ListField extends SortableField {
       return true
     }
 
-    // Expand if there is only one item.
-    if (this._listItems.length == 1) {
-      return true
-    }
-
     return this._isExpanded
   }
 
@@ -489,6 +484,7 @@ export class ListField extends SortableField {
 
       index += 1
     }
+
     return items
   }
 
@@ -513,6 +509,12 @@ export class ListField extends SortableField {
     // If the sub fields have not been created create them now.
     if (!this._listItems.length) {
       this._listItems = this._createItems(editor, data)
+
+      // Expand by default if there is only one item.
+      if (this._listItems.length == 1) {
+        this._expandedIndexes = [0]
+      }
+
       this._listIds = this._idsFromList(this._listItems)
     }
   }
@@ -636,6 +638,11 @@ export class ListField extends SortableField {
 
     // No need to expand/collapse when there is only one field config.
     if (fieldConfigs.length <= 1) {
+      return ''
+    }
+
+    // No need to expand/collapse when there is only one list item.
+    if (this._listItems && this._listItems.length <= 1) {
       return ''
     }
 
