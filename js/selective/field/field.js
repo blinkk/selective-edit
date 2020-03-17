@@ -3,12 +3,14 @@
  */
 
 import * as extend from 'deep-extend'
+import * as stringify from 'json-stable-stringify'
 import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import {
   Base,
   compose,
 } from '../../utility/compose'
+import DataType from '../../utility/dataType'
 import { autoDeepObject } from '../../utility/deepObject'
 import ConfigMixin from '../../mixin/config'
 import UidMixin from '../../mixin/uid'
@@ -53,14 +55,16 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
 
   get isClean() {
     if (this.isLocalized) {
-      if (JSON.stringify(this.values) != JSON.stringify(this._originalValues)) {
+      if (stringify(this.values) != stringify(this._originalValues)) {
         return false
       }
     }
 
     // Handle complex value.
-    if (Array.isArray(this.originalValue) || Array.isArray(this.value)) {
-      return JSON.stringify(this.value) == JSON.stringify(this.originalValue)
+    const isArray = DataType.isArray(this.originalValue) || DataType.isArray(this.value)
+    const isObject = DataType.isObject(this.originalValue) || DataType.isObject(this.value)
+    if (isArray || isObject) {
+      return stringify(this.value) == stringify(this.originalValue)
     }
 
     return this.originalValue == this.value

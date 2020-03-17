@@ -2,6 +2,7 @@
  * Field defined for editing.
  */
 
+import * as stringify from 'json-stable-stringify'
 import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import ConfigMixin from '../mixin/config'
@@ -399,8 +400,8 @@ export class ListField extends SortableField {
     }
 
     // Check if the ids on the item list have changed.
-    const originalIds = JSON.stringify(this._listIds)
-    const currentIds = JSON.stringify(this._idsFromList(this._listItems))
+    const originalIds = stringify(this._listIds)
+    const currentIds = stringify(this._idsFromList(this._listItems))
     if (originalIds != currentIds) {
       return false
     }
