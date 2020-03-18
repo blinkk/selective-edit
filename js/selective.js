@@ -7,6 +7,7 @@ import { repeat } from 'lit-html/directives/repeat'
 import Editor from './selective/editor'
 import Field from './selective/field'
 import FieldRewrite from './selective/field/field'
+import UI from './selective/ui/ui'
 import { GroupField } from './selective/field/structure'
 import FieldsRewrite from './selective/fields/fields'
 import { SortableField, ListField } from './selective/field'
@@ -27,6 +28,7 @@ export {
   Fields,
   FieldsRewrite,
   AutoFields,
+  UI,
   directive,
   html,
   repeat,
