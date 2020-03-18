@@ -94,11 +94,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
   get template() {
     return (selective, data) => html`
       ${this.updateOriginal(selective, data)}
-      <div
-          class=${this.classesField}
-          data-field-type="${this.fieldType}">
-        ${this.renderField(selective, data)}
-      </div>`
+      ${this.renderWrapper(selective, data)}`
   }
 
   get uid() {
@@ -191,6 +187,15 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
               ${this.renderInput(selective, data, locale)}
             </div>
           `)}
+      </div>`
+  }
+
+  renderWrapper(selective, data) {
+    return html`
+      <div
+          class=${this.classesField}
+          data-field-type="${this.fieldType}">
+        ${this.renderField(selective, data)}
       </div>`
   }
 
