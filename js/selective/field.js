@@ -637,7 +637,7 @@ export class ListField extends SortableField {
     const fieldConfigs = this.getConfig().get('fields', [])
 
     // No need to expand/collapse when there is only one field config.
-    if (fieldConfigs.length <= 1) {
+    if (fieldConfigs.length == 1) {
       return ''
     }
 
