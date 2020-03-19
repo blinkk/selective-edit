@@ -14,16 +14,12 @@ import Listeners from '../../utility/listeners'
 export default class UI extends compose(ConfigMixin, UidMixin,)(Base) {
   constructor(config) {
     super()
-
     this.listeners = new Listeners()
+    this.setConfig(config)
   }
 
   get config() {
     return this.getConfig()
-  }
-
-  get template() {
-    return 'Missing template for UI.'
   }
 
   get uid() {

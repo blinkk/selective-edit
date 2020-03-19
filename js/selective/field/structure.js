@@ -6,18 +6,19 @@ import * as extend from 'deep-extend'
 import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import { autoConfig } from '../../utility/config'
-import { autoDeepObject } from '../../utility/deepObject'
 import AutoFields from '../autoFields'
 import FieldsRewrite from '../fields/fields'
 import Field from './field'
+
 
 export class GroupField extends Field {
   constructor(config, globalConfig) {
     super(config, globalConfig)
     this.fieldType = 'group'
+    this.ignoreLocalize = true
     this.fields = null
     this.isExpanded = false
-    this.ignoreLocalize = true
+    this._useAutoFields = false
   }
 
   get isClean() {
@@ -54,9 +55,9 @@ export class GroupField extends Field {
     fields.updateOriginal(this.originalValue)
 
     let fieldConfigs = this.config.fields || []
-    const useAutoFields = fieldConfigs.length == 0
+    this._useAutoFields = fieldConfigs.length == 0
 
-    if (useAutoFields) {
+    if (this._useAutoFields) {
       // Auto guess the fields if they are not defined.
       const AutoFieldsCls = this.config.get('AutoFieldsCls', AutoFields)
       fieldConfigs = new AutoFieldsCls(this.originalValue).config['fields']

@@ -42,7 +42,15 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
     return true
   }
 
+  get isSimpleField() {
+    return this.fields.length == 1 && !this.fields[0].key
+  }
+
   get template() {
+    if (this.isSimpleField) {
+      return (selective, data) => this.fields[0].template(selective, data)
+    }
+
     return (selective, data) => html`<div class="selective__fields">
       ${this.updateOriginal(selective, data)}
       ${repeat(this.fields, (field) => field.uid, (field, index) => html`
@@ -52,6 +60,10 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
   }
 
   get value() {
+    if (this.isSimpleField) {
+      return this.fields[0].value
+    }
+
     const value = autoDeepObject({})
 
     const keySet = []
