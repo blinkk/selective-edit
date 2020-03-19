@@ -27,6 +27,8 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
 
     this.setConfig(config)
 
+    this._errors = {}
+
     this._originalValue = undefined
     this.value = undefined
 
@@ -143,7 +145,18 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     return html`
       ${this.renderLabel(selective, data)}
       ${this.renderLocalization(selective, data)}
+      ${this.renderError(selective, data)}
       ${this.renderHelp(selective, data)}`
+  }
+
+  renderError(selective, data) {
+    const errorKeys = Object.keys(this._errors)
+
+    if (!errorKeys.length) {
+      return ''
+    }
+
+    return html`<div class="selective__field__errors">${errorKeys}</div>`
   }
 
   renderHelp(selective, data) {
