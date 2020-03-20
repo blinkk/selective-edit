@@ -30,6 +30,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
 
     this._errors = {}
     this._isLocked = false
+    this._useAutoFields = false
 
     this._originalValue = undefined
     this.value = undefined
@@ -53,6 +54,10 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       'selective__field',
       `selective__field__${this.fieldType}`,
     ]
+
+    if (this._useAutoFields) {
+      classes.push('selective__field--auto')
+    }
 
     return classes.join(' ')
   }

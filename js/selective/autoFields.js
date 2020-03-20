@@ -15,6 +15,8 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
     this.setConfig(config)
 
     this._ignoredKeys = null
+
+    this.DataType = DataType
   }
 
   get config() {

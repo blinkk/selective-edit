@@ -58,7 +58,7 @@ export class ListField extends Field {
       // Auto guess the fields if they are not defined.
       if (this._useAutoFields) {
         const AutoFieldsCls = this.config.get('AutoFieldsCls', AutoFields)
-        fieldConfigs = new AutoFieldsCls(this.originalValue).config['fields']
+        fieldConfigs = new AutoFieldsCls(itemData).config['fields']
       }
 
       // Create the fields based on the config.
@@ -332,8 +332,6 @@ export class ListField extends Field {
       return ''
     }
 
-    console.log('exp/col', areAllExpanded, areAllCollapsed);
-
     actions.push(html`
       <button
           ?disabled=${areAllExpanded}
@@ -363,7 +361,7 @@ export class ListField extends Field {
     const value = this.getOriginalValueForLocale(locale)
 
     return html`
-      <div class="selective__list">
+      <div class="selective__list ${this._useAutoFields ? 'selective__list--auto' : ''}">
         ${repeat(
           items,
           (item) => item.uid,
