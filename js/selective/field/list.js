@@ -95,8 +95,16 @@ export class ListField extends Field {
   }
 
   get isClean() {
-    for (const localeKey of Object.keys(this._listItems)) {
-      for (const item of this._listItems[localeKey]) {
+    for (const locale of this.locales) {
+      const originalValue = this.getOriginalValueForLocale(locale)
+      const listItems = this._getListItemsForLocale(locale)
+
+      // Check for a change in length.
+      if (originalValue && originalValue.length != listItems.length) {
+        return false
+      }
+
+      for (const item of listItems) {
         if (!item.fields.isClean) {
           return false
         }

@@ -24,6 +24,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     this.isLocalized = false
     this.ignoreLocalize = false
     this.defaultLocale = 'en'
+    this.locales = ['en']
 
     this.setConfig(config)
 
@@ -197,7 +198,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     return html`
       <div class="selective__field__localization">
         ${repeat(
-          selective.config.locales || ['en', 'es'],
+          this.locales,
           (locale) => locale,
           (locale, index) => html`
             <div class="selective__field__localization__locale">
@@ -241,6 +242,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     const isClean = this.isClean
     this.isLocalized = selective.localize
     this.defaultLocale = selective.config.defaultLocale || 'en'
+    this.locales = selective.config.locales || ['en', 'es']
 
     // Certain formats in the data may need to be cleaned up
     newValue = this._cleanOriginalValue(newValue)
@@ -272,7 +274,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
 
       if (typeof data === 'object' && data !== null) {
         data = autoDeepObject(data)
-        for (const locale of selective.config.locales || ['en', 'es']) {
+        for (const locale of this.locales) {
           if (locale == this.defaultLocale) {
             continue
           }
