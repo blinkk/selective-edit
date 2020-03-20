@@ -247,6 +247,13 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     // Certain formats in the data may need to be cleaned up
     newValue = this._cleanOriginalValue(newValue)
 
+    // Copy the array to prevent shared array.
+    if (Array.isArray(newValue)) {
+      newValue = [...newValue]
+    }
+
+    this.originalValue = newValue
+
     // Only if the field is clean, update the value.
     if (isClean) {
       // Copy the array to prevent shared array.
@@ -260,13 +267,6 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
         this.value = this.config.default
       }
     }
-
-    // Copy the array to prevent shared array.
-    if (Array.isArray(newValue)) {
-      newValue = [...newValue]
-    }
-
-    this.originalValue = newValue
 
     // Pull in localized values.
     if (this.isLocalized) {

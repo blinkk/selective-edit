@@ -140,10 +140,6 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
   }
 
   updateOriginal(selective, data) {
-    if (!data) {
-      this._originalValue = data
-      return
-    }
-    this._originalValue = data.obj || data
+    this._originalValue = (data ? data.obj ? data.obj : data : undefined)
   }
 }
