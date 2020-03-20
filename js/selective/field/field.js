@@ -103,6 +103,13 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     return this.getUid()
   }
 
+  getOriginalValueForLocale(locale) {
+    if (!locale || locale == this.defaultLocale) {
+      return this.originalValue
+    }
+    return this._originalValues[this.keyForLocale(locale)]
+  }
+
   getValueForLocale(locale) {
     if (!locale || locale == this.defaultLocale) {
       return this.value

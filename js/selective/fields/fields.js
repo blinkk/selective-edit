@@ -32,6 +32,16 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
     return this.getConfig()
   }
 
+  // Guess default value when there is not value defined for fields.
+  get defaultValue() {
+    let defaultValue = ''
+    // If there is multiple fields it should be an object.
+    if (this.fields.length > 1) {
+      defaultValue = {}
+    }
+    return defaultValue
+  }
+
   get isClean() {
     for (const field of this.fields) {
       if (!field.isClean) {
@@ -48,7 +58,9 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
 
   get template() {
     if (this.isSimpleField) {
-      return (selective, data) => this.fields[0].template(selective, data)
+      return (selective, data) => html`
+        ${this.updateOriginal(selective, data)}
+        ${this.fields[0].template(selective, data)}`
     }
 
     return (selective, data) => html`<div class="selective__fields">
@@ -96,7 +108,7 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
       }
     }
 
-    return extend({}, this._originalValue.obj, value.obj)
+    return extend({}, this._originalValue, value.obj)
   }
 
   set value(value) {
@@ -128,6 +140,10 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
   }
 
   updateOriginal(selective, data) {
-    this._originalValue = data
+    if (!data) {
+      this._originalValue = data
+      return
+    }
+    this._originalValue = data.obj || data
   }
 }

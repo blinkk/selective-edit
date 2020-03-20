@@ -2,6 +2,7 @@
  * List fields for controlling the lists of fields.
  */
 
+import * as extend from 'deep-extend'
 import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import {
@@ -23,6 +24,7 @@ export class ListField extends Field {
   constructor(config, globalConfig) {
     super(config, globalConfig)
     this.fieldType = 'list'
+    this.isLocalized = true
 
     this._listItems = {}
     this._useAutoFields = false
@@ -39,16 +41,15 @@ export class ListField extends Field {
   _createItems(selective, data, locale) {
     const value = this.getValueForLocale(locale) || []
     const localeKey = this.keyForLocale(locale)
+    const listItems = this._getListItemsForLocale(locale)
 
-    if (this._listItems[localeKey] != null || !value.length) {
+    if (listItems.length > 0 || !value.length) {
       return
     }
 
     // Use the config to find the field configs.
     let fieldConfigs = this.config.get('fields', [])
     this._useAutoFields = !fieldConfigs.length
-
-    const items = []
 
     for (const itemData of value) {
       const fields = this._createFields(selective.fieldTypes)
@@ -69,25 +70,59 @@ export class ListField extends Field {
       // When an is not expanded it does not get the value
       // updated correctly so we need to manually call the data update.
       for (const field of fields.fields) {
-        field.updateOriginal(selective, itemData || {})
+        field.updateOriginal(selective, itemData || fields.defaultValue)
       }
 
-      items.push(new ListItem({
+      listItems.push(new ListItem({
         'fields': fieldConfigs,
       }, fields))
     }
-
-    this._listItems[localeKey] = items
   }
 
   _getListItemsForLocale(locale) {
     const localeKey = this.keyForLocale(locale)
+
+    if (!this._listItems[localeKey]) {
+      this._listItems[localeKey] = []
+    }
+
     return this._listItems[localeKey]
   }
 
   _setListItemsForLocale(locale, listItems) {
     const localeKey = this.keyForLocale(locale)
     this._listItems[localeKey] = listItems
+  }
+
+  get isClean() {
+    for (const localeKey of Object.keys(this._listItems)) {
+      for (const item of this._listItems[localeKey]) {
+        if (!item.fields.isClean) {
+          return false
+        }
+      }
+    }
+
+    return true
+  }
+
+  get value() {
+    const listItems = this._getListItemsForLocale()
+
+    if (!listItems.length) {
+      return this.originalValue
+    }
+
+    const value = []
+    for (const item of listItems) {
+      value.push(item.fields.value)
+    }
+
+    return value
+  }
+
+  set value(value) {
+    // no-op
   }
 
   handleAddItem(evt, selective) {
@@ -109,20 +144,13 @@ export class ListField extends Field {
       fields.addField(fieldConfig, this.extendedConfig)
     }
 
-    // If there is multiple fields it should be an object.
-    let defaultValue = ''
-    if (fieldConfigs.length > 1) {
-      defaultValue = {}
-    }
-    fields.updateOriginal(defaultValue)
+    fields.updateOriginal(fields.defaultValue)
 
     const listItem = new ListItem({
       'fields': fieldConfigs,
     }, fields)
     listItem.isExpanded = true
     listItems.push(listItem)
-
-    this.value.push(defaultValue)
 
     // TODO: Focus on the input after rendering.
 
@@ -196,7 +224,6 @@ export class ListField extends Field {
 
     if (deleteIndex > -1) {
       listItems.splice(deleteIndex, 1)
-      this.value.splice(deleteIndex, 1)
     }
 
     this.render()
@@ -210,8 +237,6 @@ export class ListField extends Field {
     // Rework the arrays to have the items in the correct position.
     const newListItems = []
     const oldListItems = this._getListItemsForLocale(locale)
-    const newValue = []
-    const oldValue = this.value
     const maxIndex = Math.max(endIndex, startIndex)
     const minIndex = Math.min(endIndex, startIndex)
 
@@ -225,20 +250,16 @@ export class ListField extends Field {
       if (i < minIndex || i > maxIndex) {
         // Leave in the same order.
         newListItems[i] = oldListItems[i]
-        newValue[i] = oldValue[i]
       } else if (i == endIndex) {
         // This element is being moved to, place the moved value here.
         newListItems[i] = oldListItems[startIndex]
-        newValue[i] = oldValue[startIndex]
       } else {
         // Shift the old index using the modifier to determine direction.
         newListItems[i] = oldListItems[i+modifier]
-        newValue[i] = oldValue[i+modifier]
       }
     }
 
     this._setListItemsForLocale(locale, newListItems)
-    this.value = newValue
     this.render()
   }
 
@@ -290,7 +311,7 @@ export class ListField extends Field {
     this._createItems(selective, data, locale)
     const localeKey = this.keyForLocale(locale)
     const items = this._listItems[localeKey]
-    const value = this.getValueForLocale(locale) || []
+    const value = this.getOriginalValueForLocale(locale)
 
     return html`
       <div class="selective__list">
