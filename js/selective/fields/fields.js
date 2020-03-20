@@ -43,7 +43,7 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
   }
 
   get isSimpleField() {
-    return this.fields.length == 1 && !this.fields[0].key
+    return this.fields.length == 1
   }
 
   get template() {
@@ -60,7 +60,7 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
   }
 
   get value() {
-    if (this.isSimpleField) {
+    if (this.isSimpleField && !this.fields[0].key) {
       return this.fields[0].value
     }
 

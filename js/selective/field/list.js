@@ -11,6 +11,7 @@ import {
 import ConfigMixin from '../../mixin/config'
 import UidMixin from '../../mixin/uid'
 import { autoConfig } from '../../utility/config'
+import { findParentByClassname } from '../../utility/dom'
 import { autoDeepObject } from '../../utility/deepObject'
 import AutoFields from '../autoFields'
 import FieldsRewrite from '../fields/fields'
@@ -84,6 +85,11 @@ export class ListField extends Field {
     return this._listItems[localeKey]
   }
 
+  _setListItemsForLocale(locale, listItems) {
+    const localeKey = this.keyForLocale(locale)
+    this._listItems[localeKey] = listItems
+  }
+
   handleAddItem(evt, selective) {
     const locale = evt.target.dataset.locale
     const listItems = this._getListItemsForLocale(locale)
@@ -104,17 +110,19 @@ export class ListField extends Field {
     }
 
     // If there is multiple fields it should be an object.
+    let defaultValue = ''
     if (fieldConfigs.length > 1) {
-      fields.updateOriginal({})
-    } else {
-      fields.updateOriginal('')
+      defaultValue = {}
     }
+    fields.updateOriginal(defaultValue)
 
     const listItem = new ListItem({
       'fields': fieldConfigs,
     }, fields)
     listItem.isExpanded = true
     listItems.push(listItem)
+
+    this.value.push(defaultValue)
 
     // TODO: Focus on the input after rendering.
 
@@ -174,11 +182,64 @@ export class ListField extends Field {
   }
 
   handleDeleteItem(evt) {
-    console.log('TODO: delete item');
+    const target = findParentByClassname(evt.target, 'selective__list__item__delete')
+    const uid = target.dataset.itemUid
+    const locale = target.dataset.locale
+    const listItems = this._getListItemsForLocale(locale)
+    let deleteIndex = -1
+    for (const index in listItems) {
+      if (listItems[index].uid == uid) {
+        deleteIndex = index
+        break
+      }
+    }
+
+    if (deleteIndex > -1) {
+      listItems.splice(deleteIndex, 1)
+      this.value.splice(deleteIndex, 1)
+    }
+
+    this.render()
   }
 
-  handleSort(startIndex, endIndex) {
-    console.log('TODO: sort', startIndex, endIndex);
+  handleSort(startIndex, endIndex, dropTarget) {
+    // Find the locale from the drop target.
+    const target = findParentByClassname(dropTarget, 'selective__list__item')
+    const locale = target.dataset.locale
+
+    // Rework the arrays to have the items in the correct position.
+    const newListItems = []
+    const oldListItems = this._getListItemsForLocale(locale)
+    const newValue = []
+    const oldValue = this.value
+    const maxIndex = Math.max(endIndex, startIndex)
+    const minIndex = Math.min(endIndex, startIndex)
+
+    // Determine which direction to shift misplaced items.
+    let modifier = 1
+    if (startIndex > endIndex) {
+      modifier = -1
+    }
+
+    for (let i = 0; i < oldValue.length; i++) {
+      if (i < minIndex || i > maxIndex) {
+        // Leave in the same order.
+        newListItems[i] = oldListItems[i]
+        newValue[i] = oldValue[i]
+      } else if (i == endIndex) {
+        // This element is being moved to, place the moved value here.
+        newListItems[i] = oldListItems[startIndex]
+        newValue[i] = oldValue[startIndex]
+      } else {
+        // Shift the old index using the modifier to determine direction.
+        newListItems[i] = oldListItems[i+modifier]
+        newValue[i] = oldValue[i+modifier]
+      }
+    }
+
+    this._setListItemsForLocale(locale, newListItems)
+    this.value = newValue
+    this.render()
   }
 
   renderActionsFooter(selective, data, locale) {

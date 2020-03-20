@@ -110,10 +110,6 @@ export class SortableUI extends UI {
     const currentIndex = parseInt(target.dataset.index)
     const startIndex = parseInt(evt.dataTransfer.getData("text/plain"))
 
-    // No longer hovering.
-    target.classList.remove(
-      'sortable--hover', 'sortable--above', 'sortable--below')
-
     // Reset the drag element.
     this._dragOriginElement = null
 
@@ -122,6 +118,6 @@ export class SortableUI extends UI {
       'selective__sortable--hover', 'selective__sortable--above',
       'selective__sortable--below')
 
-    this.listeners.trigger('sort', startIndex, currentIndex)
+    this.listeners.trigger('sort', startIndex, currentIndex, target)
   }
 }
