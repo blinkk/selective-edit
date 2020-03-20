@@ -311,13 +311,20 @@ export class ListField extends Field {
       return ''
     }
 
-    // Check if there are only simple fields.
+    // Check list items for specific conditions.
     const listItems = this._getListItemsForLocale(locale)
     let areSimpleFields = true
+    let areAllExpanded = true
+    let areAllCollapsed = true
     for (const item of listItems) {
       if (!item.fields.isSimpleField) {
         areSimpleFields = false
-        break
+      }
+      if (!item.isExpanded) {
+        areAllExpanded = false
+      }
+      if (item.isExpanded) {
+        areAllCollapsed = false
       }
     }
 
@@ -325,9 +332,11 @@ export class ListField extends Field {
       return ''
     }
 
+    console.log('exp/col', areAllExpanded, areAllCollapsed);
+
     actions.push(html`
       <button
-          ?disabled=${isExpanded}
+          ?disabled=${areAllExpanded}
           class="selective__action__expand"
           data-locale=${locale || ''}
           @click=${this.handleExpandAll.bind(this)}>
@@ -336,7 +345,7 @@ export class ListField extends Field {
 
     actions.push(html`
       <button
-          ?disabled=${isCollapsed}
+          ?disabled=${areAllCollapsed}
           class="selective__action__collapse"
           data-locale=${locale || ''}
           @click=${this.handleCollapseAll.bind(this)}>
