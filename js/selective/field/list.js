@@ -254,7 +254,7 @@ export class ListField extends Field {
       modifier = -1
     }
 
-    for (let i = 0; i < oldValue.length; i++) {
+    for (let i = 0; i < oldListItems.length; i++) {
       if (i < minIndex || i > maxIndex) {
         // Leave in the same order.
         newListItems[i] = oldListItems[i]
@@ -292,6 +292,20 @@ export class ListField extends Field {
       return ''
     }
 
+    // Check if there are only simple fields.
+    const listItems = this._getListItemsForLocale(locale)
+    let areSimpleFields = true
+    for (const item of listItems) {
+      if (!item.fields.isSimpleField) {
+        areSimpleFields = false
+        break
+      }
+    }
+
+    if (areSimpleFields) {
+      return ''
+    }
+
     actions.push(html`
       <button
           ?disabled=${isExpanded}
@@ -317,8 +331,7 @@ export class ListField extends Field {
 
   renderInput(selective, data, locale) {
     this._createItems(selective, data, locale)
-    const localeKey = this.keyForLocale(locale)
-    const items = this._listItems[localeKey]
+    const items = this._getListItemsForLocale(locale)
     const value = this.getOriginalValueForLocale(locale)
 
     return html`
