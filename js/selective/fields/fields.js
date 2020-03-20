@@ -153,7 +153,15 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
     }
   }
 
-  updateOriginal(selective, data) {
+  updateOriginal(selective, data, deep) {
     this._originalValue = (data ? data.obj ? data.obj : data : undefined)
+
+    if (deep) {
+      // Update all the fields since they may not get rendered.
+      // Ex: a collapsed list would not get the update.
+      for( const field of this.fields ) {
+        field.updateOriginal(selective, data)
+      }
+    }
   }
 }

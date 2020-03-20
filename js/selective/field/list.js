@@ -279,7 +279,6 @@ export class ListField extends Field {
 
     // Unlock fields after rendering is complete to let the values be updated when clean.
     document.addEventListener('selective.render.complete', () => {
-      console.log('rendering complete...');
       for (const item of newListItems) {
         item.fields.unlock()
       }
@@ -393,6 +392,7 @@ export class ListField extends Field {
             data-locale=${locale || ''}
             @click=${this.handleExpandItem.bind(this)}>
           ${this.renderPreview(item, index)}
+          ${item.fields.updateOriginal(selective, data, true)}
         </div>
         <div
             class="selective__list__item__delete"
