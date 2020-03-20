@@ -261,13 +261,33 @@ export class ListField extends Field {
       } else if (i == endIndex) {
         // This element is being moved to, place the moved value here.
         newListItems[i] = oldListItems[startIndex]
+
+        // Lock the fields to prevent the values from being updated at the same
+        // time as the original value.
+        newListItems[i].fields.lock()
       } else {
         // Shift the old index using the modifier to determine direction.
         newListItems[i] = oldListItems[i+modifier]
+
+        // Lock the fields to prevent the values from being updated at the same
+        // time as the original value.
+        newListItems[i].fields.lock()
       }
     }
 
     this._setListItemsForLocale(locale, newListItems)
+
+    // Unlock fields after rendering is complete to let the values be updated when clean.
+    document.addEventListener('selective.render.complete', () => {
+      console.log('rendering complete...');
+      for (const item of newListItems) {
+        item.fields.unlock()
+      }
+      this.render()
+    }, {
+      once: true,
+    })
+
     this.render()
   }
 

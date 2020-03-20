@@ -29,6 +29,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
     this.setConfig(config)
 
     this._errors = {}
+    this._isLocked = false
 
     this._originalValue = undefined
     this.value = undefined
@@ -57,6 +58,10 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
   }
 
   get isClean() {
+    if (this._isLocked) {
+      return false
+    }
+
     if (this.isLocalized) {
       if (stringify(this.values) != stringify(this._originalValues)) {
         return false
@@ -139,6 +144,10 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       return this.key
     }
     return `${this.key}@${locale}`
+  }
+
+  lock() {
+    this._isLocked = true
   }
 
   // TODO: Remove? Directives?
@@ -228,6 +237,10 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       this.values[localeKey] = value
     }
     this.render()
+  }
+
+  unlock() {
+    this._isLocked = false
   }
 
   // Use the data passed to render to update the original value.

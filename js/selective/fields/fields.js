@@ -127,6 +127,13 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
     }
   }
 
+  lock() {
+    // Lock all the fields to prevent them from being updated.
+    for (const field of this.fields) {
+      field.lock()
+    }
+  }
+
   // TODO: look into directives.
   postRender(containerEl) {
     // Pass it along to the fields.
@@ -137,6 +144,13 @@ export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base)
 
   reset() {
     this.fields = []
+  }
+
+  unlock() {
+    // Unlock all the fields to allow them to be updated.
+    for (const field of this.fields) {
+      field.unlock()
+    }
   }
 
   updateOriginal(selective, data) {

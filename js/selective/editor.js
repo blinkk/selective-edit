@@ -124,6 +124,8 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
 
     render(this.template(this, this.data), this.containerEl)
     this.postRender()
+
+    document.dispatchEvent(new CustomEvent('selective.render.complete'))
   }
 
   setConfig(value) {
