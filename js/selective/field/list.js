@@ -388,6 +388,7 @@ export class ListField extends Field {
           (item, index) => this.renderItem(
             selective, index < valueLen ? value[index] : item.fields.defaultValue, item, index, locale)
         )}
+        ${valueLen < 1 && items.length < 1 ? this.renderItemEmpty(selective, data, 0, locale) : ''}
       </div>
       ${this.renderActionsFooter(selective, data, locale)}`
   }
@@ -429,6 +430,15 @@ export class ListField extends Field {
             title="Delete item">
           <i class="material-icons">delete</i>
         </div>
+      </div>`
+  }
+
+  renderItemEmpty(selective, data, index, locale) {
+    return html`
+      <div class="selective__list__item selective__list__item--empty"
+          data-index=${index}
+          data-locale=${locale || ''}>
+        { Empty }
       </div>`
   }
 
