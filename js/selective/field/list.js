@@ -114,6 +114,23 @@ export class ListField extends Field {
     return true
   }
 
+  get localizedValues() {
+    const localizedValues = {}
+
+    for (const key of Object.keys(this._listItems)) {
+      const value = []
+      for (const item of this._listItems[key]) {
+        value.push(item.fields.value)
+      }
+      localizedValues[key] = value
+    }
+
+    // Set after the localized values are updated.
+    localizedValues[this.key] = this.value
+
+    return extend({}, this._originalValues, localizedValues)
+  }
+
   get value() {
     const listItems = this._getListItemsForLocale()
 
@@ -159,6 +176,8 @@ export class ListField extends Field {
     }, fields)
     listItem.isExpanded = true
     listItems.push(listItem)
+
+    this._setListItemsForLocale(locale, listItems)
 
     // TODO: Focus on the input after rendering.
 
@@ -358,7 +377,8 @@ export class ListField extends Field {
   renderInput(selective, data, locale) {
     this._createItems(selective, data, locale)
     const items = this._getListItemsForLocale(locale)
-    const value = this.getOriginalValueForLocale(locale)
+    const value = this.getOriginalValueForLocale(locale) || []
+    const valueLen = value.length
 
     return html`
       <div class="selective__list ${this._useAutoFields ? 'selective__list--auto' : ''}">
@@ -366,7 +386,7 @@ export class ListField extends Field {
           items,
           (item) => item.uid,
           (item, index) => this.renderItem(
-            selective, value[index], item, index, locale)
+            selective, index < valueLen ? value[index] : item.fields.defaultValue, item, index, locale)
         )}
       </div>
       ${this.renderActionsFooter(selective, data, locale)}`
