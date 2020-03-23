@@ -8,7 +8,7 @@ import Editor from './selective/editor'
 import Field from './selective/field'
 import FieldRewrite from './selective/field/field'
 import UI from './selective/ui/ui'
-import { ListField } from './selective/field/list'
+import { ListField, ListItem } from './selective/field/list'
 import { GroupField } from './selective/field/structure'
 import FieldsRewrite from './selective/fields/fields'
 import { SortableField } from './selective/field'
@@ -26,6 +26,7 @@ export {
   GroupField,
   SortableField,
   ListField,
+  ListItem,
   Fields,
   FieldsRewrite,
   AutoFields,

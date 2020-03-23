@@ -63,8 +63,8 @@ export class ListField extends Field {
 
       // Create the fields based on the config.
       for (let fieldConfig of fieldConfigs || []) {
-        fieldConfig = autoConfig(fieldConfig, this.extendedConfig)
-        fields.addField(fieldConfig, this.extendedConfig)
+        fieldConfig = autoConfig(fieldConfig, this.globalConfig)
+        fields.addField(fieldConfig, this.globalConfig)
       }
 
       // When an is not expanded it does not get the value
@@ -165,8 +165,8 @@ export class ListField extends Field {
 
     // Create the fields based on the config.
     for (let fieldConfig of fieldConfigs || []) {
-      fieldConfig = autoConfig(fieldConfig, this.extendedConfig)
-      fields.addField(fieldConfig, this.extendedConfig)
+      fieldConfig = autoConfig(fieldConfig, this.globalConfig)
+      fields.addField(fieldConfig, this.globalConfig)
     }
 
     fields.updateOriginal(fields.defaultValue)
@@ -517,7 +517,7 @@ export class ListField extends Field {
   }
 }
 
-export default class ListItem extends compose(ConfigMixin, UidMixin,)(Base) {
+export class ListItem extends compose(ConfigMixin, UidMixin,)(Base) {
   constructor(config, fields) {
     super()
 
