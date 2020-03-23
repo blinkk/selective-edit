@@ -438,7 +438,7 @@ export class ListField extends Field {
       <div class="selective__list__item selective__list__item--empty"
           data-index=${index}
           data-locale=${locale || ''}>
-        { Empty }
+        ${this.config.get('emptyLabel', '{ Empty }')}
       </div>`
   }
 
