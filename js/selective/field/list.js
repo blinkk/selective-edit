@@ -150,6 +150,23 @@ export class ListField extends Field {
     // no-op
   }
 
+  guessPreview(item, index, defaultPreview) {
+    const defaultPreviewField = this.config.get('preview_field')
+    const previewField = item.config.preview_field
+    let previewValue = item.fields.value
+
+    if (previewField || defaultPreviewField) {
+      previewValue = autoDeepObject(previewValue).get(previewField || defaultPreviewField)
+    }
+
+    // Do not try to show preview for complex values.
+    if (typeof previewValue == 'object') {
+      previewValue = null
+    }
+
+    return previewValue || defaultPreview || `Item ${index + 1}`
+  }
+
   handleAddItem(evt, selective) {
     const locale = evt.target.dataset.locale
     const listItems = this._getListItemsForLocale(locale)
@@ -403,6 +420,8 @@ export class ListField extends Field {
   }
 
   renderItemCollapsed(selective, data, item, index, locale) {
+    item.fields.updateOriginal(selective, data, true)
+
     return html`
       <div class="selective__list__item selective__list__item--collapsed selective__sortable"
           draggable="true"
@@ -414,14 +433,7 @@ export class ListField extends Field {
           @dragstart=${this._sortableUi.handleDragStart.bind(this._sortableUi)}
           @drop=${this._sortableUi.handleDrop.bind(this._sortableUi)}>
         <div class="selective__list__item__drag"><i class="material-icons">drag_indicator</i></div>
-        <div
-            class="selective__list__item__preview"
-            data-item-uid=${item.uid}
-            data-locale=${locale || ''}
-            @click=${this.handleExpandItem.bind(this)}>
-          ${this.renderPreview(item, index)}
-          ${item.fields.updateOriginal(selective, data, true)}
-        </div>
+        ${this.renderPreview(selective, data, item, index, locale)}
         <div
             class="selective__list__item__delete"
             data-item-uid=${item.uid}
@@ -499,21 +511,14 @@ export class ListField extends Field {
       </div>`
   }
 
-  renderPreview(item, index) {
-    const defaultPreviewField = this.config.get('preview_field')
-    const previewField = item.config.preview_field
-    let previewValue = item.fields.value
-
-    if (previewField || defaultPreviewField) {
-      previewValue = autoDeepObject(previewValue).get(previewField || defaultPreviewField)
-    }
-
-    // Do not try to show preview for complex values.
-    if (typeof previewValue == 'object') {
-      previewValue = null
-    }
-
-    return previewValue || `Item ${index + 1}`
+  renderPreview(selective, data, item, index, locale) {
+    return html`<div
+        class="selective__list__item__preview"
+        data-item-uid=${item.uid}
+        data-locale=${locale || ''}
+        @click=${this.handleExpandItem.bind(this)}>
+      ${this.guessPreview(item, index)}
+    </div>`
   }
 }
 
