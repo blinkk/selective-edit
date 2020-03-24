@@ -59,6 +59,10 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
       classes.push('selective__field--auto')
     }
 
+    if (this.config.key && this.config.key.endsWith('@')) {
+      classes.push('selective__field--translatable')
+    }
+
     return classes.join(' ')
   }
 
@@ -205,7 +209,10 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
 
   renderLocalization(selective, data) {
     if (this.ignoreLocalize || !selective.localize) {
-      return this.renderInput(selective, data)
+      return  html`
+        <div class="selective__field__input">
+          ${this.renderInput(selective, data)}
+        </div>`
     }
 
     // Render the localization grid.
@@ -215,10 +222,10 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
           this.locales,
           (locale) => locale,
           (locale, index) => html`
-            <div class="selective__field__localization__locale">
+            <div class="selective__field__locale">
               <label for="${this.uid}${locale}">${locale}</label>
             </div>
-            <div class="selective__field__localization__input">
+            <div class="selective__field__input">
               ${this.renderInput(selective, data, locale)}
             </div>
           `)}
