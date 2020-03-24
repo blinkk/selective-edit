@@ -101,7 +101,7 @@ export class GroupField extends Field {
       <div
           class="selective__field__label selective__field__label--action selective__field__label--strong"
           @click=${this.handleExpandToggle.bind(this)}>
-        <div class="selective__field__label__actions">
+        <div class="selective__field__actions">
           <i class="material-icons">
             ${this.isExpanded ? 'expand_less' : 'expand_more'}
           </i>

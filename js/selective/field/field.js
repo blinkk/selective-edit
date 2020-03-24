@@ -52,7 +52,7 @@ export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) 
   get classesField() {
     const classes = [
       'selective__field',
-      `selective__field__${this.fieldType}`,
+      `selective__field__type__${this.fieldType}`,
     ]
 
     if (this._useAutoFields) {

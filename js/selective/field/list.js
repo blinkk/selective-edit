@@ -164,7 +164,7 @@ export class ListField extends Field {
       previewValue = null
     }
 
-    return previewValue || defaultPreview || `Item ${index + 1}`
+    return previewValue || defaultPreview || `{ Item ${index + 1} }`
   }
 
   handleAddItem(evt, selective) {
@@ -503,7 +503,7 @@ export class ListField extends Field {
 
   renderLabel(selective, data) {
     return html`
-      <div class="selective__actions__wrapper">
+      <div class="selective__field__actions__wrapper">
         <div class="selective__field__label">
           <label>${this.config.label}</label>
         </div>
