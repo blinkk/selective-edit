@@ -1,3 +1,10 @@
+@import "../node_modules/@material/icon-button/mdc-icon-button"
+@import "../node_modules/@material/list/mdc-list"
+@import "../node_modules/@material/menu-surface/mdc-menu-surface"
+@import "../node_modules/@material/menu/mdc-menu"
+@import "../node_modules/@material/select/mdc-select"
+@import "../node_modules/@material/textfield/mdc-text-field"
+
 // Primary Colors
 $color-p: #455a64
 $color-p-l: #718792
@@ -41,6 +48,9 @@ body
   margin: 0
   padding: 0
 
+  *
+    border-box
+
 .container
   display: flex
   flex-flow: row
@@ -79,6 +89,7 @@ body
 .sidebar__content
   flex-grow: 1
   overflow-y: auto
+  padding: $pad
 
   .info
     flex-grow: 1
