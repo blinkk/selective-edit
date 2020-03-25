@@ -77,6 +77,11 @@ export class ListField extends Field {
         'fields': fieldConfigs,
       }, fields))
     }
+
+    // Trigger a new render to make sure the expand/collapse buttons show.
+    if (listItems.length > 1) {
+      this.render()
+    }
   }
 
   _getListItemsForLocale(locale) {
