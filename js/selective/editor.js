@@ -13,7 +13,7 @@ import ConfigMixin from '../mixin/config'
 import { autoDeepObject } from '../utility/deepObject'
 import { Base, compose } from '../utility/compose'
 import AutoFields from './autoFields'
-import Fields from './fields'
+import Fields from './fields/fields'
 import FieldTypes from './fieldTypes'
 
 export default class Editor extends compose(ConfigMixin,)(Base) {
@@ -21,17 +21,22 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     super()
     this.containerEl = containerEl
     this.fieldTypes = new FieldTypes()
+    this.localize = false
     this._fields = null
     this._data = autoDeepObject({})
 
     // Needs to be defined before the config is set.
     this.template = (editor, data) => html`<div class="selective">
-      ${editor.fields.template(editor, editor.fields, data)}
+      ${editor.fields.template(editor, data)}
     </div>`
 
     this.setConfig(config)
     this.bindEvents()
     this.render()
+  }
+
+  get config() {
+    return this.getConfig()
   }
 
   get data() {
@@ -118,6 +123,8 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
 
     render(this.template(this, this.data), this.containerEl)
     this.postRender()
+
+    document.dispatchEvent(new CustomEvent('selective.render.complete'))
   }
 
   setConfig(value) {

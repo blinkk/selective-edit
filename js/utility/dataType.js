@@ -3,50 +3,50 @@
  */
 
 export default class DataType {
-  isArray (value) {
+  static isArray (value) {
     if (Array.isArray) {
       return Array.isArray(value)
     }
     return value && typeof value === 'object' && value.constructor === Array
   }
 
-  isBoolean (value) {
+  static isBoolean (value) {
     return typeof value === 'boolean'
   }
 
-  isDate (value) {
+  static isDate (value) {
     return value instanceof Date
   }
 
-  isFunction (value) {
+  static isFunction (value) {
     return typeof value === 'function'
   }
 
-  isNumber (value) {
+  static isNumber (value) {
     return typeof value === 'number' && isFinite(value)
   }
 
-  isNull (value) {
+  static isNull (value) {
     return value === null
   }
 
-  isObject (value) {
+  static isObject (value) {
     return value && typeof value === 'object' && value.constructor === Object
   }
 
-  isRegExp (value) {
+  static isRegExp (value) {
     return value && typeof value === 'object' && value.constructor === RegExp
   }
 
-  isString (value) {
+  static isString (value) {
     return typeof value === 'string' || value instanceof String
   }
 
-  isSymbol (value) {
+  static isSymbol (value) {
     return typeof value === 'symbol'
   }
 
-  isUndefined (value) {
+  static isUndefined (value) {
     return typeof value === 'undefined'
   }
 }

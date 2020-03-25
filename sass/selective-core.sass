@@ -1,6 +1,10 @@
+.selective
+  *
+    box-sizing: border-box
+
 // Need to turn off children pointer events when hovering with selectable.
 // Otherwise all the children will send out drag events and mess with the
 // sorting events.
-.sortable--hover
+.selective__sortable--hover
   *
     pointer-events: none

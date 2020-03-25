@@ -12,10 +12,11 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
     super()
     this.data = data
     this._data = autoDeepObject(data)
-    this.dataType = new DataType()
     this.setConfig(config)
 
     this._ignoredKeys = null
+
+    this.DataType = DataType
   }
 
   get config() {
@@ -36,7 +37,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
     let fields = []
     keyBase = keyBase || []
 
-    if (this.dataType.isArray(data)) {
+    if (DataType.isArray(data)) {
       const firstValue = data.length ? data[0] : null
       fields.push(this._fieldConfig('', firstValue))
     } else {
@@ -62,7 +63,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
 
       const newKeyBase = keyBase.concat([key])
       const newData = data[key]
-      if (this.dataType.isObject(newData)) {
+      if (DataType.isObject(newData)) {
         fields = fields.concat(this._deepGuessObject(newData, newKeyBase))
       } else {
         fields.push(this._deepGuessSimple(data[key], newKeyBase))
@@ -129,7 +130,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
     if (value === null || value === undefined) {
       return 'text'
     }
-    if (this.dataType.isArray(value)) {
+    if (DataType.isArray(value)) {
       return 'list'
     }
     if (value.length > 75) {
