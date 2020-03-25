@@ -16,7 +16,7 @@ import ConfigMixin from '../../mixin/config'
 import UidMixin from '../../mixin/uid'
 
 
-export default class FieldRewrite extends compose(ConfigMixin, UidMixin,)(Base) {
+export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   constructor(config, globalConfig) {
     super()
     this.fieldType = 'Field'

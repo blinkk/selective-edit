@@ -15,7 +15,7 @@ import { autoConfig } from '../../utility/config'
 import { autoDeepObject } from '../../utility/deepObject'
 
 
-export default class FieldsRewrite extends compose(ConfigMixin, UidMixin,)(Base) {
+export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
   constructor(fieldTypes, config) {
     super()
 

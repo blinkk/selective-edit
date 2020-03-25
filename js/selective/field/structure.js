@@ -7,7 +7,7 @@ import { html } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
 import { autoConfig } from '../../utility/config'
 import AutoFields from '../autoFields'
-import FieldsRewrite from '../fields/fields'
+import Fields from '../fields/fields'
 import Field from './field'
 
 
@@ -49,7 +49,7 @@ export class GroupField extends Field {
   }
 
   _createFields(selective, data) {
-    const FieldsCls = this.config.get('FieldsCls', FieldsRewrite)
+    const FieldsCls = this.config.get('FieldsCls', Fields)
     const fields = new FieldsCls(selective.fieldTypes)
 
     fields.updateOriginal(this.originalValue)

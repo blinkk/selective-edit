@@ -1,93 +1,381 @@
 @import "./selective-core"
-@import "../node_modules/@material/icon-button/mdc-icon-button"
-@import "../node_modules/@material/list/mdc-list"
-@import "../node_modules/@material/menu-surface/mdc-menu-surface"
-@import "../node_modules/@material/menu/mdc-menu"
-@import "../node_modules/@material/select/mdc-select"
-@import "../node_modules/@material/textfield/mdc-text-field"
 
-.mdc-text-field--textarea
-  .mdc-floating-label
-    background-color: transparent
+// Primary Colors
+$color-primary: #48a0f4 !default
+$color-primary-light: #84d1ff !default
+$color-primary-dark: #0072c1 !default
+$color-on-primary: #ffffff !default
+$color-on-primary-light: #000000 !default
+$color-on-primary-dark: #ffffff !default
 
-.selective__field__text .mdc-text-field
+// Secondary Colors
+$color-secondary: #2c2c2c !default
+$color-secondary-light: #555555 !default
+$color-secondary-dark: #000000 !default
+$color-on-secondary: #ffffff !default
+$color-on-secondary-light: #ffffff !default
+$color-on-secondary-dark: #ffffff !default
+
+// Utility Colors
+$color-text: #455a64 !default
+$color-text-light: lighten($color-text, 15%) !default
+$color-back: #ffffff !default
+$color-back-light: #e5e5e5 !default
+$color-back-dark: darken($color-back, 15%) !default
+$color-back-highlight: #e1fc8d !default
+$color-on-back: #000000 !default
+$color-on-back-subtle: darken($color-back, 25%) !default
+$color-on-back-light: #455a64 !default
+$color-on-back-dark: lighten($color-on-back-light, 15%) !default
+
+$color-light-border: rgba(0,0,0,0.3) !default
+$color-bar: rgba(0,0,0,0.1) !default
+
+// Input colors
+$color-field-back: rgba($color-back-light, .5) !default
+$color-field-back-alt: $color-back !default
+$color-on-field-back: $color-text !default
+$color-on-field-back-alt: $color-text !default
+
+// Icon Colors
+$color-icon-on-back: darken($color-back, 25%) !default
+$color-icon-on-back-selected: darken($color-icon-on-back, 25%) !default
+$color-icon-on-back-light: darken($color-back-light, 25%) !default
+$color-icon-on-back-light-selected: darken($color-icon-on-back-light, 25%) !default
+
+// Speeds
+$speed-fast: 150ms !default
+$speed-slow: 400ms !default
+$speed-slower: 1500ms !default
+
+// Transistions
+$timing-cubic-bezier: cubic-bezier(0, 1, 0.5, 1) !default
+
+// Padding unit
+$pad: 1em !default
+
+// Typography
+$font-family: Roboto !default
+$font-family-mono: "Roboto Mono", monospace !default
+$font-size: 12px !default
+$font-size-small: $font-size * .8 !default
+$font-size-icon: 18px !default
+$font-size-icon-small: 14px !default
+$line-height: 14px !default
+
+// Shadows
+$shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !default
+$shadow-2: 0 3px 6px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !default
+$shadow-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !default
+$shadow-4: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !default
+$shadow-5: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22) !default
+
+// Borders
+$border-size: 1px !default
+$border-size-thick: 2px !default
+
+// Focus rings
+$focus-shadow-primary: 0px 0px 0px 2px rgba(66,133,244,0.15) !default
+$focus-shadow-secondary: 0px 0px 0px 2px rgba(126,126,126,0.15) !default
+
+// Radius
+$radius-1: 2px !default
+$radius-2: 3px !default
+$radius-3: 4px !default
+$radius-4: 5px !default
+$radius-5: 6px !default
+
+// Device; keep consistent with `previewSize` in editor.js.
+$device-width: 411px !default
+$device-height: 731px !default
+
+// Edit Column
+$edit-column-max-width: 500px !default
+$edit-column-min-width: 250px !default
+
+$header-height: 38px !default
+
+// Empty bar height
+$bar-height: 10px !default
+
+// Loading
+$loading-size: 50px !default
+$loading-border-size: 4px !default
+
+=field-border
+  border: $border-size solid transparent
+  border-radius: $radius-2
+
+  &:focus
+    border: $border-size solid $color-primary
+    outline: none
+
+  &:hover
+    border: $border-size solid $color-light-border
+
+    &:focus
+      border: $border-size solid $color-primary
+
+=field-clickable
+  cursor: pointer
+
+=field-control
+  background: $color-field-back
+  color: $color-on-field-back
+  padding: $pad/2
   width: 100%
 
-// Pell Editor
-$pell-content-height: 20vh
+=field-color
+  &:focus
+    color: $color-primary
 
-@import '../node_modules/pell/src/pell'
+  &:hover
+    color: $color-light-border
 
-// Make Pell look material.
-// TODO Use material mixins.
-.selective__field__markdown
-  position: relative
+    &:focus
+      color: $color-primary
 
-  .pell
-    border-color: rgba(0,0,0,0.73)
-    border-radius: 4px
-    padding-top: 38px
+  &--checked,
+  &--selected
+    color: $color-primary
 
-  .pell-actionbar
-    padding-left: 16px
+    &:hover
+      color: $color-primary
 
-  .pell-content
-    padding: 0px 16px 8px 16px
+=list-nesting
+  .selective__list__item &,
+  .selective__list__item .selective__list__item .selective__list__item &,
+  .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item &,
+  .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item &
+    @content
+
+=list-nesting-alt
+  .selective__list__item .selective__list__item &,
+  .selective__list__item .selective__list__item .selective__list__item .selective__list__item &,
+  .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item &,
+  .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item .selective__list__item &
+    @content
+
+.selective__field
+  margin: $pad/2 0 $pad 0
+
+  .material-icons
+    font-size: $font-size-icon
+
+  &:last-child
+    margin-bottom: 0
 
 .selective__field__label
-  color: rgba(0,0,0,0.6)
-  font-size: .813rem
-  font-weight: 400
+  margin: $pad/2 0
 
-  &--markdown
-    bottom: auto
-    left: 1px
-    letter-spacing: .00937em
-    margin-left: 18px
-    pointer-events: none
-    position: absolute
-    right: 0
-    transform: translateY(-50%) scale(.923)
-    top: 38px
+  label
+    display: block
 
-.selective__list
-  .selective__field
-    margin: .5em 0
-    padding: 0
+.selective__field__input
+  margin: $pad/2 0
 
-.selective__list__item
-  padding: .5em 0
-
-  &--collapsed
-    align-items: center
-    border-bottom: 3px solid transparent
-    border-top: 3px solid transparent
-    display: flex
-    flex-flow: row
-    margin: .5em 0
-
-    &.sortable--above
-      border-top: 3px solid rgba(0,0,0,0.6)
-
-    &.sortable--below
-      border-bottom: 3px solid rgba(0,0,0,0.6)
-
-.selective__list__item__drag
-  margin-right: .5em
-
-  i
-    font-size: .9em
-
-.selective__list__item__label
-  .selective__list__item--collapsed &
-    width: 40%
-
-.selective__list__item__preview
-  flex-grow: 1
-
-.selective__header,
-.selective__footer
+.selective__field__actions__wrapper
   align-items: center
   display: flex
   flex-flow: row
   justify-content: space-between
+
+.selective__field__actions
+  align-items: center
+  display: flex
+  flex-flow: row
+
+.selective__field__help
+  color: $color-text-light
+  font-size: $font-size-small
+  margin: $pad/2
+
+[draggable=true]
+  &.selective__sortable--hover
+    *
+      pointer-events: none
+
+  &.selective__sortable--above
+    border-top: $border-size solid $color-primary
+
+  &.selective__sortable--below
+    border-bottom: $border-size solid $color-primary
+
+.selective__field
+  input
+    +field-border
+    +field-control
+    font-family: $font-family-mono
+    transition: all $speed-fast ease-in-out
+
+    // Alternate with nesting.
+    +list-nesting
+      background-color: $color-field-back-alt
+      color: $color-on-field-back-alt
+
+    +list-nesting-alt
+      background-color: $color-field-back
+      color: $color-on-field-back
+
+  textarea
+    +field-border
+    +field-control
+    font-family: $font-family-mono
+    transition: all $speed-slow ease-in-out
+
+    // Alternate with nesting.
+    +list-nesting
+      background-color: $color-field-back-alt
+      color: $color-on-field-back-alt
+
+    +list-nesting-alt
+      background-color: $color-field-back
+      color: $color-on-field-back
+
+  [contenteditable=true]
+    +field-border
+    +field-control
+
+  button
+    background: $color-field-back-alt
+    border-radius: $radius-5
+    color: $color-on-field-back-alt
+    border: 1px solid $color-back-light
+    font-family: $font-family
+    font-size: $font-size
+    padding: $pad/2 $pad
+
+    // Alternate with nesting.
+    +list-nesting
+      background-color: $color-field-back-alt
+      color: $color-on-field-back-alt
+
+    +list-nesting-alt
+      background-color: $color-field-back
+      color: $color-on-field-back
+
+    &[disabled]
+      opacity: .5
+
+    &:focus
+      outline: none
+      box-shadow: $focus-shadow-secondary
+
+    &:hover
+      box-shadow: $focus-shadow-secondary
+
+    &.selective__button--primary
+      background: $color-primary
+      border-color: $color-primary
+      color: $color-on-primary
+      font-weight: bold
+
+      &:focus
+        outline: none
+        box-shadow: $focus-shadow-primary
+
+      &:hover
+        box-shadow: $focus-shadow-primary
+
+    &.selective__button--secondary
+      background: none
+      border: none
+      color: lighten($color-on-back, 50%)
+      font-weight: bold
+
+      &.selective__button--selected
+        color: $color-on-back
+
+      &:hover
+        color: $color-on-back
+
+      &:focus
+        box-shadow: none
+
+  &--translatable
+    input,
+    textarea
+      font-family: $font-family
+.selective__list
+  &--auto
+    .editor--highlight &
+      .selective__list__item
+        background-color: $color-back-highlight !important
+
+.selective__list__item
+  background: $color-field-back
+  border: $border-size solid transparent
+  border-radius: $radius-2
+  color: $color-on-field-back
+  margin: $pad/2 0
+  padding: $pad
+
+  // Alternate with nesting.
+  +list-nesting
+    background-color: $color-field-back-alt
+    color: $color-on-field-back-alt
+
+  +list-nesting-alt
+    background-color: $color-field-back
+    color: $color-on-field-back
+
+  &:hover
+    box-shadow: $shadow-1
+
+  &--empty
+    background: none
+    border: 1px dashed $color-field-back
+
+    &:hover
+      box-shadow: none !important
+      cursor: default
+
+  &--collapsed,
+  &--simple
+    align-items: center
+    display: flex
+    flex-flow: row
+    align-items: center
+    padding: $pad/2 0
+
+    .selective__field
+      flex-grow: 1
+      margin: 0
+
+  &--simple
+    padding: $pad/4 0
+
+.selective__list__item__delete,
+.selective__list__item__drag
+  padding: 0 $pad/2
+
+  .material-icons
+    +field-clickable
+    +field-color
+    font-size: $font-size-icon-small
+
+.selective__list__item__label
+  +field-clickable
+  flex-basis: 25%
+  flex-grow: 1
+  font-weight: bold
+  padding-right: $pad
+
+.selective__list__item__preview
+  +field-clickable
+  flex-basis: 75%
+  flex-shrink: 1
+  flex-grow: 1
+  overflow: hidden
+  text-overflow: ellipsis
+
+.selective__list__fields__label
+  font-weight: 700
+
+  &--empty
+    +field-clickable
+    background: $color-bar
+    border-radius: $radius-2 $radius-2 0 0
+    height: $bar-height
+    margin: (-$pad) (-$pad) $pad (-$pad)
+    width: calc(100% + #{$pad*2})

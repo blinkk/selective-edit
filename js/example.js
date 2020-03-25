@@ -1,5 +1,5 @@
 import Selective from './selective'
-import { defaultFieldTypes } from './selective-defaults'
+import { defaultFieldTypes } from './selective-standard'
 import {
   MDCTextField
 } from '@material/textfield'

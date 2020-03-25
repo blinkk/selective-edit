@@ -13,8 +13,7 @@ import ConfigMixin from '../mixin/config'
 import { autoDeepObject } from '../utility/deepObject'
 import { Base, compose } from '../utility/compose'
 import AutoFields from './autoFields'
-import Fields from './fields'
-import FieldsRewrite from './fields/fields'
+import Fields from './fields/fields'
 import FieldTypes from './fieldTypes'
 
 export default class Editor extends compose(ConfigMixin,)(Base) {
@@ -46,7 +45,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
 
   get fields() {
     if (!this._fields) {
-      const FieldsCls = this.getConfig().get('FieldsCls', FieldsRewrite)
+      const FieldsCls = this.getConfig().get('FieldsCls', Fields)
       this._fields = new FieldsCls(this.fieldTypes)
     }
     return this._fields

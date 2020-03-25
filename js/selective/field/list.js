@@ -15,7 +15,7 @@ import { autoConfig } from '../../utility/config'
 import { findParentByClassname } from '../../utility/dom'
 import { autoDeepObject } from '../../utility/deepObject'
 import AutoFields from '../autoFields'
-import FieldsRewrite from '../fields/fields'
+import Fields from '../fields/fields'
 import { SortableUI } from '../ui/sortable'
 import Field from './field'
 
@@ -34,7 +34,7 @@ export class ListField extends Field {
   }
 
   _createFields(fieldTypes, config) {
-    const FieldsCls = this.config.get('FieldsCls', FieldsRewrite)
+    const FieldsCls = this.config.get('FieldsCls', Fields)
     return new FieldsCls(fieldTypes, config)
   }
 
