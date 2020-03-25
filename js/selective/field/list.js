@@ -152,6 +152,7 @@ export class ListField extends Field {
 
   guessPreview(item, index, defaultPreview) {
     const defaultPreviewField = this.config.get('preview_field')
+    const previewType = this.config.get('preview_type', 'text')
     const previewField = item.config.preview_field
     let previewValue = item.fields.value
 
@@ -162,6 +163,14 @@ export class ListField extends Field {
     // Do not try to show preview for complex values.
     if (typeof previewValue == 'object') {
       previewValue = null
+    }
+
+    if (previewType == 'image') {
+      if (previewValue.startsWith('http') || previewValue.startsWith('//')) {
+        return html`<img src="${previewValue}" class="selective__image__fingernail">`
+      } else if (previewValue.startsWith('/')) {
+        // TODO: Handle local images.
+      }
     }
 
     return previewValue || defaultPreview || `{ Item ${index + 1} }`
@@ -239,8 +248,9 @@ export class ListField extends Field {
   }
 
   handleExpandItem(evt) {
-    const uid = evt.target.dataset.itemUid
-    const locale = evt.target.dataset.locale
+    const target = findParentByClassname(evt.target, 'selective__list__item__preview')
+    const uid = target.dataset.itemUid
+    const locale = target.dataset.locale
     const listItems = this._getListItemsForLocale(locale)
 
     for (const item of listItems) {
