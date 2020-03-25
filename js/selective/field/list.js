@@ -100,7 +100,7 @@ export class ListField extends Field {
       const listItems = this._getListItemsForLocale(locale)
 
       // Check for a change in length.
-      if (originalValue && originalValue.length != listItems.length) {
+      if (listItems.length > 0 && originalValue && originalValue.length != listItems.length) {
         return false
       }
 
@@ -248,7 +248,11 @@ export class ListField extends Field {
   }
 
   handleExpandItem(evt) {
-    const target = findParentByClassname(evt.target, 'selective__list__item__preview')
+    let target = findParentByClassname(evt.target, 'selective__list__item__preview')
+    // Alternative label.
+    if (!target) {
+      target = findParentByClassname(evt.target, 'selective__list__item__label')
+    }
     const uid = target.dataset.itemUid
     const locale = target.dataset.locale
     const listItems = this._getListItemsForLocale(locale)
