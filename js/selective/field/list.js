@@ -463,8 +463,8 @@ export class ListField extends Field {
   renderInput(selective, data, locale) {
     this._createItems(selective, data, locale)
     const items = this._getListItemsForLocale(locale) || []
-    const value = this.getOriginalValueForLocale(locale) || []
-    const valueLen = value.length
+    const origValue = this.getOriginalValueForLocale(locale) || []
+    const origValueLen = origValue.length
 
     return html`
       <div class="selective__list ${this._useAutoFields ? 'selective__list--auto' : ''}">
@@ -472,9 +472,9 @@ export class ListField extends Field {
           items,
           (item) => item.uid,
           (item, index) => this.renderItem(
-            selective, index < valueLen ? value[index] : item.fields.defaultValue, item, index, locale)
+            selective, index < origValueLen ? origValue[index] : item.fields.defaultValue, item, index, locale)
         )}
-        ${valueLen < 1 && items.length < 1 ? this.renderItemEmpty(selective, data, 0, locale) : ''}
+        ${items.length < 1 ? this.renderItemEmpty(selective, data, 0, locale) : ''}
       </div>
       ${this.renderActionsFooter(selective, data, locale)}`
   }
