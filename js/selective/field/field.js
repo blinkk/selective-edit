@@ -267,7 +267,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     const isClean = this.isClean
     this.isLocalized = selective.localize
     this.defaultLocale = selective.config.defaultLocale || 'en'
-    this.locales = selective.config.locales || ['en', 'es']
+    this.locales = selective.config.locales || ['en']
 
     // Certain formats in the data may need to be cleaned up
     newValue = this._cleanOriginalValue(newValue)

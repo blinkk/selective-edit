@@ -40,12 +40,15 @@ export class ListField extends Field {
 
   _createItems(selective, data, locale) {
     const value = this.getValueForLocale(locale) || []
-    const localeKey = this.keyForLocale(locale)
-    const listItems = this._getListItemsForLocale(locale)
+    let listItems = this._getListItemsForLocale(locale)
 
-    if (listItems.length > 0 || !value.length) {
+    // Null is used to make sure that the list is not just empty.
+    // Empty list --> deleted all items.
+    if (listItems != null || !value.length) {
       return
     }
+
+    listItems = []
 
     // Use the config to find the field configs.
     let fieldConfigs = this.config.get('fields', [])
@@ -78,6 +81,8 @@ export class ListField extends Field {
       }, fields))
     }
 
+    this._setListItemsForLocale(locale, listItems)
+
     // Trigger a new render to make sure the expand/collapse buttons show.
     if (listItems.length > 1) {
       this.render()
@@ -88,7 +93,9 @@ export class ListField extends Field {
     const localeKey = this.keyForLocale(locale)
 
     if (!this._listItems[localeKey]) {
-      this._listItems[localeKey] = []
+      // Need to be able to tell when the current value is an empty array.
+      // This would happen when you delete all items in a list.
+      return null
     }
 
     return this._listItems[localeKey]
@@ -105,11 +112,11 @@ export class ListField extends Field {
       const listItems = this._getListItemsForLocale(locale)
 
       // Check for a change in length.
-      if (listItems.length > 0 && originalValue && originalValue.length != listItems.length) {
+      if (Array.isArray(listItems) && originalValue && originalValue.length != listItems.length) {
         return false
       }
 
-      for (const item of listItems) {
+      for (const item of listItems || []) {
         if (!item.fields.isClean) {
           return false
         }
@@ -137,7 +144,7 @@ export class ListField extends Field {
   }
 
   get value() {
-    const listItems = this._getListItemsForLocale()
+    const listItems = this._getListItemsForLocale() || []
 
     if (!listItems.length) {
       return this.originalValue
@@ -183,7 +190,7 @@ export class ListField extends Field {
 
   handleAddItem(evt, selective) {
     const locale = evt.target.dataset.locale
-    const listItems = this._getListItemsForLocale(locale)
+    const listItems = this._getListItemsForLocale(locale) || []
     const fields = this._createFields(selective.fieldTypes)
 
     // Use the field config for the list items to create the correct field types.
@@ -217,7 +224,7 @@ export class ListField extends Field {
 
   handleCollapseAll(evt) {
     const locale = evt.target.dataset.locale
-    const listItems = this._getListItemsForLocale(locale)
+    const listItems = this._getListItemsForLocale(locale) || []
 
     for (const item of listItems) {
       item.isExpanded = false
@@ -229,7 +236,7 @@ export class ListField extends Field {
   handleCollapseItem(evt) {
     const uid = evt.target.dataset.itemUid
     const locale = evt.target.dataset.locale
-    const listItems = this._getListItemsForLocale(locale)
+    const listItems = this._getListItemsForLocale(locale) || []
 
     for (const item of listItems) {
       if (item.uid == uid) {
@@ -243,7 +250,7 @@ export class ListField extends Field {
 
   handleExpandAll(evt) {
     const locale = evt.target.dataset.locale
-    const listItems = this._getListItemsForLocale(locale)
+    const listItems = this._getListItemsForLocale(locale) || []
 
     for (const item of listItems) {
       item.isExpanded = true
@@ -260,7 +267,7 @@ export class ListField extends Field {
     }
     const uid = target.dataset.itemUid
     const locale = target.dataset.locale
-    const listItems = this._getListItemsForLocale(locale)
+    const listItems = this._getListItemsForLocale(locale) || []
 
     for (const item of listItems) {
       if (item.uid == uid) {
@@ -276,7 +283,8 @@ export class ListField extends Field {
     const target = findParentByClassname(evt.target, 'selective__list__item__delete')
     const uid = target.dataset.itemUid
     const locale = target.dataset.locale
-    const listItems = this._getListItemsForLocale(locale)
+    const listItems = this._getListItemsForLocale(locale) || []
+
     let deleteIndex = -1
     for (const index in listItems) {
       if (listItems[index].uid == uid) {
@@ -289,6 +297,9 @@ export class ListField extends Field {
       listItems.splice(deleteIndex, 1)
     }
 
+    // Prevent the delete from bubbling.
+    evt.stopPropagation()
+
     this.render()
   }
 
@@ -299,7 +310,7 @@ export class ListField extends Field {
 
     // Rework the arrays to have the items in the correct position.
     const newListItems = []
-    const oldListItems = this._getListItemsForLocale(locale)
+    const oldListItems = this._getListItemsForLocale(locale) || []
     const maxIndex = Math.max(endIndex, startIndex)
     const minIndex = Math.min(endIndex, startIndex)
 
@@ -367,7 +378,7 @@ export class ListField extends Field {
     }
 
     // Check list items for specific conditions.
-    const listItems = this._getListItemsForLocale(locale)
+    const listItems = this._getListItemsForLocale(locale) || []
     let areSimpleFields = true
     let areAllExpanded = true
     let areAllCollapsed = true
@@ -412,7 +423,7 @@ export class ListField extends Field {
 
   renderInput(selective, data, locale) {
     this._createItems(selective, data, locale)
-    const items = this._getListItemsForLocale(locale)
+    const items = this._getListItemsForLocale(locale) || []
     const value = this.getOriginalValueForLocale(locale) || []
     const valueLen = value.length
 
