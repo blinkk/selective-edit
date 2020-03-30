@@ -20,6 +20,12 @@ import { SortableUI } from '../ui/sortable'
 import Field from './field'
 
 
+const COMMON_PREVIEW_KEYS = [
+  // First match wins.
+  'title', 'label', 'subtitle', 'type', 'key', 'id', 'url', 'value',
+]
+
+
 export class ListField extends Field {
   constructor(config, globalConfig) {
     super(config, globalConfig)
@@ -167,9 +173,10 @@ export class ListField extends Field {
     const previewType = this.config.get('preview_type', 'text')
     const previewField = item.config.preview_field
     let previewValue = item.fields.value
+    const dataDeepObject = autoDeepObject(previewValue)
 
     if (previewField || defaultPreviewField) {
-      previewValue = autoDeepObject(previewValue).get(previewField || defaultPreviewField)
+      previewValue = dataDeepObject.get(previewField || defaultPreviewField)
     }
 
     // Do not try to show preview for complex values.
@@ -185,7 +192,19 @@ export class ListField extends Field {
       }
     }
 
-    return previewValue || defaultPreview || `{ Item ${index + 1} }`
+    if (previewValue || defaultPreview) {
+      return previewValue || defaultPreview
+    }
+
+    // Check the data for some of the commong preview field key names.
+    for (const key of COMMON_PREVIEW_KEYS) {
+      previewValue = dataDeepObject.get(key)
+      if (previewValue) {
+        return previewValue
+      }
+    }
+
+    return `{ Item ${index + 1} }`
   }
 
   handleAddItem(evt, selective) {
