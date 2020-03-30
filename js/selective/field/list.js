@@ -253,6 +253,7 @@ export class ListField extends Field {
     const uid = target.dataset.itemUid
     const locale = target.dataset.locale
     const listItems = this._getListItemsForLocale(locale) || []
+    const value = this.getValueForLocale(locale) || []
 
     let deleteIndex = -1
     for (const index in listItems) {
@@ -264,12 +265,30 @@ export class ListField extends Field {
 
     if (deleteIndex > -1) {
       listItems.splice(deleteIndex, 1)
+      value.splice(deleteIndex, 1)
+
+      // Lock the fields to prevent the values from being updated at the same
+      // time as the original value.
+      const downstreamItems = listItems.slice(deleteIndex)
+      for (const listItem of downstreamItems) {
+        listItem.fields.lock()
+      }
+
+      // Unlock fields after rendering is complete to let the values be updated when clean.
+      document.addEventListener('selective.render.complete', () => {
+        for (const listItem of downstreamItems) {
+          listItem.fields.unlock()
+        }
+        this.render()
+      }, {
+        once: true,
+      })
+
+      // Prevent the delete from bubbling.
+      evt.stopPropagation()
+
+      this.render()
     }
-
-    // Prevent the delete from bubbling.
-    evt.stopPropagation()
-
-    this.render()
   }
 
   handleExpandAll(evt) {
