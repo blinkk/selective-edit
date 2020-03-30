@@ -248,6 +248,30 @@ export class ListField extends Field {
     this.render()
   }
 
+  handleDeleteItem(evt) {
+    const target = findParentByClassname(evt.target, 'selective__list__item__delete')
+    const uid = target.dataset.itemUid
+    const locale = target.dataset.locale
+    const listItems = this._getListItemsForLocale(locale) || []
+
+    let deleteIndex = -1
+    for (const index in listItems) {
+      if (listItems[index].uid == uid) {
+        deleteIndex = index
+        break
+      }
+    }
+
+    if (deleteIndex > -1) {
+      listItems.splice(deleteIndex, 1)
+    }
+
+    // Prevent the delete from bubbling.
+    evt.stopPropagation()
+
+    this.render()
+  }
+
   handleExpandAll(evt) {
     const locale = evt.target.dataset.locale
     const listItems = this._getListItemsForLocale(locale) || []
@@ -275,30 +299,6 @@ export class ListField extends Field {
         break
       }
     }
-
-    this.render()
-  }
-
-  handleDeleteItem(evt) {
-    const target = findParentByClassname(evt.target, 'selective__list__item__delete')
-    const uid = target.dataset.itemUid
-    const locale = target.dataset.locale
-    const listItems = this._getListItemsForLocale(locale) || []
-
-    let deleteIndex = -1
-    for (const index in listItems) {
-      if (listItems[index].uid == uid) {
-        deleteIndex = index
-        break
-      }
-    }
-
-    if (deleteIndex > -1) {
-      listItems.splice(deleteIndex, 1)
-    }
-
-    // Prevent the delete from bubbling.
-    evt.stopPropagation()
 
     this.render()
   }
