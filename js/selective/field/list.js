@@ -22,7 +22,8 @@ import Field from './field'
 
 const COMMON_PREVIEW_KEYS = [
   // First match wins.
-  'title', 'label', 'subtitle', 'type', 'key', 'id', 'url', 'value',
+  'title', 'label', 'subtitle', 'type', 'text', 'key', 'id', 'url', 'value',
+  'doc',
 ]
 
 
