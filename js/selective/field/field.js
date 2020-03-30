@@ -67,6 +67,8 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   get isClean() {
+    // Manual locking prevents the original value overwriting the value
+    // in special cases when it should not.
     if (this._isLocked) {
       return false
     }
