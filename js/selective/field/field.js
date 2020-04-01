@@ -67,8 +67,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   get isClean() {
-    // Manual locking prevents the original value overwriting the value
-    // in special cases when it should not.
+    // When locked, the field is automatically considered dirty.
     if (this._isLocked) {
       return false
     }
@@ -260,6 +259,12 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   // Use the data passed to render to update the original value.
   // Also update the clean value when applicable.
   updateOriginal(selective, data) {
+    // Manual locking prevents the original value overwriting the value
+    // in special cases when it should not.
+    if (this._isLocked) {
+      return
+    }
+
     let newValue = data
     if (typeof data === 'object' && data !== null) {
       data = autoDeepObject(data)

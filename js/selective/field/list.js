@@ -105,7 +105,7 @@ export class ListField extends Field {
       return null
     }
 
-    return this._listItems[localeKey]
+    return [...this._listItems[localeKey]]
   }
 
   _setListItemsForLocale(locale, listItems) {
@@ -114,6 +114,11 @@ export class ListField extends Field {
   }
 
   get isClean() {
+    // When locked, the field is automatically considered dirty.
+    if (this._isLocked) {
+      return false
+    }
+
     for (const locale of this.locales) {
       const originalValue = this.getOriginalValueForLocale(locale)
       const listItems = this._getListItemsForLocale(locale)
@@ -294,11 +299,14 @@ export class ListField extends Field {
         listItem.fields.lock()
       }
 
+      this.lock()
+
       // Unlock fields after rendering is complete to let the values be updated when clean.
-      document.addEventListener('selective.render.complete', () => {
+      document.addEventListener('selective.unlock', () => {
         for (const listItem of downstreamItems) {
           listItem.fields.unlock()
         }
+        this.unlock()
         this.render()
       }, {
         once: true,
@@ -363,6 +371,8 @@ export class ListField extends Field {
       if (i < minIndex || i > maxIndex) {
         // Leave in the same order.
         newListItems[i] = oldListItems[i]
+
+        newListItems[i].fields.lock()
       } else if (i == endIndex) {
         // This element is being moved to, place the moved value here.
         newListItems[i] = oldListItems[startIndex]
@@ -381,12 +391,14 @@ export class ListField extends Field {
     }
 
     this._setListItemsForLocale(locale, newListItems)
+    this.lock()
 
-    // Unlock fields after rendering is complete to let the values be updated when clean.
-    document.addEventListener('selective.render.complete', () => {
+    // Unlock fields after saving is complete to let the values be updated when clean.
+    document.addEventListener('selective.unlock', () => {
       for (const item of newListItems) {
         item.fields.unlock()
       }
+      this.unlock()
       this.render()
     }, {
       once: true,
