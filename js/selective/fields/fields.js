@@ -21,6 +21,7 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
 
     this._originalValue = undefined
     this._value = undefined
+    this._isLocked = false
 
     this.fieldTypes = fieldTypes
     this.fields = []
@@ -128,6 +129,8 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   lock() {
+    this._isLocked = true
+
     // Lock all the fields to prevent them from being updated.
     for (const field of this.fields) {
       field.lock()
@@ -147,6 +150,8 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   unlock() {
+    this._isLocked = false
+
     // Unlock all the fields to allow them to be updated.
     for (const field of this.fields) {
       field.unlock()
@@ -154,6 +159,12 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   updateOriginal(selective, data, deep) {
+    // Manual locking prevents the original value overwriting the value
+    // in special cases when it should not.
+    if (this._isLocked) {
+      return
+    }
+
     this._originalValue = (data ? data.obj ? data.obj : data : undefined)
 
     if (deep) {
