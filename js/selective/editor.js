@@ -99,7 +99,8 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
   }
 
   guessFields() {
-    const autoFields = new AutoFields(this.data.obj)
+    const AutoFieldsCls = this.config.get('AutoFieldsCls', AutoFields)
+    const autoFields = new AutoFieldsCls(this.data.obj)
     return autoFields.config
   }
 
