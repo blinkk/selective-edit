@@ -74,6 +74,12 @@ export class ListField extends Field {
       // Create the fields based on the config.
       for (let fieldConfig of fieldConfigs || []) {
         fieldConfig = autoConfig(fieldConfig, this.globalConfig)
+
+        // Mark the auto fields.
+        if (this._useAutoFields) {
+          fieldConfig.set('isGuessed', true)
+        }
+
         fields.addField(fieldConfig, this.globalConfig)
       }
 
@@ -479,7 +485,7 @@ export class ListField extends Field {
     const origValueLen = origValue.length
 
     return html`
-      <div class="selective__list ${this._useAutoFields ? 'selective__list--auto' : ''}">
+      <div class="selective__list">
         ${repeat(
           items,
           (item) => item.uid,

@@ -63,6 +63,14 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
       classes.push('selective__field--translatable')
     }
 
+    if (this.config.isGuessed) {
+      classes.push('selective__field--guess')
+    }
+
+    if (!this.isClean) {
+      classes.push('selective__field--dirty')
+    }
+
     return classes.join(' ')
   }
 
