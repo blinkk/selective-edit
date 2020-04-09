@@ -214,6 +214,12 @@ export class ListField extends Field {
       if (previewValue) {
         return previewValue
       }
+
+      // Also check for translation marked keys.
+      previewValue = dataDeepObject.get(`${key}@`)
+      if (previewValue) {
+        return previewValue
+      }
     }
 
     return `{ Item ${index + 1} }`
