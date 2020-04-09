@@ -23,7 +23,7 @@ import Field from './field'
 const COMMON_PREVIEW_KEYS = [
   // First match wins.
   'title', 'label', 'subtitle', 'type', 'text', 'key', 'id', 'url', 'value',
-  'doc',
+  'doc', 'partial',
 ]
 
 
@@ -112,6 +112,29 @@ export class ListField extends Field {
     }
 
     return [...this._listItems[localeKey]]
+  }
+
+  _guessPreviewForObject(obj) {
+    const deepObj = autoDeepObject(obj)
+    let previewValue = obj
+    for (const key of COMMON_PREVIEW_KEYS) {
+      previewValue = deepObj.get(key)
+      if (!previewValue) {
+        // Also check for translation marked keys.
+        previewValue = deepObj.get(`${key}@`)
+      }
+
+      if (previewValue) {
+        break
+      }
+    }
+
+    // If the matched preview is also an object try again.
+    if (typeof previewValue == 'object') {
+      return this._guessPreviewForObject(previewValue)
+    }
+
+    return previewValue
   }
 
   _setListItemsForLocale(locale, listItems) {
@@ -208,18 +231,9 @@ export class ListField extends Field {
       return previewValue || defaultPreview
     }
 
-    // Check the data for some of the commong preview field key names.
-    for (const key of COMMON_PREVIEW_KEYS) {
-      previewValue = dataDeepObject.get(key)
-      if (previewValue) {
-        return previewValue
-      }
-
-      // Also check for translation marked keys.
-      previewValue = dataDeepObject.get(`${key}@`)
-      if (previewValue) {
-        return previewValue
-      }
+    previewValue = this._guessPreviewForObject(dataDeepObject)
+    if (previewValue) {
+      return previewValue
     }
 
     return `{ Item ${index + 1} }`
