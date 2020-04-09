@@ -118,6 +118,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
     key = key.replace(/\./g, ' ')
     key = key.replace(/\-/g, ' ')
     key = key.replace(/\_/g, ' ')
+    key = key.replace(/@$/, '')
     return key.split(' ').map(function(word) {
       return (word.charAt(0).toUpperCase() + word.slice(1));
     }).join(' ')
