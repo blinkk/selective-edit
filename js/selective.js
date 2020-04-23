@@ -4,6 +4,7 @@
 
 import { directive, html, render } from 'lit-html'
 import { repeat } from 'lit-html/directives/repeat'
+import { unsafeHTML } from 'lit-html/directives/unsafe-html'
 import Editor from './selective/editor'
 import Field from './selective/field/field'
 import UI from './selective/ui/ui'
@@ -18,17 +19,18 @@ const Selective = Editor
 
 export default Selective
 export {
+  AutoFields,
   Field,
+  Fields,
   GroupField,
   ListField,
   ListItem,
-  Fields,
-  AutoFields,
   UI,
+  autoConfig,
+  autoDeepObject,
   directive,
   html,
   repeat,
   render,
-  autoConfig,
-  autoDeepObject
+  unsafeHTML,
 }

@@ -55,6 +55,12 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
       `selective__field__type__${this.fieldType}`,
     ]
 
+    if (this.config.classes) {
+      for (const className of this.config.classes) {
+        classes.push(className)
+      }
+    }
+
     if (this._useAutoFields) {
       classes.push('selective__field--auto')
     }
