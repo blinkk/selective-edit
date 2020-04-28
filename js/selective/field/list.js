@@ -219,7 +219,7 @@ export class ListField extends Field {
       previewValue = null
     }
 
-    if (previewType == 'image') {
+    if (previewType == 'image' && previewValue) {
       if (previewValue.startsWith('http') || previewValue.startsWith('//')) {
         return html`<img src="${previewValue}" class="selective__image__fingernail">`
       } else if (previewValue.startsWith('/')) {
