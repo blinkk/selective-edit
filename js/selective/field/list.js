@@ -74,6 +74,7 @@ export class ListField extends Field {
       // Create the fields based on the config.
       for (let fieldConfig of fieldConfigs || []) {
         fieldConfig = autoConfig(fieldConfig, this.globalConfig)
+        fieldConfig.set('parentKey', this.fullKey)
 
         // Mark the auto fields.
         if (this._useAutoFields) {
@@ -255,6 +256,13 @@ export class ListField extends Field {
     // Create the fields based on the config.
     for (let fieldConfig of fieldConfigs || []) {
       fieldConfig = autoConfig(fieldConfig, this.globalConfig)
+      fieldConfig.set('parentKey', this.fullKey)
+
+      // Mark the auto fields.
+      if (this._useAutoFields) {
+        fieldConfig.set('isGuessed', true)
+      }
+
       fields.addField(fieldConfig, this.globalConfig)
     }
 

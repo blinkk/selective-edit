@@ -80,6 +80,14 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     return classes.join(' ')
   }
 
+  get fullKey() {
+    const parentKey = this.config.get('parentKey')
+    if (parentKey) {
+      return `${parentKey}.${this.key}`
+    }
+    return this.key
+  }
+
   get isClean() {
     // When locked, the field is automatically considered dirty.
     if (this._isLocked) {
@@ -251,7 +259,8 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     return html`
       <div
           class=${this.classesField}
-          data-field-type="${this.fieldType}">
+          data-field-type="${this.fieldType}"
+          data-field-full-key="${this.fullKey}">
         ${this.renderField(selective, data)}
       </div>`
   }
