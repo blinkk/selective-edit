@@ -117,7 +117,8 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   get isLinkedField() {
     // Is the field a linked field in the config.
     const fullKey = this.fullKey
-    for (const linkedField of this.config.get('linkedFields', [])) {
+    const linkedFields = this.config.get('linkedFieldsFunc', () => [])()
+    for (const linkedField of linkedFields) {
       if (linkedField == fullKey) {
         return true
       }
@@ -185,6 +186,16 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     this.setValueForLocale(locale, value)
   }
 
+  handleDeepLink(evt) {
+    // Trigger a deep link event.
+    document.dispatchEvent(new CustomEvent('selective.field.deep_link', {
+      detail: {
+        field: this.fullKey,
+        operation: evt.shiftKey ? 'add' : 'replace',
+      },
+    }))
+  }
+
   keyForLocale(locale) {
     // Default locale does not get tagged.
     if (locale == this.defaultLocale || !locale || locale == undefined) {
@@ -241,6 +252,11 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     }
 
     return html`<div class="selective__field__label">
+      <span
+          class="selective__field__deep_link"
+          @click=${this.handleDeepLink.bind(this)}>
+        <i class="material-icons">link</i>
+      </span>
       <label for="${this.uid}">${this.config.label}</label>
     </div>`
   }

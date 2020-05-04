@@ -654,7 +654,8 @@ export class ListItem extends compose(ConfigMixin, UidMixin,)(Base) {
     // Check the fields in the list item to see if they match the linked fields.
     for (const field of this.fields.fields) {
       const fullKey = field.fullKey
-      for (const linkedField of field.config.get('linkedFields', [])) {
+      const linkedFields = field.config.get('linkedFieldsFunc', () => [])()
+      for (const linkedField of linkedFields) {
         if (linkedField.startsWith(fullKey)) {
           return true
         }
