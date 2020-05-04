@@ -191,7 +191,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     document.dispatchEvent(new CustomEvent('selective.field.deep_link', {
       detail: {
         field: this.fullKey,
-        operation: evt.shiftKey ? 'add' : 'replace',
+        operation: evt.shiftKey ? 'toggle' : 'replace',
       },
     }))
   }
