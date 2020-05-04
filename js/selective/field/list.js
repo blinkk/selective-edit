@@ -643,11 +643,25 @@ export class ListItem extends compose(ConfigMixin, UidMixin,)(Base) {
     this.setConfig(config)
 
     this.fields = fields
-    this.expanded = false
+    this.isExpanded = this.isDefaultExpanded
   }
 
   get config() {
     return this.getConfig()
+  }
+
+  get isDefaultExpanded() {
+    // Check the fields in the list item to see if they match the linked fields.
+    for (const field of this.fields.fields) {
+      const fullKey = field.fullKey
+      for (const linkedField of field.config.get('linkedFields', [])) {
+        console.log(linkedField, fullKey, linkedField.startsWith(fullKey));
+        if (linkedField.startsWith(fullKey)) {
+          return true
+        }
+      }
+    }
+    return false
   }
 
   get uid() {

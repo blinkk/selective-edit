@@ -77,6 +77,10 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
       classes.push('selective__field--dirty')
     }
 
+    if (this.isLinkedField) {
+      classes.push('selective__field--linked')
+    }
+
     return classes.join(' ')
   }
 
@@ -108,6 +112,17 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     }
 
     return this.originalValue == this.value
+  }
+
+  get isLinkedField() {
+    // Is the field a linked field in the config.
+    const fullKey = this.fullKey
+    for (const linkedField of this.config.get('linkedFields', [])) {
+      if (linkedField == fullKey) {
+        return true
+      }
+    }
+    return false
   }
 
   get key() {
