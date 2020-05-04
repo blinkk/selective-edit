@@ -655,7 +655,6 @@ export class ListItem extends compose(ConfigMixin, UidMixin,)(Base) {
     for (const field of this.fields.fields) {
       const fullKey = field.fullKey
       for (const linkedField of field.config.get('linkedFields', [])) {
-        console.log(linkedField, fullKey, linkedField.startsWith(fullKey));
         if (linkedField.startsWith(fullKey)) {
           return true
         }
