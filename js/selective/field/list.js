@@ -440,6 +440,17 @@ export class ListField extends Field {
     this.render()
   }
 
+  // TODO: Remove? Directives?
+  postRender(containerEl) {
+    for (const localeKey of Object.keys(this._listItems)) {
+      const listItems = this._listItems[localeKey]
+
+      for (const listItem of listItems) {
+        listItem.fields.postRender(containerEl)
+      }
+    }
+  }
+
   renderActionsFooter(selective, data, locale) {
     return html`<div class="selective__actions">
       <button
