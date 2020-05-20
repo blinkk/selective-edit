@@ -37,7 +37,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
     let fields = []
     keyBase = keyBase || []
 
-    if (DataType.isArray(data)) {
+    if (this.DataType.isArray(data)) {
       const firstValue = data.length ? data[0] : null
       fields.push(this._fieldConfig('', firstValue))
     } else {
@@ -63,7 +63,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
 
       const newKeyBase = keyBase.concat([key])
       const newData = data[key]
-      if (DataType.isObject(newData)) {
+      if (this.DataType.isObject(newData)) {
         fields = fields.concat(this._deepGuessObject(newData, newKeyBase))
       } else {
         fields.push(this._deepGuessSimple(data[key], newKeyBase))
@@ -79,7 +79,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
   }
 
   _fieldConfig(key, value) {
-    const fieldType = this.typeFromValue(value)
+    const fieldType = this.typeFromValue(value, key)
     const label = this.labelFromKey(key)
     const fieldConfig = {
       "type": fieldType,
@@ -101,7 +101,7 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
    */
   guess(key) {
     return this._fieldConfig(
-      key, this.typeFromValue(this._data.get(key)))
+      key, this.typeFromValue(this._data.get(key), key))
   }
 
   /**
@@ -126,11 +126,11 @@ export default class AutoFields extends compose(ConfigMixin,)(Base) {
   /**
    * From a value guess the type of field.
    */
-  typeFromValue(value) {
+  typeFromValue(value, key) {
     if (value === null || value === undefined) {
       return 'text'
     }
-    if (DataType.isArray(value)) {
+    if (this.DataType.isArray(value)) {
       return 'list'
     }
     if (value.length > 75) {
