@@ -266,7 +266,7 @@ export class ListField extends Field {
       fields.addField(fieldConfig, this.globalConfig)
     }
 
-    fields.updateOriginal(fields.defaultValue)
+    fields.updateOriginal(selective, fields.defaultValue)
 
     const listItem = new ListItem({
       'fields': fieldConfigs,

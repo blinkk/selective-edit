@@ -53,7 +53,7 @@ export class GroupField extends Field {
     const FieldsCls = this.config.get('FieldsCls', Fields)
     const fields = new FieldsCls(selective.fieldTypes)
 
-    fields.updateOriginal(this.originalValue)
+    fields.updateOriginal(selective, this.originalValue)
 
     let fieldConfigs = this.config.fields || []
     this._useAutoFields = fieldConfigs.length == 0
@@ -174,7 +174,7 @@ export class VariantField extends Field {
     const FieldsCls = this.config.get('FieldsCls', Fields)
     const fields = new FieldsCls(selective.fieldTypes)
 
-    fields.updateOriginal(this.originalValue)
+    fields.updateOriginal(selective, this.originalValue)
 
     const variantConfig = this.config.variants[variant] || {}
     let fieldConfigs = variantConfig.fields || []
