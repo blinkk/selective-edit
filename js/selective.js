@@ -9,7 +9,7 @@ import Editor from './selective/editor'
 import Field from './selective/field/field'
 import UI from './selective/ui/ui'
 import { ListField, ListItem } from './selective/field/list'
-import { GroupField } from './selective/field/structure'
+import { GroupField, VariantField } from './selective/field/structure'
 import Fields from './selective/fields/fields'
 import AutoFields from './selective/autoFields'
 import { autoConfig } from './utility/config'
@@ -26,6 +26,7 @@ export {
   ListField,
   ListItem,
   UI,
+  VariantField,
   autoConfig,
   autoDeepObject,
   directive,
