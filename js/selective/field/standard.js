@@ -3,7 +3,6 @@
  */
 
 import { html } from 'lit-html'
-import { repeat } from 'lit-html/directives/repeat'
 import { ListField } from './list'
 import Field from './field'
 
