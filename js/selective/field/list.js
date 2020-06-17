@@ -98,7 +98,7 @@ export class ListField extends Field {
     this._setListItemsForLocale(locale, listItems)
 
     // Trigger a new render to make sure the expand/collapse buttons show.
-    if (listItems.length > 1) {
+    if (listItems.length > 1 || !this.useSimpleField) {
       this.render()
     }
   }
@@ -166,6 +166,11 @@ export class ListField extends Field {
     }
 
     return true
+  }
+
+  // Use the simple field only when there is not a preview field.
+  get useSimpleField() {
+    return !Boolean(this.config.get('preview_field'))
   }
 
   get localizedValues() {
@@ -478,7 +483,7 @@ export class ListField extends Field {
     let areAllExpanded = true
     let areAllCollapsed = true
     for (const item of listItems) {
-      if (!item.fields.isSimpleField) {
+      if (!item.fields.isSimpleField || !this.useSimpleField) {
         areSimpleFields = false
       }
       if (!item.isExpanded) {
@@ -536,7 +541,7 @@ export class ListField extends Field {
   }
 
   renderItem(selective, data, item, index, locale) {
-    if (item.fields.isSimpleField) {
+    if (item.fields.isSimpleField && this.useSimpleField) {
       return this.renderItemSimple(selective, data, item, index, locale)
     } else if (item.isExpanded) {
       return this.renderItemExpanded(selective, data, item, index, locale)
