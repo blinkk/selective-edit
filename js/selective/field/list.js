@@ -499,22 +499,22 @@ export class ListField extends Field {
     }
 
     actions.push(html`
-      <button
+      <div
           ?disabled=${areAllExpanded}
-          class="selective__action__expand"
+          class="selective__action selective__action__expand"
           data-locale=${locale || ''}
           @click=${this.handleExpandAll.bind(this)}>
-        Expand All
-      </button>`)
+        <i class="material-icons">unfold_more</i>
+      </div>`)
 
     actions.push(html`
-      <button
+      <div
           ?disabled=${areAllCollapsed}
-          class="selective__action__collapse"
+          class="selective__action selective__action__collapse"
           data-locale=${locale || ''}
           @click=${this.handleCollapseAll.bind(this)}>
-        Collapse All
-      </button>`)
+        <i class="material-icons">unfold_less</i>
+      </div>`)
 
     return html`<div class="selective__actions">
       ${actions}
