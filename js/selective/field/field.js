@@ -287,7 +287,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
           (locale) => locale,
           (locale, index) => html`
             <div class="selective__field__locale">
-              <label for="${this.uid}${locale}">${locale}</label>
+              <label for="${this.uid}${locale}">${locale} ${locale == this.defaultLocale ? html`<span>(default)</span>` : ''}</label>
             </div>
             <div class="selective__field__input">
               ${this.renderInput(selective, data, locale)}
@@ -338,7 +338,16 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     const isClean = this.isClean
     this.isLocalized = selective.localize
     this.defaultLocale = selective.config.defaultLocale || 'en'
-    this.locales = selective.config.locales || ['en']
+
+    // Order the locales so that the first locale is always the default locale.
+    const sortedLocales = (selective.config.locales || [this.defaultLocale]).sort()
+    const newLocales = [this.defaultLocale]
+    for (const locale of sortedLocales) {
+      if (locale != this.defaultLocale) {
+        newLocales.push(locale)
+      }
+    }
+    this.locales = newLocales
 
     // Certain formats in the data may need to be cleaned up
     newValue = this._cleanOriginalValue(newValue)
