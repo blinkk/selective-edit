@@ -25,6 +25,10 @@ const COMMON_PREVIEW_KEYS = [
   'title', 'label', 'subtitle', 'type', 'text', 'key', 'id', 'url', 'value',
   'doc', 'partial',
 ]
+const VIDEO_EXT = [
+  // Video extensions.
+  'mp4', 'webm',
+]
 
 
 export class ListField extends Field {
@@ -101,6 +105,22 @@ export class ListField extends Field {
     if (listItems.length > 1 || !this.useSimpleField) {
       this.render()
     }
+  }
+
+  _createPreviewTemplate(url) {
+    if (url.startsWith('http') || url.startsWith('//')) {
+      for (const videoExt of VIDEO_EXT) {
+        if (url.endsWith(`.${videoExt}`)) {
+          return html`<video playsinline disableremoteplayback muted autoplay loop>
+            <source src="${url}" />
+          </video>`
+        }
+      }
+      return html`<img src="${url}" class="selective__image__fingernail">`
+    } else if (url.startsWith('/')) {
+      return html`<img src="${url}" class="selective__image__fingernail">`
+    }
+    return url
   }
 
   _getListItemsForLocale(locale) {
@@ -226,11 +246,7 @@ export class ListField extends Field {
     }
 
     if (previewType == 'image' && previewValue) {
-      if (previewValue.startsWith('http') || previewValue.startsWith('//')) {
-        return html`<img src="${previewValue}" class="selective__image__fingernail">`
-      } else if (previewValue.startsWith('/')) {
-        // TODO: Handle local images.
-      }
+      return this._createPreviewTemplate(previewValue)
     }
 
     if (previewValue || defaultPreview) {
