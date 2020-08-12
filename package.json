@@ -27,29 +27,25 @@
   },
   "homepage": "https://github.com/grow/selective-edit#readme",
   "dependencies": {
-    "@babel/core": "^7.10.3",
     "@material/button": "^7.0.0",
     "@material/icon-button": "^7.0.0",
     "@material/select": "^7.0.0",
     "@material/textfield": "^7.0.0",
+    "deep-extend": "^0.6.0",
+    "json-stable-stringify": "^1.0.1",
+    "lit-html": "^1.1.2",
+    "pell": "^1.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
     "babel-loader": "^8.0.6",
     "babili-webpack-plugin": "^0.1.2",
-    "deep-extend": "^0.6.0",
-    "fs-readdir-recursive": "^1.1.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^4.1.0",
-    "json-stable-stringify": "^1.0.1",
-    "lit-html": "^1.1.2",
-    "marked": "^1.1.0",
-    "pell": "^1.0.4",
-    "superagent": "^5.2.2",
-    "turndown": "^6.0.0",
+    "gulp-connect": "^5.7.0",
     "webpack": "^4.41.6",
     "webpack-stream": "^5.1.1"
-  },
-  "devDependencies": {
-    "gulp-connect": "^5.7.0"
   }
 }
