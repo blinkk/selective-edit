@@ -11,6 +11,7 @@ import {
   compose,
 } from '../../utility/compose'
 import DataType from '../../utility/dataType'
+import Listeners from '../../utility/listeners'
 import { autoDeepObject } from '../../utility/deepObject'
 import ConfigMixin from '../../mixin/config'
 import UidMixin from '../../mixin/uid'
@@ -25,6 +26,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     this.ignoreLocalize = false
     this.defaultLocale = 'en'
     this.locales = ['en']
+    this.listeners = new Listeners()
 
     this.setConfig(config)
 
