@@ -44,9 +44,9 @@ export class ListField extends Field {
     this._sortableUi.listeners.add('sort', this.handleSort.bind(this))
   }
 
-  _createFields(fieldTypes, config) {
+  _createFields(fieldTypes, ruleTypes, config) {
     const FieldsCls = this.config.get('FieldsCls', Fields)
-    return new FieldsCls(fieldTypes, config)
+    return new FieldsCls(fieldTypes, ruleTypes, config)
   }
 
   _createItems(selective, data, locale) {
@@ -66,7 +66,8 @@ export class ListField extends Field {
     this._useAutoFields = !fieldConfigs.length
 
     for (const itemData of value) {
-      const fields = this._createFields(selective.fieldTypes)
+      const fields = this._createFields(
+        selective.fieldTypes, selective.ruleTypes)
       fields.updateOriginal(selective, itemData)
 
       // Auto guess the fields if they are not defined.
@@ -264,7 +265,8 @@ export class ListField extends Field {
   handleAddItem(evt, selective) {
     const locale = evt.target.dataset.locale
     const listItems = this._getListItemsForLocale(locale) || []
-    const fields = this._createFields(selective.fieldTypes)
+    const fields = this._createFields(
+      selective.fieldTypes, selective.ruleTypes)
 
     // Use the field config for the list items to create the correct field types.
     let fieldConfigs = this.config.get('fields', [])

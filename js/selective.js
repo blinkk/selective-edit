@@ -11,6 +11,15 @@ import UI from './selective/ui/ui'
 import { ListField, ListItem } from './selective/field/list'
 import { GroupField, VariantField } from './selective/field/structure'
 import Fields from './selective/fields/fields'
+import ValidationRules from './selective/validation/rules'
+import {
+  ValidationRule,
+  LengthValidationRule,
+  MatchValidationRule,
+  PatternValidationRule,
+  RangeValidationRule,
+  RequiredValidationRule,
+} from './selective/validation/rules'
 import AutoFields from './selective/autoFields'
 import { autoConfig } from './utility/config'
 import { autoDeepObject } from './utility/deepObject'
@@ -23,10 +32,17 @@ export {
   Field,
   Fields,
   GroupField,
+  LengthValidationRule,
   ListField,
   ListItem,
+  MatchValidationRule,
+  PatternValidationRule,
+  RangeValidationRule,
+  RequiredValidationRule,
   UI,
   VariantField,
+  ValidationRule,
+  ValidationRules,
   autoConfig,
   autoDeepObject,
   directive,

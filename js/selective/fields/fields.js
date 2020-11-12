@@ -16,7 +16,7 @@ import { autoDeepObject } from '../../utility/deepObject'
 
 
 export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
-  constructor(fieldTypes, config) {
+  constructor(fieldTypes, ruleTypes, config) {
     super()
 
     this._originalValue = undefined
@@ -25,6 +25,8 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
 
     this.fieldTypes = fieldTypes
     this.fields = []
+
+    this.ruleTypes = ruleTypes
 
     this.setConfig(config)
   }
@@ -51,6 +53,19 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
     }
 
     return true
+  }
+
+  get isValid() {
+    let currentlyValid = true
+
+    for (const field of this.fields) {
+      if (!field.isValid) {
+        // Does not return since we want to be able to mark all invalid fields.
+        currentlyValid = false
+      }
+    }
+
+    return currentlyValid
   }
 
   get isSimpleField() {
@@ -119,8 +134,8 @@ export default class Fields extends compose(ConfigMixin, UidMixin,)(Base) {
 
   addField(fieldConfig, globalConfig) {
     fieldConfig = autoConfig(fieldConfig, globalConfig)
-    const newField = this.fieldTypes.newField(
-      fieldConfig.type, fieldConfig, globalConfig)
+    const newField = this.fieldTypes.newFromKey(
+      fieldConfig.type, this.ruleTypes, fieldConfig, globalConfig)
 
     // TODO: Handle placeholders.
     if (newField) {

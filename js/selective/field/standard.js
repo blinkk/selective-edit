@@ -17,11 +17,13 @@ export class MarkdownField extends Field {
 
     return html`
       <textarea
+        class="${this.getClassesForInput(locale)}"
         id="${this.uid}${locale || ''}"
         rows=${this.config.rows || 6}
         placeholder=${this.config.placeholder || ''}
         data-locale=${locale || ''}
-        @input=${this.handleInput.bind(this)}>${value}</textarea>`
+        @input=${this.handleInput.bind(this)}>${value}</textarea>
+      ${this.renderErrors(selective, data)}`
   }
 }
 
@@ -36,12 +38,14 @@ export class TextField extends Field {
 
     return html`
       <input
+        class="${this.getClassesForInput(locale)}"
         type="text"
         id="${this.uid}${locale || ''}"
         placeholder=${this.config.placeholder || ''}
         data-locale=${locale || ''}
         @input=${this.handleInput.bind(this)}
-        value=${value}>`
+        value=${value}>
+      ${this.renderErrors(selective, data)}`
   }
 }
 
@@ -56,11 +60,13 @@ export class TextareaField extends Field {
 
     return html`
       <textarea
+        class="${this.getClassesForInput(locale)}"
         id="${this.uid}${locale || ''}"
         rows=${this.config.rows || 6}
         placeholder=${this.config.placeholder || ''}
         data-locale=${locale || ''}
-        @input=${this.handleInput.bind(this)}>${value}</textarea>`
+        @input=${this.handleInput.bind(this)}>${value}</textarea>
+      ${this.renderErrors(selective, data)}`
   }
 }
 
