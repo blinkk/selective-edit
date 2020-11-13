@@ -168,8 +168,9 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
         // validation zone to the key of the value.
         for (const zoneKey of Object.keys(this.zonesToValue)) {
           const valueKey = this.zonesToValue[zoneKey]
+          const valueSub = value ? value[valueKey] : undefined
           errors.validateRules(
-            this._validationRules, value[valueKey], locale, isDefaultLocale,
+            this._validationRules, valueSub, locale, isDefaultLocale,
             zoneKey)
         }
       }

@@ -22,6 +22,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     this.containerEl = containerEl
     this.fieldTypes = new ClassManager()
     this.ruleTypes = new ClassManager()
+    this.ruleTypes.DEFAULT_ZONE_KEY = '__default__'
     this.localize = false
     this._fields = null
     this._data = autoDeepObject({})

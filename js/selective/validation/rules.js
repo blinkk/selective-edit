@@ -9,9 +9,7 @@ import {
 import ConfigMixin from '../../mixin/config'
 import DataType from '../../utility/dataType'
 
-
 const DEFAULT_ZONE_KEY = '__default__'
-
 
 export default class ValidationRules extends compose(ConfigMixin,)(Base) {
   constructor(config) {
@@ -288,6 +286,11 @@ export class RequiredValidationRule extends ValidationRule {
       } else {
         throw e
       }
+    }
+
+    // Quill editor blank is not a blank string.
+    if (value == '<p><br></p>') {
+      return this.message
     }
 
     return null

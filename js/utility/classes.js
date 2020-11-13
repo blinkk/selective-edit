@@ -14,6 +14,14 @@ export default class ClassManager {
     }
   }
 
+  getByKey(key) {
+    if ( this.classes[key] ) {
+      return this.classes[key]
+    }
+
+    return null
+  }
+
   newFromKey(key, ...args) {
     if ( this.classes[key] ) {
       return new this.classes[key](...args)
