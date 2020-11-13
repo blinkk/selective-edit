@@ -7,8 +7,8 @@ import { ListField } from './list'
 import Field from './field'
 
 export class MarkdownField extends Field {
-  constructor(config, extendedConfig) {
-    super(config, extendedConfig)
+  constructor(ruleTypes, config, extendedConfig) {
+    super(ruleTypes, config, extendedConfig)
     this.fieldType = 'markdown'
   }
 
@@ -28,8 +28,8 @@ export class MarkdownField extends Field {
 }
 
 export class TextField extends Field {
-  constructor(config, extendedConfig) {
-    super(config, extendedConfig)
+  constructor(ruleTypes, config, extendedConfig) {
+    super(ruleTypes, config, extendedConfig)
     this.fieldType = 'text'
   }
 
@@ -50,8 +50,8 @@ export class TextField extends Field {
 }
 
 export class TextareaField extends Field {
-  constructor(config, extendedConfig) {
-    super(config, extendedConfig)
+  constructor(ruleTypes, config, extendedConfig) {
+    super(ruleTypes, config, extendedConfig)
     this.fieldType = 'textarea'
   }
 

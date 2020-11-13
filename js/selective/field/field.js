@@ -43,6 +43,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     this._originalValues = {}
     this.errors = {}
     this.values = {}
+    this.zonesToValue = null
 
     // Store the validation rules.
     this._validationRules = new ValidationRules({
@@ -142,6 +143,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
   }
 
   get isValid() {
+    // TODO: Only want to revalidate once per render.
     let hasErrors = false
     let locales = []
 
@@ -156,11 +158,25 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
       const errors = new ValidationErrors()
       const isDefaultLocale = !locale || locale == this.defaultLocale
       const value = this.getValueForLocale(locale)
-      errors.validateRules(
-        this._validationRules.rules, value, locale, isDefaultLocale)
+
+      if (!this.zonesToValue) {
+        // Simple field, only one value/input to validate.
+        errors.validateRules(
+          this._validationRules, value, locale, isDefaultLocale)
+      } else {
+        // Complex field type. There are multiple inputs, so we need to map the
+        // validation zone to the key of the value.
+        for (const zoneKey of Object.keys(this.zonesToValue)) {
+          const valueKey = this.zonesToValue[zoneKey]
+          errors.validateRules(
+            this._validationRules, value[valueKey], locale, isDefaultLocale,
+            zoneKey)
+        }
+      }
+
       this.setErrorsForLocale(locale, errors)
 
-      if (errors.hasErrors()) {
+      if (errors.hasAnyErrors()) {
         hasErrors = true
       }
     }
@@ -203,15 +219,40 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     const classes = []
 
     const errors = this.getErrorsForLocale(locale)
-    const zoneErrors = errors.getErrorsForZone(zoneKey)
-    const errorTypes = Object.keys(zoneErrors).sort()
+    if (errors) {
+      const zoneErrors = errors.getErrorsForZone(zoneKey)
+      const errorTypes = Object.keys(zoneErrors).sort()
 
-    if (errorTypes.length) {
-      classes.push('selective__field__input--error')
+      if (errorTypes.length) {
+        classes.push('selective__field__input--error')
+      }
+
+      for (const key of errorTypes) {
+        classes.push(`selective__field__input--error__${key}`)
+      }
     }
 
-    for (const key of errorTypes) {
-      classes.push(`selective__field__input--error__${key}`)
+
+    return classes.join(' ')
+  }
+
+  getClassesForLabel(locale, zoneKey) {
+    const classes = ['selective__field__label']
+
+    if (locale || zoneKey || !this.isLocalized) {
+      const errors = this.getErrorsForLocale(locale)
+      if (errors) {
+        const zoneErrors = errors.getErrorsForZone(zoneKey)
+        const errorTypes = Object.keys(zoneErrors).sort()
+
+        if (errorTypes.length) {
+          classes.push('selective__field__label--error')
+        }
+
+        for (const key of errorTypes) {
+          classes.push(`selective__field__label--error__${key}`)
+        }
+      }
     }
 
     return classes.join(' ')
@@ -291,6 +332,11 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
 
   renderErrors(selective, data, locale, zoneKey) {
     const errors = this.getErrorsForLocale(locale)
+
+    if (!errors) {
+      return ''
+    }
+
     const zoneErrors = errors.getErrorsForZone(zoneKey)
     const errorTypes = Object.keys(zoneErrors).sort()
 
@@ -326,6 +372,27 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     return html`<div class="selective__field__help">${this.config.help}</div>`
   }
 
+  renderIconError(selective, data, locale) {
+    if (this.isValid) {
+      return ''
+    }
+
+    return html`
+      <span
+          class="selective__field__invalid">
+        <i class="material-icons">error</i>
+      </span>`
+  }
+
+  renderIconLink(selective, data, locale) {
+    return html`
+      <span
+          class="selective__field__deep_link"
+          @click=${this.handleDeepLink.bind(this)}>
+        <i class="material-icons">link</i>
+      </span>`
+  }
+
   renderInput(selective, data, locale) {
     return 'Input not defined.'
   }
@@ -335,16 +402,9 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
       return ''
     }
 
-    return html`<div class="selective__field__label">
-      <span
-          class="selective__field__deep_link"
-          @click=${this.handleDeepLink.bind(this)}>
-        <i class="material-icons">link</i>
-      </span>
-      <span
-          class="selective__field__invalid">
-        <i class="material-icons">error</i>
-      </span>
+    return html`<div class="${this.getClassesForLabel()}">
+      ${this.renderIconLink(selective, data)}
+      ${this.renderIconError(selective, data)}
       <label for="${this.uid}">${this.config.label}</label>
     </div>`
   }

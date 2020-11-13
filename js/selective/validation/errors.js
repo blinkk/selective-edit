@@ -31,13 +31,23 @@ export default class ValidationErrors {
     return this._zones[zoneKey]
   }
 
+  hasAnyErrors() {
+    for (const zoneKey of Object.keys(this._zones)) {
+      if (Object.keys(this._zones[zoneKey]).length > 0) {
+        return true
+      }
+    }
+
+    return false
+  }
+
   hasErrors(zoneKey) {
     const zone = this.getErrorsForZone(zoneKey)
     return Object.keys(zone).length > 0
   }
 
   validateRules(rules, value, locale, isDefaultLocale, zoneKey) {
-    for (const rule of rules) {
+    for (const rule of rules.getRulesForZone(zoneKey)) {
       // Ignore rules that only apply to default locale when not default.
       // For example, a required rule is usually only required in the default.
       if (!isDefaultLocale && rule.appliesToOnlyDefaultLocale) {

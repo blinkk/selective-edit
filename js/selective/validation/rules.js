@@ -7,12 +7,16 @@ import {
   compose,
 } from '../../utility/compose'
 import ConfigMixin from '../../mixin/config'
+import DataType from '../../utility/dataType'
+
+
+const DEFAULT_ZONE_KEY = '__default__'
 
 
 export default class ValidationRules extends compose(ConfigMixin,)(Base) {
   constructor(config) {
     super()
-    this._rules = []
+    this._rules = {}
     this.setConfig(config)
   }
 
@@ -28,20 +32,39 @@ export default class ValidationRules extends compose(ConfigMixin,)(Base) {
     return this.config.ruleTypes
   }
 
-  addRule(rule) {
+  addRule(rule, zoneKey) {
     let newRule = this.ruleTypes.newFromKey(rule['type'], rule)
 
     if (!newRule) {
       newRule = new UnknownValidationRule(rule)
     }
 
-    this._rules.push(newRule)
+    const rules = this.getRulesForZone(zoneKey)
+    rules.push(newRule)
   }
 
-  addRules(rules) {
-    for (const rule of rules) {
-      this.addRule(rule)
+  addRules(rules, zoneKey) {
+    if (DataType.isObject(rules)) {
+      for (const zoneKey of Object.keys(rules)) {
+        for (const rule of rules[zoneKey]) {
+          this.addRule(rule, zoneKey)
+        }
+      }
+    } else {
+      for (const rule of rules) {
+        this.addRule(rule, zoneKey)
+      }
     }
+  }
+
+  getRulesForZone(zoneKey) {
+    zoneKey = zoneKey || DEFAULT_ZONE_KEY
+
+    if (!this._rules[zoneKey]) {
+      this._rules[zoneKey] = []
+    }
+
+    return this._rules[zoneKey]
   }
 }
 
@@ -246,10 +269,25 @@ export class RequiredValidationRule extends ValidationRule {
       return this.message
     }
 
+    // Handle required array values.
+    if (DataType.isArray(value)) {
+      if (value.length < 1) {
+        return this.message
+      }
+    }
+
     // Require that it be more than just whitespace.
-    value = value.trim()
-    if (!value.length) {
-      return this.message
+    try {
+      value = value.trim()
+      if (!value.length) {
+        return this.message
+      }
+    } catch (e) {
+      if (e instanceof TypeError) {
+        // Value type doesn't have a trim or length.
+      } else {
+        throw e
+      }
     }
 
     return null
