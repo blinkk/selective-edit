@@ -32,8 +32,8 @@ const VIDEO_EXT = [
 
 
 export class ListField extends Field {
-  constructor(config, globalConfig) {
-    super(config, globalConfig)
+  constructor(ruleTypes, config, globalConfig) {
+    super(ruleTypes, config, globalConfig)
     this.fieldType = 'list'
     this.isLocalized = true
 
@@ -44,9 +44,9 @@ export class ListField extends Field {
     this._sortableUi.listeners.add('sort', this.handleSort.bind(this))
   }
 
-  _createFields(fieldTypes, config) {
+  _createFields(fieldTypes, ruleTypes, config) {
     const FieldsCls = this.config.get('FieldsCls', Fields)
-    return new FieldsCls(fieldTypes, config)
+    return new FieldsCls(fieldTypes, ruleTypes, config)
   }
 
   _createItems(selective, data, locale) {
@@ -66,7 +66,8 @@ export class ListField extends Field {
     this._useAutoFields = !fieldConfigs.length
 
     for (const itemData of value) {
-      const fields = this._createFields(selective.fieldTypes)
+      const fields = this._createFields(
+        selective.fieldTypes, selective.ruleTypes)
       fields.updateOriginal(selective, itemData)
 
       // Auto guess the fields if they are not defined.
@@ -211,10 +212,9 @@ export class ListField extends Field {
   }
 
   get value() {
-    const listItems = this._getListItemsForLocale() || []
-
-    if (!listItems.length) {
-      return this.originalValue
+    const listItems = this._getListItemsForLocale()
+    if (listItems == null) {
+      return this.originalValue || []
     }
 
     const value = []
@@ -264,7 +264,8 @@ export class ListField extends Field {
   handleAddItem(evt, selective) {
     const locale = evt.target.dataset.locale
     const listItems = this._getListItemsForLocale(locale) || []
-    const fields = this._createFields(selective.fieldTypes)
+    const fields = this._createFields(
+      selective.fieldTypes, selective.ruleTypes)
 
     // Use the field config for the list items to create the correct field types.
     let fieldConfigs = this.config.get('fields', [])
@@ -553,7 +554,8 @@ export class ListField extends Field {
         )}
         ${items.length < 1 ? this.renderItemEmpty(selective, data, 0, locale) : ''}
       </div>
-      ${this.renderActionsFooter(selective, data, locale)}`
+      ${this.renderActionsFooter(selective, data, locale)}
+      ${this.renderErrors(selective, data, locale)}`
   }
 
   renderItem(selective, data, item, index, locale) {
@@ -650,7 +652,8 @@ export class ListField extends Field {
   renderLabel(selective, data) {
     return html`
       <div class="selective__field__actions__wrapper">
-        <div class="selective__field__label">
+        <div class="${this.getClassesForLabel()}">
+          ${this.renderIconError(selective, data)}
           <label>${this.config.label}</label>
         </div>
         ${this.renderActionsHeader(selective, data)}

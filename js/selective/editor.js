@@ -12,15 +12,17 @@ import {
 import ConfigMixin from '../mixin/config'
 import { autoDeepObject } from '../utility/deepObject'
 import { Base, compose } from '../utility/compose'
+import ClassManager from '../utility/classes'
 import AutoFields from './autoFields'
 import Fields from './fields/fields'
-import FieldTypes from './fieldTypes'
 
 export default class Editor extends compose(ConfigMixin,)(Base) {
   constructor(containerEl, config) {
     super()
     this.containerEl = containerEl
-    this.fieldTypes = new FieldTypes()
+    this.fieldTypes = new ClassManager()
+    this.ruleTypes = new ClassManager()
+    this.ruleTypes.DEFAULT_ZONE_KEY = '__default__'
     this.localize = false
     this._fields = null
     this._data = autoDeepObject({})
@@ -46,13 +48,17 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
   get fields() {
     if (!this._fields) {
       const FieldsCls = this.getConfig().get('FieldsCls', Fields)
-      this._fields = new FieldsCls(this.fieldTypes)
+      this._fields = new FieldsCls(this.fieldTypes, this.ruleTypes)
     }
     return this._fields
   }
 
   get isClean() {
     return this.fields.isClean
+  }
+
+  get isValid() {
+    return this.fields.isValid
   }
 
   get selfRender() {
@@ -75,14 +81,22 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
   }
 
   addFieldType(key, FieldCls) {
-    this.fieldTypes.addFieldType(key, FieldCls)
+    this.fieldTypes.setClass(key, FieldCls)
     this.render()
   }
 
   addFieldTypes(fieldTypes) {
-    for (const key of Object.keys(fieldTypes)) {
-      this.fieldTypes.addFieldType(key, fieldTypes[key])
-    }
+    this.fieldTypes.setClasses(fieldTypes)
+    this.render()
+  }
+
+  addRuleType(key, RuleCls) {
+    this.ruleTypes.setClass(key, RuleCls)
+    this.render()
+  }
+
+  addRuleTypes(ruleTypes) {
+    this.ruleTypes.setClasses(ruleTypes)
     this.render()
   }
 
@@ -110,7 +124,7 @@ export default class Editor extends compose(ConfigMixin,)(Base) {
     containerEl = containerEl || this.containerEl
 
     // Initialize any new fields.
-    this.fieldTypes.initialize(containerEl)
+    this.fieldTypes.forEachFunc('initialize', containerEl)
 
     // Trigger any field specific actions.
     this.fields.postRender(containerEl)

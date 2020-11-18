@@ -13,8 +13,8 @@ import Field from './field'
 
 
 export class GroupField extends Field {
-  constructor(config, globalConfig) {
-    super(config, globalConfig)
+  constructor(ruleTypes, config, globalConfig) {
+    super(ruleTypes, config, globalConfig)
     this.fieldType = 'group'
     this.ignoreLocalize = true
     this.fields = null
@@ -37,6 +37,15 @@ export class GroupField extends Field {
     return true
   }
 
+  get isValid() {
+    // If there are no fields, all is valid.
+    if (!this.fields) {
+      return true
+    }
+
+    return this.fields.isValid
+  }
+
   get value() {
     if (!this.fields) {
       return this.originalValue
@@ -51,7 +60,7 @@ export class GroupField extends Field {
 
   _createFields(selective, data) {
     const FieldsCls = this.config.get('FieldsCls', Fields)
-    const fields = new FieldsCls(selective.fieldTypes)
+    const fields = new FieldsCls(selective.fieldTypes, selective.ruleTypes)
 
     fields.updateOriginal(selective, this.originalValue)
 
@@ -114,8 +123,8 @@ export class GroupField extends Field {
 
 
 export class VariantField extends Field {
-  constructor(config, globalConfig) {
-    super(config, globalConfig)
+  constructor(ruleTypes, config, globalConfig) {
+    super(ruleTypes, config, globalConfig)
     this.fieldType = 'variant'
     this.ignoreLocalize = true
     this.variant = null
@@ -135,6 +144,17 @@ export class VariantField extends Field {
     }
 
     return true
+  }
+
+  get isValid() {
+    const superValid = super.isValid
+
+    // If there are no fields, all is valid.
+    if (!this.fields) {
+      return superValid
+    }
+
+    return this.fields.isValid && superValid
   }
 
   get isDataClean() {
@@ -172,7 +192,7 @@ export class VariantField extends Field {
     }
 
     const FieldsCls = this.config.get('FieldsCls', Fields)
-    const fields = new FieldsCls(selective.fieldTypes)
+    const fields = new FieldsCls(selective.fieldTypes, selective.ruleTypes)
 
     fields.updateOriginal(selective, this.originalValue)
 
@@ -225,8 +245,6 @@ export class VariantField extends Field {
   }
 
   renderInput(selective, data, locale) {
-    this.ensureFields(selective, data)
-
     let fieldsOutput = ''
     if (this.fields) {
       fieldsOutput = this.fields.template(selective, this.originalValue)
@@ -234,7 +252,8 @@ export class VariantField extends Field {
 
     return html`
       ${this.renderVariants(selective, data, locale)}
-      ${fieldsOutput}`
+      ${fieldsOutput}
+      ${this.renderErrors(selective, data, locale)}`
   }
 
   renderVariants(selective, data, locale) {
@@ -257,5 +276,11 @@ export class VariantField extends Field {
             </button>
           `)}
       </div>`
+  }
+
+  renderWrapper(selective, data) {
+    // Need to ensure the fields exists before we check for the clean status.
+    this.ensureFields(selective, data)
+    return super.renderWrapper(selective, data)
   }
 }
