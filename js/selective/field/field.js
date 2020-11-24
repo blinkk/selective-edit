@@ -223,6 +223,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
     if (errors) {
       const zoneErrors = errors.getErrorsForZone(zoneKey)
       const errorTypes = Object.keys(zoneErrors).sort()
+      const errorLevels = new Set()
 
       if (errorTypes.length) {
         classes.push('selective__field__input--error')
@@ -230,6 +231,11 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
 
       for (const key of errorTypes) {
         classes.push(`selective__field__input--error__${key}`)
+        errorLevels.add(zoneErrors[key].level)
+      }
+
+      for (const key of errorLevels) {
+        classes.push(`selective__field__input--error__level__${key}`)
       }
     }
 
@@ -245,6 +251,7 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
       if (errors) {
         const zoneErrors = errors.getErrorsForZone(zoneKey)
         const errorTypes = Object.keys(zoneErrors).sort()
+        const errorLevels = new Set()
 
         if (errorTypes.length) {
           classes.push('selective__field__label--error')
@@ -252,6 +259,11 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
 
         for (const key of errorTypes) {
           classes.push(`selective__field__label--error__${key}`)
+          errorLevels.add(zoneErrors[key].level)
+        }
+
+        for (const key of errorLevels) {
+          classes.push(`selective__field__label--error__level__${key}`)
         }
       }
     }
@@ -350,8 +362,11 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
           errorTypes,
           (type) => type,
           (type, index) => html`
-            <div class="selective__field__error" data-error-type="${type}">
-              ${zoneErrors[type]}
+            <div
+                class="selective__field__error selective__field__error--level__${zoneErrors[type].level}"
+                data-error-level="${zoneErrors[type].level}"
+                data-error-type="${type}">
+              ${zoneErrors[type].message}
             </div>
           `)}
       </div>`
