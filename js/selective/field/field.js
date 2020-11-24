@@ -231,7 +231,10 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
 
       for (const key of errorTypes) {
         classes.push(`selective__field__input--error__${key}`)
-        errorLevels.add(zoneErrors[key].level)
+        const errors = zoneErrors[key]
+        for (const error of errors) {
+          errorLevels.add(error.level)
+        }
       }
 
       for (const key of errorLevels) {
@@ -259,7 +262,10 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
 
         for (const key of errorTypes) {
           classes.push(`selective__field__label--error__${key}`)
-          errorLevels.add(zoneErrors[key].level)
+          const errors = zoneErrors[key]
+          for (const error of errors) {
+            errorLevels.add(error.level)
+          }
         }
 
         for (const key of errorLevels) {
@@ -362,12 +368,17 @@ export default class Field extends compose(ConfigMixin, UidMixin,)(Base) {
           errorTypes,
           (type) => type,
           (type, index) => html`
-            <div
-                class="selective__field__error selective__field__error--level__${zoneErrors[type].level}"
-                data-error-level="${zoneErrors[type].level}"
-                data-error-type="${type}">
-              ${zoneErrors[type].message}
-            </div>
+            ${repeat(
+              zoneErrors[type],
+              (errorMsg) => errorMsg.id,
+              (errorMsg, index) => html`
+                <div
+                    class="selective__field__error selective__field__error--level__${errorMsg.level}"
+                    data-error-level="${errorMsg.level}"
+                    data-error-type="${errorMsg.type}">
+                  ${errorMsg.message}
+                </div>
+              `)}
           `)}
       </div>`
   }

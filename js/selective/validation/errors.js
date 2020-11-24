@@ -5,6 +5,9 @@
  * validation for different parts of the field.
  */
 
+import generateUUID from '../../utility/uuid'
+
+
 const DEFAULT_ZONE_KEY = '__default__'
 
 export default class ValidationErrors {
@@ -18,11 +21,15 @@ export default class ValidationErrors {
 
   addError(type, level, message, zoneKey) {
     const zone = this.getErrorsForZone(zoneKey)
-    zone[type] = {
+    if (!zone[type]) {
+      zone[type] = []
+    }
+    zone[type].push({
+      'id': generateUUID(),
       'level': level,
       'message': message,
       'type': type,
-    }
+    })
   }
 
   getErrorsForZone(zoneKey) {
@@ -37,9 +44,13 @@ export default class ValidationErrors {
 
   hasAnyErrors() {
     for (const zoneKey of Object.keys(this._zones)) {
-      for (const typeKey of Object.keys(this._zones[zoneKey])) {
-        if (this._zones[zoneKey][typeKey].level == 'error') {
-          return true
+      const zone = this._zones[zoneKey]
+      for (const typeKey of Object.keys(zone)) {
+        const typeErrors = this._zones[zoneKey][typeKey]
+        for (const error of typeErrors) {
+          if (error.level == 'error') {
+            return true
+          }
         }
       }
     }
@@ -60,8 +71,11 @@ export default class ValidationErrors {
   hasErrors(zoneKey) {
     const zone = this.getErrorsForZone(zoneKey)
     for (const typeKey of Object.keys(zone)) {
-      if (this._zones[zoneKey][typeKey].level == 'error') {
-        return true
+      const typeErrors = this._zones[zoneKey][typeKey]
+      for (const error of typeErrors) {
+        if (error.level == 'error') {
+          return true
+        }
       }
     }
     return false
