@@ -12,24 +12,13 @@ import {
 import ConfigMixin from '../../mixin/config'
 import UidMixin from '../../mixin/uid'
 import { autoConfig } from '../../utility/config'
-import DataType from '../../utility/dataType'
 import { findParentByClassname } from '../../utility/dom'
 import { autoDeepObject } from '../../utility/deepObject'
+import { findPreviewValue, templatePreviewValue } from '../../utility/preview'
 import AutoFields from '../autoFields'
 import Fields from '../fields/fields'
 import { SortableUI } from '../ui/sortable'
 import Field from './field'
-
-
-const COMMON_PREVIEW_KEYS = [
-  // First match wins.
-  'title', 'label', 'subtitle', 'type', 'text', 'key', 'id', 'url', 'value',
-  'doc', 'partial',
-]
-const VIDEO_EXT = [
-  // Video extensions.
-  'mp4', 'webm',
-]
 
 
 export class ListField extends Field {
@@ -109,22 +98,6 @@ export class ListField extends Field {
     }
   }
 
-  _createPreviewTemplate(url) {
-    if (url.startsWith('http') || url.startsWith('//')) {
-      for (const videoExt of VIDEO_EXT) {
-        if (url.endsWith(`.${videoExt}`)) {
-          return html`<video playsinline disableremoteplayback muted autoplay loop>
-            <source src="${url}" />
-          </video>`
-        }
-      }
-      return html`<img src="${url}" class="selective__image__fingernail">`
-    } else if (url.startsWith('/')) {
-      return html`<img src="${url}" class="selective__image__fingernail">`
-    }
-    return url
-  }
-
   _getListItemsForLocale(locale) {
     const localeKey = this.keyForLocale(locale)
 
@@ -135,29 +108,6 @@ export class ListField extends Field {
     }
 
     return [...this._listItems[localeKey]]
-  }
-
-  _guessPreviewForObject(obj) {
-    const deepObj = autoDeepObject(obj)
-    let previewValue = obj
-    for (const key of COMMON_PREVIEW_KEYS) {
-      previewValue = deepObj.get(key)
-      if (!previewValue) {
-        // Also check for translation marked keys.
-        previewValue = deepObj.get(`${key}@`)
-      }
-
-      if (previewValue) {
-        break
-      }
-    }
-
-    // If the matched preview is also an object try again.
-    if (typeof previewValue == 'object') {
-      return this._guessPreviewForObject(previewValue)
-    }
-
-    return previewValue
   }
 
   _setListItemsForLocale(locale, listItems) {
@@ -231,49 +181,13 @@ export class ListField extends Field {
   }
 
   guessPreview(item, index, defaultPreview) {
-    const defaultPreviewField = this.config.get('preview_field')
-    const previewType = this.config.get('preview_type', 'text')
-    const previewField = item.config.preview_field
-    const previewFields = item.config.preview_fields
-    let previewValue = item.fields.value
-    const dataDeepObject = autoDeepObject(previewValue)
+    const previewType = item.config.get(
+      'preview_type', this.config.get('preview_type', 'text'))
+    let previewValue = findPreviewValue(
+      this.config, item.config, item.fields.value)
 
-    let previewFieldKeys = previewField || previewFields || defaultPreviewField
-    if (previewFieldKeys) {
-      // Treat preview_type and preview_types as an array.
-      if (!DataType.isArray(previewFieldKeys)) {
-        previewFieldKeys = [previewFieldKeys]
-      }
-
-      for (const fieldKey of previewFieldKeys) {
-        previewValue = dataDeepObject.get(fieldKey)
-
-        // First matching field key becomes the value.
-        if (previewValue) {
-          break
-        }
-      }
-    }
-
-    // Do not try to show preview for complex values.
-    if (typeof previewValue == 'object') {
-      previewValue = null
-    }
-
-    if (previewType == 'image' && previewValue) {
-      return this._createPreviewTemplate(previewValue)
-    }
-
-    if (previewValue || defaultPreview) {
-      return previewValue || defaultPreview
-    }
-
-    previewValue = this._guessPreviewForObject(dataDeepObject)
-    if (previewValue) {
-      return previewValue
-    }
-
-    return `{ Item ${index + 1} }`
+    return templatePreviewValue(
+      previewValue, previewType, `{ Item ${index + 1} }`)
   }
 
   handleAddItem(evt, selective) {
