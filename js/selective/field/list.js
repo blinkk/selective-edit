@@ -12,6 +12,7 @@ import {
 import ConfigMixin from '../../mixin/config'
 import UidMixin from '../../mixin/uid'
 import { autoConfig } from '../../utility/config'
+import DataType from '../../utility/dataType'
 import { findParentByClassname } from '../../utility/dom'
 import { autoDeepObject } from '../../utility/deepObject'
 import AutoFields from '../autoFields'
@@ -233,11 +234,25 @@ export class ListField extends Field {
     const defaultPreviewField = this.config.get('preview_field')
     const previewType = this.config.get('preview_type', 'text')
     const previewField = item.config.preview_field
+    const previewFields = item.config.preview_fields
     let previewValue = item.fields.value
     const dataDeepObject = autoDeepObject(previewValue)
 
-    if (previewField || defaultPreviewField) {
-      previewValue = dataDeepObject.get(previewField || defaultPreviewField)
+    let previewFieldKeys = previewField || previewFields || defaultPreviewField
+    if (previewFieldKeys) {
+      // Treat preview_type and preview_types as an array.
+      if (!DataType.isArray(previewFieldKeys)) {
+        previewFieldKeys = [previewFieldKeys]
+      }
+
+      for (const fieldKey of previewFieldKeys) {
+        previewValue = dataDeepObject.get(fieldKey)
+
+        // First matching field key becomes the value.
+        if (previewValue) {
+          break
+        }
+      }
     }
 
     // Do not try to show preview for complex values.
