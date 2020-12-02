@@ -405,6 +405,7 @@ export class ListField extends Field {
   renderActionsFooter(selective, data, locale) {
     return html`<div class="selective__actions">
       <button
+          class="selective__button--add"
           data-locale=${locale || ''}
           @click=${(evt) => {this.handleAddItem(evt, selective)}}>
         ${this.config.add_label || 'Add'}
@@ -512,12 +513,13 @@ export class ListField extends Field {
         <div class="selective__list__item__drag"><i class="material-icons">drag_indicator</i></div>
         ${this.renderPreview(selective, data, item, index, locale)}
         <div
-            class="selective__list__item__delete"
+            class="selective__list__item__delete tooltip--left"
             data-item-uid=${item.uid}
             data-locale=${locale || ''}
             @click=${this.handleDeleteItem.bind(this)}
-            title="Delete item">
-          <i class="material-icons">delete</i>
+            aria-label="Delete item"
+            data-tip="Delete item">
+          <i class="material-icons icon icon--delete">remove_circle</i>
         </div>
       </div>`
   }
@@ -548,7 +550,10 @@ export class ListField extends Field {
             @click=${this.handleCollapseItem.bind(this)}>
           ${item.fields.label}
         </div>
-        ${item.fields.template(selective, data)}
+
+        <div class="selective__list__fields">
+          ${item.fields.template(selective, data)}
+        </div>
       </div>`
   }
 
@@ -568,7 +573,7 @@ export class ListField extends Field {
         </div>
         ${item.fields.template(selective, data)}
         <div
-            class="selective__list__item__delete"
+            class="selective__list__item__delete tooltip--left"
             data-item-uid=${item.uid}
             data-locale=${locale || ''}
             @click=${this.handleDeleteItem.bind(this)}
