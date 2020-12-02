@@ -407,7 +407,7 @@ export class ListField extends Field {
       <button
           data-locale=${locale || ''}
           @click=${(evt) => {this.handleAddItem(evt, selective)}}>
-        Add
+        ${this.config.add_label || 'Add'}
       </button>
     </div>`
   }
