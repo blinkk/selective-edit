@@ -18,7 +18,7 @@ export class GroupField extends Field {
     this.fieldType = 'group'
     this.ignoreLocalize = true
     this.fields = null
-    this.isExpanded = false
+    this.isExpanded = this.config.get('is_expanded', false)
     this._useAutoFields = false
   }
 
@@ -108,14 +108,12 @@ export class GroupField extends Field {
 
   renderLabel(selective, data) {
     return html`
-      <div
-          class="selective__field__label selective__field__label--action selective__field__label--strong"
-          @click=${this.handleExpandToggle.bind(this)}>
+      <div class="selective__field__actions__wrapper ${this.getClassesForLabel()}" @click=${this.handleExpandToggle.bind(this)}>
+        <label>${this.config.label || '(Group)'}</label>
         <div class="selective__field__actions">
           <i class="material-icons">
             ${this.isExpanded ? 'expand_less' : 'expand_more'}
           </i>
-          <label>${this.config.label || '(Group)'}</label>
         </div>
       </div>`
   }

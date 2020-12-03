@@ -403,7 +403,7 @@ export class ListField extends Field {
   }
 
   renderActionsFooter(selective, data, locale) {
-    return html`<div class="selective__actions">
+    return html`<div class="selective__field__actions">
       <button
           class="selective__button--add"
           data-locale=${locale || ''}
@@ -463,7 +463,7 @@ export class ListField extends Field {
         <i class="material-icons">unfold_less</i>
       </div>`)
 
-    return html`<div class="selective__actions">
+    return html`<div class="selective__field__actions">
       ${actions}
     </div>`
   }
