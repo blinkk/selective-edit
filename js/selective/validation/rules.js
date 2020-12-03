@@ -10,6 +10,9 @@ import ConfigMixin from '../../mixin/config'
 import DataType from '../../utility/dataType'
 
 const DEFAULT_ZONE_KEY = '__default__'
+const LEVEL_ERROR = 'error'
+const LEVEL_INFO = 'info'
+const LEVEL_WARNING = 'warning'
 
 export default class ValidationRules extends compose(ConfigMixin,)(Base) {
   constructor(config) {
@@ -87,6 +90,10 @@ export class ValidationRule extends compose(ConfigMixin,)(Base) {
 
   get message() {
     return this.config.message
+  }
+
+  get level() {
+    return this.config.level || LEVEL_ERROR
   }
 
   get type() {

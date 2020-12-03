@@ -5,6 +5,9 @@
  * validation for different parts of the field.
  */
 
+import generateUUID from '../../utility/uuid'
+
+
 const DEFAULT_ZONE_KEY = '__default__'
 
 export default class ValidationErrors {
@@ -16,9 +19,17 @@ export default class ValidationErrors {
     return this.getErrorsForZone()
   }
 
-  addError(type, message, zoneKey) {
+  addError(type, level, message, zoneKey) {
     const zone = this.getErrorsForZone(zoneKey)
-    zone[type] = message
+    if (!zone[type]) {
+      zone[type] = []
+    }
+    zone[type].push({
+      'id': generateUUID(),
+      'level': level,
+      'message': message,
+      'type': type,
+    })
   }
 
   getErrorsForZone(zoneKey) {
@@ -33,6 +44,22 @@ export default class ValidationErrors {
 
   hasAnyErrors() {
     for (const zoneKey of Object.keys(this._zones)) {
+      const zone = this._zones[zoneKey]
+      for (const typeKey of Object.keys(zone)) {
+        const typeErrors = this._zones[zoneKey][typeKey]
+        for (const error of typeErrors) {
+          if (error.level == 'error') {
+            return true
+          }
+        }
+      }
+    }
+
+    return false
+  }
+
+  hasAnyMessages() {
+    for (const zoneKey of Object.keys(this._zones)) {
       if (Object.keys(this._zones[zoneKey]).length > 0) {
         return true
       }
@@ -42,6 +69,19 @@ export default class ValidationErrors {
   }
 
   hasErrors(zoneKey) {
+    const zone = this.getErrorsForZone(zoneKey)
+    for (const typeKey of Object.keys(zone)) {
+      const typeErrors = this._zones[zoneKey][typeKey]
+      for (const error of typeErrors) {
+        if (error.level == 'error') {
+          return true
+        }
+      }
+    }
+    return false
+  }
+
+  hasMessages(zoneKey) {
     const zone = this.getErrorsForZone(zoneKey)
     return Object.keys(zone).length > 0
   }
@@ -63,7 +103,7 @@ export default class ValidationErrors {
       // based on what went wrong with the validation.
       const result = rule.validate(value, locale, isDefaultLocale)
       if (result) {
-        this.addError(rule.type, result, zoneKey)
+        this.addError(rule.type, rule.level, result, zoneKey)
       }
     }
   }
