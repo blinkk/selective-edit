@@ -110,11 +110,13 @@ export class LengthValidationRule extends ValidationRule {
       return null
     }
 
-    // Do not count whitespace.
-    value = value.trim()
-
     const configMax = this.config.max
     const configMin = this.config.min
+
+    if (!DataType.isArray(value)) {
+      // Do not count whitespace.
+      value = value.trim()
+    }
 
     if (configMin && value.length < configMin.value) {
       return configMin.message || this.message
@@ -226,22 +228,31 @@ export class RangeValidationRule extends ValidationRule {
       return null
     }
 
-    // Do not count whitespace.
-    value = parseFloat(value)
-
-    if (isNaN(value)) {
-      return this.message
-    }
-
     const configMax = this.config.max
     const configMin = this.config.min
 
-    if (configMin && value < configMin.value) {
-      return configMin.message || this.message
-    }
+    if (DataType.isArray(value)) {
+      if (configMin && value.length < configMin.value) {
+        return configMin.message || this.message
+      }
 
-    if (configMax && value > configMax.value) {
-      return configMax.message || this.message
+      if (configMax && value.length > configMax.value) {
+        return configMax.message || this.message
+      }
+    } else {
+      value = parseFloat(value)
+
+      if (isNaN(value)) {
+        return this.message
+      }
+
+      if (configMin && value < configMin.value) {
+        return configMin.message || this.message
+      }
+
+      if (configMax && value > configMax.value) {
+        return configMax.message || this.message
+      }
     }
 
     return null
