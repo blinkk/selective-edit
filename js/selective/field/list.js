@@ -403,6 +403,24 @@ export class ListField extends Field {
   }
 
   renderActionsFooter(selective, data, locale) {
+    const value = this.getValueForLocale(locale) || []
+
+    // Check if validation rules allow for adding more items.
+    const rules = this._validationRules.getRulesForZone()
+    const isDefaultLocale = !locale || locale == this.defaultLocale
+
+    let allowMore = true
+    for (const rule of rules) {
+      if (!rule.allowMore(value, locale, isDefaultLocale)) {
+        allowMore = false
+        break
+      }
+    }
+
+    if (!allowMore) {
+      return ''
+    }
+
     return html`<div class="selective__field__actions">
       <button
           class="selective__button--add"
