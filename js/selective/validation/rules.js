@@ -100,6 +100,12 @@ export class ValidationRule extends compose(ConfigMixin,)(Base) {
     return this.config.type
   }
 
+  // Validation rule can control whether the field allows more to be added.
+  allowMore(value, locale, isDefaultLocale) {
+    // Defaults to true to allow more.
+    return true
+  }
+
   validate(value, locale, isDefaultLocale) {
     console.error('Validation check not defined.');
   }
@@ -107,8 +113,34 @@ export class ValidationRule extends compose(ConfigMixin,)(Base) {
 
 
 export class LengthValidationRule extends ValidationRule {
+  _cleanValue(value) {
+    if (!DataType.isArray(value)) {
+      // Do not count whitespace.
+      value = value.trim()
+    }
+    return value
+  }
+
   get message() {
     return super.message || 'Value needs to have the correct length.'
+  }
+
+  allowMore(value, locale, isDefaultLocale) {
+    // Allow for empty fields.
+    if (!value) {
+      return true
+    }
+
+    value = this._cleanValue(value)
+
+    const configMax = this.config.max
+
+    // Do not allow more to be added when at max length.
+    if (configMax && value.length >= configMax.value) {
+      return false
+    }
+
+    return true
   }
 
   validate(value, locale, isDefaultLocale) {
@@ -117,13 +149,10 @@ export class LengthValidationRule extends ValidationRule {
       return null
     }
 
+    value = this._cleanValue(value)
+
     const configMax = this.config.max
     const configMin = this.config.min
-
-    if (!DataType.isArray(value)) {
-      // Do not count whitespace.
-      value = value.trim()
-    }
 
     if (configMin && value.length < configMin.value) {
       return configMin.message || this.message
@@ -225,6 +254,33 @@ export class PatternValidationRule extends ValidationRule {
 
 
 export class RangeValidationRule extends ValidationRule {
+  allowMore(value, locale, isDefaultLocale) {
+    // Allow for empty fields.
+    if (!value) {
+      return true
+    }
+
+    const configMax = this.config.max
+
+    if (DataType.isArray(value)) {
+      if (configMax && value.length >= configMax.value) {
+        return false
+      }
+    } else {
+      value = parseFloat(value)
+
+      if (isNaN(value)) {
+        return true
+      }
+
+      if (configMax && value >= configMax.value) {
+        return false
+      }
+    }
+
+    return true
+  }
+
   get message() {
     return super.message || 'Value needs to be a number in range.'
   }
