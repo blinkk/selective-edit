@@ -1,2 +1,5 @@
-node_modules/
+.DS_Store
+.npmrc
 dist/
+docs/
+node_modules/
