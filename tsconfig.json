@@ -1,11 +1,11 @@
 {
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
-    "esModuleInterop": true,
-    "rootDir": ".",
+    "lib": ["es2017", "dom", "dom.iterable"],
+    "moduleResolution": "node",
     "outDir": "dist",
-    "resolveJsonModule": true,
-    "lib": ["dom"],
+    "rootDir": ".",
+    "target": "es2017",
   },
   "include": [
     "src/**/*.ts",
@@ -15,7 +15,7 @@
     "excludeProtected": true,
     "excludeExternals": true,
     "src": [
-      "./src/**/*.ts"
+      "./src/**/*.ts",
     ],
     "exclude": [
       "./src/**/*.test.ts",

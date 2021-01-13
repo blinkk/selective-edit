@@ -2,8 +2,6 @@
  * Selective structure content editor.
  */
 
-import { SelectiveEditor } from "./editor"
+import {SelectiveEditor} from './selective/editor';
 
-export {
-  SelectiveEditor,
-}
+export {SelectiveEditor};
