@@ -1,7 +1,7 @@
 import {Listeners} from './listeners';
 import test from 'ava';
 
-test('able to trigger a listener.', async t => {
+test('able to trigger a listener.', t => {
   t.plan(1);
 
   const listeners = new Listeners();
