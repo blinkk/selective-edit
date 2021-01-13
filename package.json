@@ -34,7 +34,7 @@
     "clean": "gts clean",
     "compile": "tsc && npx gulp compile-sass",
     "copy": "mkdir -p dist/src/static; cp src/static/* dist/src/static",
-    "dev": "concurrently \"tsc --watch\" \"npx gulp watch-sass\"",
+    "dev": "concurrently \"tsc --watch\" \"npx gulp watch-sass\" \"npx ava --watch\"",
     "docs": "typedoc --out docs src/",
     "fix": "node ./node_modules/eslint/bin/eslint --fix src/**/*.ts",
     "test": "ava"
