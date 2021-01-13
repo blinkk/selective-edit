@@ -1,0 +1,211 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@amagaki/selective-edit</title>
+	<meta name="description" content="Documentation for @amagaki/selective-edit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@amagaki/selective-edit</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>@amagaki/selective-edit</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#selective-editor" id="selective-editor" style="color: inherit; text-decoration: none;">
+					<h1>Selective Editor</h1>
+				</a>
+				<p>Experimental.</p>
+				<p>Selective editor for providing a rich UI for editing structured data.</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>The selective editor is broken up into two parts: the core editor and the defaults.</p>
+				<a href="#core-usage" id="core-usage" style="color: inherit; text-decoration: none;">
+					<h3>Core Usage</h3>
+				</a>
+				<p>If you are using the editor and want to control more of the functionality use
+					the core editor and styling. This doesn&#39;t use the dependencies on the
+				Material Design Components and keeps things slimmed down in size.</p>
+				<p>SASS:</p>
+				<pre><code class="language-sass">@import &quot;selective-edit/sass/selective-core&quot;</code></pre>
+				<p>JS:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> Selective <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit&#x27;</span>
+
+editor = <span class="hljs-keyword">new</span> Selective(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.editor&#x27;</span>), {})
+
+<span class="hljs-comment">// Need to add your own field types...</span>
+
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Once the placeholder field type is working again it will not need to</span>
+<span class="hljs-comment">// have the config set after the field types are added.</span>
+editor.setConfig(...)
+
+editor.data = {
+  <span class="hljs-comment">// ...</span>
+}</code></pre>
+				<a href="#default-usage" id="default-usage" style="color: inherit; text-decoration: none;">
+					<h3>Default Usage</h3>
+				</a>
+				<p>When you want to use the default styling that the example page uses you can use
+				the selective defaults that include the dependencies on the Material Design Components.</p>
+				<pre><code class="language-sass">@import &quot;selective-edit/sass/selective&quot;</code></pre>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> Selective <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit&#x27;</span>
+<span class="hljs-keyword">import</span> { defaultFieldTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit/js/selective-defaults&#x27;</span>
+
+editor = <span class="hljs-keyword">new</span> Selective(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.editor&#x27;</span>))
+
+editor.addFieldTypes(defaultFieldTypes)
+
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Once the placeholder field type is working again it will not need to</span>
+<span class="hljs-comment">// have the config set after the field types are added.</span>
+editor.setConfig(...)
+
+editor.data = {
+  <span class="hljs-comment">// ...</span>
+}</code></pre>
+				<a href="#field-types" id="field-types" style="color: inherit; text-decoration: none;">
+					<h2>Field Types</h2>
+				</a>
+				<p>The selective editor comes with a few default field types to help make thing easier
+					to get started but is made to be customized with field types specific to your
+				usage.</p>
+				<p>Selective edit uses the <code>html-lit</code> package to handle the templating of
+				fields and UI rendering.</p>
+				<p>For example, adding a <code>number</code> field type:</p>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> Selective <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit&#x27;</span>
+<span class="hljs-keyword">import</span> { Field } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit&#x27;</span>
+
+editor = <span class="hljs-keyword">new</span> Selective(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.editor&#x27;</span>))
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NumberField</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Field</span> </span>{
+  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">config</span>)</span> {
+    <span class="hljs-built_in">super</span>(config)
+    <span class="hljs-built_in">this</span>.fieldType = <span class="hljs-string">&#x27;number&#x27;</span>
+
+    <span class="hljs-built_in">this</span>.template = <span class="hljs-function">(<span class="hljs-params">editor, field, data</span>) =&gt;</span> html`<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;selective__field selective__field__</span></span></span><span class="hljs-subst">${field.fieldType}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> <span class="hljs-attr">data-field-type</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-subst">${field.fieldType}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-subst">${field.getUid()}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span>&gt;</span></span><span class="hljs-subst">${field.label}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-subst">${field.getUid()}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-subst">${field.valueFromData(data)}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> @<span class="hljs-attr">input</span>=</span></span><span class="hljs-subst">${field.handleInput.bind(field)}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>`</span>
+  }
+}
+
+editor.addFieldType(<span class="hljs-string">&#x27;number&#x27;</span>, NumberField)
+
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Once the placeholder field type is working again it will not need to</span>
+<span class="hljs-comment">// have the config set after the field types are added.</span>
+editor.setConfig({
+  <span class="hljs-attr">fields</span>: [
+    {
+      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;number&quot;</span>,
+      <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;counter&quot;</span>,
+      <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;Numbers!&quot;</span>
+    }
+  ]
+})
+
+editor.data = {
+  <span class="hljs-attr">counter</span>: <span class="hljs-number">100</span>
+}</code></pre>
+				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
+					<h2>Development</h2>
+				</a>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h3>Install</h3>
+				</a>
+				<pre><code class="language-sh">yarn install</code></pre>
+				<a href="#dev-server" id="dev-server" style="color: inherit; text-decoration: none;">
+					<h3>Dev Server</h3>
+				</a>
+				<pre><code class="language-sh">yarn run watch</code></pre>
+				<p>Then visit <a href="http://localhost:8888/">localhost:8888</a> to view example page.</p>
+				<a href="#build-assets" id="build-assets" style="color: inherit; text-decoration: none;">
+					<h3>Build Assets</h3>
+				</a>
+				<pre><code class="language-sh">yarn run build</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/_editor_.html">&quot;editor&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
