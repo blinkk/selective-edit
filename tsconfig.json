@@ -14,8 +14,8 @@
   "typedocOptions": {
     "excludeProtected": true,
     "excludeExternals": true,
-    "src": [
-      "./src/**/*.ts",
+    "entryPoints": [
+      "./src/index.ts",
     ],
     "exclude": [
       "./src/**/*.test.ts",
