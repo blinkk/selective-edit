@@ -67,6 +67,15 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Class manager allowing for dynamically changing which class definitions are
+							used. Allows for defining a default set of classes which can later be
+						overwritten without special changes to the code.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -116,7 +125,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/7785bd8/src/utility/classes.ts#L24">utility/classes.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/294149a/src/utility/classes.ts#L29">utility/classes.ts:29</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -138,7 +147,7 @@
 					<div class="tsd-signature tsd-kind-icon">Default<wbr>Cls<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_utility_classes_.classconstructor.html" class="tsd-signature-type">ClassConstructor</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/7785bd8/src/utility/classes.ts#L23">utility/classes.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/294149a/src/utility/classes.ts#L28">utility/classes.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -148,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">classes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_utility_classes_.classconstructor.html" class="tsd-signature-type">ClassConstructor</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/7785bd8/src/utility/classes.ts#L24">utility/classes.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/294149a/src/utility/classes.ts#L29">utility/classes.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -165,13 +174,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/7785bd8/src/utility/classes.ts#L31">utility/classes.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/294149a/src/utility/classes.ts#L41">utility/classes.ts:41</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Retrieve the class definition based on the key.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Key used to identify the purpose for the class.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_utility_classes_.classconstructor.html" class="tsd-signature-type">ClassConstructor</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
@@ -188,16 +205,29 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/7785bd8/src/utility/classes.ts#L40">utility/classes.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/294149a/src/utility/classes.ts#L59">utility/classes.ts:59</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a new instance of a registered class if available.</p>
+								</div>
+								<p>Falls back to the default class if it is defined or returns null if no
+								matching class definition is found.</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Key used to identify the purpose for the class.</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Arguments to be passed onto the class constructor.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_utility_classes_.classcomponent.html" class="tsd-signature-type">ClassComponent</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h4>
@@ -214,16 +244,28 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/7785bd8/src/utility/classes.ts#L54">utility/classes.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/294149a/src/utility/classes.ts#L80">utility/classes.ts:80</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register a new class that will be used when creating a new class
+									based on the provided key.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Key used to identify the purpose for the class.</p>
+									</div>
 								</li>
 								<li>
 									<h5>Cls: <a href="../interfaces/_utility_classes_.classconstructor.html" class="tsd-signature-type">ClassConstructor</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Class definition to use for the given key.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -240,13 +282,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/7785bd8/src/utility/classes.ts#L58">utility/classes.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/294149a/src/utility/classes.ts#L89">utility/classes.ts:89</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register multiple classes as a time.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>classes: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_utility_classes_.classconstructor.html" class="tsd-signature-type">ClassConstructor</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A mapping of keys to class definitions.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -266,6 +316,18 @@
 					</li>
 					<li class="current tsd-kind-module">
 						<a href="../modules/_utility_classes_.html">&quot;utility/classes&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_utility_compose_.html">&quot;utility/compose&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_utility_config_.html">&quot;utility/config&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_utility_datatype_.html">&quot;utility/data<wbr>Type&quot;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/_utility_defer_.html">&quot;utility/defer&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -321,6 +383,9 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
