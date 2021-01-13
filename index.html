@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for @amagaki/selective-edit">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -38,8 +39,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -49,12 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1>@amagaki/selective-edit</h1>
+			<h1>Project @amagaki/selective-edit</h1>
 		</div>
 	</div>
 </header>
@@ -78,41 +72,45 @@
 					the core editor and styling. This doesn&#39;t use the dependencies on the
 				Material Design Components and keeps things slimmed down in size.</p>
 				<p>SASS:</p>
-				<pre><code class="language-sass">@import &quot;selective-edit/sass/selective-core&quot;</code></pre>
+				<pre><code class="language-sass"><span style="color: #AF00DB">@import</span><span style="color: #0000FF"> &quot;selective-edit/sass/selective-core&quot;</span>
+</code></pre>
 				<p>JS:</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> Selective <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit&#x27;</span>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Selective</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit&#039;</span>
 
-editor = <span class="hljs-keyword">new</span> Selective(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.editor&#x27;</span>), {})
+<span style="color: #001080">editor</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Selective</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;.editor&#039;</span><span style="color: #000000">), {})</span>
 
-<span class="hljs-comment">// Need to add your own field types...</span>
+<span style="color: #008000">// Need to add your own field types...</span>
 
-<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Once the placeholder field type is working again it will not need to</span>
-<span class="hljs-comment">// have the config set after the field types are added.</span>
-editor.setConfig(...)
+<span style="color: #008000">// TODO: Once the placeholder field type is working again it will not need to</span>
+<span style="color: #008000">// have the config set after the field types are added.</span>
+<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">setConfig</span><span style="color: #000000">(...)</span>
 
-editor.data = {
-  <span class="hljs-comment">// ...</span>
-}</code></pre>
+<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// ...</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#default-usage" id="default-usage" style="color: inherit; text-decoration: none;">
 					<h3>Default Usage</h3>
 				</a>
 				<p>When you want to use the default styling that the example page uses you can use
 				the selective defaults that include the dependencies on the Material Design Components.</p>
-				<pre><code class="language-sass">@import &quot;selective-edit/sass/selective&quot;</code></pre>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> Selective <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit&#x27;</span>
-<span class="hljs-keyword">import</span> { defaultFieldTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit/js/selective-defaults&#x27;</span>
+				<pre><code class="language-sass"><span style="color: #AF00DB">@import</span><span style="color: #0000FF"> &quot;selective-edit/sass/selective&quot;</span>
+</code></pre>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Selective</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">defaultFieldTypes</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit/js/selective-defaults&#039;</span>
 
-editor = <span class="hljs-keyword">new</span> Selective(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.editor&#x27;</span>))
+<span style="color: #001080">editor</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Selective</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;.editor&#039;</span><span style="color: #000000">))</span>
 
-editor.addFieldTypes(defaultFieldTypes)
+<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">addFieldTypes</span><span style="color: #000000">(</span><span style="color: #001080">defaultFieldTypes</span><span style="color: #000000">)</span>
 
-<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Once the placeholder field type is working again it will not need to</span>
-<span class="hljs-comment">// have the config set after the field types are added.</span>
-editor.setConfig(...)
+<span style="color: #008000">// TODO: Once the placeholder field type is working again it will not need to</span>
+<span style="color: #008000">// have the config set after the field types are added.</span>
+<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">setConfig</span><span style="color: #000000">(...)</span>
 
-editor.data = {
-  <span class="hljs-comment">// ...</span>
-}</code></pre>
+<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// ...</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#field-types" id="field-types" style="color: inherit; text-decoration: none;">
 					<h2>Field Types</h2>
 				</a>
@@ -122,104 +120,75 @@ editor.data = {
 				<p>Selective edit uses the <code>html-lit</code> package to handle the templating of
 				fields and UI rendering.</p>
 				<p>For example, adding a <code>number</code> field type:</p>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> Selective <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit&#x27;</span>
-<span class="hljs-keyword">import</span> { Field } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;selective-edit&#x27;</span>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Selective</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Field</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit&#039;</span>
 
-editor = <span class="hljs-keyword">new</span> Selective(<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;.editor&#x27;</span>))
+<span style="color: #001080">editor</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Selective</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;.editor&#039;</span><span style="color: #000000">))</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NumberField</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Field</span> </span>{
-  <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">config</span>)</span> {
-    <span class="hljs-built_in">super</span>(config)
-    <span class="hljs-built_in">this</span>.fieldType = <span class="hljs-string">&#x27;number&#x27;</span>
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">NumberField</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Field</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">constructor</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">super</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">fieldType</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;number&#039;</span>
 
-    <span class="hljs-built_in">this</span>.template = <span class="hljs-function">(<span class="hljs-params">editor, field, data</span>) =&gt;</span> html`<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;selective__field selective__field__</span></span></span><span class="hljs-subst">${field.fieldType}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> <span class="hljs-attr">data-field-type</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-subst">${field.fieldType}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-subst">${field.getUid()}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span>&gt;</span></span><span class="hljs-subst">${field.label}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-subst">${field.getUid()}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;</span></span></span><span class="hljs-subst">${field.valueFromData(data)}</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">&quot;</span> @<span class="hljs-attr">input</span>=</span></span><span class="hljs-subst">${field.handleInput.bind(field)}</span><span class="xml"><span class="hljs-tag">&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>`</span>
-  }
-}
+<span style="color: #000000">    </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">template</span><span style="color: #000000"> = (</span><span style="color: #001080">editor</span><span style="color: #000000">, </span><span style="color: #001080">field</span><span style="color: #000000">, </span><span style="color: #001080">data</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">html</span><span style="color: #A31515">`&lt;div class=&quot;selective__field selective__field__</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #001080">fieldType</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot; data-field-type=&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #001080">fieldType</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">      &lt;label for=&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #795E26">getUid</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #001080">label</span><span style="color: #0000FF">}</span><span style="color: #A31515">&lt;/label&gt;</span>
+<span style="color: #A31515">      &lt;input type=&quot;number&quot; id=&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #795E26">getUid</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot; value=&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #795E26">valueFromData</span><span style="color: #000000FF">(</span><span style="color: #001080">data</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot; @input=</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #001080">handleInput</span><span style="color: #000000FF">.</span><span style="color: #795E26">bind</span><span style="color: #000000FF">(</span><span style="color: #001080">field</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">&gt;</span>
+<span style="color: #A31515">    &lt;/div&gt;`</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
 
-editor.addFieldType(<span class="hljs-string">&#x27;number&#x27;</span>, NumberField)
+<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">addFieldType</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;number&#039;</span><span style="color: #000000">, </span><span style="color: #001080">NumberField</span><span style="color: #000000">)</span>
 
-<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Once the placeholder field type is working again it will not need to</span>
-<span class="hljs-comment">// have the config set after the field types are added.</span>
-editor.setConfig({
-  <span class="hljs-attr">fields</span>: [
-    {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;number&quot;</span>,
-      <span class="hljs-string">&quot;key&quot;</span>: <span class="hljs-string">&quot;counter&quot;</span>,
-      <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;Numbers!&quot;</span>
-    }
-  ]
-})
+<span style="color: #008000">// TODO: Once the placeholder field type is working again it will not need to</span>
+<span style="color: #008000">// have the config set after the field types are added.</span>
+<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">setConfig</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">fields:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;type&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;number&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;key&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;counter&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Numbers!&quot;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  ]</span>
+<span style="color: #000000">})</span>
 
-editor.data = {
-  <span class="hljs-attr">counter</span>: <span class="hljs-number">100</span>
-}</code></pre>
+<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">counter:</span><span style="color: #000000"> </span><span style="color: #098658">100</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
 					<h2>Development</h2>
 				</a>
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h3>Install</h3>
 				</a>
-				<pre><code class="language-sh">yarn install</code></pre>
+				<pre><code class="language-sh"><span style="color: #000000">yarn install</span>
+</code></pre>
 				<a href="#dev-server" id="dev-server" style="color: inherit; text-decoration: none;">
 					<h3>Dev Server</h3>
 				</a>
-				<pre><code class="language-sh">yarn run watch</code></pre>
+				<pre><code class="language-sh"><span style="color: #000000">yarn run watch</span>
+</code></pre>
 				<p>Then visit <a href="http://localhost:8888/">localhost:8888</a> to view example page.</p>
 				<a href="#build-assets" id="build-assets" style="color: inherit; text-decoration: none;">
 					<h3>Build Assets</h3>
 				</a>
-				<pre><code class="language-sh">yarn run build</code></pre>
+				<pre><code class="language-sh"><span style="color: #000000">yarn run build</span>
+</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_editor_.html">&quot;editor&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_example_.html">&quot;example&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_index_.html">&quot;index&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_classes_.html">&quot;utility/classes&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_compose_.html">&quot;utility/compose&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_config_.html">&quot;utility/config&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_datatype_.html">&quot;utility/data<wbr>Type&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_defer_.html">&quot;utility/defer&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_dom_.html">&quot;utility/dom&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_listeners_.html">&quot;utility/listeners&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_throttle_.html">&quot;utility/throttle&quot;</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/_utility_uuid_.html">&quot;utility/uuid&quot;</a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/selectiveeditor.html" class="tsd-kind-icon">Selective<wbr>Editor</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -230,13 +199,7 @@ editor.data = {
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 			</ul>
 		</div>
 	</div>
