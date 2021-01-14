@@ -1,11 +1,9 @@
 const path = require('path');
 
-const entry = {
-  example: './src/example.ts',
-};
-
 module.exports = {
-  entry: entry,
+  entry: {
+    example: './src/example.ts',
+  },
   mode: 'development',
   module: {
     rules: [
