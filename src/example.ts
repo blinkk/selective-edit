@@ -1,14 +1,11 @@
-import {TemplateResult, html, render} from 'lit-html';
+import {SelectiveEditor} from './index';
 
-const container = document.querySelector('.container');
-const template = (data: Record<string, any>): TemplateResult =>
-  html`${data.foo}`;
+const configEl = document.querySelector('#config') as HTMLTextAreaElement;
+const fieldsEl = document.querySelector('#fields') as HTMLElement;
 
-if (container) {
-  render(
-    template({
-      foo: 'bar',
-    }),
-    container
-  );
-}
+/**
+ * Basic example of using -selective editor.
+ */
+
+const editorConfig = JSON.parse(configEl.value || '') as Record<string, any>;
+const exampleSelective = new SelectiveEditor(fieldsEl, editorConfig);
