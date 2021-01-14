@@ -1,13 +1,13 @@
 import {Config, autoConfig} from '../utility/config';
+import {FieldComponent, FieldConstructor} from './field';
 import {Fields, FieldsComponent, FieldsConstructor} from './fields';
+import {RuleComponent, RuleConstructor} from './rule';
 import {TemplateResult, html, render} from 'lit-html';
 import {Base} from '../mixins';
 import {ClassManager} from '../utility/classes';
 import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
 import {DeepObject} from '../utility/deepObject';
-import {FieldComponent, FieldConstructor} from './field';
-import {RuleComponent, RuleConstructor} from './rule';
 import {Template} from './template';
 import {Types} from './types';
 

@@ -1,8 +1,7 @@
 {
   "extends": "./node_modules/gts/",
   "env": {
-    "browser": true,
-    "node": true
+    "browser": true
   },
   "plugins": [
     "sort-class-members"
