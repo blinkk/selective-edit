@@ -34,9 +34,10 @@
     "clean": "gts clean",
     "compile": "tsc && npx gulp compile && webpack --config webpack.prod.js",
     "copy": "mkdir -p dist/src/static; cp src/static/* dist/src/static",
-    "dev": "concurrently \"npx ava --watch\" \"tsc --watch\" \"npx gulp watch\" \"webpack serve --config webpack.dev.js\"",
+    "dev": "concurrently \"npx ava --watch\" \"tsc --watch\" \"npx gulp watch\"",
     "docs": "typedoc",
     "fix": "node ./node_modules/eslint/bin/eslint --fix src/**/*.ts",
+    "serve": "webpack serve --config webpack.dev.js",
     "test": "ava"
   },
   "ava": {
