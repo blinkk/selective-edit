@@ -1,7 +1,6 @@
 import {Config, autoConfig} from '../utility/config';
 import {Fields, FieldsComponent, FieldsConstructor} from './fields';
 import {TemplateResult, html, render} from 'lit-html';
-
 import {Base} from '../mixins';
 import {ClassManager} from '../utility/classes';
 import {ConfigMixin} from '../mixins/config';
@@ -24,8 +23,10 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
     this.container = container;
     this.config = autoConfig(config);
     this.types = {
-      field: new ClassManager<FieldConstructor>(),
-      fields: (Fields as unknown) as FieldsConstructor,
+      fields: new ClassManager<FieldConstructor>(),
+      globals: {
+        fields: (Fields as unknown) as FieldsConstructor,
+      },
       rules: new ClassManager<RuleConstructor>(),
     };
 
@@ -35,7 +36,19 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
   }
 
   addFieldType(key: string, FieldCls: FieldConstructor) {
-    this.types.field.registerClass(key, FieldCls);
+    this.types.fields.registerClass(key, FieldCls);
+  }
+
+  addFieldTypes(fieldTypes: Record<string, FieldConstructor>) {
+    this.types.fields.registerClasses(fieldTypes);
+  }
+
+  addRuleType(key: string, RuleCls: RuleConstructor) {
+    this.types.rules.registerClass(key, RuleCls);
+  }
+
+  addRuleTypes(ruleTypes: Record<string, RuleConstructor>) {
+    this.types.rules.registerClasses(ruleTypes);
   }
 
   render(): void {

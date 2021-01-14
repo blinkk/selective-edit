@@ -16,18 +16,13 @@ export interface FieldsComponent {
 export type FieldsConstructor = (types: Types) => FieldsComponent;
 
 export class Fields implements FieldsComponent {
-  template: Template;
   types: Types;
 
   constructor(types: Types) {
     this.types = types;
-    this.template = defaultTemplate;
   }
-}
 
-function defaultTemplate(
-  editor: SelectiveEditor,
-  data: DeepObject
-): TemplateResult {
-  return html`<div class="selective__fields">foo</div>`;
+  template(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    return html`<div class="selective__fields">foo</div>`;
+  }
 }
