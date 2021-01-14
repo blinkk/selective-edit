@@ -15,20 +15,18 @@ export interface ClassComponent {
 /**
  * Generic class constructor for the classes manager.
  */
-export interface ClassConstructor {
-  new (...args: any): any;
-}
+export type ClassConstructor = new (...args: any[]) => any;
 
 /**
  * Class manager allowing for dynamically changing which class definitions are
  * used. Allows for defining a default set of classes which can later be
  * overwritten without special changes to the code.
  */
-export class ClassManager {
-  DefaultCls?: ClassConstructor;
-  classes: Record<string, ClassConstructor>;
+export class ClassManager<T> {
+  DefaultCls?: T;
+  classes: Record<string, T>;
 
-  constructor(DefaultCls?: ClassConstructor) {
+  constructor(DefaultCls?: T) {
     this.DefaultCls = DefaultCls;
     this.classes = {};
   }
@@ -38,7 +36,7 @@ export class ClassManager {
    *
    * @param key Key used to identify the purpose for the class.
    */
-  getByKey(key: string): ClassConstructor | null {
+  getByKey(key: string): T | null {
     if (this.classes[key]) {
       return this.classes[key];
     }
@@ -56,15 +54,15 @@ export class ClassManager {
    * @param args Arguments to be passed onto the class constructor.
    */
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  newFromKey(key: string, ...args: any): ClassComponent | null {
+  newFromKey(key: string, ...args: any): any {
     // Create based on the provided key if defined.
     if (this.classes[key]) {
-      return new this.classes[key](...args);
+      return new ((this.classes[key] as unknown) as ClassConstructor)(...args);
     }
 
     // Fall back to the default class when defined.
     if (this.DefaultCls) {
-      return new this.DefaultCls(...args);
+      return new ((this.DefaultCls as unknown) as ClassConstructor)(...args);
     }
 
     return null;
@@ -77,7 +75,7 @@ export class ClassManager {
    * @param key Key used to identify the purpose for the class.
    * @param Cls Class definition to use for the given key.
    */
-  registerClass(key: string, Cls: ClassConstructor): void {
+  registerClass(key: string, Cls: T): void {
     this.classes[key] = Cls;
   }
 
@@ -86,7 +84,7 @@ export class ClassManager {
    *
    * @param classes A mapping of keys to class definitions.
    */
-  registerClasses(classes: Record<string, ClassConstructor>): void {
+  registerClasses(classes: Record<string, T>): void {
     for (const key of Object.keys(classes)) {
       this.registerClass(key, classes[key]);
     }

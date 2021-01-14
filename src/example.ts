@@ -8,4 +8,4 @@ const fieldsEl = document.querySelector('#fields') as HTMLElement;
  */
 
 const editorConfig = JSON.parse(configEl.value || '') as Record<string, any>;
-const exampleSelective = new SelectiveEditor(fieldsEl, editorConfig);
+const exampleSelective = new SelectiveEditor(editorConfig, fieldsEl);
