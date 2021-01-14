@@ -6,8 +6,8 @@ import {ClassManager} from '../utility/classes';
 import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
 import {DeepObject} from '../utility/deepObject';
-import {FieldConstructor} from './field';
-import {RuleConstructor} from './rule';
+import {FieldComponent, FieldConstructor} from './field';
+import {RuleComponent, RuleConstructor} from './rule';
 import {Template} from './template';
 import {Types} from './types';
 
@@ -23,16 +23,16 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
     this.container = container;
     this.config = autoConfig(config);
     this.types = {
-      fields: new ClassManager<FieldConstructor>(),
+      fields: new ClassManager<FieldConstructor, FieldComponent>(),
       globals: {
         fields: (Fields as unknown) as FieldsConstructor,
       },
-      rules: new ClassManager<RuleConstructor>(),
+      rules: new ClassManager<RuleConstructor, RuleComponent>(),
     };
 
     this.isLocalized = false;
     this.template = defaultTemplate;
-    this.fields = new Fields(this.types);
+    this.fields = new Fields(this.types, {} as Config);
   }
 
   addFieldType(key: string, FieldCls: FieldConstructor) {

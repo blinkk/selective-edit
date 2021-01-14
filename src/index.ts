@@ -1,7 +1,6 @@
 /**
- * Selective structure content editor.
+ * Selective structured data editor.
+ *
+ * Exports for using selective in other projects.
  */
-
-import {SelectiveEditor} from './selective/editor';
-
-export {SelectiveEditor};
+export {SelectiveEditor} from './selective/editor';

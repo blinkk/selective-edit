@@ -1,14 +1,14 @@
+import {FieldComponent, FieldConstructor} from './field';
+import {RuleComponent, RuleConstructor} from './rule';
 import {ClassManager} from '../utility/classes';
-import {FieldConstructor} from './field';
 import {FieldsConstructor} from './fields';
-import {RuleConstructor} from './rule';
 
 export interface GlobalTypes {
   fields: FieldsConstructor;
 }
 
 export interface Types {
-  fields: ClassManager<FieldConstructor>;
+  fields: ClassManager<FieldConstructor, FieldComponent>;
   globals: GlobalTypes;
-  rules: ClassManager<RuleConstructor>;
+  rules: ClassManager<RuleConstructor, RuleComponent>;
 }

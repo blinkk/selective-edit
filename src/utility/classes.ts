@@ -22,7 +22,7 @@ export type ClassConstructor = new (...args: any[]) => any;
  * used. Allows for defining a default set of classes which can later be
  * overwritten without special changes to the code.
  */
-export class ClassManager<T> {
+export class ClassManager<T, R> {
   DefaultCls?: T;
   classes: Record<string, T>;
 
@@ -54,15 +54,19 @@ export class ClassManager<T> {
    * @param args Arguments to be passed onto the class constructor.
    */
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  newFromKey(key: string, ...args: any): any {
+  newFromKey(key: string, ...args: any): R | null {
     // Create based on the provided key if defined.
     if (this.classes[key]) {
-      return new ((this.classes[key] as unknown) as ClassConstructor)(...args);
+      return new ((this.classes[key] as unknown) as ClassConstructor)(
+        ...args
+      ) as R;
     }
 
     // Fall back to the default class when defined.
     if (this.DefaultCls) {
-      return new ((this.DefaultCls as unknown) as ClassConstructor)(...args);
+      return new ((this.DefaultCls as unknown) as ClassConstructor)(
+        ...args
+      ) as R;
     }
 
     return null;
