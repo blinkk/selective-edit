@@ -17,7 +17,7 @@
     "excludeProtected": true,
     "excludeExternals": true,
     "entryPoints": [
-      "./src/index.ts",
+      "./src/",
     ],
     "exclude": [
       "./src/**/*.test.ts",
