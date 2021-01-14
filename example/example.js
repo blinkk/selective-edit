@@ -7,5 +7,5 @@ const fieldsEl = document.querySelector('#fields');
  * Basic example of using -selective editor.
  */
 const editorConfig = JSON.parse(configEl.value || '');
-const exampleSelective = new index_1.SelectiveEditor(fieldsEl, editorConfig);
+const exampleSelective = new index_1.SelectiveEditor(editorConfig, fieldsEl);
 //# sourceMappingURL=example.js.map
