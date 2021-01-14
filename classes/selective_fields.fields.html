@@ -66,6 +66,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Fields control the display of a list of fields in the editor.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -113,13 +120,22 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="selective_fields.fields.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="selective_fields.fields.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_fields.fields.html#isclean" class="tsd-kind-icon">is<wbr>Clean</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_fields.fields.html#issimple" class="tsd-kind-icon">is<wbr>Simple</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_fields.fields.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_fields.fields.html#uuid" class="tsd-kind-icon">uuid</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_fields.fields.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_fields.fields.html#addfield" class="tsd-kind-icon">add<wbr>Field</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_fields.fields.html#guessdefaultvalue" class="tsd-kind-icon">guess<wbr>Default<wbr>Value</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="selective_fields.fields.html#lock" class="tsd-kind-icon">lock</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_fields.fields.html#template" class="tsd-kind-icon">template</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="selective_fields.fields.html#unlock" class="tsd-kind-icon">unlock</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="selective_fields.fields.html#updateoriginal" class="tsd-kind-icon">update<wbr>Original</a></li>
 							</ul>
 						</section>
 					</div>
@@ -137,7 +153,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/selective/fields.ts#L34">selective/fields.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L39">selective/fields.ts:39</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -162,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">_config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/mixins/config.ts#L6">mixins/config.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/mixins/config.ts#L6">mixins/config.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -172,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">_data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/mixins/data.ts#L6">mixins/data.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/mixins/data.ts#L6">mixins/data.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -182,7 +198,7 @@
 					<div class="tsd-signature tsd-kind-icon">_uuid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/mixins/uuid.ts#L6">mixins/uuid.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/mixins/uuid.ts#L6">mixins/uuid.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -192,7 +208,7 @@
 					<div class="tsd-signature tsd-kind-icon">current<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/selective/fields.ts#L30">selective/fields.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L35">selective/fields.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -202,7 +218,7 @@
 					<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_field.fieldcomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldComponent</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/selective/fields.ts#L31">selective/fields.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L36">selective/fields.ts:36</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -212,7 +228,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Locked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/selective/fields.ts#L32">selective/fields.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L37">selective/fields.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -222,7 +238,7 @@
 					<div class="tsd-signature tsd-kind-icon">original<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/selective/fields.ts#L33">selective/fields.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L38">selective/fields.ts:38</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -232,7 +248,7 @@
 					<div class="tsd-signature tsd-kind-icon">types<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_types.types.html" class="tsd-signature-type" data-tsd-kind="Interface">Types</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/selective/fields.ts#L34">selective/fields.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L39">selective/fields.ts:39</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -250,7 +266,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/mixins/config.ts#L8">mixins/config.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/mixins/config.ts#L8">mixins/config.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h4>
@@ -258,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/mixins/config.ts#L12">mixins/config.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/mixins/config.ts#L12">mixins/config.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -282,7 +298,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/mixins/data.ts#L8">mixins/data.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/mixins/data.ts#L8">mixins/data.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></h4>
@@ -290,7 +306,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/mixins/data.ts#L12">mixins/data.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/mixins/data.ts#L12">mixins/data.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -304,6 +320,72 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="isclean" class="tsd-anchor"></a>
+					<h3>is<wbr>Clean</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isClean<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L80">selective/fields.ts:80</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks if the value is clean (unchanged) from the original value.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="issimple" class="tsd-anchor"></a>
+					<h3>is<wbr>Simple</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isSimple<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L93">selective/fields.ts:93</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks if the fields are simple and can be simplified in the display.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="isvalid" class="tsd-anchor"></a>
+					<h3>is<wbr>Valid</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isValid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L100">selective/fields.ts:100</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks all the fields to find out if there are invalid fields.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="uuid" class="tsd-anchor"></a>
 					<h3>uuid</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
@@ -313,16 +395,107 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/mixins/uuid.ts#L8">mixins/uuid.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/mixins/uuid.ts#L8">mixins/uuid.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="value" class="tsd-anchor"></a>
+					<h3>value</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L198">selective/fields.ts:198</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value from all of the fields in a single object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="addfield" class="tsd-anchor"></a>
+					<h3>add<wbr>Field</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Field<span class="tsd-signature-symbol">(</span>fieldConfig<span class="tsd-signature-symbol">: </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L50">selective/fields.ts:50</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fieldConfig: <a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="guessdefaultvalue" class="tsd-anchor"></a>
+					<h3>guess<wbr>Default<wbr>Value</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">guess<wbr>Default<wbr>Value<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L69">selective/fields.ts:69</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>When there is no value, guess based on the known information about
+									the fields.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="lock" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> lock</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">lock<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L115">selective/fields.ts:115</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Certain cases require the field to be locked while updating to prevent bad
+									data mixing. This allows for manually locking the fields.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="template" class="tsd-anchor"></a>
 					<h3>template</h3>
@@ -333,19 +506,98 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/35c8793/src/selective/fields.ts#L45">selective/fields.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L130">selective/fields.ts:130</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Template for determining what the fields should render to the browser.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>editor: <a href="selective_editor.selectiveeditor.html" class="tsd-signature-type" data-tsd-kind="Class">SelectiveEditor</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Selective editor used to render the template.</p>
+									</div>
 								</li>
 								<li>
 									<h5>data: <a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Data provided to render the template.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemplateResult</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="unlock" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> unlock</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">unlock<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L154">selective/fields.ts:154</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Certain cases require the field to be locked while updating to prevent bad
+									data mixing. This allows for manually unlocking the fields.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="updateoriginal" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> update<wbr>Original</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Original<span class="tsd-signature-symbol">(</span>editor<span class="tsd-signature-symbol">: </span><a href="selective_editor.selectiveeditor.html" class="tsd-signature-type" data-tsd-kind="Class">SelectiveEditor</a>, data<span class="tsd-signature-symbol">: </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a>, deep<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/07d4530/src/selective/fields.ts#L173">selective/fields.ts:173</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The data is not known to the fields until the rendering is done.</p>
+								</div>
+								<p>Updated the original value from the data provided during rendering.
+								This gives a base set of values for clean checks and validation to use.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>editor: <a href="selective_editor.selectiveeditor.html" class="tsd-signature-type" data-tsd-kind="Class">SelectiveEditor</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Selective editor used to render the template.</p>
+									</div>
+								</li>
+								<li>
+									<h5>data: <a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Data provided to render the template.</p>
+									</div>
+								</li>
+								<li>
+									<h5>deep: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Update in fields as well, such as when the field is not visible.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -463,10 +715,37 @@
 								<a href="selective_fields.fields.html#data" class="tsd-kind-icon">data</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="selective_fields.fields.html#isclean" class="tsd-kind-icon">is<wbr>Clean</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="selective_fields.fields.html#issimple" class="tsd-kind-icon">is<wbr>Simple</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="selective_fields.fields.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="selective_fields.fields.html#uuid" class="tsd-kind-icon">uuid</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="selective_fields.fields.html#value" class="tsd-kind-icon">value</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="selective_fields.fields.html#addfield" class="tsd-kind-icon">add<wbr>Field</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="selective_fields.fields.html#guessdefaultvalue" class="tsd-kind-icon">guess<wbr>Default<wbr>Value</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="selective_fields.fields.html#lock" class="tsd-kind-icon">lock</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="selective_fields.fields.html#template" class="tsd-kind-icon">template</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="selective_fields.fields.html#unlock" class="tsd-kind-icon">unlock</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="selective_fields.fields.html#updateoriginal" class="tsd-kind-icon">update<wbr>Original</a>
 							</li>
 						</ul>
 					</li>
@@ -501,10 +780,11 @@
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 			</ul>
 		</div>
 	</div>
