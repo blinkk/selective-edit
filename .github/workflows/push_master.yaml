@@ -30,11 +30,10 @@ jobs:
       run: |
         mkdir -p docs/example
         mkdir -p docs/example/css
-        mkdir -p docs/example/src
         yarn run compile
         cp example/* docs/example/
         cp dist/css/example* docs/example/css/
-        cp dist/src/example* docs/example/src/
+        cp dist/src/example* docs/example/
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3
       with:

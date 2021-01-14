@@ -32,7 +32,7 @@
   "scripts": {
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "tsc && npx gulp compile-sass && webpack --config webpack.prod.js",
+    "compile": "tsc && npx gulp compile && webpack --config webpack.prod.js",
     "copy": "mkdir -p dist/src/static; cp src/static/* dist/src/static",
     "dev": "concurrently \"npx ava --watch\" \"tsc --watch\" \"npx gulp watch\" \"webpack serve --config webpack.dev.js\"",
     "docs": "typedoc",
