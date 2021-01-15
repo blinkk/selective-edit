@@ -365,6 +365,7 @@ export class RangeRule extends Rule {
 }
 
 export class RequireRule extends Rule {
+  alternativeEmpties?: Array<string>;
   defaultMessage = 'Value is required. Cannot be empty.';
 
   validate(value: any): string | null {
@@ -393,9 +394,12 @@ export class RequireRule extends Rule {
       }
     }
 
-    // Quill editor blank is not a blank string.
-    if (value === '<p><br></p>') {
-      return this.message;
+    // Some fields a blank is not an empty value. Allow for setting
+    // alternative values that are also considered as being empty.
+    for (const alternativeEmpty of this?.alternativeEmpties || []) {
+      if (value === alternativeEmpty) {
+        return this.message;
+      }
     }
 
     return null;
