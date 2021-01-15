@@ -1,8 +1,8 @@
+import {DEFAULT_ZONE_KEY, Validation, ValidationLevel} from './validation';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
 import {Config} from '../utility/config';
 import {ConfigMixin} from '../mixins/config';
-import {DEFAULT_ZONE_KEY, Validation} from './validation';
 import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
@@ -64,7 +64,7 @@ export class Field
           this.rules.addRuleFromConfig(new Config(ruleConfig), zoneKey);
         }
       }
-    } else {
+    } else if (ruleConfigs) {
       console.error(
         'Validation rules in an invalid format.',
         'Expecting array or Record<zoneKey, array>.',
@@ -116,22 +116,15 @@ export class Field
     const classes: Array<string> = [];
 
     if (!this.isValid) {
-      //   const zoneErrors = errors.getErrorsForZone(zoneKey)
-      //   const errorTypes = Object.keys(zoneErrors).sort()
-      //   const errorLevels = new Set()
-      //   if (errorTypes.length) {
-      //     classes.push('selective__field__input--error')
-      //   }
-      //   for (const key of errorTypes) {
-      //     classes.push(`selective__field__input--error__${key}`)
-      //     const errors = zoneErrors[key]
-      //     for (const error of errors) {
-      //       errorLevels.add(error.level)
-      //     }
-      //   }
-      //   for (const key of errorLevels) {
-      //     classes.push(`selective__field__input--error__level__${key}`)
-      //   }
+      for (const level of [
+        ValidationLevel.Error,
+        ValidationLevel.Warning,
+        ValidationLevel.Info,
+      ]) {
+        if (this.validation?.hasAnyResults(zoneKey, level)) {
+          classes.push(`selective__field__input--${level}`);
+        }
+      }
     }
 
     return classes;
@@ -144,27 +137,17 @@ export class Field
     const classes = ['selective__field__label'];
 
     if (!this.isValid) {
-      // TODO: Use validation to set the classes for the given zone.
-      // if (locale || zoneKey || !this.isLocalized) {
-      //   const errors = this.getErrorsForLocale(locale);
-      //   if (errors) {
-      //     const zoneErrors = errors.getErrorsForZone(zoneKey);
-      //     const errorTypes = Object.keys(zoneErrors).sort();
-      //     const errorLevels = new Set();
-      //     if (errorTypes.length) {
-      //       classes.push('selective__field__label--error');
-      //     }
-      //     for (const key of errorTypes) {
-      //       classes.push(`selective__field__label--error__${key}`);
-      //       const errors = zoneErrors[key];
-      //       for (const error of errors) {
-      //         errorLevels.add(error.level);
-      //       }
-      //     }
-      //     for (const key of errorLevels) {
-      //       classes.push(`selective__field__label--error__level__${key}`);
-      //     }
-      //   }
+      if (!this.isValid) {
+        for (const level of [
+          ValidationLevel.Error,
+          ValidationLevel.Warning,
+          ValidationLevel.Info,
+        ]) {
+          if (this.validation?.hasAnyResults(zoneKey, level)) {
+            classes.push(`selective__field__label--${level}`);
+          }
+        }
+      }
     }
 
     return classes;
@@ -183,6 +166,10 @@ export class Field
     }
 
     return value;
+  }
+
+  private expandClasses(classes: Array<string>): string {
+    return classes.join(' ');
   }
 
   get fullKey(): string {
@@ -251,7 +238,157 @@ export class Field
    * @param data Data provided to render the template.
    */
   template(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    return html`<div class="selective__field">foo</div>`;
+    // Update the original every time the template is used.
+    this.updateOriginal(editor, data);
+    return this.templateWrapper(editor, data);
+  }
+
+  /**
+   * Template for rendering the field footer.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  templateFooter(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    return html``;
+  }
+
+  /**
+   * Template for rendering the field header.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  templateHeader(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    return html``;
+  }
+
+  /**
+   * Template for rendering the field help.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  templateHelp(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    const helpMessage = this.config?.get('help');
+    if (!helpMessage) {
+      return html``;
+    }
+    return html`<div class="selective__field__help">${helpMessage}</div>`;
+  }
+
+  /**
+   * Template for rendering the icon for deep linking.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templateIconDeepLink(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    editor: SelectiveEditor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    data: DeepObject
+  ): TemplateResult {
+    return html``;
+  }
+
+  /**
+   * Template for rendering the icon for validation.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templateIconValidation(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    editor: SelectiveEditor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    data: DeepObject
+  ): TemplateResult {
+    if (this.isValid) {
+      return html``;
+    }
+
+    return html` <span class="selective__field__invalid">
+      <i class="material-icons">error</i>
+    </span>`;
+  }
+
+  /**
+   * Template for rendering the field input.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    return html`<div class="selective__field__input">Input not defined.</div>`;
+  }
+
+  /**
+   * Template for rendering the field input structure.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templateInputStructure(
+    editor: SelectiveEditor,
+    data: DeepObject
+  ): TemplateResult {
+    return html`<div class="selective__field__input">
+      ${this.templateInput(editor, data)}
+    </div>`;
+  }
+
+  /**
+   * Template for rendering the field label.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templateLabel(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    const label = this.config?.get('label');
+    if (!label) {
+      return html``;
+    }
+    return html`<div class=${this.expandClasses(this.classesForLabel())}>
+      ${this.templateIconDeepLink(editor, data)}
+      ${this.templateIconValidation(editor, data)}
+      <label for=${this.uid}>${label}</label>
+    </div>`;
+  }
+
+  /**
+   * Template for rendering the field structure.
+   *
+   * Used for controlling the order that parts of the field are rendered.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templateStructure(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    return html`${this.templateHeader(editor, data)}
+    ${this.templateLabel(editor, data)} ${this.templateHelp(editor, data)}
+    ${this.templateInputStructure(editor, data)}
+    ${this.templateFooter(editor, data)}`;
+  }
+
+  /**
+   * Template for rendering the field wrapper.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templateWrapper(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    return html`<div
+      class=${this.expandClasses(this.classesForField())}
+      data-field-type=${this.fieldType}
+      data-field-full-key=${this.fullKey}
+    >
+      ${this.templateStructure(editor, data)}
+    </div>`;
   }
 
   /**

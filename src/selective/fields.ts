@@ -55,9 +55,12 @@ export class Fields
     );
 
     if (!newField) {
-      throw new Error(
-        `Unable to add field for field type: ${fieldConfig.get('type')}.`
+      console.error(
+        `Unable to add field for unknown field type: ${fieldConfig.get(
+          'type'
+        )}.`
       );
+      return;
     }
     this.fields.push(newField);
   }

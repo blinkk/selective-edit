@@ -36,10 +36,12 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
 
   addFieldType(key: string, FieldCls: FieldConstructor) {
     this.types.fields.registerClass(key, FieldCls);
+    this.resetFields();
   }
 
   addFieldTypes(fieldTypes: Record<string, FieldConstructor>) {
     this.types.fields.registerClasses(fieldTypes);
+    this.resetFields();
   }
 
   addRuleType(key: string, RuleCls: RuleConstructor) {
@@ -50,7 +52,7 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
     this.types.rules.registerClasses(ruleTypes);
   }
 
-  render(): void {
+  render() {
     // When no container is defined, it is rendered externally.
     if (!this.container || !this.data) {
       return;
@@ -58,6 +60,14 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
 
     render(this.template(this, this.data), this.container);
     document.dispatchEvent(new CustomEvent(EVENT_RENDER_COMPLETE));
+  }
+
+  resetFields(): void {
+    this.fields = new Fields(this.types, {} as Config);
+
+    for (const fieldConfigRaw of this.config?.get('fields') || []) {
+      this.fields.addField(new Config(fieldConfigRaw));
+    }
   }
 }
 
