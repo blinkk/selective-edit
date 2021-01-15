@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DeepObject | @amagaki/selective-edit</title>
+	<title>Rules | @amagaki/selective-edit</title>
 	<meta name="description" content="Documentation for @amagaki/selective-edit">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -53,32 +53,24 @@
 					<a href="../modules.html">@amagaki/selective-edit</a>
 				</li>
 				<li>
-					<a href="../modules/utility_deepobject.html">utility/deepObject</a>
+					<a href="../modules/selective_validationrules.html">selective/validationRules</a>
 				</li>
 				<li>
-					<a href="utility_deepobject.deepobject.html">DeepObject</a>
+					<a href="selective_validationrules.rules.html">Rules</a>
 				</li>
 			</ul>
-			<h1>Class DeepObject</h1>
+			<h1>Class Rules</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Utility for working with deep object references.</p>
-					</div>
-					<p>Example: obj.get(&#39;somthing.sub.key&#39;) would deeply reference the object.</p>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DeepObject</span>
+						<span class="target">Rules</span>
 					</li>
 				</ul>
 			</section>
@@ -89,21 +81,22 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="utility_deepobject.deepobject.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="selective_validationrules.rules.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="utility_deepobject.deepobject.html#obj" class="tsd-kind-icon">obj</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validationrules.rules.html#types" class="tsd-kind-icon">types</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validationrules.rules.html#zonetorules" class="tsd-kind-icon">zone<wbr>ToRules</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="utility_deepobject.deepobject.html#get" class="tsd-kind-icon">get</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="utility_deepobject.deepobject.html#set" class="tsd-kind-icon">set</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="utility_deepobject.deepobject.html#update" class="tsd-kind-icon">update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_validationrules.rules.html#addrulefromconfig" class="tsd-kind-icon">add<wbr>Rule<wbr>From<wbr>Config</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_validationrules.rules.html#getrulesforzone" class="tsd-kind-icon">get<wbr>Rules<wbr>For<wbr>Zone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_validationrules.rules.html#getzones" class="tsd-kind-icon">get<wbr>Zones</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,22 +108,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Deep<wbr>Object<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Rules<span class="tsd-signature-symbol">(</span>ruleTypes<span class="tsd-signature-symbol">: </span><a href="utility_classes.classmanager.html" class="tsd-signature-type" data-tsd-kind="Class">ClassManager</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/selective_validationrules.html#ruleconstructor" class="tsd-signature-type" data-tsd-kind="Type alias">RuleConstructor</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/selective_validationrules.rulecomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleComponent</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_validationrules.rules.html" class="tsd-signature-type" data-tsd-kind="Class">Rules</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/utility/deepObject.ts#L8">utility/deepObject.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/selective/validationRules.ts#L19">selective/validationRules.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> obj: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>ruleTypes: <a href="utility_classes.classmanager.html" class="tsd-signature-type" data-tsd-kind="Class">ClassManager</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/selective_validationrules.html#ruleconstructor" class="tsd-signature-type" data-tsd-kind="Type alias">RuleConstructor</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/selective_validationrules.rulecomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleComponent</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="selective_validationrules.rules.html" class="tsd-signature-type" data-tsd-kind="Class">Rules</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -138,12 +131,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="obj" class="tsd-anchor"></a>
-					<h3>obj</h3>
-					<div class="tsd-signature tsd-kind-icon">obj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="types" class="tsd-anchor"></a>
+					<h3>types</h3>
+					<div class="tsd-signature tsd-kind-icon">types<span class="tsd-signature-symbol">:</span> <a href="utility_classes.classmanager.html" class="tsd-signature-type" data-tsd-kind="Class">ClassManager</a><span class="tsd-signature-symbol">&lt;</span><a href="../modules/selective_validationrules.html#ruleconstructor" class="tsd-signature-type" data-tsd-kind="Type alias">RuleConstructor</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/selective_validationrules.rulecomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleComponent</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/utility/deepObject.ts#L8">utility/deepObject.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/selective/validationRules.ts#L19">selective/validationRules.ts:19</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="zonetorules" class="tsd-anchor"></a>
+					<h3>zone<wbr>ToRules</h3>
+					<div class="tsd-signature tsd-kind-icon">zone<wbr>ToRules<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/selective_validationrules.rulecomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleComponent</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/selective/validationRules.ts#L18">selective/validationRules.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -151,67 +154,25 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="get" class="tsd-anchor"></a>
-					<h3>get</h3>
+					<a name="addrulefromconfig" class="tsd-anchor"></a>
+					<h3>add<wbr>Rule<wbr>From<wbr>Config</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Rule<wbr>From<wbr>Config<span class="tsd-signature-symbol">(</span>ruleConfig<span class="tsd-signature-symbol">: </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a>, zoneKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/utility/deepObject.ts#L19">utility/deepObject.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/selective/validationRules.ts#L26">selective/validationRules.ts:26</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Allows for accessing nested values in an object with a single reference.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>key: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Period separated reference to the deep value.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="set" class="tsd-anchor"></a>
-					<h3>set</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/utility/deepObject.ts#L45">utility/deepObject.ts:45</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Set a deep value on the object using a referenced key.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>key: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Period separated reference to the deep value.</p>
-									</div>
+									<h5>ruleConfig: <a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
 								</li>
 								<li>
-									<h5>value: <span class="tsd-signature-type">any</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>New value to set at the deep reference.</p>
-									</div>
+									<h5>zoneKey: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -219,33 +180,42 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="update" class="tsd-anchor"></a>
-					<h3>update</h3>
+					<a name="getrulesforzone" class="tsd-anchor"></a>
+					<h3>get<wbr>Rules<wbr>For<wbr>Zone</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Rules<wbr>For<wbr>Zone<span class="tsd-signature-symbol">(</span>zoneKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_validationrules.rulecomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleComponent</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/utility/deepObject.ts#L69">utility/deepObject.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/selective/validationRules.ts#L39">selective/validationRules.ts:39</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Updates the current object with the keys from a new value.</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>New object to be added to the existing object.</p>
-									</div>
+									<h5>zoneKey: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/selective_validationrules.rulecomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleComponent</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getzones" class="tsd-anchor"></a>
+					<h3>get<wbr>Zones</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Zones<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/selective/validationRules.ts#L46">selective/validationRules.ts:46</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -293,7 +263,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/selective_validation.html">selective/validation</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/selective_validationrules.html">selective/validation<wbr>Rules</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -305,7 +275,7 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/utility_datatype.html">utility/data<wbr>Type</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/utility_deepobject.html">utility/deep<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -330,32 +300,41 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="selective_validationrules.rule.html" class="tsd-kind-icon">Rule</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="utility_deepobject.deepobject.html" class="tsd-kind-icon">Deep<wbr>Object</a>
+						<a href="selective_validationrules.rules.html" class="tsd-kind-icon">Rules</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="utility_deepobject.deepobject.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="selective_validationrules.rules.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="utility_deepobject.deepobject.html#obj" class="tsd-kind-icon">obj</a>
+								<a href="selective_validationrules.rules.html#types" class="tsd-kind-icon">types</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="selective_validationrules.rules.html#zonetorules" class="tsd-kind-icon">zone<wbr>ToRules</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="utility_deepobject.deepobject.html#get" class="tsd-kind-icon">get</a>
+								<a href="selective_validationrules.rules.html#addrulefromconfig" class="tsd-kind-icon">add<wbr>Rule<wbr>From<wbr>Config</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="utility_deepobject.deepobject.html#set" class="tsd-kind-icon">set</a>
+								<a href="selective_validationrules.rules.html#getrulesforzone" class="tsd-kind-icon">get<wbr>Rules<wbr>For<wbr>Zone</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="utility_deepobject.deepobject.html#update" class="tsd-kind-icon">update</a>
+								<a href="selective_validationrules.rules.html#getzones" class="tsd-kind-icon">get<wbr>Zones</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/utility_deepobject.html#autodeepobject" class="tsd-kind-icon">auto<wbr>Deep<wbr>Object</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.rulecomponent.html" class="tsd-kind-icon">Rule<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/selective_validationrules.html#ruleconstructor" class="tsd-kind-icon">Rule<wbr>Constructor</a>
 					</li>
 				</ul>
 			</nav>

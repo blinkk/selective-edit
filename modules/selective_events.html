@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Rule | @amagaki/selective-edit</title>
+	<title>selective/events | @amagaki/selective-edit</title>
 	<meta name="description" content="Documentation for @amagaki/selective-edit">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -53,61 +53,61 @@
 					<a href="../modules.html">@amagaki/selective-edit</a>
 				</li>
 				<li>
-					<a href="../modules/selective_rule.html">selective/rule</a>
-				</li>
-				<li>
-					<a href="selective_rule.rule.html">Rule</a>
+					<a href="selective_events.html">selective/events</a>
 				</li>
 			</ul>
-			<h1>Class Rule</h1>
+			<h1>Module selective/events</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">Rule</span>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel">
-				<h3>Implements</h3>
-				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/selective_rule.rulecomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleComponent</a></li>
-				</ul>
-			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
+							<h3>Variables</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="selective_rule.rule.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="selective_events.html#event_render" class="tsd-kind-icon">EVENT_<wbr>RENDER</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="selective_events.html#event_render_complete" class="tsd-kind-icon">EVENT_<wbr>RENDER_<wbr>COMPLETE</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Rule<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_rule.rule.html" class="tsd-signature-type" data-tsd-kind="Class">Rule</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="selective_rule.rule.html" class="tsd-signature-type" data-tsd-kind="Class">Rule</a></h4>
-						</li>
-					</ul>
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="event_render" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> EVENT_<wbr>RENDER</h3>
+					<div class="tsd-signature tsd-kind-icon">EVENT_<wbr>RENDER<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;selective.render&quot;</span><span class="tsd-signature-symbol"> = &#x27;selective.render&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/selective/events.ts#L4">selective/events.ts:4</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Custom event name for triggering a render.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="event_render_complete" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> EVENT_<wbr>RENDER_<wbr>COMPLETE</h3>
+					<div class="tsd-signature tsd-kind-icon">EVENT_<wbr>RENDER_<wbr>COMPLETE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;selective.render.complete&quot;</span><span class="tsd-signature-symbol"> = &#x27;selective.render.complete&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/75ef0eb/src/selective/events.ts#L9">selective/events.ts:9</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Custom event name for triggering a render.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -118,89 +118,83 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/index.html">index</a>
+						<a href="index.html">index</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/mixins.html">mixins</a>
+						<a href="mixins.html">mixins</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/mixins_config.html">mixins/config</a>
+						<a href="mixins_config.html">mixins/config</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/mixins_data.html">mixins/data</a>
+						<a href="mixins_data.html">mixins/data</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/mixins_uuid.html">mixins/uuid</a>
+						<a href="mixins_uuid.html">mixins/uuid</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/selective_editor.html">selective/editor</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/selective_field.html">selective/field</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="../modules/selective_fields.html">selective/fields</a>
+						<a href="selective_editor.html">selective/editor</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/selective_rule.html">selective/rule</a>
+						<a href="selective_events.html">selective/events</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/selective_template.html">selective/template</a>
+						<a href="selective_field.html">selective/field</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/selective_types.html">selective/types</a>
+						<a href="selective_fields.html">selective/fields</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_classes.html">utility/classes</a>
+						<a href="selective_template.html">selective/template</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_config.html">utility/config</a>
+						<a href="selective_types.html">selective/types</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_datatype.html">utility/data<wbr>Type</a>
+						<a href="selective_validation.html">selective/validation</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_deepobject.html">utility/deep<wbr>Object</a>
+						<a href="selective_validationrules.html">selective/validation<wbr>Rules</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_defer.html">utility/defer</a>
+						<a href="utility_classes.html">utility/classes</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_dom.html">utility/dom</a>
+						<a href="utility_config.html">utility/config</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_listeners.html">utility/listeners</a>
+						<a href="utility_datatype.html">utility/data<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_preview.html">utility/preview</a>
+						<a href="utility_deepobject.html">utility/deep<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_throttle.html">utility/throttle</a>
+						<a href="utility_defer.html">utility/defer</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="../modules/utility_uuid.html">utility/uuid</a>
+						<a href="utility_dom.html">utility/dom</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="utility_listeners.html">utility/listeners</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="utility_preview.html">utility/preview</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="utility_throttle.html">utility/throttle</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="utility_uuid.html">utility/uuid</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="selective_rule.rule.html" class="tsd-kind-icon">Rule</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="selective_rule.rule.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-						</ul>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="selective_events.html#event_render" class="tsd-kind-icon">EVENT_<wbr>RENDER</a>
 					</li>
-				</ul>
-				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/selective_rule.rulecomponent.html" class="tsd-kind-icon">Rule<wbr>Component</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/selective_rule.html#ruleconstructor" class="tsd-kind-icon">Rule<wbr>Constructor</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="selective_events.html#event_render_complete" class="tsd-kind-icon">EVENT_<wbr>RENDER_<wbr>COMPLETE</a>
 					</li>
 				</ul>
 			</nav>
@@ -212,6 +206,7 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
@@ -219,7 +214,6 @@
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
