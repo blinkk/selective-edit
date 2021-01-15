@@ -3,9 +3,15 @@ import {ClassManager} from '../utility/classes';
 import {Config} from '../utility/config';
 import {ConfigMixin} from '../mixins/config';
 import {DEFAULT_ZONE_KEY} from './validation';
-import {Types} from './types';
 import {DataType} from '../utility/dataType';
+import {Types} from './types';
 
+/**
+ * Validation rules define the validation on the editor fields.
+ *
+ * Each field will create an instance of the validation
+ * rule based on the validation definitions in the field config.
+ */
 export interface RuleComponent {
   /**
    * Given the value, should it be able to add new values?
