@@ -1,5 +1,5 @@
 import {FieldComponent, FieldConstructor} from './field';
-import {RuleComponent, RuleConstructor} from './rule';
+import {RuleComponent, RuleConstructor} from './validationRules';
 import {ClassManager} from '../utility/classes';
 import {FieldsConstructor} from './fields';
 

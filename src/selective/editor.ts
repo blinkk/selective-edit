@@ -1,20 +1,20 @@
 import {Config, autoConfig} from '../utility/config';
 import {FieldComponent, FieldConstructor} from './field';
 import {Fields, FieldsComponent, FieldsConstructor} from './fields';
-import {RuleComponent, RuleConstructor} from './rule';
+import {RuleComponent, RuleConstructor} from './validationRules';
 import {TemplateResult, html, render} from 'lit-html';
 import {Base} from '../mixins';
 import {ClassManager} from '../utility/classes';
 import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
 import {DeepObject} from '../utility/deepObject';
+import {EVENT_RENDER_COMPLETE} from './events';
 import {Template} from './template';
 import {Types} from './types';
 
 export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
   container?: HTMLElement;
   fields: FieldsComponent;
-  isLocalized: boolean;
   template: Template;
   types: Types;
 
@@ -30,7 +30,6 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
       rules: new ClassManager<RuleConstructor, RuleComponent>(),
     };
 
-    this.isLocalized = false;
     this.template = defaultTemplate;
     this.fields = new Fields(this.types, {} as Config);
   }
@@ -58,7 +57,7 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
     }
 
     render(this.template(this, this.data), this.container);
-    document.dispatchEvent(new CustomEvent('selective.render.complete'));
+    document.dispatchEvent(new CustomEvent(EVENT_RENDER_COMPLETE));
   }
 }
 

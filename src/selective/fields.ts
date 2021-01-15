@@ -98,21 +98,19 @@ export class Fields
    * Checks all the fields to find out if there are invalid fields.
    */
   get isValid() {
-    let currentlyValid = true;
     for (const field of this.fields) {
       if (!field.isValid) {
-        // Does not return after first failure to mark all invalid fields.
-        currentlyValid = false;
+        return false;
       }
     }
-    return currentlyValid;
+    return true;
   }
 
   /**
    * Certain cases require the field to be locked while updating to prevent bad
    * data mixing. This allows for manually locking the fields.
    */
-  private lock() {
+  lock() {
     this.isLocked = true;
 
     // Lock all the fields to prevent them from being updated.
@@ -122,7 +120,7 @@ export class Fields
   }
 
   /**
-   * Template for determining what the fields should render to the browser.
+   * Template for determining how to render the fields.
    *
    * @param editor Selective editor used to render the template.
    * @param data Data provided to render the template.
@@ -151,7 +149,7 @@ export class Fields
    * Certain cases require the field to be locked while updating to prevent bad
    * data mixing. This allows for manually unlocking the fields.
    */
-  private unlock() {
+  unlock() {
     this.isLocked = false;
 
     // Lock all the fields to prevent them from being updated.
