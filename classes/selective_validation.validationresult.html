@@ -70,7 +70,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ValidationResult</span>
+						<a href="" class="tsd-signature-type" data-tsd-kind="Type literal">__type</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">typeof </span><a href="mixins.base.html" class="tsd-signature-type" data-tsd-kind="Class">Base</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="mixins.base.html" class="tsd-signature-type" data-tsd-kind="Class">Base</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">ValidationResult</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -87,8 +92,16 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validation.validationresult.html#_uuid" class="tsd-kind-icon">_uuid</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validation.validationresult.html#level" class="tsd-kind-icon">level</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validation.validationresult.html#message" class="tsd-kind-icon">message</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_validation.validationresult.html#uid" class="tsd-kind-icon">uid</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_validation.validationresult.html#uuid" class="tsd-kind-icon">uuid</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,7 +119,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b541dcd/src/selective/validation.ts#L144">selective/validation.ts:144</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b8e001a/src/selective/validation.ts#L146">selective/validation.ts:146</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -126,12 +139,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_uuid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _uuid</h3>
+					<div class="tsd-signature tsd-kind-icon">_uuid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b8e001a/src/mixins/uuid.ts#L6">mixins/uuid.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="level" class="tsd-anchor"></a>
 					<h3>level</h3>
 					<div class="tsd-signature tsd-kind-icon">level<span class="tsd-signature-symbol">:</span> <a href="../enums/selective_validation.validationlevel.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ValidationLevel</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b541dcd/src/selective/validation.ts#L143">selective/validation.ts:143</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b8e001a/src/selective/validation.ts#L145">selective/validation.ts:145</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -141,9 +164,46 @@
 					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b541dcd/src/selective/validation.ts#L144">selective/validation.ts:144</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b8e001a/src/selective/validation.ts#L146">selective/validation.ts:146</a></li>
 						</ul>
 					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="uid" class="tsd-anchor"></a>
+					<h3>uid</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> uid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b8e001a/src/mixins/uuid.ts#L15">mixins/uuid.ts:15</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="uuid" class="tsd-anchor"></a>
+					<h3>uuid</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> uuid<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/b8e001a/src/mixins/uuid.ts#L8">mixins/uuid.ts:8</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -241,10 +301,19 @@
 								<a href="selective_validation.validationresult.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="selective_validation.validationresult.html#_uuid" class="tsd-kind-icon">_uuid</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="selective_validation.validationresult.html#level" class="tsd-kind-icon">level</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="selective_validation.validationresult.html#message" class="tsd-kind-icon">message</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="selective_validation.validationresult.html#uid" class="tsd-kind-icon">uid</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="selective_validation.validationresult.html#uuid" class="tsd-kind-icon">uuid</a>
 							</li>
 						</ul>
 					</li>
