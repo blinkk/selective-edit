@@ -1,8 +1,8 @@
+import {DEFAULT_ZONE_KEY, ValidationLevel} from './validation';
 import {Base} from '../mixins';
 import {ClassManager} from '../utility/classes';
 import {Config} from '../utility/config';
 import {ConfigMixin} from '../mixins/config';
-import {DEFAULT_ZONE_KEY} from './validation';
 import {DataType} from '../utility/dataType';
 import {Types} from './types';
 
@@ -22,6 +22,7 @@ export interface RuleComponent {
    * @param value Current value of the field.
    */
   allowAdd(value: any): boolean;
+
   /**
    * Given the value, should it be able to remove new values?
    *
@@ -31,6 +32,12 @@ export interface RuleComponent {
    * @param value Current value of the field.
    */
   allowRemove(value: any): boolean;
+
+  /**
+   * Validation level used if the validation fails.
+   */
+  level: ValidationLevel;
+
   /**
    * Validates the field using the current value.
    *
@@ -85,10 +92,14 @@ export class Rules {
 
 export class Rule extends ConfigMixin(Base) implements RuleComponent {
   defaultMessage = 'Value is invalid.';
+  defaultLevel: ValidationLevel;
 
   constructor(config: Config) {
     super();
     this.config = config;
+
+    // Default to error level.
+    this.defaultLevel = ValidationLevel.Error;
   }
 
   /**
@@ -96,6 +107,7 @@ export class Rule extends ConfigMixin(Base) implements RuleComponent {
    *
    * @param value Current value of the field.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   allowAdd(value: any): boolean {
     return true;
   }
@@ -105,8 +117,16 @@ export class Rule extends ConfigMixin(Base) implements RuleComponent {
    *
    * @param value Current value of the field.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   allowRemove(value: any): boolean {
     return true;
+  }
+
+  /**
+   * Validation level to use if the validation fails.
+   */
+  get level(): ValidationLevel {
+    return this.config?.get('level') || this.defaultLevel;
   }
 
   /**
@@ -116,6 +136,7 @@ export class Rule extends ConfigMixin(Base) implements RuleComponent {
     return this.config?.get('message') || this.defaultMessage;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   validate(value: any): string | null {
     console.error('Validation check not defined.');
     return null;
