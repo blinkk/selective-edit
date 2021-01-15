@@ -1,3 +1,5 @@
+import {Base} from '../mixins';
+import {UuidMixin} from '../mixins/uuid';
 import {Rules} from './validationRules';
 
 export const DEFAULT_ZONE_KEY = 'default';
@@ -139,11 +141,12 @@ export class Validation implements ValidationComponent {
   }
 }
 
-export class ValidationResult {
+export class ValidationResult extends UuidMixin(Base) {
   level: ValidationLevel;
   message: string;
 
   constructor(message: string, level = ValidationLevel.Error) {
+    super();
     this.message = message;
     this.level = level;
   }

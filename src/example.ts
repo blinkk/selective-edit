@@ -1,6 +1,6 @@
-import {SelectiveEditor} from './index';
-import {TextField} from './selective/field';
+import {TextField, TextareaField} from './selective/field';
 import {FieldsConstructor} from './selective/fields';
+import {SelectiveEditor} from './index';
 import {autoDeepObject} from './utility/deepObject';
 
 const configEl = document.querySelector('#config') as HTMLTextAreaElement;
@@ -15,10 +15,10 @@ const editorConfig = JSON.parse(configEl.value || '') as Record<string, any>;
 const exampleSelective = new SelectiveEditor(editorConfig, fieldsEl);
 
 // Add the field types.
-exampleSelective.addFieldType(
-  'text',
-  (TextField as unknown) as FieldsConstructor
-);
+exampleSelective.addFieldTypes({
+  text: (TextField as unknown) as FieldsConstructor,
+  textarea: (TextareaField as unknown) as FieldsConstructor,
+});
 
 exampleSelective.data = autoDeepObject(JSON.parse(dataEl.value));
 

@@ -13,6 +13,7 @@ import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
 import stringify from 'json-stable-stringify';
+import {repeat} from 'lit-html/directives/repeat';
 
 export interface FieldComponent {
   template: Template;
@@ -28,11 +29,11 @@ export type FieldConstructor = (types: Types, config: Config) => FieldComponent;
 export class Field
   extends UuidMixin(DataMixin(ConfigMixin(Base)))
   implements FieldComponent {
-  private currentValue?: any;
-  private isLocked: boolean;
-  private isDeepLinked: boolean;
+  protected currentValue?: any;
+  protected isLocked: boolean;
+  protected isDeepLinked: boolean;
   readonly fieldType: string;
-  private originalValue?: any;
+  protected originalValue?: any;
   rules: Rules;
   types: Types;
   usingAutoFields: boolean;
@@ -168,7 +169,7 @@ export class Field
     return value;
   }
 
-  private expandClasses(classes: Array<string>): string {
+  protected expandClasses(classes: Array<string>): string {
     return classes.join(' ');
   }
 
@@ -178,6 +179,17 @@ export class Field
       return `${parentKey}.${this.key}`;
     }
     return this.key;
+  }
+
+  /**
+   * Handle when the input changes value.
+   *
+   * @param evt Input event from changing value.
+   */
+  handleInput(evt: Event) {
+    const target = evt.target as HTMLInputElement;
+    this.currentValue = target.value;
+    this.render();
   }
 
   get isClean(): boolean {
@@ -241,6 +253,42 @@ export class Field
     // Update the original every time the template is used.
     this.updateOriginal(editor, data);
     return this.templateWrapper(editor, data);
+  }
+
+  /**
+   * Template for rendering the errors.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templateErrors(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    zoneKey?: string
+  ): TemplateResult {
+    if (this.isValid) {
+      return html``;
+    }
+
+    const results = this.validation?.getResults(zoneKey) || [];
+    if (!results.length) {
+      return html``;
+    }
+
+    return html`<div class="selective__field__errors">
+      ${repeat(
+        results,
+        result => result.uuid,
+        result => html`
+          <div
+            class="selective__field__error selective__field__error--level__${result.level}"
+            data-error-level="${result.level}"
+          >
+            ${result.message}
+          </div>
+        `
+      )}
+    </div>`;
   }
 
   /**
@@ -444,5 +492,38 @@ export class Field
 export class TextField extends Field {
   constructor(types: Types, config: Config, fieldType = 'text') {
     super(types, config, fieldType);
+  }
+
+  templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    const value = this.currentValue || '';
+    return html`<input
+        class=${this.expandClasses(this.classesForInput())}
+        type="text"
+        id="${this.uid}"
+        placeholder=${this.config?.get('placeholder') || ''}
+        @input=${this.handleInput.bind(this)}
+        value=${value}
+      />
+      ${this.templateErrors(editor, data)}`;
+  }
+}
+
+export class TextareaField extends Field {
+  constructor(types: Types, config: Config, fieldType = 'textarea') {
+    super(types, config, fieldType);
+  }
+
+  templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    const value = this.currentValue || '';
+    return html`<textarea
+        class=${this.expandClasses(this.classesForInput())}
+        id=${this.uid}
+        rows=${this.config?.get('rows') || 6}
+        placeholder=${this.config?.get('placeholder') || ''}
+        @input=${this.handleInput.bind(this)}
+      >
+${value}</textarea
+      >
+      ${this.templateErrors(editor, data)}`;
   }
 }
