@@ -42,6 +42,12 @@ export interface ValidationComponent {
    */
   hasAnyResults(zoneKey?: string | null, maxLevel?: ValidationLevel): boolean;
 
+  /**
+   * Runs the validation rules against the value.
+   *
+   * @param value Value to validate.
+   * @param zoneKey Zone to store validation result.
+   */
   validate(value: any, zoneKey?: string): boolean;
 }
 

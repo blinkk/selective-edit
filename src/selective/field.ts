@@ -2,7 +2,7 @@ import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
 import {Config} from '../utility/config';
 import {ConfigMixin} from '../mixins/config';
-import {DEFAULT_ZONE_KEY} from './validation';
+import {DEFAULT_ZONE_KEY, Validation} from './validation';
 import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
@@ -36,6 +36,8 @@ export class Field
   rules: Rules;
   types: Types;
   usingAutoFields: boolean;
+  validation?: Validation;
+  zoneToKey?: Record<string, string>;
 
   constructor(types: Types, config: Config, fieldType = 'unknown') {
     super();
@@ -113,29 +115,24 @@ export class Field
   classesForInput(zoneKey = DEFAULT_ZONE_KEY): Array<string> {
     const classes: Array<string> = [];
 
-    // TODO: Use validation to set the classes for the given zone.
-    // const errors = this.getErrorsForLocale(locale)
-    // if (errors) {
-    //   const zoneErrors = errors.getErrorsForZone(zoneKey)
-    //   const errorTypes = Object.keys(zoneErrors).sort()
-    //   const errorLevels = new Set()
-
-    //   if (errorTypes.length) {
-    //     classes.push('selective__field__input--error')
-    //   }
-
-    //   for (const key of errorTypes) {
-    //     classes.push(`selective__field__input--error__${key}`)
-    //     const errors = zoneErrors[key]
-    //     for (const error of errors) {
-    //       errorLevels.add(error.level)
-    //     }
-    //   }
-
-    //   for (const key of errorLevels) {
-    //     classes.push(`selective__field__input--error__level__${key}`)
-    //   }
-    // }
+    if (!this.isValid) {
+      //   const zoneErrors = errors.getErrorsForZone(zoneKey)
+      //   const errorTypes = Object.keys(zoneErrors).sort()
+      //   const errorLevels = new Set()
+      //   if (errorTypes.length) {
+      //     classes.push('selective__field__input--error')
+      //   }
+      //   for (const key of errorTypes) {
+      //     classes.push(`selective__field__input--error__${key}`)
+      //     const errors = zoneErrors[key]
+      //     for (const error of errors) {
+      //       errorLevels.add(error.level)
+      //     }
+      //   }
+      //   for (const key of errorLevels) {
+      //     classes.push(`selective__field__input--error__level__${key}`)
+      //   }
+    }
 
     return classes;
   }
@@ -146,31 +143,29 @@ export class Field
   classesForLabel(zoneKey = DEFAULT_ZONE_KEY): Array<string> {
     const classes = ['selective__field__label'];
 
-    // TODO: Use validation to set the classes for the given zone.
-    // if (locale || zoneKey || !this.isLocalized) {
-    //   const errors = this.getErrorsForLocale(locale);
-    //   if (errors) {
-    //     const zoneErrors = errors.getErrorsForZone(zoneKey);
-    //     const errorTypes = Object.keys(zoneErrors).sort();
-    //     const errorLevels = new Set();
-
-    //     if (errorTypes.length) {
-    //       classes.push('selective__field__label--error');
-    //     }
-
-    //     for (const key of errorTypes) {
-    //       classes.push(`selective__field__label--error__${key}`);
-    //       const errors = zoneErrors[key];
-    //       for (const error of errors) {
-    //         errorLevels.add(error.level);
-    //       }
-    //     }
-
-    //     for (const key of errorLevels) {
-    //       classes.push(`selective__field__label--error__level__${key}`);
-    //     }
-    //   }
-    // }
+    if (!this.isValid) {
+      // TODO: Use validation to set the classes for the given zone.
+      // if (locale || zoneKey || !this.isLocalized) {
+      //   const errors = this.getErrorsForLocale(locale);
+      //   if (errors) {
+      //     const zoneErrors = errors.getErrorsForZone(zoneKey);
+      //     const errorTypes = Object.keys(zoneErrors).sort();
+      //     const errorLevels = new Set();
+      //     if (errorTypes.length) {
+      //       classes.push('selective__field__label--error');
+      //     }
+      //     for (const key of errorTypes) {
+      //       classes.push(`selective__field__label--error__${key}`);
+      //       const errors = zoneErrors[key];
+      //       for (const error of errors) {
+      //         errorLevels.add(error.level);
+      //       }
+      //     }
+      //     for (const key of errorLevels) {
+      //       classes.push(`selective__field__label--error__level__${key}`);
+      //     }
+      //   }
+    }
 
     return classes;
   }
@@ -210,8 +205,24 @@ export class Field
   }
 
   get isValid(): boolean {
-    // TODO: Make this work.
-    return true;
+    // Store the validation to keep from having to repeat the validation.
+    // Is reset every time the updateOriginal is called (every render).
+    if (!this.validation) {
+      this.validation = new Validation(this.rules);
+
+      if (!this.zoneToKey) {
+        // Simple field, only the default zone.
+        this.validation.validate(this.currentValue);
+      } else {
+        // Complex field, validate each zone separately.
+        for (const zoneKey of Object.keys(this.zoneToKey)) {
+          const valueKey = this.zoneToKey[zoneKey];
+          this.validation.validate(this.currentValue[valueKey], zoneKey);
+        }
+      }
+    }
+    // Is valid if there are no results in any zone.
+    return !this.validation.hasAnyResults(null);
   }
 
   get key(): string {
@@ -264,6 +275,9 @@ export class Field
     if (this.isLocked) {
       return;
     }
+
+    // Clears the validation each time the original value is updated.
+    this.validation = undefined;
 
     let newValue = data.get(this.key);
     const isClean = this.isClean;

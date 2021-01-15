@@ -67,7 +67,7 @@ export class Rules {
 
   addRuleFromConfig(ruleConfig: Config, zoneKey = DEFAULT_ZONE_KEY) {
     const ruleType = ruleConfig.get('type', '__missing_type__');
-    const newRule = this.types.newFromKey(ruleType);
+    const newRule = this.types.newFromKey(ruleType, ruleConfig);
     if (!newRule) {
       console.error(
         `Unable to add validation rule for unknown validation type: ${ruleType}`
@@ -189,7 +189,7 @@ export class LengthRule extends Rule {
   validate(value: any): string | null {
     // Allow for empty fields.
     // Use the required rule for making sure it exists.
-    if (!value) {
+    if (!value || (DataType.isArray(value) && value.length === 0)) {
       return null;
     }
 
