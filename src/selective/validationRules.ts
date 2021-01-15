@@ -84,22 +84,318 @@ export class Rules {
 }
 
 export class Rule extends ConfigMixin(Base) implements RuleComponent {
+  defaultMessage = 'Value is invalid.';
+
   constructor(config: Config) {
     super();
     this.config = config;
   }
 
+  /**
+   * Default to allowing adding.
+   *
+   * @param value Current value of the field.
+   */
   allowAdd(value: any): boolean {
-    return DataType.isArray(value);
+    return true;
   }
 
+  /**
+   * Default to allowing removal.
+   *
+   * @param value Current value of the field.
+   */
   allowRemove(value: any): boolean {
-    return DataType.isArray(value);
+    return true;
+  }
+
+  /**
+   * Error message from the config or fall back to the default.
+   */
+  get message(): string {
+    return this.config?.get('message') || this.defaultMessage;
   }
 
   validate(value: any): string | null {
+    console.error('Validation check not defined.');
+    return null;
+  }
+}
+
+export class LengthRule extends Rule {
+  defaultMessage = 'Value needs to have the correct length.';
+
+  allowAdd(value: any): boolean {
+    // Allow for empty fields.
+    if (!value) {
+      return true;
+    }
+
+    value = this.cleanValue(value);
+    const configMax = this.config?.get('max');
+
+    // Do not allow more to be added when at max length.
+    if (configMax && value.length >= configMax.value) {
+      return false;
+    }
+    return true;
+  }
+
+  allowRemove(value: any): boolean {
+    // Allow for empty fields.
+    if (!value) {
+      return true;
+    }
+
+    value = this.cleanValue(value);
+    const configMin = this.config?.get('min');
+
+    // Do not allow more to be removed when at max length.
+    if (configMin && value.length <= configMin.value) {
+      return false;
+    }
+    return true;
+  }
+
+  private cleanValue(value: any) {
+    if (DataType.isString(value)) {
+      // Do not count whitespace.
+      value = value.trim();
+    }
+    return value;
+  }
+
+  validate(value: any): string | null {
+    // Allow for empty fields.
+    // Use the required rule for making sure it exists.
+    if (!value) {
+      return null;
+    }
+
+    value = this.cleanValue(value);
+    const configMax = this.config?.get('max');
+    const configMin = this.config?.get('min');
+
+    if (configMin && value.length < configMin.value) {
+      return configMin.message || this.message;
+    }
+
+    if (configMax && value.length > configMax.value) {
+      return configMax.message || this.message;
+    }
+
+    return null;
+  }
+}
+
+export class MatchRule extends Rule {
+  defaultMessage = 'Value needs to match the validation rule.';
+  patternCache: Record<string, RegExp>;
+
+  constructor(config: Config) {
+    super(config);
+    this.patternCache = {};
+  }
+
+  private cachePattern(key: string, pattern: string): RegExp {
+    if (!(key in this.patternCache)) {
+      this.patternCache[key] = new RegExp(pattern);
+    }
+    return this.patternCache[key];
+  }
+
+  validate(value: any): string | null {
+    // Allow for empty fields.
+    // Use the required rule for making sure it exists.
+    if (!value) {
+      return null;
+    }
+
+    // Handle the allowed matching.
+    let matchConfig = this.config?.get('allowed');
+    if (matchConfig) {
+      // Matching values are allowed.
+      if (matchConfig.pattern) {
+        if (!this.cachePattern('allowed', matchConfig.pattern).test(value)) {
+          return matchConfig.message || this.message;
+        }
+      }
+
+      // Matching specific values only.
+      if (matchConfig.values) {
+        if (!matchConfig.values.includes(value)) {
+          return matchConfig.message || this.message;
+        }
+      }
+    }
+
+    // Handle the excluded matching.
+    matchConfig = this.config?.get('excluded');
+    if (matchConfig) {
+      // Matching values are NOT allowed.
+      if (matchConfig.pattern) {
+        if (this.cachePattern('excluded', matchConfig.pattern).test(value)) {
+          return matchConfig.message || this.message;
+        }
+      }
+
+      // Matching specific values NOT allowed.
+      if (matchConfig.values) {
+        if (matchConfig.values.includes(value)) {
+          return matchConfig.message || this.message;
+        }
+      }
+    }
+
+    return null;
+  }
+}
+
+export class PatternRule extends Rule {
+  defaultMessage: string;
+  pattern?: RegExp;
+
+  constructor(config: Config) {
+    super(config);
+    this.defaultMessage = `Value needs to match the pattern: ${
+      this.config?.get('pattern') || '__missing__'
+    }`;
+  }
+
+  validate(value: any): string | null {
+    // Allow for empty fields.
+    // Use the required rule for making sure it exists.
+    if (!value) {
+      return null;
+    }
+
+    // Only need to compile the pattern once.
+    if (!this.pattern) {
+      this.pattern = new RegExp(this.config?.get('pattern'));
+    }
+
+    // Needs to match the pattern.
+    if (!this.pattern.test(value)) {
+      return this.message;
+    }
+
+    return null;
+  }
+}
+
+export class RangeRule extends Rule {
+  defaultMessage = 'Value needs to be a number in range.';
+
+  allowAdd(value: any): boolean {
+    // Allow for empty fields.
+    if (!value) {
+      return true;
+    }
+
+    value = this.cleanValue(value);
+    const configMax = this.config?.get('max');
+
+    // Do not allow more to be added when at max length.
+    if (configMax && value.length >= configMax.value) {
+      return false;
+    }
+    return true;
+  }
+
+  allowRemove(value: any): boolean {
+    // Allow for empty fields.
+    if (!value) {
+      return true;
+    }
+
+    value = this.cleanValue(value);
+    const configMin = this.config?.get('min');
+
+    // Do not allow more to be removed when at max length.
+    if (configMin && value.length <= configMin.value) {
+      return false;
+    }
+    return true;
+  }
+
+  private cleanValue(value: any) {
+    if (DataType.isString(value)) {
+      // Do not count whitespace.
+      value = value.trim();
+    }
+    return value;
+  }
+
+  validate(value: any): string | null {
+    // Allow for empty fields.
+    // Use the required rule for making sure it exists.
+    if (!value) {
+      return null;
+    }
+
+    const configMax = this.config?.get('max');
+    const configMin = this.config?.get('min');
+
     if (DataType.isArray(value)) {
-      return 'test';
+      if (configMin && value.length < configMin.value) {
+        return configMin.message || this.message;
+      }
+
+      if (configMax && value.length > configMax.value) {
+        return configMax.message || this.message;
+      }
+    } else {
+      value = parseFloat(value);
+
+      if (isNaN(value)) {
+        return this.message;
+      }
+
+      if (configMin && value < configMin.value) {
+        return configMin.message || this.message;
+      }
+
+      if (configMax && value > configMax.value) {
+        return configMax.message || this.message;
+      }
+    }
+
+    return null;
+  }
+}
+
+export class RequiredRule extends Rule {
+  defaultMessage = 'Value needs to be a number in range.';
+
+  validate(value: any): string | null {
+    if (!value) {
+      return this.message;
+    }
+
+    // Handle required array values.
+    if (DataType.isArray(value)) {
+      if (value.length < 1) {
+        return this.message;
+      }
+    }
+
+    // Require that it be more than just whitespace.
+    try {
+      value = value.trim();
+      if (!value.length) {
+        return this.message;
+      }
+    } catch (e) {
+      if (e instanceof TypeError) {
+        // Value type doesn't have a trim or length.
+      } else {
+        throw e;
+      }
+    }
+
+    // Quill editor blank is not a blank string.
+    if (value === '<p><br></p>') {
+      return this.message;
     }
 
     return null;
