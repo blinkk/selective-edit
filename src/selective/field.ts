@@ -56,16 +56,16 @@ export class Field
         this.rules.addRuleFromConfig(new Config(ruleConfig));
       }
     } else if (DataType.isObject(ruleConfigs)) {
-      // Complex fields define rules into zones using keys.
+      // Complex fields define rules into separate zones.
       for (const zoneKey of Object.keys(ruleConfigs)) {
         for (const ruleConfig of ruleConfigs[zoneKey]) {
-          this.rules.addRuleFromConfig(ruleConfig, zoneKey);
+          this.rules.addRuleFromConfig(new Config(ruleConfig), zoneKey);
         }
       }
     } else {
       console.error(
         'Validation rules in an invalid format.',
-        'Expecting array or Record<zone, array>.',
+        'Expecting array or Record<zoneKey, array>.',
         ruleConfigs
       );
     }
@@ -107,6 +107,9 @@ export class Field
     return classes;
   }
 
+  /**
+   * Generates a list of classes to apply to the input element.
+   */
   classesForInput(zoneKey = DEFAULT_ZONE_KEY): Array<string> {
     const classes: Array<string> = [];
 
@@ -137,6 +140,9 @@ export class Field
     return classes;
   }
 
+  /**
+   * Generates a list of classes to apply to the label element.
+   */
   classesForLabel(zoneKey = DEFAULT_ZONE_KEY): Array<string> {
     const classes = ['selective__field__label'];
 
