@@ -8,12 +8,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/example.min.css">
   </head>
-  <body class="mdc-typography front_matter">
+  <body class="front_matter">
     <div class="container">
       <div class="content">
         <div class="content__section content__data">
-          <div class="mdc-text-field text-field mdc-text-field--textarea">
-            <textarea id="data" class="mdc-text-field__input" rows="6">{
+          <label for="data">Input data</label>
+          <textarea id="data" rows="6">{
   "title": "The stuff dreams are made of.",
   "description": "Fluffy stuff. Wispy stuff. Flying stuff. Falling stuff. Weird stuff.",
   "body": "A field of sparkling fluffy _bunnies_ with horns.",
@@ -45,21 +45,15 @@
     }
   ]
 }</textarea>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch" style=""><label class="mdc-floating-label" for="data" style="">Input data</label></div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-          </div>
         </div>
 
         <div class="content__section content__data__actions">
-          <button class="mdc-button mdc-button--outlined"><span class="mdc-button__ripple"></span>Guess Config from Data</button>
+          <button>Guess Config from Data</button>
         </div>
 
         <div class="content__section content__config">
-          <div class="mdc-text-field text-field mdc-text-field--textarea">
-            <textarea id="config" class="mdc-text-field__input" rows="6">{
+          <label for="config" style="">Configuration</label>
+          <textarea id="config" rows="6">{
   "fields": [
     {
       "type": "text",
@@ -106,16 +100,11 @@
     }
   ]
 }</textarea>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch" style=""><label class="mdc-floating-label" for="config" style="">Configuration</label></div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-          </div>
         </div>
+
         <div class="content__section content__value">
-          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--no-label mdc-text-field--textarea">
-            <textarea id="value" class="mdc-text-field__input" rows="6">{
+          <label for="value" style="">Edited value</label>
+          <textarea id="value" rows="6">{
   "fields": [
     {
       "type": "text",
@@ -134,20 +123,16 @@
     }
   ]
 }</textarea>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch"><label class="mdc-floating-label" for="value" style="">Edited value</label></div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-          </div>
         </div>
       </div>
+
       <div class="sidebar">
         <div class="sidebar__content">
           <div id="fields"></div>
         </div>
       </div>
     </div>
+
     <script src="/example.min.js"></script>
   </body>
 </html>
