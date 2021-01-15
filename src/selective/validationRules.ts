@@ -364,8 +364,8 @@ export class RangeRule extends Rule {
   }
 }
 
-export class RequiredRule extends Rule {
-  defaultMessage = 'Value needs to be a number in range.';
+export class RequireRule extends Rule {
+  defaultMessage = 'Value is required. Cannot be empty.';
 
   validate(value: any): string | null {
     if (!value) {
