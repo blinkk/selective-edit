@@ -301,6 +301,22 @@ export class Field
   }
 
   /**
+   * Template for rendering the field footer structure.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  templateFooterStructure(
+    editor: SelectiveEditor,
+    data: DeepObject
+  ): TemplateResult {
+    return html`<div class="selective__field__footer">
+      ${this.templateFooter(editor, data)}
+    </div>`;
+  }
+
+  /**
    * Template for rendering the field header.
    *
    * @param editor Selective editor used to render the template.
@@ -309,6 +325,23 @@ export class Field
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templateHeader(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     return html``;
+  }
+
+  /**
+   * Template for rendering the field header structure.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  templateHeaderStructure(
+    editor: SelectiveEditor,
+    data: DeepObject
+  ): TemplateResult {
+    return html`<div class="selective__field__header">
+      ${this.templateHeader(editor, data)} ${this.templateLabel(editor, data)}
+      ${this.templateHelp(editor, data)}
+    </div>`;
   }
 
   /**
@@ -357,7 +390,7 @@ export class Field
       return html``;
     }
 
-    return html` <span class="selective__field__invalid">
+    return html`<span class="selective__field__invalid">
       <i class="material-icons">error</i>
     </span>`;
   }
@@ -415,10 +448,9 @@ export class Field
    * @param data Data provided to render the template.
    */
   templateStructure(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    return html`${this.templateHeader(editor, data)}
-    ${this.templateLabel(editor, data)} ${this.templateHelp(editor, data)}
+    return html`${this.templateHeaderStructure(editor, data)}
     ${this.templateInputStructure(editor, data)}
-    ${this.templateFooter(editor, data)}`;
+    ${this.templateFooterStructure(editor, data)}`;
   }
 
   /**

@@ -205,10 +205,20 @@ export class ListField extends SortableMixin(Field) {
     this.render();
   }
 
-  templateActionsFooter(
+  templateEmpty(
     editor: SelectiveEditor,
-    data: DeepObject
+    data: DeepObject,
+    index: number
   ): TemplateResult {
+    return html` <div
+      class="selective__list__item selective__list__item--empty"
+      data-index=${index}
+    >
+      ${this.config?.get('empty_label') || '{ Empty }'}
+    </div>`;
+  }
+
+  templateFooter(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     // Check if validation rules allow for adding more items.
     const value = this.value;
     const rules = this.rules.getRulesForZone();
@@ -237,10 +247,7 @@ export class ListField extends SortableMixin(Field) {
     </div>`;
   }
 
-  templateActionsHeader(
-    editor: SelectiveEditor,
-    data: DeepObject
-  ): TemplateResult {
+  templateHeader(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const items = this.itemsOrCreateItems(editor);
     if (!items.length) {
       return html``;
@@ -302,23 +309,9 @@ export class ListField extends SortableMixin(Field) {
     return html`<div class="selective__field__actions">${actions}</div>`;
   }
 
-  templateEmpty(
-    editor: SelectiveEditor,
-    data: DeepObject,
-    index: number
-  ): TemplateResult {
-    return html` <div
-      class="selective__list__item selective__list__item--empty"
-      data-index=${index}
-    >
-      ${this.config?.get('empty_label') || '{ Empty }'}
-    </div>`;
-  }
-
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const items = this.itemsOrCreateItems(editor);
-    return html`${this.templateActionsHeader(editor, data)}
-      <div class="selective__list">
+    return html`<div class="selective__list">
         ${repeat(
           items,
           item => item.uid,
@@ -333,7 +326,6 @@ export class ListField extends SortableMixin(Field) {
         )}
         ${items.length === 0 ? this.templateEmpty(editor, data, 0) : ''}
       </div>
-      ${this.templateActionsFooter(editor, data)}
       ${this.templateErrors(editor, data)}`;
   }
 

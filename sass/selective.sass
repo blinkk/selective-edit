@@ -114,6 +114,16 @@
     input,
     textarea
       font-family: $font-family
+
+.selective__field__type__list
+  > .selective__field__header
+    display: flex
+    flex-flow: row-reverse
+    justify-content: space-between
+
+    > .selective__field__label
+      flex-grow: 1
+
 .selective__list
   &--auto
     .editor--highlight &
