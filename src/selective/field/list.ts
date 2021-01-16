@@ -13,6 +13,7 @@ import {repeat} from 'lit-html/directives/repeat';
 export interface ListItemComponent {
   field: FieldComponent;
   fields: FieldsComponent;
+  isExpanded: boolean;
   template: (
     editor: SelectiveEditor,
     data: DeepObject,
@@ -152,7 +153,64 @@ export class ListField extends SortableMixin(Field) {
     data: DeepObject
   ): TemplateResult {
     const items = this.itemsOrCreateItems(editor);
-    return html``;
+    if (!items.length) {
+      return html``;
+    }
+
+    const actions = [];
+
+    // Determine the ability to show simple fields and to
+    let areSimpleFields = true;
+    let areAllExpanded = true;
+    let areAllCollapsed = true;
+    for (const item of items) {
+      if (!item.fields.isSimple || !item.fields.allowSimple) {
+        areSimpleFields = false;
+      }
+      if (!item.isExpanded) {
+        areAllExpanded = false;
+      }
+      if (item.isExpanded) {
+        areAllCollapsed = false;
+      }
+    }
+
+    // Do not show the expand/collapse for simplet fields.
+    if (areSimpleFields) {
+      return html``;
+    }
+
+    const handleExpandAll = () => {
+      for (const item of items) {
+        item.isExpanded = true;
+      }
+      this.render();
+    };
+
+    actions.push(html`<div
+      ?disabled=${areAllExpanded}
+      class="selective__action selective__action__expand"
+      @click=${handleExpandAll}
+    >
+      <i class="material-icons">unfold_more</i>
+    </div>`);
+
+    const handleCollapseAll = () => {
+      for (const item of items) {
+        item.isExpanded = false;
+      }
+      this.render();
+    };
+
+    actions.push(html`<div
+      ?disabled=${areAllCollapsed}
+      class="selective__action selective__action__collapse"
+      @click=${handleCollapseAll}
+    >
+      <i class="material-icons">unfold_less</i>
+    </div>`);
+
+    return html`<div class="selective__field__actions">${actions}</div>`;
   }
 
   templateEmpty(
@@ -232,11 +290,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
     item: ListItemComponent,
     index: number
   ): TemplateResult {
-    const hasPreviewConfig = Boolean(
-      this.fields.config?.get('preview_field') ||
-        this.fields.config?.get('preview_fields')
-    );
-    if (!hasPreviewConfig && item.fields.isSimpleField) {
+    if (item.fields.allowSimple && item.fields.isSimple) {
       return this.templateSimple(editor, data, item, index);
     } else if (this.isExpanded) {
       return this.templateExpanded(editor, data, item, index);

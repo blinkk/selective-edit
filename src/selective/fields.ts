@@ -14,6 +14,7 @@ import {repeat} from 'lit-html/directives/repeat';
 
 export interface FieldsComponent {
   addField(fieldConfig: Config): void;
+  allowSimple: boolean;
   template: Template;
   templatePreview: Template;
   updateOriginal(
@@ -69,6 +70,12 @@ export class Fields
       return;
     }
     this.fields.push(newField);
+  }
+
+  get allowSimple(): boolean {
+    return (
+      !this.config?.get('preview_field') && !this.config?.get('preview_fields')
+    );
   }
 
   /**
