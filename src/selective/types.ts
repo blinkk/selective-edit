@@ -4,7 +4,7 @@ import {ClassManager} from '../utility/classes';
 import {FieldsConstructor} from './fields';
 
 export interface GlobalTypes {
-  fields: FieldsConstructor;
+  FieldsCls: FieldsConstructor;
 }
 
 export interface Types {

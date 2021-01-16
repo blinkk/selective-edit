@@ -25,7 +25,7 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
     this.types = {
       fields: new ClassManager<FieldConstructor, FieldComponent>(),
       globals: {
-        fields: (Fields as unknown) as FieldsConstructor,
+        FieldsCls: (Fields as unknown) as FieldsConstructor,
       },
       rules: new ClassManager<RuleConstructor, RuleComponent>(),
     };
@@ -68,6 +68,10 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
     for (const fieldConfigRaw of this.config?.get('fields') || []) {
       this.fields.addField(new Config(fieldConfigRaw));
     }
+  }
+
+  get value(): any {
+    return this.fields.value;
   }
 }
 

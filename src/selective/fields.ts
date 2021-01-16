@@ -9,11 +9,18 @@ import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
-import extend from 'deep-extend';
+import merge from 'lodash.merge';
 import {repeat} from 'lit-html/directives/repeat';
 
 export interface FieldsComponent {
+  addField(fieldConfig: Config): void;
   template: Template;
+  templatePreview: Template;
+  updateOriginal(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    deep?: boolean
+  ): void;
 
   /**
    * Fields can define any properties or methods they need.
@@ -21,10 +28,9 @@ export interface FieldsComponent {
   [x: string]: any;
 }
 
-export type FieldsConstructor = (
-  types: Types,
-  config: Config
-) => FieldsComponent;
+export interface FieldsConstructor {
+  new (types: Types, config: Config): FieldsComponent;
+}
 
 /**
  * Fields control the display of a list of fields in the editor.
@@ -149,6 +155,17 @@ export class Fields
   }
 
   /**
+   * Template for how to render a preview.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  templatePreview(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    return html`TODO: Fields Preview...`;
+  }
+
+  /**
    * Certain cases require the field to be locked while updating to prevent bad
    * data mixing. This allows for manually unlocking the fields.
    */
@@ -171,7 +188,7 @@ export class Fields
    * @param data Data provided to render the template.
    * @param deep Update in fields as well, such as when the field is not visible.
    */
-  private updateOriginal(
+  updateOriginal(
     editor: SelectiveEditor,
     data: DeepObject,
     deep = false
@@ -210,6 +227,6 @@ export class Fields
       value.set(field.key, field.value);
     }
 
-    return extend({}, this?.originalValue?.obj || {}, value.obj);
+    return merge({}, this?.originalValue?.obj || {}, value.obj);
   }
 }

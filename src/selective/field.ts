@@ -12,8 +12,8 @@ import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
-import stringify from 'json-stable-stringify';
 import {repeat} from 'lit-html/directives/repeat';
+import stringify from 'json-stable-stringify';
 
 export interface FieldComponent {
   template: Template;
@@ -198,9 +198,7 @@ export class Field
       return false;
     }
 
-    return (
-      stringify(this.currentValue?.obj) === stringify(this.originalValue?.obj)
-    );
+    return stringify(this.currentValue) === stringify(this.originalValue);
   }
 
   get isValid(): boolean {
@@ -487,43 +485,8 @@ export class Field
       this.render();
     }
   }
-}
 
-export class TextField extends Field {
-  constructor(types: Types, config: Config, fieldType = 'text') {
-    super(types, config, fieldType);
-  }
-
-  templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    const value = this.currentValue || '';
-    return html`<input
-        class=${this.expandClasses(this.classesForInput())}
-        type="text"
-        id="${this.uid}"
-        placeholder=${this.config?.get('placeholder') || ''}
-        @input=${this.handleInput.bind(this)}
-        value=${value}
-      />
-      ${this.templateErrors(editor, data)}`;
-  }
-}
-
-export class TextareaField extends Field {
-  constructor(types: Types, config: Config, fieldType = 'textarea') {
-    super(types, config, fieldType);
-  }
-
-  templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    const value = this.currentValue || '';
-    return html`<textarea
-        class=${this.expandClasses(this.classesForInput())}
-        id=${this.uid}
-        rows=${this.config?.get('rows') || 6}
-        placeholder=${this.config?.get('placeholder') || ''}
-        @input=${this.handleInput.bind(this)}
-      >
-${value}</textarea
-      >
-      ${this.templateErrors(editor, data)}`;
+  get value(): any {
+    return this.currentValue;
   }
 }
