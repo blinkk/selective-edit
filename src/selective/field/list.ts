@@ -311,7 +311,8 @@ export class ListField extends SortableMixin(Field) {
 
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const items = this.itemsOrCreateItems(editor);
-    return html`<div class="selective__list">
+    return html`${this.templateHelp(editor, data)}
+      <div class="selective__list">
         ${repeat(
           items,
           item => item.uid,

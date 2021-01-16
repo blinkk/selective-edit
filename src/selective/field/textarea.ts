@@ -12,7 +12,7 @@ export class TextareaField extends Field {
 
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const value = this.currentValue || '';
-    return html`<textarea
+    return html` ${this.templateHelp(editor, data)}<textarea
         class=${this.expandClasses(this.classesForInput())}
         id=${this.uid}
         rows=${this.config?.get('rows') || 6}

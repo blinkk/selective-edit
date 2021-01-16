@@ -258,6 +258,7 @@ export class Field
    *
    * @param editor Selective editor used to render the template.
    * @param data Data provided to render the template.
+   * @param zoneKey Zone to provide the error messages for.
    */
   templateErrors(
     editor: SelectiveEditor,
@@ -340,7 +341,6 @@ export class Field
   ): TemplateResult {
     return html`<div class="selective__field__header">
       ${this.templateHeader(editor, data)} ${this.templateLabel(editor, data)}
-      ${this.templateHelp(editor, data)}
     </div>`;
   }
 
@@ -349,13 +349,24 @@ export class Field
    *
    * @param editor Selective editor used to render the template.
    * @param data Data provided to render the template.
+   * @param zoneKey Zone to provide the error messages for.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  templateHelp(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    const helpMessage = this.config?.get('help');
+  templateHelp(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    zoneKey?: string
+  ): TemplateResult {
+    let helpMessage = this.config?.get('help');
     if (!helpMessage) {
       return html``;
     }
+
+    // Allow for help messages to be broken up into zones.
+    if (zoneKey && DataType.isObject(helpMessage)) {
+      helpMessage = helpMessage[zoneKey];
+    }
+
     return html`<div class="selective__field__help">${helpMessage}</div>`;
   }
 
@@ -403,7 +414,8 @@ export class Field
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    return html`<div class="selective__field__input">Input not defined.</div>`;
+    return html`${this.templateHelp(editor, data)}
+      <div class="selective__field__input">Input not defined.</div>`;
   }
 
   /**
