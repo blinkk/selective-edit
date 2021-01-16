@@ -9,13 +9,11 @@ import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
 import {DeepObject} from '../utility/deepObject';
 import {EVENT_RENDER_COMPLETE} from './events';
-import {Template} from './template';
 import {Types} from './types';
 
 export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
   container?: HTMLElement;
   fields: FieldsComponent;
-  template: Template;
   types: Types;
 
   constructor(config: Config | Record<string, any>, container?: HTMLElement) {
@@ -30,7 +28,6 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
       rules: new ClassManager<RuleConstructor, RuleComponent>(),
     };
 
-    this.template = defaultTemplate;
     this.fields = new Fields(this.types, {} as Config);
   }
 
@@ -50,6 +47,12 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
 
   addRuleTypes(ruleTypes: Record<string, RuleConstructor>) {
     this.types.rules.registerClasses(ruleTypes);
+  }
+
+  template(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    return html`<div class="selective">
+      ${editor.fields.template(editor, data)}
+    </div>`;
   }
 
   render() {
@@ -73,13 +76,4 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
   get value(): any {
     return this.fields.value;
   }
-}
-
-function defaultTemplate(
-  editor: SelectiveEditor,
-  data: DeepObject
-): TemplateResult {
-  return html`<div class="selective">
-    ${editor.fields.template(editor, data)}
-  </div>`;
 }
