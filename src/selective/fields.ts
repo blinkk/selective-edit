@@ -3,12 +3,14 @@ import {Base} from '../mixins';
 import {Config} from '../utility/config';
 import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
+import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
 import {FieldComponent} from './field';
 import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
+import {findPreviewValue} from '../utility/preview';
 import merge from 'lodash.merge';
 import {repeat} from 'lit-html/directives/repeat';
 
@@ -135,6 +137,16 @@ export class Fields
     }
   }
 
+  get previewFields(): Array<string> {
+    let previewFields =
+      this.config?.get('preview_field', this.config?.get('preview_fields')) ||
+      [];
+    if (!DataType.isArray(previewFields)) {
+      previewFields = [previewFields];
+    }
+    return previewFields;
+  }
+
   /**
    * Template for determining how to render the fields.
    *
@@ -169,7 +181,7 @@ export class Fields
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templatePreview(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    return html`TODO: Fields Preview...`;
+    return html`${findPreviewValue(this.value, this.previewFields, '{ Item }')}`;
   }
 
   /**

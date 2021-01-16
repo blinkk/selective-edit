@@ -50,31 +50,14 @@ function guessPreviewForObject(obj: Record<string, any>): any {
 }
 
 export function findPreviewValue(
-  mainConfig: Config,
-  subConfig: Config,
   value: Record<string, any>,
+  previewFieldKeys: Array<string>,
   defaultValue: string
 ): string | TemplateResult {
   value = autoDeepObject(value);
   let previewValue = null;
 
-  const defaultPreviewField = mainConfig.get('preview_field');
-  const defaultPreviewFields = mainConfig.get('preview_fields');
-  const previewField = subConfig.get('preview_field');
-  const previewFields = subConfig.get('preview_fields');
-
-  let previewFieldKeys =
-    previewField ||
-    previewFields ||
-    defaultPreviewField ||
-    defaultPreviewFields;
-
   if (previewFieldKeys) {
-    // Treat preview_type and preview_types as an array.
-    if (!DataType.isArray(previewFieldKeys)) {
-      previewFieldKeys = [previewFieldKeys];
-    }
-
     for (const fieldKey of previewFieldKeys) {
       previewValue = value.get(fieldKey);
 

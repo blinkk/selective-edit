@@ -143,7 +143,7 @@ export class ListField extends SortableMixin(Field) {
           this.handleAddItem(evt, editor, data);
         }}
       >
-        ${this.config?.get('addLabel') || 'Add'}
+        ${this.config?.get('add_label') || 'Add'}
       </button>
     </div>`;
   }
@@ -222,7 +222,7 @@ export class ListField extends SortableMixin(Field) {
       class="selective__list__item selective__list__item--empty"
       data-index=${index}
     >
-      ${this.config?.get('emptyLabel') || '{ Empty }'}
+      ${this.config?.get('empty_label') || '{ Empty }'}
     </div>`;
   }
 

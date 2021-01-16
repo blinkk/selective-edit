@@ -14,7 +14,6 @@ const valueEl = document.querySelector('#value') as HTMLTextAreaElement;
 /**
  * Basic example of using -selective editor.
  */
-
 const editorConfig = JSON.parse(configEl.value || '') as Record<string, any>;
 const exampleSelective = new SelectiveEditor(editorConfig, fieldsEl);
 
