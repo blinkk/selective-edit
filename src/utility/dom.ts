@@ -25,7 +25,7 @@ export const findParentDraggable = (
   // Use the event target to traverse until the draggable element is found.
   let isDraggable = false;
   while (target && !isDraggable) {
-    isDraggable = target.getAttribute('draggable') == 'true';
+    isDraggable = target.getAttribute('draggable') === 'true';
     if (!isDraggable) {
       target = target.parentElement;
     }

@@ -3,6 +3,7 @@ import {Field, FieldComponent} from '../field';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../../mixins';
 import {DeepObject} from '../../utility/deepObject';
+import {EVENT_UNLOCK} from '../events';
 import {FieldsComponent} from '../fields';
 import {SelectiveEditor} from '../..';
 import {SortableMixin} from '../../mixins/sortable';
@@ -35,6 +36,7 @@ export class ListField extends SortableMixin(Field) {
     super(types, config, fieldType);
     this.items = null;
     this.ListItemCls = ListFieldItem;
+    this.sortableUi.listeners.add('sort', this.handleSort.bind(this));
   }
 
   private createFields(fieldConfigs: Array<any>): FieldsComponent {
@@ -114,7 +116,94 @@ export class ListField extends SortableMixin(Field) {
     this.render();
   }
 
-  handleDeleteItem(evt: Event) {}
+  handleDeleteItem(evt: Event, editor: SelectiveEditor, index: number) {
+    const items = this.itemsOrCreateItems(editor);
+    // Prevent the delete from bubbling.
+    evt.stopPropagation();
+
+    // Remove the value at the index.
+    items.splice(index, 1);
+
+    // Lock the fields to prevent the values from being updated at the same
+    // time as the original value.
+    const downstreamItems = items.slice(index);
+    for (const item of downstreamItems) {
+      item.fields.lock();
+    }
+    this.lock();
+
+    // Unlock fields after saving is complete to let the values be updated
+    // when clean.
+    // TODO: Automate this unlock without having to be done manually.
+    document.addEventListener(
+      EVENT_UNLOCK,
+      () => {
+        for (const item of downstreamItems) {
+          item.fields.unlock();
+        }
+        this.unlock();
+        this.render();
+      },
+      {once: true}
+    );
+
+    this.render();
+  }
+
+  handleSort(startIndex: number, endIndex: number) {
+    // Rework the arrays to have the items in the correct position.
+    const newListItems: Array<ListItemComponent> = [];
+    const oldListItems: Array<ListItemComponent> = this.items || [];
+    const maxIndex = Math.max(endIndex, startIndex);
+    const minIndex = Math.min(endIndex, startIndex);
+
+    // Determine which direction to shift misplaced items.
+    let modifier = 1;
+    if (startIndex > endIndex) {
+      modifier = -1;
+    }
+
+    for (let i = 0; i < oldListItems.length; i++) {
+      if (i < minIndex || i > maxIndex) {
+        // Leave in the same order.
+        newListItems[i] = oldListItems[i];
+
+        newListItems[i].fields.lock();
+      } else if (i === endIndex) {
+        // This element is being moved to, place the moved value here.
+        newListItems[i] = oldListItems[startIndex];
+
+        // Lock the fields to prevent the values from being updated at the same
+        // time as the original value.
+        newListItems[i].fields.lock();
+      } else {
+        // Shift the old index using the modifier to determine direction.
+        newListItems[i] = oldListItems[i + modifier];
+
+        // Lock the fields to prevent the values from being updated at the same
+        // time as the original value.
+        newListItems[i].fields.lock();
+      }
+    }
+
+    this.items = newListItems;
+    this.lock();
+
+    // Unlock fields after saving is complete to let the values be updated when clean.
+    document.addEventListener(
+      EVENT_UNLOCK,
+      () => {
+        for (const item of newListItems) {
+          item.fields.unlock();
+        }
+        this.unlock();
+        this.render();
+      },
+      {once: true}
+    );
+
+    this.render();
+  }
 
   templateActionsFooter(
     editor: SelectiveEditor,
@@ -333,7 +422,9 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       <div
         class="selective__list__item__delete tooltip--left"
         data-item-uid=${item.uid}
-        @click=${this.field.handleDeleteItem.bind(this.field)}
+        @click=${(evt: Event) => {
+          this.field.handleDeleteItem(evt, editor, index);
+        }}
         aria-label="Delete item"
         data-tip="Delete item"
       >
@@ -349,7 +440,6 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
     index: number
   ): TemplateResult {
     const sortable = this.field.sortableUi;
-
     return html` <div
       class="selective__list__item selective__sortable"
       draggable="true"
@@ -403,7 +493,9 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       <div
         class="selective__list__item__delete tooltip--left"
         data-item-uid=${item.uid}
-        @click=${this.field.handleDeleteItem.bind(this.field)}
+        @click=${(evt: Event) => {
+          this.field.handleDeleteItem(evt, editor, index);
+        }}
         title="Delete item"
       >
         <i class="material-icons">delete</i>

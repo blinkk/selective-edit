@@ -2,8 +2,6 @@
  * UI elements for the working with sortables.
  */
 
-import { html } from 'lit-html'
-import { repeat } from 'lit-html/directives/repeat'
 import {
   findParentDraggable,
 } from '../../utility/dom'
