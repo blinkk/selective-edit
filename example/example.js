@@ -9,6 +9,7 @@ const deepObject_1 = require("./utility/deepObject");
 const configEl = document.querySelector('#config');
 const dataEl = document.querySelector('#data');
 const fieldsEl = document.querySelector('#fields');
+const guessEl = document.querySelector('.content__data__actions button');
 const valueEl = document.querySelector('#value');
 /**
  * Basic example of using -selective editor.
@@ -29,6 +30,23 @@ document.addEventListener(events_1.EVENT_RENDER, () => {
 // Show value after every render as an example.
 document.addEventListener(events_1.EVENT_RENDER_COMPLETE, () => {
     valueEl.textContent = JSON.stringify(exampleSelective.value, null, 2);
+});
+// Allow guessing config based on data.
+guessEl.addEventListener('click', () => {
+    const configs = exampleSelective.guessFields();
+    const deepPrettyFields = (configs) => {
+        const prettyFields = [];
+        for (const config of configs) {
+            const prettyConfig = config.config;
+            if (prettyConfig['fields']) {
+                prettyConfig['fields'] = deepPrettyFields(prettyConfig['fields']);
+            }
+            prettyFields.push(config.config);
+        }
+        return prettyFields;
+    };
+    const prettyFields = deepPrettyFields(configs);
+    configEl.textContent = JSON.stringify({ fields: prettyFields }, null, 2);
 });
 exampleSelective.render();
 //# sourceMappingURL=example.js.map
