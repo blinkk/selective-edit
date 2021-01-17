@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("./selective/events");
+const group_1 = require("./selective/field/group");
 const list_1 = require("./selective/field/list");
 const index_1 = require("./index");
 const text_1 = require("./selective/field/text");
@@ -18,6 +19,7 @@ const editorConfig = JSON.parse(configEl.value || '');
 const exampleSelective = new index_1.SelectiveEditor(editorConfig, fieldsEl);
 // Add the field types.
 exampleSelective.addFieldTypes({
+    group: group_1.GroupField,
     list: list_1.ListField,
     text: text_1.TextField,
     textarea: textarea_1.TextareaField,
