@@ -1,4 +1,5 @@
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from './selective/events';
+import {Config} from './utility/config';
 import {FieldConstructor} from './selective/field';
 import {ListField} from './selective/field/list';
 import {SelectiveEditor} from './index';
@@ -9,6 +10,9 @@ import {autoDeepObject} from './utility/deepObject';
 const configEl = document.querySelector('#config') as HTMLTextAreaElement;
 const dataEl = document.querySelector('#data') as HTMLTextAreaElement;
 const fieldsEl = document.querySelector('#fields') as HTMLElement;
+const guessEl = document.querySelector(
+  '.content__data__actions button'
+) as HTMLButtonElement;
 const valueEl = document.querySelector('#value') as HTMLTextAreaElement;
 
 /**
@@ -34,6 +38,26 @@ document.addEventListener(EVENT_RENDER, () => {
 // Show value after every render as an example.
 document.addEventListener(EVENT_RENDER_COMPLETE, () => {
   valueEl.textContent = JSON.stringify(exampleSelective.value, null, 2);
+});
+
+// Allow guessing config based on data.
+guessEl.addEventListener('click', () => {
+  const configs = exampleSelective.guessFields();
+
+  const deepPrettyFields = (configs: Array<Config>) => {
+    const prettyFields = [];
+    for (const config of configs) {
+      const prettyConfig = config.config;
+      if (prettyConfig['fields']) {
+        prettyConfig['fields'] = deepPrettyFields(prettyConfig['fields']);
+      }
+      prettyFields.push(config.config);
+    }
+    return prettyFields;
+  };
+
+  const prettyFields = deepPrettyFields(configs);
+  configEl.textContent = JSON.stringify({fields: prettyFields}, null, 2);
 });
 
 exampleSelective.render();

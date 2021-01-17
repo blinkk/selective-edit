@@ -49,7 +49,7 @@ export class ListField extends SortableMixin(Field) {
 
     // Create the fields based on the config.
     for (const fieldConfigRaw of fieldConfigs) {
-      const fieldConfig = new Config(fieldConfigRaw);
+      const fieldConfig = autoConfig(fieldConfigRaw);
       fieldConfig.set('parentKey', this.fullKey);
 
       // Mark the auto fields.
@@ -70,15 +70,22 @@ export class ListField extends SortableMixin(Field) {
       // TODO: create all the items based on the config.
       this.items = [];
 
-      const fieldConfigs = this.config?.get('fields') || [];
+      let fieldConfigs = this.config?.get('fields') || [];
 
       // Add list items for each of the values in the list already.
       for (const value of this.originalValue || []) {
         // If no field configs, auto guess based on first row with a value.
         if (fieldConfigs.length === 0) {
           this.usingAutoFields = true;
-          // TODO: Auto-guess fields based on the first item in the list.
-          // TODO: Store the the auto-guess configs into the `this.config`.
+
+          // Auto-guess fields based on the first item in the list.
+          const autoFields = new this.types.globals.AutoFieldsCls(
+            autoConfig(this.config?.get('autoFields') || {})
+          );
+          fieldConfigs = autoFields.guessFields(value);
+
+          // Store the the auto-guessed configs for new list items.
+          this.config?.set('fields', fieldConfigs);
         }
 
         const fields = this.createFields(fieldConfigs);
