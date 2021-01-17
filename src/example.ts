@@ -1,6 +1,7 @@
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from './selective/events';
 import {Config} from './utility/config';
 import {FieldConstructor} from './selective/field';
+import {GroupField} from './selective/field/group';
 import {ListField} from './selective/field/list';
 import {SelectiveEditor} from './index';
 import {TextField} from './selective/field/text';
@@ -23,6 +24,7 @@ const exampleSelective = new SelectiveEditor(editorConfig, fieldsEl);
 
 // Add the field types.
 exampleSelective.addFieldTypes({
+  group: (GroupField as unknown) as FieldConstructor,
   list: (ListField as unknown) as FieldConstructor,
   text: (TextField as unknown) as FieldConstructor,
   textarea: (TextareaField as unknown) as FieldConstructor,

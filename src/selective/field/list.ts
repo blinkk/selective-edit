@@ -31,15 +31,17 @@ export interface ListItemConstructor {
 export class ListField extends SortableMixin(Field) {
   protected items: Array<ListItemComponent> | null;
   protected ListItemCls: ListItemConstructor;
+  usingAutoFields: boolean;
 
   constructor(types: Types, config: Config, fieldType = 'list') {
     super(types, config, fieldType);
     this.items = null;
+    this.usingAutoFields = false;
     this.ListItemCls = ListFieldItem;
     this.sortableUi.listeners.add('sort', this.handleSort.bind(this));
   }
 
-  private createFields(fieldConfigs: Array<any>): FieldsComponent {
+  protected createFields(fieldConfigs: Array<any>): FieldsComponent {
     const fields = new this.types.globals.FieldsCls(
       this.types,
       new Config({
@@ -63,52 +65,8 @@ export class ListField extends SortableMixin(Field) {
     return fields;
   }
 
-  private itemsOrCreateItems(
-    editor: SelectiveEditor
-  ): Array<ListItemComponent> {
-    if (this.items === null) {
-      // TODO: create all the items based on the config.
-      this.items = [];
-
-      let fieldConfigs = this.config?.get('fields') || [];
-
-      // Add list items for each of the values in the list already.
-      for (const value of this.originalValue || []) {
-        // If no field configs, auto guess based on first row with a value.
-        if (fieldConfigs.length === 0) {
-          this.usingAutoFields = true;
-
-          // Auto-guess fields based on the first item in the list.
-          const autoFields = new this.types.globals.AutoFieldsCls(
-            autoConfig(this.config?.get('autoFields') || {})
-          );
-          fieldConfigs = autoFields.guessFields(value);
-
-          // Store the the auto-guessed configs for new list items.
-          this.config?.set('fields', fieldConfigs);
-        }
-
-        const fields = this.createFields(fieldConfigs);
-
-        // When an item is not expanded it does not get the value
-        // updated correctly so we need to manually call the data update.
-        fields.updateOriginal(editor, value);
-        for (const field of fields.fields) {
-          field.updateOriginal(
-            editor,
-            autoConfig(value || fields.defaultValue)
-          );
-        }
-
-        this.items.push(new ListFieldItem(this, fields));
-      }
-    }
-
-    return this.items;
-  }
-
   handleAddItem(evt: Event, editor: SelectiveEditor, data: DeepObject) {
-    const items = this.itemsOrCreateItems(editor);
+    const items = this.ensureItems(editor);
     const fieldConfigs = this.config?.get('fields') || [];
     const fields = this.createFields(fieldConfigs);
 
@@ -123,8 +81,8 @@ export class ListField extends SortableMixin(Field) {
     this.render();
   }
 
-  handleDeleteItem(evt: Event, editor: SelectiveEditor, index: number) {
-    const items = this.itemsOrCreateItems(editor);
+  handleDeleteItem(evt: Event, index: number) {
+    const items = this.items || [];
     // Prevent the delete from bubbling.
     evt.stopPropagation();
 
@@ -212,6 +170,48 @@ export class ListField extends SortableMixin(Field) {
     this.render();
   }
 
+  protected ensureItems(editor: SelectiveEditor): Array<ListItemComponent> {
+    if (this.items === null) {
+      // TODO: create all the items based on the config.
+      this.items = [];
+
+      let fieldConfigs = this.config?.get('fields') || [];
+
+      // Add list items for each of the values in the list already.
+      for (const value of this.originalValue || []) {
+        // If no field configs, auto guess based on first row with a value.
+        if (fieldConfigs.length === 0) {
+          this.usingAutoFields = true;
+
+          // Auto-guess fields based on the first item in the list.
+          const autoFields = new this.types.globals.AutoFieldsCls(
+            autoConfig(this.config?.get('autoFields') || {})
+          );
+          fieldConfigs = autoFields.guessFields(value);
+
+          // Store the the auto-guessed configs for new list items.
+          this.config?.set('fields', fieldConfigs);
+        }
+
+        const fields = this.createFields(fieldConfigs);
+
+        // When an item is not expanded it does not get the value
+        // updated correctly so we need to manually call the data update.
+        fields.updateOriginal(editor, value);
+        for (const field of fields.fields) {
+          field.updateOriginal(
+            editor,
+            autoConfig(value || fields.defaultValue)
+          );
+        }
+
+        this.items.push(new ListFieldItem(this, fields));
+      }
+    }
+
+    return this.items;
+  }
+
   templateEmpty(
     editor: SelectiveEditor,
     data: DeepObject,
@@ -254,8 +254,9 @@ export class ListField extends SortableMixin(Field) {
     </div>`;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templateHeader(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    const items = this.itemsOrCreateItems(editor);
+    const items = this.ensureItems(editor);
     if (!items.length) {
       return html``;
     }
@@ -317,11 +318,10 @@ export class ListField extends SortableMixin(Field) {
   }
 
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    const items = this.itemsOrCreateItems(editor);
     return html`${this.templateHelp(editor, data)}
       <div class="selective__list">
         ${repeat(
-          items,
+          this.items || [],
           item => item.uid,
           (item: ListItemComponent, index) => {
             const itemValue = new DeepObject(
@@ -332,7 +332,7 @@ export class ListField extends SortableMixin(Field) {
             return item.template(editor, itemValue, item, index);
           }
         )}
-        ${items.length === 0 ? this.templateEmpty(editor, data, 0) : ''}
+        ${this.items?.length ? '' : this.templateEmpty(editor, data, 0)}
       </div>
       ${this.templateErrors(editor, data)}`;
   }
@@ -423,7 +423,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
         class="selective__list__item__delete tooltip--left"
         data-item-uid=${item.uid}
         @click=${(evt: Event) => {
-          this.field.handleDeleteItem(evt, editor, index);
+          this.field.handleDeleteItem(evt, index);
         }}
         aria-label="Delete item"
         data-tip="Delete item"
@@ -494,7 +494,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
         class="selective__list__item__delete tooltip--left"
         data-item-uid=${item.uid}
         @click=${(evt: Event) => {
-          this.field.handleDeleteItem(evt, editor, index);
+          this.field.handleDeleteItem(evt, index);
         }}
         title="Delete item"
       >

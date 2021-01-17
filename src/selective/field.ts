@@ -409,10 +409,12 @@ export class Field
   /**
    * Template for rendering the field input.
    *
+   * The help text is part of the input template so complex inputs can
+   * use zones for the help text.
+   *
    * @param editor Selective editor used to render the template.
    * @param data Data provided to render the template.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     return html`${this.templateHelp(editor, data)}
       <div class="selective__field__input">Input not defined.</div>`;

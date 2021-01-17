@@ -17,6 +17,8 @@ import {repeat} from 'lit-html/directives/repeat';
 export interface FieldsComponent {
   addField(fieldConfig: Config): void;
   allowSimple: boolean;
+  isClean: boolean;
+  isValid: boolean;
   template: Template;
   templatePreview: Template;
   updateOriginal(
