@@ -6,6 +6,7 @@ import {ListField} from './selective/field/list';
 import {SelectiveEditor} from './index';
 import {TextField} from './selective/field/text';
 import {TextareaField} from './selective/field/textarea';
+import {VariantField} from './selective/field/variant';
 import {autoDeepObject} from './utility/deepObject';
 
 const configEl = document.querySelector('#config') as HTMLTextAreaElement;
@@ -28,6 +29,7 @@ exampleSelective.addFieldTypes({
   list: (ListField as unknown) as FieldConstructor,
   text: (TextField as unknown) as FieldConstructor,
   textarea: (TextareaField as unknown) as FieldConstructor,
+  variant: (VariantField as unknown) as FieldConstructor,
 });
 
 exampleSelective.data = autoDeepObject(JSON.parse(dataEl.value));

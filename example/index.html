@@ -30,6 +30,10 @@
     "title": "Something more",
     "description": "Hidden by default."
   },
+  "varied": {
+    "title": "Varied life",
+    "description": "Fields are varied depending on choice."
+  },
   "clouds": [
     {
       "title": "Cirrus fibratus radiatus",
@@ -117,6 +121,39 @@
           "label": "Description"
         }
       ]
+    },
+    {
+      "type": "variant",
+      "key": "varied",
+      "label": "Variant",
+      "help": "Variant fields change based on variant.",
+      "variants": {
+        "simple":{
+          "label": "Simple",
+          "fields": [
+            {
+              "type": "text",
+              "key": "title",
+              "label": "Title"
+            }
+          ]
+        },
+        "multi":{
+          "label": "Multiple",
+          "fields": [
+            {
+              "type": "text",
+              "key": "title",
+              "label": "Title"
+            },
+            {
+              "type": "textarea",
+              "key": "description",
+              "label": "Description"
+            }
+          ]
+        }
+      }
     }
   ]
 }</textarea>

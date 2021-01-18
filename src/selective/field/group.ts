@@ -26,8 +26,6 @@ export class GroupField extends Field {
       })
     );
 
-    console.log(fieldConfigs);
-
     // Create the fields based on the config.
     for (const fieldConfigRaw of fieldConfigs) {
       const fieldConfig = autoConfig(fieldConfigRaw);
@@ -40,7 +38,6 @@ export class GroupField extends Field {
 
       fields.addField(fieldConfig);
     }
-
     return fields;
   }
 
@@ -138,7 +135,7 @@ export class GroupField extends Field {
     </div>`;
   }
 
-  get value(): any {
+  get value(): Record<string, any> {
     if (!this.fields) {
       return this.originalValue;
     }
