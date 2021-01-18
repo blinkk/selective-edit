@@ -25,11 +25,14 @@ export class VariantField extends Field {
       this.originalValue?._variant ||
       this.config?.get('default');
 
-    console.log('create the fields', variant);
-
     // If we don't know which variant to use, then skip it.
     if (!variant) {
       return undefined;
+    }
+
+    // Use the found variant if it is undefined.
+    if (this.variant === undefined) {
+      this.variant = variant;
     }
 
     const variantConfig = (this.config?.get('variants') || {})[variant] || {};
@@ -76,13 +79,6 @@ export class VariantField extends Field {
       return;
     }
     this.variant = variant;
-
-    console.log(
-      'change variant',
-      variant,
-      this.variant,
-      this.originalValue?.variant
-    );
 
     // Reset the fields so they can be recreated next render.
     this.fields = undefined;
