@@ -1,6 +1,6 @@
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from './selective/events';
 import {Config} from './utility/config';
-import {FieldConstructor} from './selective/field';
+import {FieldConfig, FieldConstructor, TestTextField} from './selective/field';
 import {GroupField} from './selective/field/group';
 import {ListField} from './selective/field/list';
 import {SelectiveEditor} from './index';
@@ -48,14 +48,13 @@ document.addEventListener(EVENT_RENDER_COMPLETE, () => {
 guessEl.addEventListener('click', () => {
   const configs = exampleSelective.guessFields();
 
-  const deepPrettyFields = (configs: Array<Config>) => {
+  const deepPrettyFields = (configs: Array<FieldConfig>) => {
     const prettyFields = [];
     for (const config of configs) {
-      const prettyConfig = config.config;
-      if (prettyConfig['fields']) {
-        prettyConfig['fields'] = deepPrettyFields(prettyConfig['fields']);
+      if (config.fields) {
+        config.fields = deepPrettyFields(config.fields);
       }
-      prettyFields.push(config.config);
+      prettyFields.push(config);
     }
     return prettyFields;
   };
@@ -65,3 +64,11 @@ guessEl.addEventListener('click', () => {
 });
 
 exampleSelective.render();
+
+const testText = new TestTextField({
+  key: 'test',
+  type: 'testType',
+  placeholder: 'placeholder',
+});
+
+console.log(testText.config.placeholder);

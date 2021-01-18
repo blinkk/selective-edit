@@ -1,9 +1,16 @@
-import {Base} from '../mixins';
 import {Config} from '../utility/config';
-import {ConfigMixin} from '../mixins/config';
 import {DataType} from '../utility/dataType';
+import {FieldConfig} from './field';
+import {FieldsConfig} from './fields';
+
+export interface AutoFieldsConfig {
+  ignoreKeys?: Array<string>;
+  ignorePatterns?: Array<string>;
+}
 
 export interface AutoFieldsComponent {
+  config: AutoFieldsConfig;
+
   /**
    * Use the provided data to guess what types of field to use
    * to edit the data.
@@ -11,7 +18,7 @@ export interface AutoFieldsComponent {
    * @param key Key to use in the configuration.
    * @param data Data to use for guessing field configurations.
    */
-  guessField(key: string, data: any): Config;
+  guessField(key: string, data: any): FieldConfig;
 
   /**
    * Use the provided data to guess what types of fields to use
@@ -19,7 +26,7 @@ export interface AutoFieldsComponent {
    *
    * @param data Data to use for guessing field configurations.
    */
-  guessFields(data: any): Array<Config>;
+  guessFields(data: any): Array<FieldConfig>;
 
   /**
    * AutoFields can define any properties or methods they need.
@@ -28,18 +35,20 @@ export interface AutoFieldsComponent {
 }
 
 export interface AutoFieldsConstructor {
-  new (config: Config): AutoFieldsComponent;
+  new (config: AutoFieldsConfig): AutoFieldsComponent;
 }
 
-export class AutoFields
-  extends ConfigMixin(Base)
-  implements AutoFieldsComponent {
-  constructor(config: Config) {
-    super();
-    this.config = config;
+export class AutoFields implements AutoFieldsComponent {
+  config: AutoFieldsConfig;
+
+  constructor(config?: AutoFieldsConfig) {
+    this.config = config || {};
   }
 
-  protected deepGuess(data: string, keyBase?: Array<string>): Array<Config> {
+  protected deepGuess(
+    data: string,
+    keyBase?: Array<string>
+  ): Array<FieldConfig> {
     keyBase = keyBase || [];
 
     // Handle arrays by guessing for first element.
@@ -66,7 +75,7 @@ export class AutoFields
     data: Record<string, any>,
     keyBase?: Array<string>
   ) {
-    let fieldConfigs: Array<Config> = [];
+    let fieldConfigs: Array<FieldConfig> = [];
     keyBase = keyBase || [];
 
     for (const key of Object.keys(data)) {
@@ -90,42 +99,33 @@ export class AutoFields
     return fieldConfigs;
   }
 
-  protected deepGuessSimple(data: any, keyBase?: Array<string>): Config {
+  protected deepGuessSimple(data: any, keyBase?: Array<string>): FieldConfig {
     keyBase = keyBase || [];
     const fullKey = keyBase.join('.');
     return this.guessField(fullKey, data);
   }
 
-  guessField(key: string, data: any): Config {
+  guessField(key: string, data: any): FieldConfig {
     const fieldType = this.guessType(key, data);
     const label = this.guessLabel(key);
-    const fieldConfig: Record<string, any> = {
+    const fieldConfig: FieldConfig = {
+      key: key,
       type: fieldType,
     };
 
-    if (key !== '') {
-      fieldConfig['key'] = key;
-    }
-
     if (label !== '') {
-      fieldConfig['label'] = label;
+      fieldConfig.label = label;
     }
 
     if (fieldType === 'list') {
-      fieldConfig['fields'] = this.deepGuess(data);
+      fieldConfig.fields = this.deepGuess(data);
     }
 
-    return new Config(fieldConfig);
+    return fieldConfig;
   }
 
-  guessFields(data: any): Array<Config> {
+  guessFields(data: any): Array<FieldConfig> {
     return this.deepGuess(data);
-  }
-
-  guessFieldsAsConfig(data: any): Config {
-    return new Config({
-      fields: this.guessFields(data),
-    });
   }
 
   /**
@@ -167,9 +167,8 @@ export class AutoFields
 
   protected isIgnoredKey(key: string): boolean {
     // Ignore keys based on patterns or a set of keys.
-    const ignorePatterns: Array<string> =
-      this.config?.get('ignorePatterns') || [];
-    const ignoreKeys: Array<string> = this.config?.get('ignoreKeys') || [];
+    const ignorePatterns: Array<string> = this.config.ignorePatterns || [];
+    const ignoreKeys: Array<string> = this.config.ignoreKeys || [];
 
     // Test for the ignored keys.
     if (ignoreKeys.includes(key)) {

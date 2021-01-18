@@ -1,4 +1,5 @@
 import {DEFAULT_ZONE_KEY, Validation, ValidationLevel} from './validation';
+import {RuleConfig, Rules} from './validationRules';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
 import {Config} from '../utility/config';
@@ -7,13 +8,29 @@ import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
 import {EVENT_RENDER} from './events';
-import {Rules} from './validationRules';
 import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
 import {repeat} from 'lit-html/directives/repeat';
 import stringify from 'json-stable-stringify';
+
+export interface FieldConfig {
+  classes?: Array<string>;
+  default?: any;
+  help?: string | Record<string, string>;
+  isGuessed?: boolean;
+  key: string;
+  label?: string;
+  parentKey?: string;
+  type: string;
+  validation?: Array<RuleConfig> | Record<string, Array<RuleConfig>>;
+
+  /**
+   * Specific fields can index any property.
+   */
+  [x: string]: any;
+}
 
 export interface FieldComponent {
   template: Template;
@@ -27,20 +44,21 @@ export interface FieldComponent {
 export type FieldConstructor = (types: Types, config: Config) => FieldComponent;
 
 export class Field
-  extends UuidMixin(DataMixin(ConfigMixin(Base)))
+  extends UuidMixin(DataMixin(Base))
   implements FieldComponent {
+  config: FieldConfig;
   protected currentValue?: any;
   protected isLocked: boolean;
   protected isDeepLinked: boolean;
   readonly fieldType: string;
   protected originalValue?: any;
-  rules: Rules;
+  protected _rules?: Rules;
   types: Types;
   usingAutoFields: boolean;
   validation?: Validation;
   zoneToKey?: Record<string, string>;
 
-  constructor(types: Types, config: Config, fieldType = 'unknown') {
+  constructor(types: Types, config: FieldConfig, fieldType = 'unknown') {
     super();
     this.types = types;
     this.config = config;
@@ -49,29 +67,6 @@ export class Field
     this.isLocked = false;
     this.isDeepLinked = false;
     this.usingAutoFields = false;
-
-    // Each field has separate validation rule definitions.
-    this.rules = new Rules(this.types.rules);
-    const ruleConfigs = this.config?.get('validation');
-    if (DataType.isArray(ruleConfigs)) {
-      // Validation is an array when it is all one zone.
-      for (const ruleConfig of ruleConfigs) {
-        this.rules.addRuleFromConfig(new Config(ruleConfig));
-      }
-    } else if (DataType.isObject(ruleConfigs)) {
-      // Complex fields define rules into separate zones.
-      for (const zoneKey of Object.keys(ruleConfigs)) {
-        for (const ruleConfig of ruleConfigs[zoneKey]) {
-          this.rules.addRuleFromConfig(new Config(ruleConfig), zoneKey);
-        }
-      }
-    } else if (ruleConfigs) {
-      console.error(
-        'Validation rules in an invalid format.',
-        'Expecting array or Record<zoneKey, array>.',
-        ruleConfigs
-      );
-    }
   }
 
   /**
@@ -83,7 +78,7 @@ export class Field
       `selective__field__type__${this.fieldType}`,
     ];
 
-    for (const className of this.config?.get('classes') || []) {
+    for (const className of this.config?.classes || []) {
       classes.push(className);
     }
 
@@ -91,7 +86,7 @@ export class Field
       classes.push('selective__field--auto');
     }
 
-    if (this.config?.get('isGuessed') || false) {
+    if (this.config.isGuessed) {
       classes.push('selective__field--guess');
     }
 
@@ -174,9 +169,8 @@ export class Field
   }
 
   get fullKey(): string {
-    const parentKey = this.config?.get('parentKey');
-    if (parentKey) {
-      return `${parentKey}.${this.key}`;
+    if (this.config.parentKey) {
+      return `${this.config.parentKey}.${this.key}`;
     }
     return this.key;
   }
@@ -223,7 +217,7 @@ export class Field
   }
 
   get key(): string {
-    return this.config?.get('key') || '';
+    return this.config.key;
   }
 
   /**
@@ -239,6 +233,38 @@ export class Field
    */
   render() {
     document.dispatchEvent(new CustomEvent(EVENT_RENDER));
+  }
+
+  get rules(): Rules {
+    if (this._rules) {
+      return this._rules;
+    }
+
+    // Each field has separate validation rule definitions.
+    this._rules = new Rules(this.types.rules);
+    let ruleConfigs = this.config?.validation || [];
+    if (DataType.isArray(ruleConfigs)) {
+      // Validation is an array when it is all one zone.
+      ruleConfigs = ruleConfigs as Array<RuleConfig>;
+      for (const ruleConfig of ruleConfigs) {
+        this.rules.addRuleFromConfig(new Config(ruleConfig));
+      }
+    } else if (DataType.isObject(ruleConfigs)) {
+      // Complex fields define rules into separate zones.
+      ruleConfigs = ruleConfigs as Record<string, Array<RuleConfig>>;
+      for (const zoneKey of Object.keys(ruleConfigs)) {
+        for (const ruleConfig of ruleConfigs[zoneKey]) {
+          this.rules.addRuleFromConfig(new Config(ruleConfig), zoneKey);
+        }
+      }
+    } else if (ruleConfigs) {
+      console.error(
+        'Validation rules in an invalid format.',
+        'Expecting array or Record<zoneKey, array>.',
+        ruleConfigs
+      );
+    }
+    return this._rules;
   }
 
   /**
@@ -357,13 +383,14 @@ export class Field
     data: DeepObject,
     zoneKey?: string
   ): TemplateResult {
-    let helpMessage = this.config?.get('help');
+    let helpMessage = this.config.help;
     if (!helpMessage) {
       return html``;
     }
 
     // Allow for help messages to be broken up into zones.
     if (zoneKey && DataType.isObject(helpMessage)) {
+      helpMessage = helpMessage as Record<string, string>;
       helpMessage = helpMessage[zoneKey];
     }
 
@@ -442,14 +469,13 @@ export class Field
    * @param data Data provided to render the template.
    */
   templateLabel(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    const label = this.config?.get('label');
-    if (!label) {
+    if (!this.config.label) {
       return html``;
     }
     return html`<div class=${this.expandClasses(this.classesForLabel())}>
       ${this.templateIconDeepLink(editor, data)}
       ${this.templateIconValidation(editor, data)}
-      <label for=${this.uid}>${label}</label>
+      <label for=${this.uid}>${this.config.label}</label>
     </div>`;
   }
 
@@ -522,7 +548,7 @@ export class Field
       this.currentValue = this.cleanOriginalValue(newValue);
 
       if (this.currentValue === undefined) {
-        this.currentValue = this.config?.get('default');
+        this.currentValue = this.config.default;
       }
     }
 

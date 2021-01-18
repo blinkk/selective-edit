@@ -1,13 +1,19 @@
+import {Field, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
-import {Config} from '../../utility/config';
 import {DeepObject} from '../../utility/deepObject';
-import {Field} from '../field';
 import {SelectiveEditor} from '../..';
 import {Types} from '../types';
 
+export interface TextFieldConfig extends FieldConfig {
+  placeholder?: string;
+}
+
 export class TextField extends Field {
-  constructor(types: Types, config: Config, fieldType = 'text') {
-    super(types, config, fieldType);
+  config: TextFieldConfig;
+
+  constructor(types: Types, config: TextFieldConfig) {
+    super(types, config, 'text');
+    this.config = config;
   }
 
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {

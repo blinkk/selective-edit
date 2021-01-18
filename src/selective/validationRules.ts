@@ -6,6 +6,10 @@ import {ConfigMixin} from '../mixins/config';
 import {DataType} from '../utility/dataType';
 import {Types} from './types';
 
+export interface RuleConfig {
+  message?: string;
+}
+
 /**
  * Validation rules define the validation on the editor fields.
  *

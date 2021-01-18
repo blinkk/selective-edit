@@ -1,7 +1,7 @@
 import {Config, autoConfig} from '../../utility/config';
 import {DeepObject, autoDeepObject} from '../../utility/deepObject';
+import {Field, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
-import {Field} from '../field';
 import {FieldsComponent} from '../fields';
 import {SelectiveEditor} from '../..';
 import {Types} from '../types';
@@ -14,7 +14,7 @@ export class VariantField extends Field {
   usingAutoFields: boolean;
   variant?: string;
 
-  constructor(types: Types, config: Config, fieldType = 'variant') {
+  constructor(types: Types, config: FieldConfig, fieldType = 'variant') {
     super(types, config, fieldType);
     this.usingAutoFields = false;
   }

@@ -1,20 +1,25 @@
 import {Config, autoConfig} from '../../utility/config';
 import {DeepObject, autoDeepObject} from '../../utility/deepObject';
+import {Field, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
-import {Field} from '../field';
 import {FieldsComponent} from '../fields';
 import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
 import merge from 'lodash.merge';
 
+export interface GroupFieldConfig extends FieldConfig {
+  fields?: Array<FieldConfig>;
+  isExpanded?: boolean;
+}
+
 export class GroupField extends Field {
+  config: GroupFieldConfig;
   fields?: FieldsComponent;
-  isExpanded: boolean;
   usingAutoFields: boolean;
 
-  constructor(types: Types, config: Config, fieldType = 'group') {
+  constructor(types: Types, config: GroupFieldConfig, fieldType = 'group') {
     super(types, config, fieldType);
-    this.isExpanded = this.config?.get('isExpanded') || false;
+    this.config = config;
     this.usingAutoFields = false;
   }
 
@@ -43,7 +48,7 @@ export class GroupField extends Field {
 
   protected ensureFields() {
     if (!this.fields) {
-      this.fields = this.createFields(this.config?.get('fields') || []);
+      this.fields = this.createFields(this.config.fields || []);
     }
   }
 
@@ -68,7 +73,7 @@ export class GroupField extends Field {
 
     actions.push(html`<div class="selective__action selective__action__expand">
       <i class="material-icons"
-        >${this.isExpanded ? 'expand_less' : 'expand_more'}</i
+        >${this.config.isExpanded ? 'expand_less' : 'expand_more'}</i
       >
     </div>`);
     return html`<div class="selective__field__actions">${actions}</div>`;
@@ -86,7 +91,7 @@ export class GroupField extends Field {
     data: DeepObject
   ): TemplateResult {
     const handleExpandToggle = () => {
-      this.isExpanded = !this.isExpanded;
+      this.config.isExpanded = !this.config.isExpanded;
       this.render();
     };
 
@@ -108,7 +113,7 @@ export class GroupField extends Field {
    * @param data Data provided to render the template.
    */
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    if (!this.isExpanded) {
+    if (!this.config.isExpanded) {
       return this.templateHelp(editor, data);
     }
 
@@ -127,7 +132,7 @@ export class GroupField extends Field {
    * @param data Data provided to render the template.
    */
   templateLabel(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    const label = this.config?.get('label') || '(Group)';
+    const label = this.config.label || '(Group)';
 
     return html`<div class=${this.expandClasses(this.classesForLabel())}>
       ${this.templateIconValidation(editor, data)}

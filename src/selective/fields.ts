@@ -1,3 +1,4 @@
+import {FieldComponent, FieldConfig} from './field';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
 import {Config} from '../utility/config';
@@ -5,7 +6,6 @@ import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
-import {FieldComponent} from './field';
 import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
@@ -13,6 +13,10 @@ import {UuidMixin} from '../mixins/uuid';
 import {findPreviewValue} from '../utility/preview';
 import merge from 'lodash.merge';
 import {repeat} from 'lit-html/directives/repeat';
+
+export interface FieldsConfig {
+  fields?: Array<FieldConfig>;
+}
 
 export interface FieldsComponent {
   addField(fieldConfig: Config): void;

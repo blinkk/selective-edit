@@ -1,5 +1,5 @@
 import {Config, autoConfig} from '../utility/config';
-import {FieldComponent, FieldConstructor} from './field';
+import {FieldComponent, FieldConfig, FieldConstructor} from './field';
 import {Fields, FieldsComponent, FieldsConstructor} from './fields';
 import {RuleComponent, RuleConstructor} from './validationRules';
 import {TemplateResult, html, render} from 'lit-html';
@@ -51,8 +51,8 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
     this.types.rules.registerClasses(ruleTypes);
   }
 
-  guessFields(): Array<Config> {
-    const autoFields = new this.types.globals.AutoFieldsCls(new Config());
+  guessFields(): Array<FieldConfig> {
+    const autoFields = new this.types.globals.AutoFieldsCls({});
     const fieldsConfig = autoFields.guessFields(this.data?.obj);
 
     this.config?.set('fields', fieldsConfig);

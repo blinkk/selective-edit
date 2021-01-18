@@ -1,12 +1,11 @@
+import {Field, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
-import {Config} from '../../utility/config';
 import {DeepObject} from '../../utility/deepObject';
-import {Field} from '../field';
 import {SelectiveEditor} from '../..';
 import {Types} from '../types';
 
 export class TextareaField extends Field {
-  constructor(types: Types, config: Config, fieldType = 'textarea') {
+  constructor(types: Types, config: FieldConfig, fieldType = 'textarea') {
     super(types, config, fieldType);
   }
 

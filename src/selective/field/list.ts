@@ -1,5 +1,5 @@
 import {Config, autoConfig} from '../../utility/config';
-import {Field, FieldComponent} from '../field';
+import {Field, FieldComponent, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../../mixins';
 import {DeepObject} from '../../utility/deepObject';
@@ -10,6 +10,11 @@ import {SortableMixin} from '../../mixins/sortable';
 import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
 import {repeat} from 'lit-html/directives/repeat';
+
+export interface ListFieldConfig extends FieldConfig {
+  fields?: Array<FieldConfig>;
+  placeholder?: string;
+}
 
 export interface ListItemComponent {
   field: FieldComponent;
@@ -29,12 +34,14 @@ export interface ListItemConstructor {
 }
 
 export class ListField extends SortableMixin(Field) {
+  config: ListFieldConfig;
   protected items: Array<ListItemComponent> | null;
   protected ListItemCls: ListItemConstructor;
   usingAutoFields: boolean;
 
-  constructor(types: Types, config: Config, fieldType = 'list') {
+  constructor(types: Types, config: ListFieldConfig, fieldType = 'list') {
     super(types, config, fieldType);
+    this.config = config;
     this.items = null;
     this.usingAutoFields = false;
     this.ListItemCls = ListFieldItem;
@@ -67,7 +74,7 @@ export class ListField extends SortableMixin(Field) {
 
   handleAddItem(evt: Event, editor: SelectiveEditor, data: DeepObject) {
     const items = this.ensureItems(editor);
-    const fieldConfigs = this.config?.get('fields') || [];
+    const fieldConfigs = this.config.fields || [];
     const fields = this.createFields(fieldConfigs);
 
     // When an item is not expanded it does not get the value
@@ -175,7 +182,7 @@ export class ListField extends SortableMixin(Field) {
       // TODO: create all the items based on the config.
       this.items = [];
 
-      let fieldConfigs = this.config?.get('fields') || [];
+      let fieldConfigs = this.config.fields || [];
 
       // Add list items for each of the values in the list already.
       for (const value of this.originalValue || []) {
@@ -185,7 +192,7 @@ export class ListField extends SortableMixin(Field) {
 
           // Auto-guess fields based on the first item in the list.
           const autoFields = new this.types.globals.AutoFieldsCls(
-            autoConfig(this.config?.get('autoFields') || {})
+            this.config.autoFields || {}
           );
           fieldConfigs = autoFields.guessFields(value);
 
