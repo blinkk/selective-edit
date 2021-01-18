@@ -6,6 +6,7 @@ const list_1 = require("./selective/field/list");
 const index_1 = require("./index");
 const text_1 = require("./selective/field/text");
 const textarea_1 = require("./selective/field/textarea");
+const variant_1 = require("./selective/field/variant");
 const deepObject_1 = require("./utility/deepObject");
 const configEl = document.querySelector('#config');
 const dataEl = document.querySelector('#data');
@@ -23,6 +24,7 @@ exampleSelective.addFieldTypes({
     list: list_1.ListField,
     text: text_1.TextField,
     textarea: textarea_1.TextareaField,
+    variant: variant_1.VariantField,
 });
 exampleSelective.data = deepObject_1.autoDeepObject(JSON.parse(dataEl.value));
 // Bind to the custom event to re-render the editor.
