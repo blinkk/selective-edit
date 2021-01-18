@@ -39,7 +39,7 @@ export class AutoFields
     this.config = config;
   }
 
-  private deepGuess(data: string, keyBase?: Array<string>): Array<Config> {
+  protected deepGuess(data: string, keyBase?: Array<string>): Array<Config> {
     keyBase = keyBase || [];
 
     // Handle arrays by guessing for first element.
@@ -62,7 +62,10 @@ export class AutoFields
     return [this.guessField(keyBase.join('.'), data)];
   }
 
-  private deepGuessObject(data: Record<string, any>, keyBase?: Array<string>) {
+  protected deepGuessObject(
+    data: Record<string, any>,
+    keyBase?: Array<string>
+  ) {
     let fieldConfigs: Array<Config> = [];
     keyBase = keyBase || [];
 
@@ -87,7 +90,7 @@ export class AutoFields
     return fieldConfigs;
   }
 
-  private deepGuessSimple(data: any, keyBase?: Array<string>): Config {
+  protected deepGuessSimple(data: any, keyBase?: Array<string>): Config {
     keyBase = keyBase || [];
     const fullKey = keyBase.join('.');
     return this.guessField(fullKey, data);
@@ -162,7 +165,7 @@ export class AutoFields
     return 'text';
   }
 
-  private isIgnoredKey(key: string): boolean {
+  protected isIgnoredKey(key: string): boolean {
     // Ignore keys based on patterns or a set of keys.
     const ignorePatterns: Array<string> =
       this.config?.get('ignorePatterns') || [];
