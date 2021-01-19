@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="" class="tsd-signature-type" data-tsd-kind="Type literal">__type</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">typeof </span><a href="mixins.base.html" class="tsd-signature-type" data-tsd-kind="Class">Base</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="mixins.base.html" class="tsd-signature-type" data-tsd-kind="Class">Base</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span>
+						<a href="mixins.base.html" class="tsd-signature-type" data-tsd-kind="Class">Base</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">Rule</span>
@@ -109,13 +109,13 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="selective_validationrules.rule.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="selective_validationrules.rule.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validationrules.rule.html#_config" class="tsd-kind-icon">_config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validationrules.rule.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validationrules.rule.html#defaultlevel" class="tsd-kind-icon">default<wbr>Level</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_validationrules.rule.html#defaultmessage" class="tsd-kind-icon">default<wbr>Message</a></li>
 							</ul>
@@ -123,7 +123,6 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="selective_validationrules.rule.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_validationrules.rule.html#level" class="tsd-kind-icon">level</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="selective_validationrules.rule.html#message" class="tsd-kind-icon">message</a></li>
 							</ul>
@@ -141,23 +140,24 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Rule<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_validationrules.rule.html" class="tsd-signature-type" data-tsd-kind="Class">Rule</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Rule<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_validationrules.ruleconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_validationrules.rule.html" class="tsd-signature-type" data-tsd-kind="Class">Rule</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="mixins.base.html">Base</a>.<a href="mixins.base.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/validationRules.ts#L95">selective/validationRules.ts:95</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L139">selective/validationRules.ts:139</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
+									<h5>config: <a href="../interfaces/selective_validationrules.ruleconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleConfig</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="selective_validationrules.rule.html" class="tsd-signature-type" data-tsd-kind="Class">Rule</a></h4>
@@ -168,12 +168,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="_config" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _config</h3>
-					<div class="tsd-signature tsd-kind-icon">_config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></div>
+					<a name="config" class="tsd-anchor"></a>
+					<h3>config</h3>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_validationrules.ruleconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">RuleConfig</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L6">mixins/config.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L137">selective/validationRules.ts:137</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -183,7 +183,7 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Level<span class="tsd-signature-symbol">:</span> <a href="../enums/selective_validation.validationlevel.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ValidationLevel</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/validationRules.ts#L95">selective/validationRules.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L139">selective/validationRules.ts:139</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -193,45 +193,13 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Value is invalid.&#x27;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/validationRules.ts#L94">selective/validationRules.ts:94</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L138">selective/validationRules.ts:138</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
-					<a name="config" class="tsd-anchor"></a>
-					<h3>config</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> config<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L8">mixins/config.ts:8</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L12">mixins/config.ts:12</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>config: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
 					<a name="level" class="tsd-anchor"></a>
 					<h3>level</h3>
@@ -242,7 +210,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/validationRules.ts#L128">selective/validationRules.ts:128</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L172">selective/validationRules.ts:172</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -264,7 +232,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/validationRules.ts#L135">selective/validationRules.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L179">selective/validationRules.ts:179</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -290,7 +258,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/selective_validationrules.rulecomponent.html">RuleComponent</a>.<a href="../interfaces/selective_validationrules.rulecomponent.html#allowadd">allowAdd</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/validationRules.ts#L111">selective/validationRules.ts:111</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L155">selective/validationRules.ts:155</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -322,7 +290,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/selective_validationrules.rulecomponent.html">RuleComponent</a>.<a href="../interfaces/selective_validationrules.rulecomponent.html#allowremove">allowRemove</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/validationRules.ts#L121">selective/validationRules.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L165">selective/validationRules.ts:165</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -354,7 +322,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/selective_validationrules.rulecomponent.html">RuleComponent</a>.<a href="../interfaces/selective_validationrules.rulecomponent.html#validate">validate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/validationRules.ts#L140">selective/validationRules.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/validationRules.ts#L184">selective/validationRules.ts:184</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -402,20 +370,17 @@
 					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="selective_validationrules.rule.html" class="tsd-kind-icon">Rule</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_validationrules.rule.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="selective_validationrules.rule.html#_config" class="tsd-kind-icon">_config</a>
+								<a href="selective_validationrules.rule.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="selective_validationrules.rule.html#defaultlevel" class="tsd-kind-icon">default<wbr>Level</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="selective_validationrules.rule.html#defaultmessage" class="tsd-kind-icon">default<wbr>Message</a>
-							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
-								<a href="selective_validationrules.rule.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="selective_validationrules.rule.html#level" class="tsd-kind-icon">level</a>
@@ -440,7 +405,34 @@
 						<a href="selective_validationrules.rules.html" class="tsd-kind-icon">Rules</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.allowexcluderuleconfig.html" class="tsd-kind-icon">Allow<wbr>Exclude<wbr>Rule<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.generalruleconfig.html" class="tsd-kind-icon">General<wbr>Rule<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.lengthruleconfig.html" class="tsd-kind-icon">Length<wbr>Rule<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.matchruleconfig.html" class="tsd-kind-icon">Match<wbr>Rule<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.minmaxruleconfig.html" class="tsd-kind-icon">Min<wbr>Max<wbr>Rule<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.patternruleconfig.html" class="tsd-kind-icon">Pattern<wbr>Rule<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.rangeruleconfig.html" class="tsd-kind-icon">Range<wbr>Rule<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.requireruleconfig.html" class="tsd-kind-icon">Require<wbr>Rule<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/selective_validationrules.rulecomponent.html" class="tsd-kind-icon">Rule<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_validationrules.ruleconfig.html" class="tsd-kind-icon">Rule<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="../modules/selective_validationrules.html#ruleconstructor" class="tsd-kind-icon">Rule<wbr>Constructor</a>
@@ -455,24 +447,25 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
 			</ul>
 		</div>
 	</div>

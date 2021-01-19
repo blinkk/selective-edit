@@ -41,11 +41,10 @@ guessEl.addEventListener('click', () => {
     const deepPrettyFields = (configs) => {
         const prettyFields = [];
         for (const config of configs) {
-            const prettyConfig = config.config;
-            if (prettyConfig['fields']) {
-                prettyConfig['fields'] = deepPrettyFields(prettyConfig['fields']);
+            if (config.fields) {
+                config.fields = deepPrettyFields(config.fields);
             }
-            prettyFields.push(config.config);
+            prettyFields.push(config);
         }
         return prettyFields;
     };

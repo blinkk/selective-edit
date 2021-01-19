@@ -92,11 +92,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#_config" class="tsd-kind-icon">_config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#_data" class="tsd-kind-icon">_data</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#_uuid" class="tsd-kind-icon">_uuid</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="selective_field_text.textfield.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#fieldtype" class="tsd-kind-icon">field<wbr>Type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#rules" class="tsd-kind-icon">rules</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#types" class="tsd-kind-icon">types</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#usingautofields" class="tsd-kind-icon">using<wbr>Auto<wbr>Fields</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#validation" class="tsd-kind-icon">validation</a></li>
@@ -106,12 +105,12 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#data" class="tsd-kind-icon">data</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#fullkey" class="tsd-kind-icon">full<wbr>Key</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#isclean" class="tsd-kind-icon">is<wbr>Clean</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#rules" class="tsd-kind-icon">rules</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#uid" class="tsd-kind-icon">uid</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#uuid" class="tsd-kind-icon">uuid</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_text.textfield.html#value" class="tsd-kind-icon">value</a></li>
@@ -154,14 +153,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Text<wbr>Field<span class="tsd-signature-symbol">(</span>types<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_types.types.html" class="tsd-signature-type" data-tsd-kind="Interface">Types</a>, config<span class="tsd-signature-symbol">: </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a>, fieldType<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_field_text.textfield.html" class="tsd-signature-type" data-tsd-kind="Class">TextField</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Text<wbr>Field<span class="tsd-signature-symbol">(</span>types<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_types.types.html" class="tsd-signature-type" data-tsd-kind="Interface">Types</a>, config<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_field_text.textfieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">TextFieldConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_field_text.textfield.html" class="tsd-signature-type" data-tsd-kind="Class">TextField</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field/text.ts#L8">selective/field/text.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field/text.ts#L12">selective/field/text.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -170,10 +169,7 @@
 									<h5>types: <a href="../interfaces/selective_types.types.html" class="tsd-signature-type" data-tsd-kind="Interface">Types</a></h5>
 								</li>
 								<li>
-									<h5>config: <a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
-								</li>
-								<li>
-									<h5>fieldType: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;text&#x27;</span></h5>
+									<h5>config: <a href="../interfaces/selective_field_text.textfieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">TextFieldConfig</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="selective_field_text.textfield.html" class="tsd-signature-type" data-tsd-kind="Class">TextField</a></h4>
@@ -184,24 +180,13 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="_config" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _config</h3>
-					<div class="tsd-signature tsd-kind-icon">_config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#_config">_config</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L6">mixins/config.ts:6</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="_data" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _data</h3>
 					<div class="tsd-signature tsd-kind-icon">_data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#_data">_data</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/data.ts#L6">mixins/data.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/mixins/data.ts#L6">mixins/data.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -212,7 +197,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#_uuid">_uuid</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/uuid.ts#L6">mixins/uuid.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/mixins/uuid.ts#L6">mixins/uuid.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+					<a name="config" class="tsd-anchor"></a>
+					<h3>config</h3>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_field_text.textfieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">TextFieldConfig</a></div>
+					<aside class="tsd-sources">
+						<p>Overrides <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#config">config</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field/text.ts#L12">selective/field/text.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -223,18 +219,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#fieldtype">fieldType</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L35">selective/field.ts:35</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="rules" class="tsd-anchor"></a>
-					<h3>rules</h3>
-					<div class="tsd-signature tsd-kind-icon">rules<span class="tsd-signature-symbol">:</span> <a href="selective_validationrules.rules.html" class="tsd-signature-type" data-tsd-kind="Class">Rules</a></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#rules">rules</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L37">selective/field.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L54">selective/field.ts:54</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -245,7 +230,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#types">types</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L38">selective/field.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L57">selective/field.ts:57</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -256,7 +241,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#usingautofields">usingAutoFields</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L39">selective/field.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L58">selective/field.ts:58</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -267,7 +252,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#validation">validation</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L40">selective/field.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L59">selective/field.ts:59</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -278,45 +263,13 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#zonetokey">zoneToKey</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L41">selective/field.ts:41</a></li>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L60">selective/field.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-					<a name="config" class="tsd-anchor"></a>
-					<h3>config</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> config<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L8">mixins/config.ts:8</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L12">mixins/config.ts:12</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>config: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
 					<a name="data" class="tsd-anchor"></a>
 					<h3>data</h3>
@@ -328,7 +281,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/data.ts#L8">mixins/data.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/mixins/data.ts#L8">mixins/data.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></h4>
@@ -336,7 +289,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/data.ts#L12">mixins/data.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/mixins/data.ts#L12">mixins/data.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -359,7 +312,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L176">selective/field.ts:176</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L172">selective/field.ts:172</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -376,7 +329,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L195">selective/field.ts:195</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L190">selective/field.ts:190</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -393,7 +346,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L204">selective/field.ts:204</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L199">selective/field.ts:199</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -410,10 +363,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L225">selective/field.ts:225</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L220">selective/field.ts:220</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="rules" class="tsd-anchor"></a>
+					<h3>rules</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> rules<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_validationrules.rules.html" class="tsd-signature-type" data-tsd-kind="Class">Rules</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L239">selective/field.ts:239</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="selective_validationrules.rules.html" class="tsd-signature-type" data-tsd-kind="Class">Rules</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -427,7 +397,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/uuid.ts#L15">mixins/uuid.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/mixins/uuid.ts#L15">mixins/uuid.ts:15</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -444,7 +414,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/uuid.ts#L8">mixins/uuid.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/mixins/uuid.ts#L8">mixins/uuid.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -461,7 +431,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L535">selective/field.ts:535</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L563">selective/field.ts:563</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -482,7 +452,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#classesforfield">classesForField</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L80">selective/field.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L76">selective/field.ts:76</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -505,7 +475,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#classesforinput">classesForInput</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L116">selective/field.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L112">selective/field.ts:112</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -534,7 +504,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#classesforlabel">classesForLabel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L137">selective/field.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L133">selective/field.ts:133</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -563,7 +533,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#cleanoriginalvalue">cleanOriginalValue</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L163">selective/field.ts:163</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L159">selective/field.ts:159</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -596,7 +566,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#handleinput">handleInput</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L189">selective/field.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L184">selective/field.ts:184</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -628,7 +598,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#lock">lock</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L233">selective/field.ts:233</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L228">selective/field.ts:228</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -652,7 +622,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#render">render</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L240">selective/field.ts:240</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L235">selective/field.ts:235</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -675,7 +645,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#template">template</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L250">selective/field.ts:250</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L277">selective/field.ts:277</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -713,7 +683,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateerrors">templateErrors</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L263">selective/field.ts:263</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L290">selective/field.ts:290</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -757,7 +727,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatefooter">templateFooter</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L300">selective/field.ts:300</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L327">selective/field.ts:327</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -795,7 +765,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatefooterstructure">templateFooterStructure</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L311">selective/field.ts:311</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L338">selective/field.ts:338</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -833,7 +803,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateheader">templateHeader</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L327">selective/field.ts:327</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L354">selective/field.ts:354</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -871,7 +841,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateheaderstructure">templateHeaderStructure</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L338">selective/field.ts:338</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L365">selective/field.ts:365</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -909,7 +879,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatehelp">templateHelp</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L355">selective/field.ts:355</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L382">selective/field.ts:382</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -953,7 +923,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateicondeeplink">templateIconDeepLink</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L379">selective/field.ts:379</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L407">selective/field.ts:407</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -991,7 +961,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateiconvalidation">templateIconValidation</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L394">selective/field.ts:394</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L422">selective/field.ts:422</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1029,7 +999,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateinput">templateInput</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field/text.ts#L13">selective/field/text.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field/text.ts#L19">selective/field/text.ts:19</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1056,7 +1026,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateinputstructure">templateInputStructure</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L429">selective/field.ts:429</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L457">selective/field.ts:457</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1094,7 +1064,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatelabel">templateLabel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L444">selective/field.ts:444</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L472">selective/field.ts:472</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1132,7 +1102,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatestructure">templateStructure</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L464">selective/field.ts:464</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L491">selective/field.ts:491</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1171,7 +1141,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatewrapper">templateWrapper</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L476">selective/field.ts:476</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L503">selective/field.ts:503</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1209,7 +1179,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#unlock">unlock</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L490">selective/field.ts:490</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L517">selective/field.ts:517</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1233,7 +1203,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#updateoriginal">updateOriginal</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/field.ts#L501">selective/field.ts:501</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/field.ts#L528">selective/field.ts:528</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1285,19 +1255,16 @@
 								<a href="selective_field_text.textfield.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="selective_field_text.textfield.html#_config" class="tsd-kind-icon">_config</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_field_text.textfield.html#_data" class="tsd-kind-icon">_data</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_field_text.textfield.html#_uuid" class="tsd-kind-icon">_uuid</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="selective_field_text.textfield.html#fieldtype" class="tsd-kind-icon">field<wbr>Type</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite">
+								<a href="selective_field_text.textfield.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="selective_field_text.textfield.html#rules" class="tsd-kind-icon">rules</a>
+								<a href="selective_field_text.textfield.html#fieldtype" class="tsd-kind-icon">field<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_field_text.textfield.html#types" class="tsd-kind-icon">types</a>
@@ -1310,9 +1277,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_field_text.textfield.html#zonetokey" class="tsd-kind-icon">zone<wbr>ToKey</a>
-							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
-								<a href="selective_field_text.textfield.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_field_text.textfield.html#data" class="tsd-kind-icon">data</a>
@@ -1328,6 +1292,9 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_field_text.textfield.html#key" class="tsd-kind-icon">key</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="selective_field_text.textfield.html#rules" class="tsd-kind-icon">rules</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_field_text.textfield.html#uid" class="tsd-kind-icon">uid</a>
@@ -1411,6 +1378,9 @@
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_field_text.textfieldconfig.html" class="tsd-kind-icon">Text<wbr>Field<wbr>Config</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -1427,15 +1397,16 @@
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
 			</ul>
 			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>

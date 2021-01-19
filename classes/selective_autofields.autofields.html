@@ -70,12 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="" class="tsd-signature-type" data-tsd-kind="Type literal">__type</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">typeof </span><a href="mixins.base.html" class="tsd-signature-type" data-tsd-kind="Class">Base</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="mixins.base.html" class="tsd-signature-type" data-tsd-kind="Class">Base</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">&gt;</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">AutoFields</span>
-							</li>
-						</ul>
+						<span class="target">AutoFields</span>
 					</li>
 				</ul>
 			</section>
@@ -98,13 +93,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_autofields.autofields.html#_config" class="tsd-kind-icon">_config</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Accessors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="selective_autofields.autofields.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_autofields.autofields.html#config" class="tsd-kind-icon">config</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -112,7 +101,6 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_autofields.autofields.html#guessfield" class="tsd-kind-icon">guess<wbr>Field</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_autofields.autofields.html#guessfields" class="tsd-kind-icon">guess<wbr>Fields</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_autofields.autofields.html#guessfieldsasconfig" class="tsd-kind-icon">guess<wbr>Fields<wbr>AsConfig</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_autofields.autofields.html#guesslabel" class="tsd-kind-icon">guess<wbr>Label</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="selective_autofields.autofields.html#guesstype" class="tsd-kind-icon">guess<wbr>Type</a></li>
 							</ul>
@@ -126,19 +114,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Auto<wbr>Fields<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_autofields.autofields.html" class="tsd-signature-type" data-tsd-kind="Class">AutoFields</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Auto<wbr>Fields<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">?: </span><a href="../interfaces/selective_autofields.autofieldsconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">AutoFieldsConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_autofields.autofields.html" class="tsd-signature-type" data-tsd-kind="Class">AutoFields</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/autoFields.ts#L36">selective/autoFields.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/autoFields.ts#L40">selective/autoFields.ts:40</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>config: <a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> config: <a href="../interfaces/selective_autofields.autofieldsconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">AutoFieldsConfig</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="selective_autofields.autofields.html" class="tsd-signature-type" data-tsd-kind="Class">AutoFields</a></h4>
@@ -149,49 +137,15 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="_config" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _config</h3>
-					<div class="tsd-signature tsd-kind-icon">_config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L6">mixins/config.ts:6</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Accessors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
 					<a name="config" class="tsd-anchor"></a>
 					<h3>config</h3>
-					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> config<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></li>
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> config<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L8">mixins/config.ts:8</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h4>
-						</li>
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/mixins/config.ts#L12">mixins/config.ts:12</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>config: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
+					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_autofields.autofieldsconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">AutoFieldsConfig</a></div>
+					<aside class="tsd-sources">
+						<p>Implementation of <a href="../interfaces/selective_autofields.autofieldscomponent.html">AutoFieldsComponent</a>.<a href="../interfaces/selective_autofields.autofieldscomponent.html#config">config</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/autoFields.ts#L40">selective/autoFields.ts:40</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -200,14 +154,14 @@
 					<a name="guessfield" class="tsd-anchor"></a>
 					<h3>guess<wbr>Field</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">guess<wbr>Field<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></li>
+						<li class="tsd-signature tsd-kind-icon">guess<wbr>Field<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_field.fieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldConfig</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/selective_autofields.autofieldscomponent.html">AutoFieldsComponent</a>.<a href="../interfaces/selective_autofields.autofieldscomponent.html#guessfield">guessField</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/autoFields.ts#L99">selective/autoFields.ts:99</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/autoFields.ts#L106">selective/autoFields.ts:106</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -219,7 +173,7 @@
 									<h5>data: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/selective_field.fieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldConfig</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -227,14 +181,14 @@
 					<a name="guessfields" class="tsd-anchor"></a>
 					<h3>guess<wbr>Fields</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">guess<wbr>Fields<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">guess<wbr>Fields<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_field.fieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldConfig</a><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/selective_autofields.autofieldscomponent.html">AutoFieldsComponent</a>.<a href="../interfaces/selective_autofields.autofieldscomponent.html#guessfields">guessFields</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/autoFields.ts#L121">selective/autoFields.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/autoFields.ts#L125">selective/autoFields.ts:125</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -243,30 +197,7 @@
 									<h5>data: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="guessfieldsasconfig" class="tsd-anchor"></a>
-					<h3>guess<wbr>Fields<wbr>AsConfig</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">guess<wbr>Fields<wbr>AsConfig<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/autoFields.ts#L125">selective/autoFields.ts:125</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>data: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="utility_config.config.html" class="tsd-signature-type" data-tsd-kind="Class">Config</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/selective_field.fieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldConfig</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -280,7 +211,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/autoFields.ts#L134">selective/autoFields.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/autoFields.ts#L132">selective/autoFields.ts:132</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -308,7 +239,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/e418ffb/src/selective/autoFields.ts#L152">selective/autoFields.ts:152</a></li>
+									<li>Defined in <a href="https://github.com/grow/selective-edit/blob/a911816/src/selective/autoFields.ts#L150">selective/autoFields.ts:150</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -359,9 +290,6 @@
 								<a href="selective_autofields.autofields.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="selective_autofields.autofields.html#_config" class="tsd-kind-icon">_config</a>
-							</li>
-							<li class=" tsd-kind-accessor tsd-parent-kind-class">
 								<a href="selective_autofields.autofields.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -369,9 +297,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="selective_autofields.autofields.html#guessfields" class="tsd-kind-icon">guess<wbr>Fields</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="selective_autofields.autofields.html#guessfieldsasconfig" class="tsd-kind-icon">guess<wbr>Fields<wbr>AsConfig</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="selective_autofields.autofields.html#guesslabel" class="tsd-kind-icon">guess<wbr>Label</a>
@@ -385,6 +310,9 @@
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/selective_autofields.autofieldscomponent.html" class="tsd-kind-icon">Auto<wbr>Fields<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/selective_autofields.autofieldsconfig.html" class="tsd-kind-icon">Auto<wbr>Fields<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/selective_autofields.autofieldsconstructor.html" class="tsd-kind-icon">Auto<wbr>Fields<wbr>Constructor</a>
@@ -404,7 +332,6 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
