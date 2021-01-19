@@ -14,14 +14,51 @@ import {repeat} from 'lit-html/directives/repeat';
 import stringify from 'json-stable-stringify';
 
 export interface FieldConfig {
+  /**
+   * Extra css classes to apply to the field in the editor.
+   */
   classes?: Array<string>;
+  /**
+   * default value to use for the field.
+   */
   default?: any;
+  /**
+   * Help string to display to assist user in understanding the
+   * expectations of the field.
+   *
+   * In complex fields, this can be broken up into zones like
+   * validation rules.
+   */
   help?: string | Record<string, string>;
+  /**
+   * Set by the editor when the field was guessed by the auto
+   * fields utility.
+   */
   isGuessed?: boolean;
+  /**
+   * Key to reference the field in the data.
+   */
   key: string;
+  /**
+   * Label for the field in the editor.
+   */
   label?: string;
+  /**
+   * Set by the editor to allow for full reference to the
+   * current field structure.
+   */
   parentKey?: string;
+  /**
+   * Type of field. Used to create the correct field in the
+   * editor UI.
+   */
   type: string;
+  /**
+   * Validation rules that should be applied to the field.
+   *
+   * In complex fields, this can be broken up into zone like
+   * help text.
+   */
   validation?: Array<RuleConfig> | Record<string, Array<RuleConfig>>;
 
   /**

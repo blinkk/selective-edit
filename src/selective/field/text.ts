@@ -5,6 +5,9 @@ import {SelectiveEditor} from '../..';
 import {Types} from '../types';
 
 export interface TextFieldConfig extends FieldConfig {
+  /**
+   * Placeholder for the text input.
+   */
   placeholder?: string;
 }
 

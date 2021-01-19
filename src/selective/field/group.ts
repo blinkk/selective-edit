@@ -7,7 +7,13 @@ import {Types} from '../types';
 import merge from 'lodash.merge';
 
 export interface GroupFieldConfig extends FieldConfig {
+  /**
+   * Fields to be grouped and hidden.
+   */
   fields?: Array<FieldConfig>;
+  /**
+   * Is the group expanded to show the fields?
+   */
   isExpanded?: boolean;
 }
 

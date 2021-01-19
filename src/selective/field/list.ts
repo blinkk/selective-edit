@@ -11,10 +11,18 @@ import {UuidMixin} from '../../mixins/uuid';
 import {repeat} from 'lit-html/directives/repeat';
 
 export interface ListFieldConfig extends FieldConfig {
+  /**
+   * Label for adding more list items.
+   */
   addLabel?: string;
+  /**
+   * Label for when the list is empty.
+   */
   emptyLabel?: string;
+  /**
+   * Field definitions for each item in the list.
+   */
   fields?: Array<FieldConfig>;
-  placeholder?: string;
 }
 
 export interface ListItemComponent {

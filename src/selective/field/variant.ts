@@ -9,15 +9,29 @@ import merge from 'lodash.merge';
 import {repeat} from 'lit-html/directives/repeat';
 
 export interface VariantOptionConfig {
+  /**
+   * Fields to show when the variant is in use.
+   */
   fields: Array<FieldConfig>;
+  /**
+   * Label for the variant option.
+   */
   label?: string;
+  /**
+   * Help text to explain the variant.
+   */
   help?: string;
 }
 
 export interface VariantFieldConfig extends FieldConfig {
+  /**
+   * Label for presenting the variants as options.
+   */
   variantLabel?: string;
+  /**
+   * Variant options the user are allowed to select from.
+   */
   variants: Record<string, VariantOptionConfig>;
-  placeholder?: string;
 }
 
 export class VariantField extends Field {

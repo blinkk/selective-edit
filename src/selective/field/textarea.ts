@@ -5,7 +5,13 @@ import {SelectiveEditor} from '../..';
 import {Types} from '../types';
 
 export interface TextAreaFieldConfig extends FieldConfig {
+  /**
+   * Placeholder for the textarea input.
+   */
   placeholder?: string;
+  /**
+   * Number of rows to use when displaying the textarea.
+   */
   rows?: number;
 }
 
