@@ -1,6 +1,5 @@
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from './selective/events';
-import {Config} from './utility/config';
-import {FieldConfig, FieldConstructor, TestTextField} from './selective/field';
+import {FieldConfig, FieldConstructor} from './selective/field';
 import {GroupField} from './selective/field/group';
 import {ListField} from './selective/field/list';
 import {SelectiveEditor} from './index';
@@ -64,11 +63,3 @@ guessEl.addEventListener('click', () => {
 });
 
 exampleSelective.render();
-
-const testText = new TestTextField({
-  key: 'test',
-  type: 'testType',
-  placeholder: 'placeholder',
-});
-
-console.log(testText.config.placeholder);

@@ -1,7 +1,7 @@
 import {AutoFields} from './autoFields';
 import {FieldConfig} from './field';
-import test from 'ava';
 import {ListFieldConfig} from './field/list';
+import test from 'ava';
 
 test('auto fields guess null', t => {
   const autoFields = new AutoFields({});

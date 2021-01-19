@@ -4,9 +4,21 @@ import {DeepObject} from '../../utility/deepObject';
 import {SelectiveEditor} from '../..';
 import {Types} from '../types';
 
+export interface TextAreaFieldConfig extends FieldConfig {
+  placeholder?: string;
+  rows?: number;
+}
+
 export class TextareaField extends Field {
-  constructor(types: Types, config: FieldConfig, fieldType = 'textarea') {
+  config: TextAreaFieldConfig;
+
+  constructor(
+    types: Types,
+    config: TextAreaFieldConfig,
+    fieldType = 'textarea'
+  ) {
     super(types, config, fieldType);
+    this.config = config;
   }
 
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
@@ -14,8 +26,8 @@ export class TextareaField extends Field {
     return html` ${this.templateHelp(editor, data)}<textarea
         class=${this.expandClasses(this.classesForInput())}
         id=${this.uid}
-        rows=${this.config?.get('rows') || 6}
-        placeholder=${this.config?.get('placeholder') || ''}
+        rows=${this.config.rows || 6}
+        placeholder=${this.config.placeholder || ''}
         @input=${this.handleInput.bind(this)}
       >
 ${value}</textarea

@@ -1,13 +1,53 @@
 import {DEFAULT_ZONE_KEY, ValidationLevel} from './validation';
 import {Base} from '../mixins';
 import {ClassManager} from '../utility/classes';
-import {Config} from '../utility/config';
-import {ConfigMixin} from '../mixins/config';
 import {DataType} from '../utility/dataType';
 import {Types} from './types';
 
-export interface RuleConfig {
+export interface AllowExcludeRuleConfig {
   message?: string;
+  pattern?: string;
+  values?: Array<string>;
+}
+
+export interface MinMaxRuleConfig {
+  message?: string;
+  value: number;
+}
+
+export interface RuleConfig {
+  level?: ValidationLevel;
+  message?: string;
+  type: string;
+}
+
+export interface GeneralRuleConfig extends RuleConfig {
+  // Allow the generic rule config to accept all of the
+  // sub config properties.
+  [x: string]: any;
+}
+
+export interface LengthRuleConfig extends RuleConfig {
+  max?: MinMaxRuleConfig;
+  min?: MinMaxRuleConfig;
+}
+
+export interface MatchRuleConfig extends RuleConfig {
+  allowed?: AllowExcludeRuleConfig;
+  excluded?: AllowExcludeRuleConfig;
+}
+
+export interface PatternRuleConfig extends RuleConfig {
+  message?: string;
+  pattern: string;
+}
+
+export interface RangeRuleConfig extends RuleConfig {
+  max?: MinMaxRuleConfig;
+  min?: MinMaxRuleConfig;
+}
+export interface RequireRuleConfig extends RuleConfig {
+  alternativeEmpties?: Array<string>;
 }
 
 /**
@@ -69,12 +109,11 @@ export class Rules {
     this.types = ruleTypes;
   }
 
-  addRuleFromConfig(ruleConfig: Config, zoneKey = DEFAULT_ZONE_KEY) {
-    const ruleType = ruleConfig.get('type', '__missing_type__');
-    const newRule = this.types.newFromKey(ruleType, ruleConfig);
+  addRuleFromConfig(ruleConfig: GeneralRuleConfig, zoneKey = DEFAULT_ZONE_KEY) {
+    const newRule = this.types.newFromKey(ruleConfig.type, ruleConfig);
     if (!newRule) {
       console.error(
-        `Unable to add validation rule for unknown validation type: ${ruleType}`
+        `Unable to add validation rule for unknown validation type: ${ruleConfig.type}`
       );
       return;
     }
@@ -94,11 +133,12 @@ export class Rules {
   }
 }
 
-export class Rule extends ConfigMixin(Base) implements RuleComponent {
+export class Rule extends Base implements RuleComponent {
+  config: RuleConfig;
   defaultMessage = 'Value is invalid.';
   defaultLevel: ValidationLevel;
 
-  constructor(config: Config) {
+  constructor(config: RuleConfig) {
     super();
     this.config = config;
 
@@ -130,14 +170,14 @@ export class Rule extends ConfigMixin(Base) implements RuleComponent {
    * Validation level to use if the validation fails.
    */
   get level(): ValidationLevel {
-    return this.config?.get('level') || this.defaultLevel;
+    return this.config.level || this.defaultLevel;
   }
 
   /**
    * Error message from the config or fall back to the default.
    */
   get message(): string {
-    return this.config?.get('message') || this.defaultMessage;
+    return this.config.message || this.defaultMessage;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -148,7 +188,13 @@ export class Rule extends ConfigMixin(Base) implements RuleComponent {
 }
 
 export class LengthRule extends Rule {
+  config: LengthRuleConfig;
   defaultMessage = 'Value needs to have the correct length.';
+
+  constructor(config: LengthRuleConfig) {
+    super(config);
+    this.config = config;
+  }
 
   allowAdd(value: any): boolean {
     // Allow for empty fields.
@@ -157,10 +203,9 @@ export class LengthRule extends Rule {
     }
 
     value = this.cleanValue(value);
-    const configMax = this.config?.get('max');
 
     // Do not allow more to be added when at max length.
-    if (configMax && value.length >= configMax.value) {
+    if (this.config.max && value.length >= this.config.max.value) {
       return false;
     }
     return true;
@@ -173,10 +218,9 @@ export class LengthRule extends Rule {
     }
 
     value = this.cleanValue(value);
-    const configMin = this.config?.get('min');
 
-    // Do not allow more to be removed when at max length.
-    if (configMin && value.length <= configMin.value) {
+    // Do not allow more to be removed when at min length.
+    if (this.config.min && value.length <= this.config.min.value) {
       return false;
     }
     return true;
@@ -198,15 +242,13 @@ export class LengthRule extends Rule {
     }
 
     value = this.cleanValue(value);
-    const configMax = this.config?.get('max');
-    const configMin = this.config?.get('min');
 
-    if (configMin && value.length < configMin.value) {
-      return configMin.message || this.message;
+    if (this.config.min && value.length < this.config.min.value) {
+      return this.config.min.message || this.message;
     }
 
-    if (configMax && value.length > configMax.value) {
-      return configMax.message || this.message;
+    if (this.config.max && value.length > this.config.max.value) {
+      return this.config.max.message || this.message;
     }
 
     return null;
@@ -214,11 +256,13 @@ export class LengthRule extends Rule {
 }
 
 export class MatchRule extends Rule {
+  config: MatchRuleConfig;
   defaultMessage = 'Value needs to match the validation rule.';
   patternCache: Record<string, RegExp>;
 
-  constructor(config: Config) {
+  constructor(config: MatchRuleConfig) {
     super(config);
+    this.config = config;
     this.patternCache = {};
   }
 
@@ -237,7 +281,7 @@ export class MatchRule extends Rule {
     }
 
     // Handle the allowed matching.
-    let matchConfig = this.config?.get('allowed');
+    let matchConfig = this.config.allowed;
     if (matchConfig) {
       // Matching values are allowed.
       if (matchConfig.pattern) {
@@ -255,7 +299,7 @@ export class MatchRule extends Rule {
     }
 
     // Handle the excluded matching.
-    matchConfig = this.config?.get('excluded');
+    matchConfig = this.config.excluded;
     if (matchConfig) {
       // Matching values are NOT allowed.
       if (matchConfig.pattern) {
@@ -277,13 +321,15 @@ export class MatchRule extends Rule {
 }
 
 export class PatternRule extends Rule {
+  config: PatternRuleConfig;
   defaultMessage: string;
   pattern?: RegExp;
 
-  constructor(config: Config) {
+  constructor(config: PatternRuleConfig) {
     super(config);
+    this.config = config;
     this.defaultMessage = `Value needs to match the pattern: ${
-      this.config?.get('pattern') || '__missing__'
+      this.config.pattern || '__missing__'
     }`;
   }
 
@@ -296,7 +342,7 @@ export class PatternRule extends Rule {
 
     // Only need to compile the pattern once.
     if (!this.pattern) {
-      this.pattern = new RegExp(this.config?.get('pattern'));
+      this.pattern = new RegExp(this.config.pattern);
     }
 
     // Needs to match the pattern.
@@ -309,7 +355,13 @@ export class PatternRule extends Rule {
 }
 
 export class RangeRule extends Rule {
+  config: RangeRuleConfig;
   defaultMessage = 'Value needs to be a number in range.';
+
+  constructor(config: RangeRuleConfig) {
+    super(config);
+    this.config = config;
+  }
 
   allowAdd(value: any): boolean {
     // Allow for empty fields.
@@ -318,10 +370,9 @@ export class RangeRule extends Rule {
     }
 
     value = this.cleanValue(value);
-    const configMax = this.config?.get('max');
 
     // Do not allow more to be added when at max length.
-    if (configMax && value.length >= configMax.value) {
+    if (this.config.max && value.length >= this.config.max.value) {
       return false;
     }
     return true;
@@ -334,10 +385,9 @@ export class RangeRule extends Rule {
     }
 
     value = this.cleanValue(value);
-    const configMin = this.config?.get('min');
 
     // Do not allow more to be removed when at max length.
-    if (configMin && value.length <= configMin.value) {
+    if (this.config.min && value.length <= this.config.min.value) {
       return false;
     }
     return true;
@@ -358,16 +408,13 @@ export class RangeRule extends Rule {
       return null;
     }
 
-    const configMax = this.config?.get('max');
-    const configMin = this.config?.get('min');
-
     if (DataType.isArray(value)) {
-      if (configMin && value.length < configMin.value) {
-        return configMin.message || this.message;
+      if (this.config.min && value.length < this.config.min.value) {
+        return this.config.min.message || this.message;
       }
 
-      if (configMax && value.length > configMax.value) {
-        return configMax.message || this.message;
+      if (this.config.max && value.length > this.config.max.value) {
+        return this.config.max.message || this.message;
       }
     } else {
       value = parseFloat(value);
@@ -376,12 +423,12 @@ export class RangeRule extends Rule {
         return this.message;
       }
 
-      if (configMin && value < configMin.value) {
-        return configMin.message || this.message;
+      if (this.config.min && value < this.config.min.value) {
+        return this.config.min.message || this.message;
       }
 
-      if (configMax && value > configMax.value) {
-        return configMax.message || this.message;
+      if (this.config.max && value > this.config.max.value) {
+        return this.config.max.message || this.message;
       }
     }
 
@@ -390,8 +437,13 @@ export class RangeRule extends Rule {
 }
 
 export class RequireRule extends Rule {
-  alternativeEmpties?: Array<string>;
+  config: RequireRuleConfig;
   defaultMessage = 'Value is required. Cannot be empty.';
+
+  constructor(config: RequireRuleConfig) {
+    super(config);
+    this.config = config;
+  }
 
   validate(value: any): string | null {
     if (!value) {
@@ -421,7 +473,7 @@ export class RequireRule extends Rule {
 
     // Some fields a blank is not an empty value. Allow for setting
     // alternative values that are also considered as being empty.
-    for (const alternativeEmpty of this?.alternativeEmpties || []) {
+    for (const alternativeEmpty of this.config.alternativeEmpties || []) {
       if (value === alternativeEmpty) {
         return this.message;
       }

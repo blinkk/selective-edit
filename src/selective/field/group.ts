@@ -1,4 +1,3 @@
-import {Config, autoConfig} from '../../utility/config';
 import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
@@ -24,26 +23,11 @@ export class GroupField extends Field {
   }
 
   protected createFields(fieldConfigs: Array<any>): FieldsComponent {
-    const fields = new this.types.globals.FieldsCls(
-      this.types,
-      new Config({
-        fields: fieldConfigs,
-      })
-    );
-
-    // Create the fields based on the config.
-    for (const fieldConfigRaw of fieldConfigs) {
-      const fieldConfig = autoConfig(fieldConfigRaw);
-      fieldConfig.set('parentKey', this.fullKey);
-
-      // Mark the auto fields.
-      if (this.usingAutoFields) {
-        fieldConfig.set('isGuessed', true);
-      }
-
-      fields.addField(fieldConfig);
-    }
-    return fields;
+    return new this.types.globals.FieldsCls(this.types, {
+      fields: fieldConfigs,
+      isGuessed: this.usingAutoFields,
+      parentKey: this.fullKey,
+    });
   }
 
   protected ensureFields() {

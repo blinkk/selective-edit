@@ -1,6 +1,6 @@
 import {Base} from '../mixins';
-import {UuidMixin} from '../mixins/uuid';
 import {Rules} from './validationRules';
+import {UuidMixin} from '../mixins/uuid';
 
 export const DEFAULT_ZONE_KEY = 'default';
 

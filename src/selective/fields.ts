@@ -1,8 +1,6 @@
 import {FieldComponent, FieldConfig} from './field';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
-import {Config} from '../utility/config';
-import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
@@ -16,10 +14,15 @@ import {repeat} from 'lit-html/directives/repeat';
 
 export interface FieldsConfig {
   fields?: Array<FieldConfig>;
+  isGuessed?: boolean;
+  parentKey: string;
+  preview_field?: string;
+  preview_fields?: Array<string>;
 }
 
 export interface FieldsComponent {
-  addField(fieldConfig: Config): void;
+  config: FieldsConfig;
+  addField(fieldConfig: FieldConfig): void;
   allowSimple: boolean;
   isClean: boolean;
   isValid: boolean;
@@ -38,42 +41,49 @@ export interface FieldsComponent {
 }
 
 export interface FieldsConstructor {
-  new (types: Types, config: Config): FieldsComponent;
+  new (types: Types, config: FieldsConfig): FieldsComponent;
 }
 
 /**
  * Fields control the display of a list of fields in the editor.
  */
 export class Fields
-  extends UuidMixin(DataMixin(ConfigMixin(Base)))
+  extends UuidMixin(DataMixin(Base))
   implements FieldsComponent {
+  config: FieldsConfig;
   private currentValue?: DeepObject;
   fields: Array<FieldComponent>;
   private isLocked: boolean;
   private originalValue?: DeepObject;
   types: Types;
 
-  constructor(types: Types, config: Config) {
+  constructor(types: Types, config: FieldsConfig) {
     super();
     this.types = types;
     this.config = config;
 
     this.isLocked = false;
     this.fields = [];
+
+    // Create the fields based on the config.
+    for (const fieldConfig of this.config.fields || []) {
+      this.addField(fieldConfig);
+    }
   }
 
-  addField(fieldConfig: Config) {
+  addField(fieldConfig: FieldConfig) {
+    fieldConfig.parentKey = this.config.parentKey;
+    fieldConfig.isGuessed = this.config.isGuessed;
+
     const newField = this.types.fields.newFromKey(
-      fieldConfig.get('type'),
+      fieldConfig.type,
       this.types,
       fieldConfig
     );
 
     if (!newField) {
       console.error(
-        `Unable to add field for unknown field type: ${fieldConfig.get(
-          'type'
-        )}.`
+        `Unable to add field for unknown field type: ${fieldConfig.type}.`
       );
       return;
     }
@@ -81,9 +91,7 @@ export class Fields
   }
 
   get allowSimple(): boolean {
-    return (
-      !this.config?.get('preview_field') && !this.config?.get('preview_fields')
-    );
+    return !this.config.preview_field && !this.config.preview_fields;
   }
 
   /**
@@ -145,12 +153,11 @@ export class Fields
 
   get previewFields(): Array<string> {
     let previewFields =
-      this.config?.get('preview_field', this.config?.get('preview_fields')) ||
-      [];
+      this.config.preview_field || this.config.preview_fields || [];
     if (!DataType.isArray(previewFields)) {
-      previewFields = [previewFields];
+      previewFields = [previewFields as string];
     }
-    return previewFields;
+    return previewFields as Array<string>;
   }
 
   /**

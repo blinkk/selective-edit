@@ -2,8 +2,6 @@ import {DEFAULT_ZONE_KEY, Validation, ValidationLevel} from './validation';
 import {RuleConfig, Rules} from './validationRules';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
-import {Config} from '../utility/config';
-import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
@@ -41,7 +39,10 @@ export interface FieldComponent {
   [x: string]: any;
 }
 
-export type FieldConstructor = (types: Types, config: Config) => FieldComponent;
+export type FieldConstructor = (
+  types: Types,
+  config: FieldConfig
+) => FieldComponent;
 
 export class Field
   extends UuidMixin(DataMixin(Base))
@@ -247,14 +248,14 @@ export class Field
       // Validation is an array when it is all one zone.
       ruleConfigs = ruleConfigs as Array<RuleConfig>;
       for (const ruleConfig of ruleConfigs) {
-        this.rules.addRuleFromConfig(new Config(ruleConfig));
+        this.rules.addRuleFromConfig(ruleConfig);
       }
     } else if (DataType.isObject(ruleConfigs)) {
       // Complex fields define rules into separate zones.
       ruleConfigs = ruleConfigs as Record<string, Array<RuleConfig>>;
       for (const zoneKey of Object.keys(ruleConfigs)) {
         for (const ruleConfig of ruleConfigs[zoneKey]) {
-          this.rules.addRuleFromConfig(new Config(ruleConfig), zoneKey);
+          this.rules.addRuleFromConfig(ruleConfig, zoneKey);
         }
       }
     } else if (ruleConfigs) {
@@ -535,6 +536,7 @@ export class Field
     this.validation = undefined;
 
     let newValue = data.get(this.key);
+
     const isClean = this.isClean;
 
     // Cleaning up the origina value.

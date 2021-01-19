@@ -23,7 +23,7 @@ export class TextField extends Field {
         class=${this.expandClasses(this.classesForInput())}
         type="text"
         id="${this.uid}"
-        placeholder=${this.config?.get('placeholder') || ''}
+        placeholder=${this.config.placeholder || ''}
         @input=${this.handleInput.bind(this)}
         value=${value}
       />

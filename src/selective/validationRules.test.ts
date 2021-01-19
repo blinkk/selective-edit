@@ -9,19 +9,17 @@ import {
   Rules,
 } from './validationRules';
 import {ClassManager} from '../utility/classes';
-import {Config} from '../utility/config';
 import test from 'ava';
 
 test('length rule respects min length on strings', t => {
   const failMessage = 'failed';
-  const rule = new LengthRule(
-    new Config({
-      min: {
-        value: 3,
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new LengthRule({
+    type: 'length',
+    min: {
+      value: 3,
+      message: failMessage,
+    },
+  });
 
   // Fails with length less than min value.
   t.is(rule.validate('a'), failMessage);
@@ -38,14 +36,13 @@ test('length rule respects min length on strings', t => {
 
 test('length rule respects max length on strings', t => {
   const failMessage = 'failed';
-  const rule = new LengthRule(
-    new Config({
-      max: {
-        value: 3,
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new LengthRule({
+    type: 'length',
+    max: {
+      value: 3,
+      message: failMessage,
+    },
+  });
 
   // Fails with length greater than max value.
   t.is(rule.validate('abcd'), failMessage);
@@ -62,14 +59,13 @@ test('length rule respects max length on strings', t => {
 
 test('length rule respects min length on arrays', t => {
   const failMessage = 'failed';
-  const rule = new LengthRule(
-    new Config({
-      min: {
-        value: 3,
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new LengthRule({
+    type: 'length',
+    min: {
+      value: 3,
+      message: failMessage,
+    },
+  });
 
   // Fails with length less than min value.
   t.is(rule.validate(['a', 'b']), failMessage);
@@ -87,14 +83,13 @@ test('length rule respects min length on arrays', t => {
 
 test('length rule respects max length on arrays', t => {
   const failMessage = 'failed';
-  const rule = new LengthRule(
-    new Config({
-      max: {
-        value: 3,
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new LengthRule({
+    type: 'length',
+    max: {
+      value: 3,
+      message: failMessage,
+    },
+  });
 
   // Fails with length greater than max value.
   t.is(rule.validate(['a', 'b', 'c', 'd']), failMessage);
@@ -112,14 +107,13 @@ test('length rule respects max length on arrays', t => {
 
 test('match rule respects allowed pattern', t => {
   const failMessage = 'failed';
-  const rule = new MatchRule(
-    new Config({
-      allowed: {
-        pattern: '^s.*y$',
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new MatchRule({
+    type: 'match',
+    allowed: {
+      pattern: '^s.*y$',
+      message: failMessage,
+    },
+  });
 
   // Fails with invalid value.
   t.is(rule.validate('testing'), failMessage);
@@ -137,14 +131,13 @@ test('match rule respects allowed pattern', t => {
 
 test('match rule respects allowed values', t => {
   const failMessage = 'failed';
-  const rule = new MatchRule(
-    new Config({
-      allowed: {
-        values: ['apple', 'banana', 'grape'],
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new MatchRule({
+    type: 'match',
+    allowed: {
+      values: ['apple', 'banana', 'grape'],
+      message: failMessage,
+    },
+  });
 
   // Fails with invalid value.
   t.is(rule.validate('testing'), failMessage);
@@ -163,14 +156,13 @@ test('match rule respects allowed values', t => {
 
 test('match rule respects excluded pattern', t => {
   const failMessage = 'failed';
-  const rule = new MatchRule(
-    new Config({
-      excluded: {
-        pattern: '^s.*y$',
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new MatchRule({
+    type: 'match',
+    excluded: {
+      pattern: '^s.*y$',
+      message: failMessage,
+    },
+  });
 
   // Fails with invalid value.
   t.is(rule.validate('slurry'), failMessage);
@@ -188,14 +180,13 @@ test('match rule respects excluded pattern', t => {
 
 test('match rule respects excluded values', t => {
   const failMessage = 'failed';
-  const rule = new MatchRule(
-    new Config({
-      excluded: {
-        values: ['apple', 'banana', 'grape'],
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new MatchRule({
+    type: 'match',
+    excluded: {
+      values: ['apple', 'banana', 'grape'],
+      message: failMessage,
+    },
+  });
 
   // Fails with invalid value.
   t.is(rule.validate('apple'), failMessage);
@@ -214,12 +205,11 @@ test('match rule respects excluded values', t => {
 
 test('pattern rule respects pattern', t => {
   const failMessage = 'failed';
-  const rule = new PatternRule(
-    new Config({
-      pattern: '^s.*y$',
-      message: failMessage,
-    })
-  );
+  const rule = new PatternRule({
+    type: 'pattern',
+    pattern: '^s.*y$',
+    message: failMessage,
+  });
 
   // Fails with invalid value.
   t.is(rule.validate('testing'), failMessage);
@@ -237,14 +227,13 @@ test('pattern rule respects pattern', t => {
 
 test('range rule respects min value', t => {
   const failMessage = 'failed';
-  const rule = new RangeRule(
-    new Config({
-      min: {
-        value: 3,
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new RangeRule({
+    type: 'range',
+    min: {
+      value: 3,
+      message: failMessage,
+    },
+  });
 
   // Fails with invalid value.
   t.is(rule.validate('2'), failMessage);
@@ -263,14 +252,13 @@ test('range rule respects min value', t => {
 
 test('range rule respects max value', t => {
   const failMessage = 'failed';
-  const rule = new RangeRule(
-    new Config({
-      max: {
-        value: 3,
-        message: failMessage,
-      },
-    })
-  );
+  const rule = new RangeRule({
+    type: 'range',
+    max: {
+      value: 3,
+      message: failMessage,
+    },
+  });
 
   // Fails with invalid value.
   t.is(rule.validate('4'), failMessage);
@@ -289,11 +277,10 @@ test('range rule respects max value', t => {
 
 test('required rule respects value', t => {
   const failMessage = 'failed';
-  const rule = new RequireRule(
-    new Config({
-      message: failMessage,
-    })
-  );
+  const rule = new RequireRule({
+    type: 'require',
+    message: failMessage,
+  });
 
   // Fails when there is no value or empty.
   t.is(rule.validate(undefined), failMessage);
@@ -319,15 +306,13 @@ test('rules can add validation rules', t => {
     (LengthRule as unknown) as RuleConstructor
   );
   const rules = new Rules(classManager);
-  rules.addRuleFromConfig(
-    new Config({
-      type: 'length',
-      min: {
-        value: 3,
-        message: failMessage,
-      },
-    })
-  );
+  rules.addRuleFromConfig({
+    type: 'length',
+    min: {
+      value: 3,
+      message: failMessage,
+    },
+  });
 
   t.is(rules.getRulesForZone().length, 1);
 });

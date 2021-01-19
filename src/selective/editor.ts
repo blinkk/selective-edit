@@ -1,26 +1,38 @@
-import {Config, autoConfig} from '../utility/config';
 import {FieldComponent, FieldConfig, FieldConstructor} from './field';
-import {Fields, FieldsComponent, FieldsConstructor} from './fields';
+import {
+  Fields,
+  FieldsComponent,
+  FieldsConfig,
+  FieldsConstructor,
+} from './fields';
 import {RuleComponent, RuleConstructor} from './validationRules';
 import {TemplateResult, html, render} from 'lit-html';
 import {AutoFields} from './autoFields';
 import {Base} from '../mixins';
 import {ClassManager} from '../utility/classes';
-import {ConfigMixin} from '../mixins/config';
 import {DataMixin} from '../mixins/data';
 import {DeepObject} from '../utility/deepObject';
 import {EVENT_RENDER_COMPLETE} from './events';
 import {Types} from './types';
 
-export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
+export interface EditorConfig {
+  fieldTypes?: Array<FieldConstructor>;
+  fields?: Array<FieldConfig>;
+}
+
+export class SelectiveEditor extends DataMixin(Base) {
+  config: EditorConfig;
   container?: HTMLElement;
   fields: FieldsComponent;
   types: Types;
 
-  constructor(config: Config | Record<string, any>, container?: HTMLElement) {
+  constructor(
+    config: EditorConfig | Record<string, any>,
+    container?: HTMLElement
+  ) {
     super();
     this.container = container;
-    this.config = autoConfig(config);
+    this.config = config;
     this.types = {
       fields: new ClassManager<FieldConstructor, FieldComponent>(),
       globals: {
@@ -30,7 +42,7 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
       rules: new ClassManager<RuleConstructor, RuleComponent>(),
     };
 
-    this.fields = new Fields(this.types, {} as Config);
+    this.fields = new Fields(this.types, {} as FieldsConfig);
   }
 
   addFieldType(key: string, FieldCls: FieldConstructor) {
@@ -53,12 +65,9 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
 
   guessFields(): Array<FieldConfig> {
     const autoFields = new this.types.globals.AutoFieldsCls({});
-    const fieldsConfig = autoFields.guessFields(this.data?.obj);
-
-    this.config?.set('fields', fieldsConfig);
+    this.config.fields = autoFields.guessFields(this.data?.obj);
     this.resetFields();
-
-    return fieldsConfig;
+    return this.config.fields;
   }
 
   template(editor: SelectiveEditor, data: DeepObject): TemplateResult {
@@ -78,10 +87,10 @@ export class SelectiveEditor extends DataMixin(ConfigMixin(Base)) {
   }
 
   resetFields(): void {
-    this.fields = new Fields(this.types, {} as Config);
-    for (const fieldConfigRaw of this.config?.get('fields') || []) {
-      this.fields.addField(autoConfig(fieldConfigRaw));
-    }
+    this.fields = new Fields(this.types, {
+      fields: this.config.fields,
+      parentKey: '',
+    });
     this.render();
   }
 

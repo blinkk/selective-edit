@@ -1,8 +1,7 @@
-import {Config, autoConfig} from '../../utility/config';
+import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldComponent, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../../mixins';
-import {DeepObject} from '../../utility/deepObject';
 import {EVENT_UNLOCK} from '../events';
 import {FieldsComponent} from '../fields';
 import {SelectiveEditor} from '../..';
@@ -12,6 +11,8 @@ import {UuidMixin} from '../../mixins/uuid';
 import {repeat} from 'lit-html/directives/repeat';
 
 export interface ListFieldConfig extends FieldConfig {
+  addLabel?: string;
+  emptyLabel?: string;
   fields?: Array<FieldConfig>;
   placeholder?: string;
 }
@@ -49,27 +50,11 @@ export class ListField extends SortableMixin(Field) {
   }
 
   protected createFields(fieldConfigs: Array<any>): FieldsComponent {
-    const fields = new this.types.globals.FieldsCls(
-      this.types,
-      new Config({
-        fields: fieldConfigs,
-      })
-    );
-
-    // Create the fields based on the config.
-    for (const fieldConfigRaw of fieldConfigs) {
-      const fieldConfig = autoConfig(fieldConfigRaw);
-      fieldConfig.set('parentKey', this.fullKey);
-
-      // Mark the auto fields.
-      if (this.usingAutoFields) {
-        fieldConfig.set('isGuessed', true);
-      }
-
-      fields.addField(fieldConfig);
-    }
-
-    return fields;
+    return new this.types.globals.FieldsCls(this.types, {
+      fields: fieldConfigs,
+      isGuessed: this.usingAutoFields,
+      parentKey: this.fullKey,
+    });
   }
 
   handleAddItem(evt: Event, editor: SelectiveEditor, data: DeepObject) {
@@ -81,7 +66,7 @@ export class ListField extends SortableMixin(Field) {
     // updated correctly so we need to manually call the data update.
     fields.updateOriginal(editor, data);
     for (const field of fields.fields) {
-      field.updateOriginal(editor, autoConfig(fields.defaultValue));
+      field.updateOriginal(editor, autoDeepObject(fields.defaultValue));
     }
 
     items.push(new ListFieldItem(this, fields));
@@ -208,7 +193,7 @@ export class ListField extends SortableMixin(Field) {
         for (const field of fields.fields) {
           field.updateOriginal(
             editor,
-            autoConfig(value || fields.defaultValue)
+            autoDeepObject(value || fields.defaultValue)
           );
         }
 
@@ -228,7 +213,7 @@ export class ListField extends SortableMixin(Field) {
       class="selective__list__item selective__list__item--empty"
       data-index=${index}
     >
-      ${this.config?.get('empty_label') || '{ Empty }'}
+      ${this.config.emptyLabel || '{ Empty }'}
     </div>`;
   }
 
@@ -256,7 +241,7 @@ export class ListField extends SortableMixin(Field) {
           this.handleAddItem(evt, editor, data);
         }}
       >
-        ${this.config?.get('add_label') || 'Add'}
+        ${this.config.addLabel || 'Add'}
       </button>
     </div>`;
   }

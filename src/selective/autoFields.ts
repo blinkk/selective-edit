@@ -1,7 +1,5 @@
-import {Config} from '../utility/config';
 import {DataType} from '../utility/dataType';
 import {FieldConfig} from './field';
-import {FieldsConfig} from './fields';
 
 export interface AutoFieldsConfig {
   ignoreKeys?: Array<string>;

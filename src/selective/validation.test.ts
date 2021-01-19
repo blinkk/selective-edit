@@ -5,7 +5,6 @@ import {
   Rules,
 } from './validationRules';
 import {ClassManager} from '../utility/classes';
-import {Config} from '../utility/config';
 import {Validation} from './validation';
 import test from 'ava';
 
@@ -20,15 +19,13 @@ test('validation errors are stored when there are errors', t => {
     (LengthRule as unknown) as RuleConstructor
   );
   const rules = new Rules(classManager);
-  rules.addRuleFromConfig(
-    new Config({
-      type: 'length',
-      min: {
-        value: 3,
-        message: failMessage,
-      },
-    })
-  );
+  rules.addRuleFromConfig({
+    type: 'length',
+    min: {
+      value: 3,
+      message: failMessage,
+    },
+  });
 
   const validation = new Validation(rules);
 

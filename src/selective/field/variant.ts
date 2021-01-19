@@ -1,4 +1,3 @@
-import {Config, autoConfig} from '../../utility/config';
 import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
@@ -9,21 +8,33 @@ import {findParentByClassname} from '../../utility/dom';
 import merge from 'lodash.merge';
 import {repeat} from 'lit-html/directives/repeat';
 
+export interface VariantOptionConfig {
+  fields: Array<FieldConfig>;
+  label?: string;
+  help?: string;
+}
+
+export interface VariantFieldConfig extends FieldConfig {
+  variantLabel?: string;
+  variants: Record<string, VariantOptionConfig>;
+  placeholder?: string;
+}
+
 export class VariantField extends Field {
+  config: VariantFieldConfig;
   fields?: FieldsComponent;
   usingAutoFields: boolean;
   variant?: string;
 
-  constructor(types: Types, config: FieldConfig, fieldType = 'variant') {
+  constructor(types: Types, config: VariantFieldConfig, fieldType = 'variant') {
     super(types, config, fieldType);
+    this.config = config;
     this.usingAutoFields = false;
   }
 
   protected createFields(): FieldsComponent | undefined {
     const variant: string | undefined =
-      this.variant ||
-      this.originalValue?._variant ||
-      this.config?.get('default');
+      this.variant || this.originalValue?._variant || this.config.default;
 
     // If we don't know which variant to use, then skip it.
     if (!variant) {
@@ -35,30 +46,14 @@ export class VariantField extends Field {
       this.variant = variant;
     }
 
-    const variantConfig = (this.config?.get('variants') || {})[variant] || {};
-    const fieldConfigs: Array<Record<string, any> | Config> =
-      variantConfig.fields || [];
+    const variantConfig = this.config.variants[variant] || {};
+    const fieldConfigs: Array<FieldConfig> = variantConfig.fields || [];
 
-    const fields = new this.types.globals.FieldsCls(
-      this.types,
-      new Config({
-        fields: fieldConfigs,
-      })
-    );
-
-    // Create the fields based on the config.
-    for (const fieldConfigRaw of fieldConfigs) {
-      const fieldConfig = autoConfig(fieldConfigRaw);
-      fieldConfig.set('parentKey', this.fullKey);
-
-      // Mark the auto fields.
-      if (this.usingAutoFields) {
-        fieldConfig.set('isGuessed', true);
-      }
-
-      fields.addField(fieldConfig);
-    }
-    return fields;
+    return new this.types.globals.FieldsCls(this.types, {
+      fields: fieldConfigs,
+      isGuessed: this.usingAutoFields,
+      parentKey: this.fullKey,
+    });
   }
 
   protected ensureFields() {
@@ -149,11 +144,11 @@ export class VariantField extends Field {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templateVariants(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    const variants = this.config?.get('variants') || {};
+    const variants = this.config.variants;
     const variantKeys = Object.keys(variants).sort();
 
     return html`<div class="selective__variant__variants">
-      <label>${this.config?.get('variantLabel') || 'Variant'}:</label>
+      <label>${this.config.variantLabel || 'Variant'}:</label>
       ${repeat(
         variantKeys,
         variantKey => variantKey,

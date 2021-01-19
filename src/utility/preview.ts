@@ -2,7 +2,6 @@
  *  Utility for determining the preview value given an object.
  */
 import {TemplateResult, html} from 'lit-html';
-import {Config} from './config';
 import {DataType} from './dataType';
 import {autoDeepObject} from './deepObject';
 
