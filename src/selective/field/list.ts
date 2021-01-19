@@ -65,6 +65,48 @@ export class ListField extends SortableMixin(Field) {
     });
   }
 
+  protected ensureItems(editor: SelectiveEditor): Array<ListItemComponent> {
+    if (this.items === null) {
+      // TODO: create all the items based on the config.
+      this.items = [];
+
+      let fieldConfigs = this.config.fields || [];
+
+      // Add list items for each of the values in the list already.
+      for (const value of this.originalValue || []) {
+        // If no field configs, auto guess based on first row with a value.
+        if (fieldConfigs.length === 0) {
+          this.usingAutoFields = true;
+
+          // Auto-guess fields based on the first item in the list.
+          const autoFields = new this.types.globals.AutoFieldsCls(
+            this.config.autoFields || {}
+          );
+          fieldConfigs = autoFields.guessFields(value);
+
+          // Store the the auto-guessed configs for new list items.
+          this.config?.set('fields', fieldConfigs);
+        }
+
+        const fields = this.createFields(fieldConfigs);
+
+        // When an item is not expanded it does not get the value
+        // updated correctly so we need to manually call the data update.
+        fields.updateOriginal(editor, value);
+        for (const field of fields.fields) {
+          field.updateOriginal(
+            editor,
+            autoDeepObject(value || fields.defaultValue)
+          );
+        }
+
+        this.items.push(new ListFieldItem(this, fields));
+      }
+    }
+
+    return this.items;
+  }
+
   handleAddItem(evt: Event, editor: SelectiveEditor, data: DeepObject) {
     const items = this.ensureItems(editor);
     const fieldConfigs = this.config.fields || [];
@@ -170,46 +212,30 @@ export class ListField extends SortableMixin(Field) {
     this.render();
   }
 
-  protected ensureItems(editor: SelectiveEditor): Array<ListItemComponent> {
-    if (this.items === null) {
-      // TODO: create all the items based on the config.
-      this.items = [];
-
-      let fieldConfigs = this.config.fields || [];
-
-      // Add list items for each of the values in the list already.
-      for (const value of this.originalValue || []) {
-        // If no field configs, auto guess based on first row with a value.
-        if (fieldConfigs.length === 0) {
-          this.usingAutoFields = true;
-
-          // Auto-guess fields based on the first item in the list.
-          const autoFields = new this.types.globals.AutoFieldsCls(
-            this.config.autoFields || {}
-          );
-          fieldConfigs = autoFields.guessFields(value);
-
-          // Store the the auto-guessed configs for new list items.
-          this.config?.set('fields', fieldConfigs);
-        }
-
-        const fields = this.createFields(fieldConfigs);
-
-        // When an item is not expanded it does not get the value
-        // updated correctly so we need to manually call the data update.
-        fields.updateOriginal(editor, value);
-        for (const field of fields.fields) {
-          field.updateOriginal(
-            editor,
-            autoDeepObject(value || fields.defaultValue)
-          );
-        }
-
-        this.items.push(new ListFieldItem(this, fields));
+  get isClean(): boolean {
+    // If there are no items, nothing has changed.
+    if (!this.items) {
+      return true;
+    }
+    for (const item of this.items) {
+      if (!item.fields.isClean) {
+        return false;
       }
     }
+    return true;
+  }
 
-    return this.items;
+  get isValid(): boolean {
+    // If there are no items, nothing has changed.
+    if (!this.items) {
+      return true;
+    }
+    for (const item of this.items) {
+      if (!item.fields.isValid) {
+        return false;
+      }
+    }
+    return true;
   }
 
   templateEmpty(

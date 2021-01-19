@@ -70,6 +70,14 @@ export class SelectiveEditor extends DataMixin(Base) {
     return this.config.fields;
   }
 
+  get isClean(): boolean {
+    return this.fields.isClean;
+  }
+
+  get isValid(): boolean {
+    return this.fields.isValid;
+  }
+
   template(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     return html`<div class="selective">
       ${editor.fields.template(editor, data)}

@@ -32,7 +32,8 @@
   },
   "varied": {
     "title": "Varied life",
-    "description": "Fields are varied depending on choice."
+    "description": "Fields are varied depending on choice.",
+    "_variant": "simple"
   },
   "clouds": [
     {
@@ -81,7 +82,14 @@
       "label": "Simple List",
       "fields": [
         {
-          "type": "text"
+          "type": "text",
+          "validation": [{
+            "type": "length",
+            "max": {
+              "message": "Cannot be more than 10 characters.",
+              "value": 10
+            }
+          }]
         }
       ]
     },
@@ -163,6 +171,11 @@
         <div class="content__section content__value">
           <label for="value" style="">Edited value</label>
           <textarea id="value" rows="6"></textarea>
+        </div>
+
+        <div class="content__section status">
+          <div>Is Clean? <span class="status__clean status--true">True</span></div>
+          <div>Is Valid? <span class="status__valid status--true">True</span></div>
         </div>
       </div>
 

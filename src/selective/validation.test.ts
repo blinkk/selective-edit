@@ -1,10 +1,6 @@
-import {
-  LengthRule,
-  RuleComponent,
-  RuleConstructor,
-  Rules,
-} from './validationRules';
+import {RuleComponent, RuleConstructor, Rules} from './validationRules';
 import {ClassManager} from '../utility/classes';
+import {LengthRule} from './rule/length';
 import {Validation} from './validation';
 import test from 'ava';
 
