@@ -1,10 +1,5 @@
 import {FieldComponent, FieldConfig, FieldConstructor} from './field';
-import {
-  Fields,
-  FieldsComponent,
-  FieldsConfig,
-  FieldsConstructor,
-} from './fields';
+import {Fields, FieldsComponent, FieldsConstructor} from './fields';
 import {RuleComponent, RuleConstructor} from './validationRules';
 import {TemplateResult, html, render} from 'lit-html';
 import {AutoFields} from './autoFields';
@@ -24,6 +19,8 @@ export class SelectiveEditor extends DataMixin(Base) {
   config: EditorConfig;
   container?: HTMLElement;
   fields: FieldsComponent;
+  isPendingRender: boolean;
+  isRendering: boolean;
   types: Types;
 
   constructor(
@@ -41,8 +38,11 @@ export class SelectiveEditor extends DataMixin(Base) {
       },
       rules: new ClassManager<RuleConstructor, RuleComponent>(),
     };
-
-    this.fields = new Fields(this.types, {} as FieldsConfig);
+    this.isRendering = false;
+    this.isPendingRender = false;
+    this.fields = new Fields(this.types, {
+      parentKey: '',
+    });
   }
 
   addFieldType(key: string, FieldCls: FieldConstructor) {
@@ -90,8 +90,27 @@ export class SelectiveEditor extends DataMixin(Base) {
       return;
     }
 
+    if (this.isRendering) {
+      this.isPendingRender = true;
+      return;
+    }
+    this.isPendingRender = false;
+    this.isRendering = true;
+
+    const isClean = this.isClean;
+    const isValid = this.isValid;
     render(this.template(this, this.data), this.container);
+
+    this.isRendering = false;
     document.dispatchEvent(new CustomEvent(EVENT_RENDER_COMPLETE));
+
+    if (
+      this.isPendingRender ||
+      this.isClean !== isClean ||
+      this.isValid !== isValid
+    ) {
+      this.render();
+    }
   }
 
   resetFields(): void {
