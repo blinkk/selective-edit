@@ -53,6 +53,8 @@ guessEl.addEventListener('click', () => {
       if (config.fields) {
         config.fields = deepPrettyFields(config.fields);
       }
+      config.parentKey = undefined;
+      config.isGuessed = undefined;
       prettyFields.push(config);
     }
     return prettyFields;
