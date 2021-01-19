@@ -1,6 +1,6 @@
 {
   "name": "selective-edit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Selective structured text editor.",
   "main": "js/selective.js",
   "directories": {
