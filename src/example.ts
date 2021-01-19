@@ -65,3 +65,8 @@ guessEl.addEventListener('click', () => {
 });
 
 exampleSelective.render();
+
+// Style the localhost differently.
+if (window.location.hostname === 'localhost') {
+  document.body.classList.add('localhost');
+}
