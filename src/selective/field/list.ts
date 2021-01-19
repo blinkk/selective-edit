@@ -67,7 +67,6 @@ export class ListField extends SortableMixin(Field) {
 
   protected ensureItems(editor: SelectiveEditor): Array<ListItemComponent> {
     if (this.items === null) {
-      // TODO: create all the items based on the config.
       this.items = [];
 
       let fieldConfigs = this.config.fields || [];
