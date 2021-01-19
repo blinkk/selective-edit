@@ -116,7 +116,7 @@ export class Field
       `selective__field__type__${this.fieldType}`,
     ];
 
-    for (const className of this.config?.classes || []) {
+    for (const className of this.config.classes || []) {
       classes.push(className);
     }
 
