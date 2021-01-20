@@ -3,6 +3,7 @@ import {TemplateResult, html} from 'lit-html';
 import {DeepObject} from '../../utility/deepObject';
 import {SelectiveEditor} from '../..';
 import {Types} from '../types';
+import {expandClasses} from '../../utility/dom';
 
 export interface TextAreaFieldConfig extends FieldConfig {
   /**
@@ -30,7 +31,7 @@ export class TextareaField extends Field {
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const value = this.currentValue || '';
     return html` ${this.templateHelp(editor, data)}<textarea
-        class=${this.expandClasses(this.classesForInput())}
+        class=${expandClasses(this.classesForInput())}
         id=${this.uid}
         rows=${this.config.rows || 6}
         placeholder=${this.config.placeholder || ''}

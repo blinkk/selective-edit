@@ -3,6 +3,15 @@
  */
 
 /**
+ * Convert an array of class names into a string for the `class`
+ * attribute.
+ *
+ * @param classes Array of css classes to convert for html attribute.
+ */
+export const expandClasses = (classes: Array<string>): string =>
+  classes.join(' ');
+
+/**
  * Search the parent nodes of the element to find an parent
  * that has the given class.
  *

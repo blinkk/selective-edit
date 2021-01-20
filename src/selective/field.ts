@@ -10,6 +10,7 @@ import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
+import {expandClasses} from '../utility/dom';
 import {repeat} from 'lit-html/directives/repeat';
 import stringify from 'json-stable-stringify';
 
@@ -200,10 +201,6 @@ export class Field
     }
 
     return value;
-  }
-
-  protected expandClasses(classes: Array<string>): string {
-    return classes.join(' ');
   }
 
   get fullKey(): string {
@@ -510,7 +507,7 @@ export class Field
     if (!this.config.label) {
       return html``;
     }
-    return html`<div class=${this.expandClasses(this.classesForLabel())}>
+    return html`<div class=${expandClasses(this.classesForLabel())}>
       ${this.templateIconDeepLink(editor, data)}
       ${this.templateIconValidation(editor, data)}
       <label for=${this.uid}>${this.config.label}</label>
@@ -539,7 +536,7 @@ export class Field
    */
   templateWrapper(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     return html`<div
-      class=${this.expandClasses(this.classesForField())}
+      class=${expandClasses(this.classesForField())}
       data-field-type=${this.fieldType}
       data-field-full-key=${this.fullKey}
     >

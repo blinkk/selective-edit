@@ -4,6 +4,7 @@ import {TemplateResult, html} from 'lit-html';
 import {FieldsComponent} from '../fields';
 import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
+import {expandClasses} from '../../utility/dom';
 import merge from 'lodash.merge';
 
 export interface GroupFieldConfig extends FieldConfig {
@@ -124,7 +125,7 @@ export class GroupField extends Field {
   templateLabel(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const label = this.config.label || '(Group)';
 
-    return html`<div class=${this.expandClasses(this.classesForLabel())}>
+    return html`<div class=${expandClasses(this.classesForLabel())}>
       ${this.templateIconValidation(editor, data)}
       <label>${label}</label>
     </div>`;

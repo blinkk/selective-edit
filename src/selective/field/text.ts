@@ -3,6 +3,7 @@ import {TemplateResult, html} from 'lit-html';
 import {DeepObject} from '../../utility/deepObject';
 import {SelectiveEditor} from '../..';
 import {Types} from '../types';
+import {expandClasses} from '../../utility/dom';
 
 export interface TextFieldConfig extends FieldConfig {
   /**
@@ -23,7 +24,7 @@ export class TextField extends Field {
     const value = this.currentValue || '';
     return html`${this.templateHelp(editor, data)}
       <input
-        class=${this.expandClasses(this.classesForInput())}
+        class=${expandClasses(this.classesForInput())}
         type="text"
         id="${this.uid}"
         placeholder=${this.config.placeholder || ''}

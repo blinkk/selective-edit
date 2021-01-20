@@ -13,7 +13,7 @@
   "bugs": {
     "url": "https://github.com/blinkkcode/selective-edit/issues"
   },
-  "main": "dist/src/index.ts",
+  "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "repository": {
     "type": "git",
@@ -37,6 +37,8 @@
     "dev": "concurrently \"npx ava --watch\" \"tsc --watch\"",
     "docs": "typedoc",
     "fix": "node ./node_modules/eslint/bin/eslint --fix src/**/*.ts",
+    "prepare": "yarn run compile",
+    "prepublish": "tsc",
     "serve": "concurrently \"webpack serve --config webpack.dev.js\" \"npx gulp watch\"",
     "test": "ava"
   },

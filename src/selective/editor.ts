@@ -23,10 +23,7 @@ export class SelectiveEditor extends DataMixin(Base) {
   isRendering: boolean;
   types: Types;
 
-  constructor(
-    config: EditorConfig | Record<string, any>,
-    container?: HTMLElement
-  ) {
+  constructor(config: EditorConfig, container?: HTMLElement) {
     super();
     this.container = container;
     this.config = config;
