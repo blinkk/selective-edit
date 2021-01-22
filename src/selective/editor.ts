@@ -11,7 +11,8 @@ import {EVENT_RENDER_COMPLETE} from './events';
 import {Types} from './types';
 
 export interface EditorConfig {
-  fieldTypes?: Array<FieldConstructor>;
+  fieldTypes?: Record<string, FieldConstructor>;
+  ruleTypes?: Record<string, RuleConstructor>;
   fields?: Array<FieldConfig>;
 }
 
@@ -38,8 +39,16 @@ export class SelectiveEditor extends DataMixin(Base) {
     this.isRendering = false;
     this.isPendingRender = false;
     this.fields = new Fields(this.types, {
+      fields: this.config.fields,
       parentKey: '',
     });
+
+    if (this.config.fieldTypes) {
+      this.types.fields.registerClasses(this.config.fieldTypes);
+    }
+    if (this.config.ruleTypes) {
+      this.types.rules.registerClasses(this.config.ruleTypes);
+    }
   }
 
   addFieldType(key: string, FieldCls: FieldConstructor) {
