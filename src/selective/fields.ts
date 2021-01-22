@@ -254,11 +254,13 @@ export class Fields
       return this.fields[0].value;
     }
 
-    const value = new DeepObject();
+    // Merging with the original value after setting values causes
+    // issues where blank arrays are replaced by the original arrays.
+    const value = new DeepObject(merge({}, this?.originalValue?.obj));
     for (const field of this.fields) {
       value.set(field.key, field.value);
     }
 
-    return merge({}, this?.originalValue?.obj || {}, value.obj);
+    return value.obj;
   }
 }
