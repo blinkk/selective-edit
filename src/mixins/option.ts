@@ -1,8 +1,9 @@
 import {TemplateResult, html} from 'lit-html';
+import {expandClasses, repeat} from '..';
 import {Constructor} from './index';
 import {DeepObject} from '../utility/deepObject';
 import {SelectiveEditor} from '../selective/editor';
-import {expandClasses, repeat} from '..';
+import {ifDefined} from 'lit-html/directives/if-defined';
 
 /**
  * Orientation for colors gradient.
@@ -179,7 +180,9 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
     ): TemplateResult {
       return html`<div
         class=${expandClasses(this.classesForOption(config, option))}
+        aria-checked=${config.isOptionSelected(option)}
         data-value=${option.value}
+        role=${config.isMulti ? 'checkbox' : 'radio'}
         @click=${config.handleInput}
       >
         <div
@@ -187,7 +190,7 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
           aria-label=${this.ariaLabelForOptionDot(config, option)}
           style=${this.styleForOptionDot(config, option)}
         ></div>
-        <div>${option.label || '(Empty)'}</div>
+        <label>${option.label || '(Empty)'}</label>
       </div>`;
     }
 
@@ -200,6 +203,7 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
       // TODO: Convert to a different UI when there are a lot of options.
       return html`<div
         class=${expandClasses(this.classesForOptions(config, options))}
+        role=${ifDefined(config.isMulti ? undefined : 'radiogroup')}
       >
         ${repeat(
           options,
