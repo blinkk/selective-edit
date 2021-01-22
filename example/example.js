@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("./selective/events");
 const group_1 = require("./selective/field/group");
@@ -8,11 +11,13 @@ const match_1 = require("./selective/rule/match");
 const pattern_1 = require("./selective/rule/pattern");
 const range_1 = require("./selective/rule/range");
 const require_1 = require("./selective/rule/require");
+const select_1 = require("./selective/field/select");
 const index_1 = require("./index");
 const text_1 = require("./selective/field/text");
 const textarea_1 = require("./selective/field/textarea");
 const variant_1 = require("./selective/field/variant");
 const deepObject_1 = require("./utility/deepObject");
+const lodash_merge_1 = __importDefault(require("lodash.merge"));
 const configEl = document.querySelector('#config');
 const dataEl = document.querySelector('#data');
 const fieldsEl = document.querySelector('#fields');
@@ -23,24 +28,24 @@ const valueEl = document.querySelector('#value');
 /**
  * Basic example of using -selective editor.
  */
-const editorConfig = JSON.parse(configEl.value || '');
+const editorConfig = lodash_merge_1.default({
+    fieldTypes: {
+        group: group_1.GroupField,
+        list: list_1.ListField,
+        select: select_1.SelectField,
+        text: text_1.TextField,
+        textarea: textarea_1.TextareaField,
+        variant: variant_1.VariantField,
+    },
+    ruleTypes: {
+        length: length_1.LengthRule,
+        match: match_1.MatchRule,
+        pattern: pattern_1.PatternRule,
+        range: range_1.RangeRule,
+        require: require_1.RequireRule,
+    },
+}, JSON.parse(configEl.value || ''));
 const exampleSelective = new index_1.SelectiveEditor(editorConfig, fieldsEl);
-// Add the field types.
-exampleSelective.addFieldTypes({
-    group: group_1.GroupField,
-    list: list_1.ListField,
-    text: text_1.TextField,
-    textarea: textarea_1.TextareaField,
-    variant: variant_1.VariantField,
-});
-// Add the field types.
-exampleSelective.addRuleTypes({
-    length: length_1.LengthRule,
-    match: match_1.MatchRule,
-    pattern: pattern_1.PatternRule,
-    range: range_1.RangeRule,
-    require: require_1.RequireRule,
-});
 exampleSelective.data = deepObject_1.autoDeepObject(JSON.parse(dataEl.value));
 // Bind to the custom event to re-render the editor.
 document.addEventListener(events_1.EVENT_RENDER, () => {

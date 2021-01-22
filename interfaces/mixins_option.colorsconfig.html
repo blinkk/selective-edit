@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>VariantOptionConfig | @blinkk/selective-edit</title>
+	<title>ColorsConfig | @blinkk/selective-edit</title>
 	<meta name="description" content="Documentation for @blinkk/selective-edit">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -53,13 +53,13 @@
 					<a href="../modules.html">@blinkk/selective-edit</a>
 				</li>
 				<li>
-					<a href="../modules/selective_field_variant.html">selective/field/variant</a>
+					<a href="../modules/mixins_option.html">mixins/option</a>
 				</li>
 				<li>
-					<a href="selective_field_variant.variantoptionconfig.html">VariantOptionConfig</a>
+					<a href="mixins_option.colorsconfig.html">ColorsConfig</a>
 				</li>
 			</ul>
-			<h1>Interface VariantOptionConfig</h1>
+			<h1>Interface ColorsConfig</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">VariantOptionConfig</span>
+						<span class="target">ColorsConfig</span>
 					</li>
 				</ul>
 			</section>
@@ -81,9 +81,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_variant.variantoptionconfig.html#fields" class="tsd-kind-icon">fields</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_variant.variantoptionconfig.html#help" class="tsd-kind-icon">help</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_variant.variantoptionconfig.html#label" class="tsd-kind-icon">label</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mixins_option.colorsconfig.html#colors" class="tsd-kind-icon">colors</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mixins_option.colorsconfig.html#issmooth" class="tsd-kind-icon">is<wbr>Smooth</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mixins_option.colorsconfig.html#orientation" class="tsd-kind-icon">orientation</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,47 +92,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="fields" class="tsd-anchor"></a>
-					<h3>fields</h3>
-					<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <a href="selective_field.fieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldConfig</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="colors" class="tsd-anchor"></a>
+					<h3>colors</h3>
+					<div class="tsd-signature tsd-kind-icon">colors<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e0da6bc/src/selective/field/variant.ts#L15">selective/field/variant.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e0da6bc/src/mixins/option.ts#L17">mixins/option.ts:17</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="issmooth" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> is<wbr>Smooth</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Smooth<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e0da6bc/src/mixins/option.ts#L21">mixins/option.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Fields to show when the variant is in use.</p>
+							<p>Use a smooth color gradient?</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="help" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> help</h3>
-					<div class="tsd-signature tsd-kind-icon">help<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="orientation" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> orientation</h3>
+					<div class="tsd-signature tsd-kind-icon">orientation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../enums/mixins_option.colorsorientation.html#vertical" class="tsd-signature-type" data-tsd-kind="Enumeration member">Vertical</a><span class="tsd-signature-symbol"> | </span><a href="../enums/mixins_option.colorsorientation.html#horizontal" class="tsd-signature-type" data-tsd-kind="Enumeration member">Horizontal</a><span class="tsd-signature-symbol"> | </span><a href="../enums/mixins_option.colorsorientation.html#slope" class="tsd-signature-type" data-tsd-kind="Enumeration member">Slope</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e0da6bc/src/selective/field/variant.ts#L23">selective/field/variant.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e0da6bc/src/mixins/option.ts#L25">mixins/option.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Help text to explain the variant.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="label" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> label</h3>
-					<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e0da6bc/src/selective/field/variant.ts#L19">selective/field/variant.ts:19</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Label for the variant option.</p>
+							<p>Orientation for the color gradient.</p>
 						</div>
 					</div>
 				</section>
@@ -145,36 +140,45 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/selective_field_variant.html">selective/field/variant</a>
+						<a href="../modules/mixins_option.html">mixins/option</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-module">
-						<a href="../classes/selective_field_variant.variantfield.html" class="tsd-kind-icon">Variant<wbr>Field</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="selective_field_variant.variantfieldconfig.html" class="tsd-kind-icon">Variant<wbr>Field<wbr>Config</a>
+					<li class=" tsd-kind-enum tsd-parent-kind-module">
+						<a href="../enums/mixins_option.colorsorientation.html" class="tsd-kind-icon">Colors<wbr>Orientation</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="selective_field_variant.variantoptionconfig.html" class="tsd-kind-icon">Variant<wbr>Option<wbr>Config</a>
+						<a href="mixins_option.colorsconfig.html" class="tsd-kind-icon">Colors<wbr>Config</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="selective_field_variant.variantoptionconfig.html#fields" class="tsd-kind-icon">fields</a>
+								<a href="mixins_option.colorsconfig.html#colors" class="tsd-kind-icon">colors</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="selective_field_variant.variantoptionconfig.html#help" class="tsd-kind-icon">help</a>
+								<a href="mixins_option.colorsconfig.html#issmooth" class="tsd-kind-icon">is<wbr>Smooth</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="selective_field_variant.variantoptionconfig.html#label" class="tsd-kind-icon">label</a>
+								<a href="mixins_option.colorsconfig.html#orientation" class="tsd-kind-icon">orientation</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="mixins_option.option.html" class="tsd-kind-icon">Option</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="mixins_option.optionuiconfig.html" class="tsd-kind-icon">OptionUIConfig</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="mixins_option.optionuicomponent.html" class="tsd-kind-icon">Option<wbr>UiComponent</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../modules/mixins_option.html#optionmixin" class="tsd-kind-icon">Option<wbr>Mixin</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
