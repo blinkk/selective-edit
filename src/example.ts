@@ -8,11 +8,13 @@ import {PatternRule} from './selective/rule/pattern';
 import {RangeRule} from './selective/rule/range';
 import {RequireRule} from './selective/rule/require';
 import {RuleConstructor} from './selective/validationRules';
+import {SelectField} from './selective/field/select';
 import {SelectiveEditor} from './index';
 import {TextField} from './selective/field/text';
 import {TextareaField} from './selective/field/textarea';
 import {VariantField} from './selective/field/variant';
 import {autoDeepObject} from './utility/deepObject';
+import merge from 'lodash.merge';
 
 const configEl = document.querySelector('#config') as HTMLTextAreaElement;
 const dataEl = document.querySelector('#data') as HTMLTextAreaElement;
@@ -31,26 +33,27 @@ const valueEl = document.querySelector('#value') as HTMLTextAreaElement;
 /**
  * Basic example of using -selective editor.
  */
-const editorConfig = JSON.parse(configEl.value || '') as Record<string, any>;
+const editorConfig = merge(
+  {
+    fieldTypes: {
+      group: (GroupField as unknown) as FieldConstructor,
+      list: (ListField as unknown) as FieldConstructor,
+      select: (SelectField as unknown) as FieldConstructor,
+      text: (TextField as unknown) as FieldConstructor,
+      textarea: (TextareaField as unknown) as FieldConstructor,
+      variant: (VariantField as unknown) as FieldConstructor,
+    },
+    ruleTypes: {
+      length: (LengthRule as unknown) as RuleConstructor,
+      match: (MatchRule as unknown) as RuleConstructor,
+      pattern: (PatternRule as unknown) as RuleConstructor,
+      range: (RangeRule as unknown) as RuleConstructor,
+      require: (RequireRule as unknown) as RuleConstructor,
+    },
+  },
+  JSON.parse(configEl.value || '') as Record<string, any>
+);
 const exampleSelective = new SelectiveEditor(editorConfig, fieldsEl);
-
-// Add the field types.
-exampleSelective.addFieldTypes({
-  group: (GroupField as unknown) as FieldConstructor,
-  list: (ListField as unknown) as FieldConstructor,
-  text: (TextField as unknown) as FieldConstructor,
-  textarea: (TextareaField as unknown) as FieldConstructor,
-  variant: (VariantField as unknown) as FieldConstructor,
-});
-
-// Add the field types.
-exampleSelective.addRuleTypes({
-  length: (LengthRule as unknown) as RuleConstructor,
-  match: (MatchRule as unknown) as RuleConstructor,
-  pattern: (PatternRule as unknown) as RuleConstructor,
-  range: (RangeRule as unknown) as RuleConstructor,
-  require: (RequireRule as unknown) as RuleConstructor,
-});
 
 exampleSelective.data = autoDeepObject(JSON.parse(dataEl.value));
 

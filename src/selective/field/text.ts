@@ -15,8 +15,8 @@ export interface TextFieldConfig extends FieldConfig {
 export class TextField extends Field {
   config: TextFieldConfig;
 
-  constructor(types: Types, config: TextFieldConfig) {
-    super(types, config, 'text');
+  constructor(types: Types, config: TextFieldConfig, fieldType = 'text') {
+    super(types, config, fieldType);
     this.config = config;
   }
 
