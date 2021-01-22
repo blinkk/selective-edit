@@ -38,10 +38,6 @@ export class SelectiveEditor extends DataMixin(Base) {
     };
     this.isRendering = false;
     this.isPendingRender = false;
-    this.fields = new Fields(this.types, {
-      fields: this.config.fields,
-      parentKey: '',
-    });
 
     if (this.config.fieldTypes) {
       this.types.fields.registerClasses(this.config.fieldTypes);
@@ -49,6 +45,11 @@ export class SelectiveEditor extends DataMixin(Base) {
     if (this.config.ruleTypes) {
       this.types.rules.registerClasses(this.config.ruleTypes);
     }
+
+    this.fields = new Fields(this.types, {
+      fields: this.config.fields,
+      parentKey: '',
+    });
   }
 
   addFieldType(key: string, FieldCls: FieldConstructor) {
