@@ -3,7 +3,7 @@
  *
  * Exports for using selective in other projects.
  */
-export {SelectiveEditor} from './selective/editor';
+export {SelectiveEditor, EditorConfig} from './selective/editor';
 
 /**
  * Selective Fields
@@ -26,6 +26,12 @@ export {MatchRule} from './selective/rule/match';
 export {PatternRule} from './selective/rule/pattern';
 export {RangeRule} from './selective/rule/range';
 export {RequireRule} from './selective/rule/require';
+
+/**
+ * Selective Utilities
+ */
+export {DeepObject} from './utility/deepObject';
+export {expandClasses, findParentByClassname} from './utility/dom';
 
 // Cannot use lithtml libraries across different node installs.
 // Instead need to export any of the lithtml pieces here.
