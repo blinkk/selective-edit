@@ -12,6 +12,7 @@ export {Field} from './selective/field';
 export {FieldComponent, FieldConstructor} from './selective/field';
 export {GroupField} from './selective/field/group';
 export {ListField} from './selective/field/list';
+export {SelectField} from './selective/field/select';
 export {TextField} from './selective/field/text';
 export {TextareaField} from './selective/field/textarea';
 export {VariantField} from './selective/field/variant';
