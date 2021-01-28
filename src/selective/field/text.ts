@@ -1,9 +1,9 @@
 import {Field, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
 import {DeepObject} from '../../utility/deepObject';
-import {SelectiveEditor} from '../..';
+import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
-import {expandClasses} from '../../utility/dom';
+import {classMap} from 'lit-html/directives/class-map';
 
 export interface TextFieldConfig extends FieldConfig {
   /**
@@ -24,7 +24,7 @@ export class TextField extends Field {
     const value = this.currentValue || '';
     return html`${this.templateHelp(editor, data)}
       <input
-        class=${expandClasses(this.classesForInput())}
+        class=${classMap(this.classesForInput())}
         type="text"
         id="${this.uid}"
         placeholder=${this.config.placeholder || ''}

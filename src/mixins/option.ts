@@ -1,5 +1,5 @@
 import {TemplateResult, html} from 'lit-html';
-import {expandClasses, repeat} from '..';
+import {classMap, repeat} from '..';
 import {Constructor} from './index';
 import {DeepObject} from '../utility/deepObject';
 import {SelectiveEditor} from '../selective/editor';
@@ -73,42 +73,28 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
     classesForOptions(
       config: OptionUIConfig,
       options: Array<Option>
-    ): Array<string> {
-      const classes: Array<string> = ['selective__options'];
-
-      if (config.isMulti) {
-        classes.push('selective__options--multi');
-      }
-
-      if (this.hasColorHints(options)) {
-        classes.push('selective__options--color-hint');
-      }
-
-      if (options.length > 4) {
-        classes.push('selective__options--few');
-      }
-
-      if (options.length > 11) {
-        classes.push('selective__options--many');
-      }
-
-      return classes;
+    ): Record<string, boolean> {
+      return {
+        selective__options: true,
+        'selective__options--color-hint': this.hasColorHints(options),
+        'selective__options--few': options.length > 4,
+        'selective__options--many': options.length > 11,
+        'selective__options--multi': config.isMulti || false,
+      };
     }
 
-    classesForOption(config: OptionUIConfig, option: Option): Array<string> {
-      const classes: Array<string> = ['selective__options__option'];
-
-      if (config.isOptionSelected(option)) {
-        classes.push('selective__options__option--selected');
-      }
-
-      if (option.color) {
-        classes.push('selective__options__option--color-hint');
-      } else if (option.gradient) {
-        classes.push('selective__options__option--color-hint-gradient');
-      }
-
-      return classes;
+    classesForOption(
+      config: OptionUIConfig,
+      option: Option
+    ): Record<string, boolean> {
+      return {
+        selective__options__option: true,
+        'selective__options__option--selected': config.isOptionSelected(option),
+        'selective__options__option--color-hint': Boolean(option.color),
+        'selective__options__option--color-hint-gradient': Boolean(
+          option.gradient
+        ),
+      };
     }
 
     /**
@@ -179,7 +165,7 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
       option: Option
     ): TemplateResult {
       return html`<div
-        class=${expandClasses(this.classesForOption(config, option))}
+        class=${classMap(this.classesForOption(config, option))}
         aria-checked=${config.isOptionSelected(option)}
         data-value=${option.value}
         role=${config.isMulti ? 'checkbox' : 'radio'}
@@ -202,7 +188,7 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
     ): TemplateResult {
       // TODO: Convert to a different UI when there are a lot of options.
       return html`<div
-        class=${expandClasses(this.classesForOptions(config, options))}
+        class=${classMap(this.classesForOptions(config, options))}
         role=${ifDefined(config.isMulti ? undefined : 'radiogroup')}
       >
         ${repeat(

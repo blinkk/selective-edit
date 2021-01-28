@@ -10,7 +10,7 @@ import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
-import {expandClasses} from '../utility/dom';
+import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 import stringify from 'json-stable-stringify';
 
@@ -111,34 +111,20 @@ export class Field
   /**
    * Generates a list of classes to apply to the field element.
    */
-  classesForField(): Array<string> {
-    const classes: Array<string> = [
-      'selective__field',
-      `selective__field__type__${this.fieldType}`,
-    ];
+  classesForField(): Record<string, boolean> {
+    const classes: Record<string, boolean> = {
+      selective__field: true,
+      'selective__field--auto': this.usingAutoFields,
+      'selective__field--dirty': !this.isClean,
+      'selective__field--guess': this.config.isGuessed || false,
+      'selective__field--invalid': !this.isValid,
+      'selective__field--linked': this.isDeepLinked,
+    };
+
+    classes[`selective__field__type__${this.fieldType}`] = true;
 
     for (const className of this.config.classes || []) {
-      classes.push(className);
-    }
-
-    if (this.usingAutoFields) {
-      classes.push('selective__field--auto');
-    }
-
-    if (this.config.isGuessed) {
-      classes.push('selective__field--guess');
-    }
-
-    if (!this.isClean) {
-      classes.push('selective__field--dirty');
-    }
-
-    if (!this.isValid) {
-      classes.push('selective__field--invalid');
-    }
-
-    if (this.isDeepLinked) {
-      classes.push('selective__field--linked');
+      classes[className] = true;
     }
 
     return classes;
@@ -147,8 +133,10 @@ export class Field
   /**
    * Generates a list of classes to apply to the input element.
    */
-  classesForInput(zoneKey = DEFAULT_ZONE_KEY): Array<string> {
-    const classes: Array<string> = [];
+  classesForInput(zoneKey = DEFAULT_ZONE_KEY): Record<string, boolean> {
+    const classes: Record<string, boolean> = {
+      selective__field__input: true,
+    };
 
     if (!this.isValid) {
       for (const level of [
@@ -157,7 +145,7 @@ export class Field
         ValidationLevel.Info,
       ]) {
         if (this.validation?.hasAnyResults(zoneKey, level)) {
-          classes.push(`selective__field__input--${level}`);
+          classes[`selective__field__input--${level}`] = true;
         }
       }
     }
@@ -168,8 +156,10 @@ export class Field
   /**
    * Generates a list of classes to apply to the label element.
    */
-  classesForLabel(zoneKey = DEFAULT_ZONE_KEY): Array<string> {
-    const classes = ['selective__field__label'];
+  classesForLabel(zoneKey = DEFAULT_ZONE_KEY): Record<string, boolean> {
+    const classes: Record<string, boolean> = {
+      selective__field__label: true,
+    };
 
     if (!this.isValid) {
       if (!this.isValid) {
@@ -179,7 +169,7 @@ export class Field
           ValidationLevel.Info,
         ]) {
           if (this.validation?.hasAnyResults(zoneKey, level)) {
-            classes.push(`selective__field__label--${level}`);
+            classes[`selective__field__label--${level}`] = true;
           }
         }
       }
@@ -507,7 +497,7 @@ export class Field
     if (!this.config.label) {
       return html``;
     }
-    return html`<div class=${expandClasses(this.classesForLabel())}>
+    return html`<div class=${classMap(this.classesForLabel())}>
       ${this.templateIconDeepLink(editor, data)}
       ${this.templateIconValidation(editor, data)}
       <label for=${this.uid}>${this.config.label}</label>
@@ -536,7 +526,7 @@ export class Field
    */
   templateWrapper(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     return html`<div
-      class=${expandClasses(this.classesForField())}
+      class=${classMap(this.classesForField())}
       data-field-type=${this.fieldType}
       data-field-full-key=${this.fullKey}
     >

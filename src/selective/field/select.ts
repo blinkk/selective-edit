@@ -1,11 +1,12 @@
 import {Field, FieldConfig} from '../field';
 import {Option, OptionMixin, OptionUIConfig} from '../../mixins/option';
 import {TemplateResult, html} from 'lit-html';
-import {expandClasses, findParentByClassname} from '../../utility/dom';
 import {DataType} from '../../utility/dataType';
 import {DeepObject} from '../../utility/deepObject';
 import {SelectiveEditor} from '../..';
 import {Types} from '../types';
+import {classMap} from 'lit-html/directives/class-map';
+import {findParentByClassname} from '../../utility/dom';
 
 export interface SelectConfig extends FieldConfig {
   /**
@@ -104,7 +105,7 @@ export class SelectField extends OptionMixin(Field) {
     };
 
     return html`${this.templateHelp(editor, data)}
-      <div class=${expandClasses(this.classesForInput())} id="${this.uid}">
+      <div class=${classMap(this.classesForInput())} id="${this.uid}">
         ${this.templateOptions(
           editor,
           data,

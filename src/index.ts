@@ -32,7 +32,7 @@ export {RequireRule} from './selective/rule/require';
  * Selective Utilities
  */
 export {DeepObject} from './utility/deepObject';
-export {expandClasses, findParentByClassname} from './utility/dom';
+export {findParentByClassname} from './utility/dom';
 
 // Cannot use lit-html libraries across different package installs.
 // Instead need to export any of the lithtml pieces here.
