@@ -37,7 +37,7 @@ export {findParentByClassname} from './utility/dom';
 // Cannot use lit-html libraries across different package installs.
 // Instead need to export any of the lithtml pieces here.
 // ex: Using the templates defined in selective in another library.
-export {TemplateResult, html, render} from 'lit-html';
+export {Part, TemplateResult, directive, html, render} from 'lit-html';
 export {classMap} from 'lit-html/directives/class-map';
 export {ifDefined} from 'lit-html/directives/if-defined';
 export {repeat} from 'lit-html/directives/repeat';
