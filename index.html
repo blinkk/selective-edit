@@ -125,6 +125,13 @@
 				<p>Custom field types can extend one of the existing field types, the base
 				<a href="https://blinkkcode.github.io/selective-edit/classes/selective_field.field.html">Field</a>, or follow the <a href="https://blinkkcode.github.io/selective-edit/interfaces/selective_field.fieldcomponent.html">FieldComponent</a> interface.</p>
 				<p>Selective edit uses the <a href="https://lit-html.polymer-project.org/"><code>html-lit</code> library</a> to handle the UI of the editor.</p>
+				<a href="#validation-rule-types" id="validation-rule-types" style="color: inherit; text-decoration: none;">
+					<h2>Validation Rule Types</h2>
+				</a>
+				<p>Every field can be validated. Selective edit comes with some basic rules
+					(length, matching, pattern matching, range, required), but projects can also define
+					their own validation rules. Follow the <a href="https://blinkkcode.github.io/selective-edit/interfaces/selective_validationrules.rulecomponent.html">RuleComponent</a> interface to
+				create a custom rule or extend one of the existing rules to improve it for your needs.</p>
 				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
 					<h2>Development</h2>
 				</a>
