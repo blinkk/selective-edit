@@ -8,7 +8,7 @@ import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
 import {findParentByClassname} from '../../utility/dom';
 
-export interface SelectConfig extends FieldConfig {
+export interface SelectFieldConfig extends FieldConfig {
   /**
    * Allow multiple values to be selected.
    */
@@ -17,9 +17,9 @@ export interface SelectConfig extends FieldConfig {
 }
 
 export class SelectField extends OptionMixin(Field) {
-  config: SelectConfig;
+  config: SelectFieldConfig;
 
-  constructor(types: Types, config: SelectConfig, fieldType = 'select') {
+  constructor(types: Types, config: SelectFieldConfig, fieldType = 'select') {
     super(types, config, fieldType);
     this.config = config;
   }
