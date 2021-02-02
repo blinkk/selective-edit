@@ -78,6 +78,13 @@ Custom field types can extend one of the existing field types, the base
 
 Selective edit uses the [`html-lit` library](https://lit-html.polymer-project.org/) to handle the UI of the editor.
 
+## Validation Rule Types
+
+Every field can be validated. Selective edit comes with some basic rules
+(length, matching, pattern matching, range, required), but projects can also define
+their own validation rules. Follow the [RuleComponent][doc_RuleComponent] interface to
+create a custom rule or extend one of the existing rules to improve it for your needs.
+
 ## Development
 
 To get started, run the `yarn install` command.
@@ -104,5 +111,6 @@ yarn run dev
 
 [doc_Field]: https://blinkkcode.github.io/selective-edit/classes/selective_field.field.html
 [doc_FieldComponent]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field.fieldcomponent.html
+[doc_RuleComponent]: https://blinkkcode.github.io/selective-edit/interfaces/selective_validationrules.rulecomponent.html
 [example]: https://blinkkcode.github.io/selective-edit/example/
 [tsdocs]: https://blinkkcode.github.io/selective-edit/
