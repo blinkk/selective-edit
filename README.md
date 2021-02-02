@@ -112,12 +112,12 @@ selective.fields.addField({
 
 Different field types have different configurations options:
 
-  - [Group][doc_FieldConfig_GroupField],
-  - [List][doc_FieldConfig_ListField],
-  - [Select][doc_FieldConfig_SelectField],
-  - [Text][doc_FieldConfig_TextField],
-  - [Textarea][doc_FieldConfig_TextareaField],
-  - [Variant][doc_FieldConfig_VariantField],
+  - [Group][doc_FieldConfig_GroupField]
+  - [List][doc_FieldConfig_ListField]
+  - [Select][doc_FieldConfig_SelectField]
+  - [Text][doc_FieldConfig_TextField]
+  - [Textarea][doc_FieldConfig_TextareaField]
+  - [Variant][doc_FieldConfig_VariantField]
 
 ## Development
 
