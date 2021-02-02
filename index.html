@@ -61,118 +61,88 @@
 				</a>
 				<p>Experimental.</p>
 				<p>Selective editor for providing a rich UI for editing structured data.</p>
+				<p>See the <a href="https://blinkkcode.github.io/selective-edit/">typescript docs</a> or <a href="https://blinkkcode.github.io/selective-edit/example/">example</a>.</p>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
-				<p>The selective editor is broken up into two parts: the core editor and the defaults.</p>
-				<a href="#core-usage" id="core-usage" style="color: inherit; text-decoration: none;">
-					<h3>Core Usage</h3>
+				<a href="#styles" id="styles" style="color: inherit; text-decoration: none;">
+					<h3>Styles</h3>
 				</a>
-				<p>If you are using the editor and want to control more of the functionality use
-					the core editor and styling. This doesn&#39;t use the dependencies on the
-				Material Design Components and keeps things slimmed down in size.</p>
-				<p>SASS:</p>
-				<pre><code class="language-sass"><span style="color: #AF00DB">@import</span><span style="color: #0000FF"> &quot;selective-edit/sass/selective-core&quot;</span>
-</code></pre>
-				<p>JS:</p>
-				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Selective</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit&#039;</span>
-
-<span style="color: #001080">editor</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Selective</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;.editor&#039;</span><span style="color: #000000">), {})</span>
-
-<span style="color: #008000">// Need to add your own field types...</span>
-
-<span style="color: #008000">// TODO: Once the placeholder field type is working again it will not need to</span>
-<span style="color: #008000">// have the config set after the field types are added.</span>
-<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">setConfig</span><span style="color: #000000">(...)</span>
-
-<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">  </span><span style="color: #008000">// ...</span>
-<span style="color: #000000">}</span>
-</code></pre>
-				<a href="#default-usage" id="default-usage" style="color: inherit; text-decoration: none;">
-					<h3>Default Usage</h3>
-				</a>
-				<p>When you want to use the default styling that the example page uses you can use
-				the selective defaults that include the dependencies on the Material Design Components.</p>
+				<p>For an out-of-box experience you can instead use the styling used by the example.</p>
 				<pre><code class="language-sass"><span style="color: #AF00DB">@import</span><span style="color: #0000FF"> &quot;selective-edit/sass/selective&quot;</span>
 </code></pre>
-				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Selective</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit&#039;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">defaultFieldTypes</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit/js/selective-defaults&#039;</span>
+				<p>If you desire full control over the styling there are a few basic style rules
+				that the selective editor requires in order to function correctly.</p>
+				<p>They are available in the <code>/sass/selective-core.sass</code> file.</p>
+				<pre><code class="language-sass"><span style="color: #AF00DB">@import</span><span style="color: #0000FF"> &quot;selective-edit/sass/selective-core&quot;</span>
+</code></pre>
+				<a href="#javascript" id="javascript" style="color: inherit; text-decoration: none;">
+					<h3>Javascript</h3>
+				</a>
+				<p>An example of creating a selective editor with an assortment of fields and
+				validation rules.</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">GroupField</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">LengthRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">ListField</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">MatchRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">PatternRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">RangeRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">RequireRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">SelectField</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">TextField</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">TextareaField</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">VariantField</span><span style="color: #000000">,</span>
+<span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@blinkk/selective-edit&#039;</span><span style="color: #000000">;</span>
 
-<span style="color: #001080">editor</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Selective</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;.editor&#039;</span><span style="color: #000000">))</span>
-
-<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">addFieldTypes</span><span style="color: #000000">(</span><span style="color: #001080">defaultFieldTypes</span><span style="color: #000000">)</span>
-
-<span style="color: #008000">// TODO: Once the placeholder field type is working again it will not need to</span>
-<span style="color: #008000">// have the config set after the field types are added.</span>
-<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">setConfig</span><span style="color: #000000">(...)</span>
-
-<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">  </span><span style="color: #008000">// ...</span>
-<span style="color: #000000">}</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">fieldsEl</span><span style="color: #000000"> = </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;#fields&#039;</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">selective</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">SelectiveEditor</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #008000">// Control which field types are available for the editor.</span>
+<span style="color: #000000">  </span><span style="color: #001080">fieldTypes:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">group:</span><span style="color: #000000"> </span><span style="color: #001080">GroupField</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">list:</span><span style="color: #000000"> </span><span style="color: #001080">ListField</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">select:</span><span style="color: #000000"> </span><span style="color: #001080">SelectField</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">text:</span><span style="color: #000000"> </span><span style="color: #001080">TextField</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">textarea:</span><span style="color: #000000"> </span><span style="color: #001080">TextareaField</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">variant:</span><span style="color: #000000"> </span><span style="color: #001080">VariantField</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #008000">// Control which validation rules are available for the fields.</span>
+<span style="color: #000000">  </span><span style="color: #001080">ruleTypes:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">length:</span><span style="color: #000000"> </span><span style="color: #001080">LengthRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">match:</span><span style="color: #000000"> </span><span style="color: #001080">MatchRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">pattern:</span><span style="color: #000000"> </span><span style="color: #001080">PatternRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">range:</span><span style="color: #000000"> </span><span style="color: #001080">RangeRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">require:</span><span style="color: #000000"> </span><span style="color: #001080">RequireRule</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">}, </span><span style="color: #001080">fieldsEl</span><span style="color: #000000">);</span>
 </code></pre>
 				<a href="#field-types" id="field-types" style="color: inherit; text-decoration: none;">
 					<h2>Field Types</h2>
 				</a>
-				<p>The selective editor comes with a few default field types to help make thing easier
-					to get started but is made to be customized with field types specific to your
-				usage.</p>
-				<p>Selective edit uses the <code>html-lit</code> package to handle the templating of
-				fields and UI rendering.</p>
-				<p>For example, adding a <code>number</code> field type:</p>
-				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Selective</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit&#039;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Field</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;selective-edit&#039;</span>
-
-<span style="color: #001080">editor</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Selective</span><span style="color: #000000">(</span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;.editor&#039;</span><span style="color: #000000">))</span>
-
-<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">NumberField</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Field</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">constructor</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">) {</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">super</span><span style="color: #000000">(</span><span style="color: #001080">config</span><span style="color: #000000">)</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">fieldType</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;number&#039;</span>
-
-<span style="color: #000000">    </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">template</span><span style="color: #000000"> = (</span><span style="color: #001080">editor</span><span style="color: #000000">, </span><span style="color: #001080">field</span><span style="color: #000000">, </span><span style="color: #001080">data</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">html</span><span style="color: #A31515">`&lt;div class=&quot;selective__field selective__field__</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #001080">fieldType</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot; data-field-type=&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #001080">fieldType</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
-<span style="color: #A31515">      &lt;label for=&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #795E26">getUid</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #001080">label</span><span style="color: #0000FF">}</span><span style="color: #A31515">&lt;/label&gt;</span>
-<span style="color: #A31515">      &lt;input type=&quot;number&quot; id=&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #795E26">getUid</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot; value=&quot;</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #795E26">valueFromData</span><span style="color: #000000FF">(</span><span style="color: #001080">data</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot; @input=</span><span style="color: #0000FF">${</span><span style="color: #001080">field</span><span style="color: #000000FF">.</span><span style="color: #001080">handleInput</span><span style="color: #000000FF">.</span><span style="color: #795E26">bind</span><span style="color: #000000FF">(</span><span style="color: #001080">field</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">&gt;</span>
-<span style="color: #A31515">    &lt;/div&gt;`</span>
-<span style="color: #000000">  }</span>
-<span style="color: #000000">}</span>
-
-<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">addFieldType</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;number&#039;</span><span style="color: #000000">, </span><span style="color: #001080">NumberField</span><span style="color: #000000">)</span>
-
-<span style="color: #008000">// TODO: Once the placeholder field type is working again it will not need to</span>
-<span style="color: #008000">// have the config set after the field types are added.</span>
-<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #795E26">setConfig</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">fields:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">    {</span>
-<span style="color: #000000">      </span><span style="color: #A31515">&quot;type&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;number&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">      </span><span style="color: #A31515">&quot;key&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;counter&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">      </span><span style="color: #A31515">&quot;label&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Numbers!&quot;</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">  ]</span>
-<span style="color: #000000">})</span>
-
-<span style="color: #001080">editor</span><span style="color: #000000">.</span><span style="color: #001080">data</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">  </span><span style="color: #001080">counter:</span><span style="color: #000000"> </span><span style="color: #098658">100</span>
-<span style="color: #000000">}</span>
-</code></pre>
+				<p>The selective editor comes with several standard field types which can be used
+					directly or extended and customized. Custom field types can also be designed
+				and used with the selective editor.</p>
+				<p>Custom field types can extend one of the existing field types, the base
+				<a href="https://blinkkcode.github.io/selective-edit/classes/selective_field.field.html">Field</a>, or follow the <a href="https://blinkkcode.github.io/selective-edit/interfaces/selective_field.fieldcomponent.html">FieldComponent</a> interface.</p>
+				<p>Selective edit uses the <a href="https://lit-html.polymer-project.org/"><code>html-lit</code> library</a> to handle the UI of the editor.</p>
 				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
 					<h2>Development</h2>
 				</a>
-				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
-					<h3>Install</h3>
+				<p>To get started, run the <code>yarn install</code> command.</p>
+				<a href="#example-server" id="example-server" style="color: inherit; text-decoration: none;">
+					<h3>Example Server</h3>
 				</a>
-				<pre><code class="language-sh"><span style="color: #000000">yarn install</span>
-</code></pre>
-				<a href="#dev-server" id="dev-server" style="color: inherit; text-decoration: none;">
-					<h3>Dev Server</h3>
-				</a>
-				<pre><code class="language-sh"><span style="color: #000000">yarn run watch</span>
+				<p>The local server provides the ability to test changes to the fields while developing
+				the field types, validation types, etc.</p>
+				<pre><code class="language-sh"><span style="color: #000000">yarn run serve</span>
 </code></pre>
 				<p>Then visit <a href="http://localhost:8888/">localhost:8888</a> to view example page.</p>
-				<a href="#build-assets" id="build-assets" style="color: inherit; text-decoration: none;">
-					<h3>Build Assets</h3>
+				<a href="#writing-tests" id="writing-tests" style="color: inherit; text-decoration: none;">
+					<h3>Writing tests</h3>
 				</a>
-				<pre><code class="language-sh"><span style="color: #000000">yarn run build</span>
+				<p>When writing tests or to have tests be automatically run while making changes use the
+				<code>dev</code> script.</p>
+				<pre><code class="language-sh"><span style="color: #000000">yarn run dev</span>
 </code></pre>
 			</div>
 		</div>
