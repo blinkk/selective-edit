@@ -65,9 +65,20 @@ const selective = new SelectiveEditor({
     require: RequireRule,
   },
 }, fieldsEl);
+
+// Add a field for the editor to display.
+selective.fields.addField({
+  type: "text",
+  key: "title",
+  label: "Title",
+  help: "Title for the data.",
+})
+
+// Render the editor into the container.
+selective.render()
 ```
 
-## Field Types
+## Field types
 
 The selective editor comes with several standard field types which can be used
 directly or extended and customized. Custom field types can also be designed
@@ -78,18 +89,41 @@ Custom field types can extend one of the existing field types, the base
 
 Selective edit uses the [`html-lit` library](https://lit-html.polymer-project.org/) to handle the UI of the editor.
 
-## Validation Rule Types
+## Validation rule types
 
 Every field can be validated. Selective edit comes with some basic rules
 (length, matching, pattern matching, range, required), but projects can also define
 their own validation rules. Follow the [RuleComponent][doc_RuleComponent] interface to
 create a custom rule or extend one of the existing rules to improve it for your needs.
 
+## Field config
+
+The editor uses field configurations to control what to display in the editor.
+
+```js
+// Add a field for the editor to display.
+selective.fields.addField({
+  type: "text",
+  key: "title",
+  label: "Title",
+  help: "Title for the data.",
+})
+```
+
+Different field types have different configurations options:
+
+  - [GroupField][doc_FieldConfig_GroupField],
+  - [ListField][doc_FieldConfig_ListField],
+  - [SelectField][doc_FieldConfig_SelectField],
+  - [TextField][doc_FieldConfig_TextField],
+  - [TextareaField][doc_FieldConfig_TextareaField],
+  - [VariantField][doc_FieldConfig_VariantField],
+
 ## Development
 
 To get started, run the `yarn install` command.
 
-### Example Server
+### Example server
 
 The local server provides the ability to test changes to the fields while developing
 the field types, validation types, etc.
@@ -110,6 +144,12 @@ yarn run dev
 ```
 
 [doc_Field]: https://blinkkcode.github.io/selective-edit/classes/selective_field.field.html
+[doc_FieldConfig_GroupField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_group.groupfieldconfig.html
+[doc_FieldConfig_ListField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_list.listfieldconfig.html
+[doc_FieldConfig_SelectField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_select.selectfieldconfig.html
+[doc_FieldConfig_TextField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_text.textfieldconfig.html
+[doc_FieldConfig_TextareaField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_textarea.textareafieldconfig.html
+[doc_FieldConfig_VariantField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_variant.variantfieldconfig.html
 [doc_FieldComponent]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field.fieldcomponent.html
 [doc_RuleComponent]: https://blinkkcode.github.io/selective-edit/interfaces/selective_validationrules.rulecomponent.html
 [example]: https://blinkkcode.github.io/selective-edit/example/
