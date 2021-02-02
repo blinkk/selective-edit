@@ -4,133 +4,105 @@ Experimental.
 
 Selective editor for providing a rich UI for editing structured data.
 
+See the [typescript docs][tsdocs] or [example][example].
+
 ## Usage
 
-The selective editor is broken up into two parts: the core editor and the defaults.
+### Styles
 
-### Core Usage
-
-If you are using the editor and want to control more of the functionality use
-the core editor and styling. This doesn't use the dependencies on the
-Material Design Components and keeps things slimmed down in size.
-
-SASS:
-
-```sass
-@import "selective-edit/sass/selective-core"
-```
-
-JS:
-
-```js
-import Selective from 'selective-edit'
-
-editor = new Selective(document.querySelector('.editor'), {})
-
-// Need to add your own field types...
-
-// TODO: Once the placeholder field type is working again it will not need to
-// have the config set after the field types are added.
-editor.setConfig(...)
-
-editor.data = {
-  // ...
-}
-```
-
-### Default Usage
-
-When you want to use the default styling that the example page uses you can use
-the selective defaults that include the dependencies on the Material Design Components.
+For an out-of-box experience you can instead use the styling used by the example.
 
 ```sass
 @import "selective-edit/sass/selective"
 ```
 
+If you desire full control over the styling there are a few basic style rules
+that the selective editor requires in order to function correctly.
+
+They are available in the `/sass/selective-core.sass` file.
+
+```sass
+@import "selective-edit/sass/selective-core"
+```
+
+### Javascript
+
+An example of creating a selective editor with an assortment of fields and
+validation rules.
+
 ```js
-import Selective from 'selective-edit'
-import { defaultFieldTypes } from 'selective-edit/js/selective-defaults'
+import {
+  GroupField,
+  LengthRule,
+  ListField,
+  MatchRule,
+  PatternRule,
+  RangeRule,
+  RequireRule,
+  SelectField,
+  TextField,
+  TextareaField,
+  VariantField,
+} from '@blinkk/selective-edit';
 
-editor = new Selective(document.querySelector('.editor'))
-
-editor.addFieldTypes(defaultFieldTypes)
-
-// TODO: Once the placeholder field type is working again it will not need to
-// have the config set after the field types are added.
-editor.setConfig(...)
-
-editor.data = {
-  // ...
-}
+const fieldsEl = document.querySelector('#fields')
+const selective = new SelectiveEditor({
+  // Control which field types are available for the editor.
+  fieldTypes: {
+    group: GroupField,
+    list: ListField,
+    select: SelectField,
+    text: TextField,
+    textarea: TextareaField,
+    variant: VariantField,
+  },
+  // Control which validation rules are available for the fields.
+  ruleTypes: {
+    length: LengthRule,
+    match: MatchRule,
+    pattern: PatternRule,
+    range: RangeRule,
+    require: RequireRule,
+  },
+}, fieldsEl);
 ```
 
 ## Field Types
 
-The selective editor comes with a few default field types to help make thing easier
-to get started but is made to be customized with field types specific to your
-usage.
+The selective editor comes with several standard field types which can be used
+directly or extended and customized. Custom field types can also be designed
+and used with the selective editor.
 
-Selective edit uses the `html-lit` package to handle the templating of
-fields and UI rendering.
+Custom field types can extend one of the existing field types, the base
+[Field][doc_Field], or follow the [FieldComponent][doc_FieldComponent] interface.
 
-For example, adding a `number` field type:
-
-
-```js
-import Selective from 'selective-edit'
-import { Field } from 'selective-edit'
-
-editor = new Selective(document.querySelector('.editor'))
-
-class NumberField extends Field {
-  constructor(config) {
-    super(config)
-    this.fieldType = 'number'
-
-    this.template = (editor, field, data) => html`<div class="selective__field selective__field__${field.fieldType}" data-field-type="${field.fieldType}">
-      <label for="${field.getUid()}">${field.label}</label>
-      <input type="number" id="${field.getUid()}" value="${field.valueFromData(data)}" @input=${field.handleInput.bind(field)}>
-    </div>`
-  }
-}
-
-editor.addFieldType('number', NumberField)
-
-// TODO: Once the placeholder field type is working again it will not need to
-// have the config set after the field types are added.
-editor.setConfig({
-  fields: [
-    {
-      "type": "number",
-      "key": "counter",
-      "label": "Numbers!"
-    }
-  ]
-})
-
-editor.data = {
-  counter: 100
-}
-```
+Selective edit uses the [`html-lit` library](https://lit-html.polymer-project.org/) to handle the UI of the editor.
 
 ## Development
 
-### Install
+To get started, run the `yarn install` command.
+
+### Example Server
+
+The local server provides the ability to test changes to the fields while developing
+the field types, validation types, etc.
 
 ```sh
-yarn install
-```
-
-### Dev Server
-
-```sh
-yarn run watch
+yarn run serve
 ```
 
 Then visit [localhost:8888](http://localhost:8888/) to view example page.
 
-### Build Assets
+### Writing tests
+
+When writing tests or to have tests be automatically run while making changes use the
+`dev` script.
 
 ```sh
-yarn run build
+yarn run dev
 ```
+
+[doc_Field]: https://blinkkcode.github.io/selective-edit/classes/selective_field.field.html
+[doc_FieldComponent]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field.fieldcomponent.html
+[example]: https://blinkkcode.github.io/selective-edit/example/
+[tsdocs]: https://blinkkcode.github.io/selective-edit/
