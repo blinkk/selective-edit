@@ -5,6 +5,7 @@ import {GroupField} from '../selective/field/group';
 import {LengthRule} from '../selective/rule/length';
 import {ListField} from '../selective/field/list';
 import {MatchRule} from '../selective/rule/match';
+import {NumberField} from '../selective/field/number';
 import {PatternRule} from '../selective/rule/pattern';
 import {RangeRule} from '../selective/rule/range';
 import {RequireRule} from '../selective/rule/require';
@@ -40,6 +41,7 @@ const editorConfig = merge(
       checkbox: (CheckboxField as unknown) as FieldConstructor,
       group: (GroupField as unknown) as FieldConstructor,
       list: (ListField as unknown) as FieldConstructor,
+      number: (NumberField as unknown) as FieldConstructor,
       select: (SelectField as unknown) as FieldConstructor,
       text: (TextField as unknown) as FieldConstructor,
       textarea: (TextareaField as unknown) as FieldConstructor,

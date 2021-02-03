@@ -18,6 +18,7 @@
   "description": "Fluffy stuff. Wispy stuff. Flying stuff. Falling stuff. Weird stuff.",
   "body": "A field of sparkling fluffy _bunnies_ with horns.",
   "isPublished": true,
+  "cloudsInTheSky": 100,
   "storm": {
     "meta": "Do not change values that are not part of the fields.",
     "chasers": [
@@ -85,6 +86,13 @@
       "type": "checkbox",
       "key": "isPublished",
       "label": "Is Published?"
+    },
+    {
+      "type": "number",
+      "key": "cloudsInTheSky",
+      "label": "How many clouds are in the sky?",
+      "min": "0",
+      "max": 10000
     },
     {
       "type": "list",

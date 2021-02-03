@@ -13,6 +13,7 @@ export {FieldComponent, FieldConstructor} from './selective/field';
 export {CheckboxField} from './selective/field/checkbox';
 export {GroupField} from './selective/field/group';
 export {ListField} from './selective/field/list';
+export {NumberField} from './selective/field/number';
 export {SelectField} from './selective/field/select';
 export {TextField} from './selective/field/text';
 export {TextareaField} from './selective/field/textarea';
@@ -36,7 +37,7 @@ export {DeepObject} from './utility/deepObject';
 export {findParentByClassname} from './utility/dom';
 
 // Cannot use lit-html libraries across different package installs.
-// Instead need to export any of the lithtml pieces here.
+// Instead need to export any of the lit-html pieces here.
 // ex: Using the templates defined in selective in another library.
 export {Part, TemplateResult, directive, html, render} from 'lit-html';
 export {classMap} from 'lit-html/directives/class-map';
