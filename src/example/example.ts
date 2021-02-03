@@ -1,5 +1,6 @@
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from '../selective/events';
 import {FieldConfig, FieldConstructor} from '../selective/field';
+import {CheckboxField} from '../selective/field/checkbox';
 import {GroupField} from '../selective/field/group';
 import {LengthRule} from '../selective/rule/length';
 import {ListField} from '../selective/field/list';
@@ -36,6 +37,7 @@ const valueEl = document.querySelector('#value') as HTMLTextAreaElement;
 const editorConfig = merge(
   {
     fieldTypes: {
+      checkbox: (CheckboxField as unknown) as FieldConstructor,
       group: (GroupField as unknown) as FieldConstructor,
       list: (ListField as unknown) as FieldConstructor,
       select: (SelectField as unknown) as FieldConstructor,

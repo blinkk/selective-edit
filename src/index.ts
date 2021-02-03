@@ -10,6 +10,7 @@ export {SelectiveEditor, EditorConfig} from './selective/editor';
  */
 export {Field} from './selective/field';
 export {FieldComponent, FieldConstructor} from './selective/field';
+export {CheckboxField} from './selective/field/checkbox';
 export {GroupField} from './selective/field/group';
 export {ListField} from './selective/field/list';
 export {SelectField} from './selective/field/select';
