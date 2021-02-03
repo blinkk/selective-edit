@@ -11,6 +11,7 @@ export {SelectiveEditor, EditorConfig} from './selective/editor';
 export {Field} from './selective/field';
 export {FieldComponent, FieldConstructor} from './selective/field';
 export {CheckboxField} from './selective/field/checkbox';
+export {DateField} from './selective/field/date';
 export {DatetimeField} from './selective/field/datetime';
 export {GroupField} from './selective/field/group';
 export {ListField} from './selective/field/list';

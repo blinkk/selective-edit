@@ -1,5 +1,6 @@
 import {
   CheckboxField,
+  DateField,
   DatetimeField,
   GroupField,
   LengthRule,
@@ -43,6 +44,7 @@ const editorConfig = merge(
   {
     fieldTypes: {
       checkbox: (CheckboxField as unknown) as FieldConstructor,
+      date: (DateField as unknown) as FieldConstructor,
       datetime: (DatetimeField as unknown) as FieldConstructor,
       group: (GroupField as unknown) as FieldConstructor,
       list: (ListField as unknown) as FieldConstructor,
