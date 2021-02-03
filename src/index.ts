@@ -18,6 +18,7 @@ export {NumberField} from './selective/field/number';
 export {SelectField} from './selective/field/select';
 export {TextField} from './selective/field/text';
 export {TextareaField} from './selective/field/textarea';
+export {TimeField} from './selective/field/time';
 export {VariantField} from './selective/field/variant';
 
 /**

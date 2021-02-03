@@ -6,27 +6,27 @@ import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
 
-export type DatetimeFieldConfig = FieldConfig;
+export type TimeFieldConfig = FieldConfig;
 
-export class DatetimeField extends Field {
-  config: DatetimeFieldConfig;
+export class TimeField extends Field {
+  config: TimeFieldConfig;
 
-  constructor(types: Types, config: DatetimeFieldConfig, fieldType = 'text') {
+  constructor(types: Types, config: TimeFieldConfig, fieldType = 'text') {
     super(types, config, fieldType);
     this.config = config;
   }
 
   /**
-   * Cleanup the datetime strings.
+   * Cleanup the time strings.
    *
    * @param value Original value from the source.
    */
   cleanOriginalValue(value: any): any {
     value = super.cleanOriginalValue(value);
 
-    // If the datetime string is too long, strip off extra.
-    if (value && DataType.isString(value) && value.length > 16) {
-      value = value.slice(0, 16);
+    // If the time string is too long, strip off extra.
+    if (value && DataType.isString(value) && value.length > 5) {
+      value = value.slice(0, 5);
     }
 
     return value;
@@ -37,7 +37,7 @@ export class DatetimeField extends Field {
     return html`${this.templateHelp(editor, data)}
       <input
         class=${classMap(this.classesForInput())}
-        type="datetime-local"
+        type="time"
         id="${this.uid}"
         @input=${this.handleInput.bind(this)}
         value=${value}

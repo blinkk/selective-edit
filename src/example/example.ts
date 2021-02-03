@@ -1,21 +1,24 @@
+import {
+  CheckboxField,
+  DatetimeField,
+  GroupField,
+  LengthRule,
+  ListField,
+  MatchRule,
+  NumberField,
+  PatternRule,
+  RangeRule,
+  RequireRule,
+  SelectiveEditor,
+  TextField,
+  TextareaField,
+  TimeField,
+  VariantField,
+} from '../index';
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from '../selective/events';
 import {FieldConfig, FieldConstructor} from '../selective/field';
-import {CheckboxField} from '../selective/field/checkbox';
-import {DatetimeField} from '../selective/field/datetime';
-import {GroupField} from '../selective/field/group';
-import {LengthRule} from '../selective/rule/length';
-import {ListField} from '../selective/field/list';
-import {MatchRule} from '../selective/rule/match';
-import {NumberField} from '../selective/field/number';
-import {PatternRule} from '../selective/rule/pattern';
-import {RangeRule} from '../selective/rule/range';
-import {RequireRule} from '../selective/rule/require';
 import {RuleConstructor} from '../selective/validationRules';
 import {SelectField} from '../selective/field/select';
-import {SelectiveEditor} from '../index';
-import {TextField} from '../selective/field/text';
-import {TextareaField} from '../selective/field/textarea';
-import {VariantField} from '../selective/field/variant';
 import {autoDeepObject} from '../utility/deepObject';
 import merge from 'lodash.merge';
 
@@ -47,6 +50,7 @@ const editorConfig = merge(
       select: (SelectField as unknown) as FieldConstructor,
       text: (TextField as unknown) as FieldConstructor,
       textarea: (TextareaField as unknown) as FieldConstructor,
+      time: (TimeField as unknown) as FieldConstructor,
       variant: (VariantField as unknown) as FieldConstructor,
     },
     ruleTypes: {
