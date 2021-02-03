@@ -20,6 +20,14 @@ export interface ListFieldConfig extends FieldConfig {
    */
   emptyLabel?: string;
   /**
+   * Are the fields complex?
+   *
+   * When set to true, the list will not use the 'Simple' mode
+   * for showing list items when there is only one field configured
+   * in the fields config.
+   */
+  isComplex?: boolean;
+  /**
    * Field definitions for each item in the list.
    */
   fields?: Array<FieldConfig>;
@@ -55,6 +63,13 @@ export class ListField extends SortableMixin(Field) {
     this.usingAutoFields = false;
     this.ListItemCls = ListFieldItem;
     this.sortableUi.listeners.add('sort', this.handleSort.bind(this));
+  }
+
+  /**
+   * Does the list allow for showing simple fields?
+   */
+  get allowSimple(): boolean {
+    return !this.config.isComplex;
   }
 
   protected createFields(fieldConfigs: Array<any>): FieldsComponent {
@@ -288,10 +303,13 @@ export class ListField extends SortableMixin(Field) {
 
     const actions = [];
 
-    // Determine the ability to show simple fields and to
-    let areSimpleFields = true;
+    // Determine the ability to show simple fields.
+    let areSimpleFields = this.allowSimple;
+
+    // Determine the expanded/collapsed state for the item.
     let areAllExpanded = true;
     let areAllCollapsed = true;
+
     for (const item of items) {
       if (!item.fields.isSimple || !item.fields.allowSimple) {
         areSimpleFields = false;
@@ -404,7 +422,11 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
     item: ListItemComponent,
     index: number
   ): TemplateResult {
-    if (item.fields.allowSimple && item.fields.isSimple) {
+    if (
+      this.field.allowSimple && // The list field allows for simple fields.
+      item.fields.allowSimple && // The fields allows for simple fields.
+      item.fields.isSimple // The fields are simple.
+    ) {
       return this.templateSimple(editor, data, item, index);
     } else if (this.isExpanded) {
       return this.templateExpanded(editor, data, item, index);
