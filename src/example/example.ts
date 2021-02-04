@@ -67,7 +67,7 @@ const editorConfig = merge(
   },
   JSON.parse(configEl.value || '') as Record<string, any>
 );
-const exampleSelective = new SelectiveEditor(editorConfig, {}, fieldsEl);
+const exampleSelective = new SelectiveEditor(editorConfig, fieldsEl);
 
 exampleSelective.data = autoDeepObject(JSON.parse(dataEl.value));
 

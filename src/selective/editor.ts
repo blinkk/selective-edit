@@ -10,39 +10,43 @@ import {DeepObject} from '../utility/deepObject';
 import {EVENT_RENDER_COMPLETE} from './events';
 import {Types} from './types';
 
-export interface EditorConfig {
-  fieldTypes?: Record<string, FieldConstructor>;
-  ruleTypes?: Record<string, RuleConstructor>;
-  fields?: Array<FieldConfig>;
-}
-
-/**
- * Allow for passing global configuration to all the fields.
- *
- * This allows for passing things that fields will need access to
- * such as an api.
- */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface GlobalConfig {}
 
+export interface EditorConfig {
+  /**
+   * Optionally provide the field types that the editor understands.
+   */
+  fieldTypes?: Record<string, FieldConstructor>;
+  /**
+   * Optionally provide the validation rules that the fields can use.
+   */
+  ruleTypes?: Record<string, RuleConstructor>;
+  /**
+   * Optionally define an initial set of field configurations.
+   */
+  fields?: Array<FieldConfig>;
+  /**
+   * Global configuration for all of the fields.
+   *
+   * This allows for passing things that fields will need access to
+   * such as an api or additional global meta information.
+   */
+  global?: GlobalConfig;
+}
+
 export class SelectiveEditor extends DataMixin(Base) {
   config: EditorConfig;
-  globalConfig: GlobalConfig;
   container?: HTMLElement;
   fields: FieldsComponent;
   isPendingRender: boolean;
   isRendering: boolean;
   types: Types;
 
-  constructor(
-    config: EditorConfig,
-    globalConfig: GlobalConfig,
-    container?: HTMLElement
-  ) {
+  constructor(config: EditorConfig, container?: HTMLElement) {
     super();
     this.container = container;
     this.config = config;
-    this.globalConfig = globalConfig;
     this.types = {
       fields: new ClassManager<FieldConstructor, FieldComponent>(),
       globals: {
@@ -67,7 +71,7 @@ export class SelectiveEditor extends DataMixin(Base) {
         fields: this.config.fields,
         parentKey: '',
       },
-      this.globalConfig
+      this.config.global || {}
     );
   }
 
@@ -146,7 +150,7 @@ export class SelectiveEditor extends DataMixin(Base) {
         fields: this.config.fields,
         parentKey: '',
       },
-      this.globalConfig
+      this.config.global || {}
     );
     this.render();
   }
