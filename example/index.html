@@ -17,11 +17,12 @@
   "title": "The stuff dreams are made of.",
   "description": "Fluffy stuff. Wispy stuff. Flying stuff. Falling stuff. Weird stuff.",
   "body": "A field of sparkling fluffy _bunnies_ with horns.",
-  "isPublished": true,
+  "areCloudsToday": true,
   "lookedForCloudsAt": "2021-02-03T06:21",
   "cloudViewingDay": "2021-05-18",
   "bestViewingTime": "09:38",
   "cloudsInTheSky": 100,
+  "skyColor": "#006beb",
   "storm": {
     "meta": "Do not change values that are not part of the fields.",
     "chasers": [
@@ -87,8 +88,8 @@
     },
     {
       "type": "checkbox",
-      "key": "isPublished",
-      "label": "Is Published?"
+      "key": "areCloudsToday",
+      "label": "Are there clouds today?"
     },
     {
       "type": "datetime",
@@ -104,6 +105,11 @@
       "type": "time",
       "key": "bestViewingTime",
       "label": "Best cloud viewing time"
+    },
+    {
+      "type": "color",
+      "key": "skyColor",
+      "label": "Current color of the sky"
     },
     {
       "type": "number",
