@@ -97,6 +97,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="selective_field_group.groupfield.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_group.groupfield.html#fieldtype" class="tsd-kind-icon">field<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_field_group.groupfield.html#fields" class="tsd-kind-icon">fields</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_group.groupfield.html#globalconfig" class="tsd-kind-icon">global<wbr>Config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_group.groupfield.html#types" class="tsd-kind-icon">types</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite"><a href="selective_field_group.groupfield.html#usingautofields" class="tsd-kind-icon">using<wbr>Auto<wbr>Fields</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_field_group.groupfield.html#validation" class="tsd-kind-icon">validation</a></li>
@@ -154,14 +155,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Group<wbr>Field<span class="tsd-signature-symbol">(</span>types<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_types.types.html" class="tsd-signature-type" data-tsd-kind="Interface">Types</a>, config<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_field_group.groupfieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">GroupFieldConfig</a>, fieldType<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_field_group.groupfield.html" class="tsd-signature-type" data-tsd-kind="Class">GroupField</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Group<wbr>Field<span class="tsd-signature-symbol">(</span>types<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_types.types.html" class="tsd-signature-type" data-tsd-kind="Interface">Types</a>, config<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_field_group.groupfieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">GroupFieldConfig</a>, globalConfig<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_editor.globalconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">GlobalConfig</a>, fieldType<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_field_group.groupfield.html" class="tsd-signature-type" data-tsd-kind="Class">GroupField</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L24">selective/field/group.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L24">selective/field/group.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -171,6 +172,9 @@
 								</li>
 								<li>
 									<h5>config: <a href="../interfaces/selective_field_group.groupfieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">GroupFieldConfig</a></h5>
+								</li>
+								<li>
+									<h5>globalConfig: <a href="../interfaces/selective_editor.globalconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">GlobalConfig</a></h5>
 								</li>
 								<li>
 									<h5>fieldType: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;group&#x27;</span></h5>
@@ -190,7 +194,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#_data">_data</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/mixins/data.ts#L6">mixins/data.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/mixins/data.ts#L6">mixins/data.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -201,7 +205,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#_uuid">_uuid</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/mixins/uuid.ts#L6">mixins/uuid.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/mixins/uuid.ts#L6">mixins/uuid.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -212,7 +216,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#config">config</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L22">selective/field/group.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L22">selective/field/group.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -223,7 +227,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#fieldtype">fieldType</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L92">selective/field.ts:92</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L97">selective/field.ts:97</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -233,7 +237,18 @@
 					<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/selective_fields.fieldscomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldsComponent</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L23">selective/field/group.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L23">selective/field/group.ts:23</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="globalconfig" class="tsd-anchor"></a>
+					<h3>global<wbr>Config</h3>
+					<div class="tsd-signature tsd-kind-icon">global<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_editor.globalconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">GlobalConfig</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#globalconfig">globalConfig</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L93">selective/field.ts:93</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -244,7 +259,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#types">types</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L95">selective/field.ts:95</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L100">selective/field.ts:100</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -255,7 +270,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#usingautofields">usingAutoFields</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L24">selective/field/group.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L24">selective/field/group.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -266,7 +281,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#validation">validation</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L97">selective/field.ts:97</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L102">selective/field.ts:102</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -277,7 +292,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#zonetokey">zoneToKey</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L98">selective/field.ts:98</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L103">selective/field.ts:103</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -295,7 +310,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/mixins/data.ts#L8">mixins/data.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/mixins/data.ts#L8">mixins/data.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></h4>
@@ -303,7 +318,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/mixins/data.ts#L12">mixins/data.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/mixins/data.ts#L12">mixins/data.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -326,7 +341,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L196">selective/field.ts:196</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L207">selective/field.ts:207</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -343,7 +358,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L46">selective/field/group.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L55">selective/field/group.ts:55</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -360,7 +375,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L54">selective/field/group.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L63">selective/field/group.ts:63</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -377,7 +392,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L244">selective/field.ts:244</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L255">selective/field.ts:255</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -394,7 +409,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L263">selective/field.ts:263</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L274">selective/field.ts:274</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="selective_validationrules.rules.html" class="tsd-signature-type" data-tsd-kind="Class">Rules</a></h4>
@@ -411,7 +426,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/mixins/uuid.ts#L15">mixins/uuid.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/mixins/uuid.ts#L15">mixins/uuid.ts:15</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -428,7 +443,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/mixins/uuid.ts#L8">mixins/uuid.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/mixins/uuid.ts#L8">mixins/uuid.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -445,7 +460,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L134">selective/field/group.ts:134</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L143">selective/field/group.ts:143</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -466,7 +481,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#classesforfield">classesForField</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L114">selective/field.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L125">selective/field.ts:125</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -489,7 +504,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#classesforinput">classesForInput</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L136">selective/field.ts:136</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L147">selective/field.ts:147</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -518,7 +533,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#classesforlabel">classesForLabel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L159">selective/field.ts:159</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L170">selective/field.ts:170</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -547,7 +562,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#cleanoriginalvalue">cleanOriginalValue</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L187">selective/field.ts:187</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L198">selective/field.ts:198</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -580,7 +595,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#handleinput">handleInput</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L208">selective/field.ts:208</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L219">selective/field.ts:219</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -612,7 +627,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#lock">lock</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L252">selective/field.ts:252</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L263">selective/field.ts:263</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -636,7 +651,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#render">render</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L259">selective/field.ts:259</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L270">selective/field.ts:270</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -659,7 +674,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#template">template</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L301">selective/field.ts:301</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L312">selective/field.ts:312</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -697,7 +712,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateerrors">templateErrors</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L314">selective/field.ts:314</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L325">selective/field.ts:325</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -741,7 +756,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatefooter">templateFooter</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L351">selective/field.ts:351</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L362">selective/field.ts:362</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -779,7 +794,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatefooterstructure">templateFooterStructure</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L362">selective/field.ts:362</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L373">selective/field.ts:373</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -817,7 +832,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateheader">templateHeader</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L62">selective/field/group.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L71">selective/field/group.ts:71</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -844,7 +859,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateheaderstructure">templateHeaderStructure</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L80">selective/field/group.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L89">selective/field/group.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -882,7 +897,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatehelp">templateHelp</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L406">selective/field.ts:406</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L417">selective/field.ts:417</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -926,7 +941,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateicondeeplink">templateIconDeepLink</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L431">selective/field.ts:431</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L442">selective/field.ts:442</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -964,7 +979,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateiconvalidation">templateIconValidation</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L446">selective/field.ts:446</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L457">selective/field.ts:457</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1002,7 +1017,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateinput">templateInput</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L106">selective/field/group.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L115">selective/field/group.ts:115</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1042,7 +1057,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templateinputstructure">templateInputStructure</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L481">selective/field.ts:481</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L492">selective/field.ts:492</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1080,7 +1095,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatelabel">templateLabel</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field/group.ts#L125">selective/field/group.ts:125</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field/group.ts#L134">selective/field/group.ts:134</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1118,7 +1133,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatestructure">templateStructure</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L515">selective/field.ts:515</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L526">selective/field.ts:526</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1157,7 +1172,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#templatewrapper">templateWrapper</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L527">selective/field.ts:527</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L538">selective/field.ts:538</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1195,7 +1210,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#unlock">unlock</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L541">selective/field.ts:541</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L552">selective/field.ts:552</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1219,7 +1234,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.field.html">Field</a>.<a href="selective_field.field.html#updateoriginal">updateOriginal</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ff1aefa/src/selective/field.ts#L552">selective/field.ts:552</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/4ee4343/src/selective/field.ts#L563">selective/field.ts:563</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1284,6 +1299,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="selective_field_group.groupfield.html#fields" class="tsd-kind-icon">fields</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="selective_field_group.groupfield.html#globalconfig" class="tsd-kind-icon">global<wbr>Config</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_field_group.groupfield.html#types" class="tsd-kind-icon">types</a>
