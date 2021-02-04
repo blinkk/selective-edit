@@ -1,5 +1,6 @@
 import {
   CheckboxField,
+  ColorField,
   DateField,
   DatetimeField,
   GroupField,
@@ -44,6 +45,7 @@ const editorConfig = merge(
   {
     fieldTypes: {
       checkbox: (CheckboxField as unknown) as FieldConstructor,
+      color: (ColorField as unknown) as FieldConstructor,
       date: (DateField as unknown) as FieldConstructor,
       datetime: (DatetimeField as unknown) as FieldConstructor,
       group: (GroupField as unknown) as FieldConstructor,
