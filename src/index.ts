@@ -3,7 +3,7 @@
  *
  * Exports for using selective in other projects.
  */
-export {SelectiveEditor, EditorConfig} from './selective/editor';
+export {SelectiveEditor, EditorConfig, GlobalConfig} from './selective/editor';
 
 /**
  * Selective Fields

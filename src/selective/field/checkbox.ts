@@ -1,8 +1,8 @@
 import {ColorsConfig, Option, OptionMixin} from '../../mixins/option';
 import {Field, FieldConfig} from '../field';
+import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
 import {DeepObject} from '../../utility/deepObject';
-import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
 
 export interface CheckboxFieldConfig extends FieldConfig {
@@ -31,9 +31,10 @@ export class CheckboxField extends OptionMixin(Field) {
   constructor(
     types: Types,
     config: CheckboxFieldConfig,
+    globalConfig: GlobalConfig,
     fieldType = 'checkbox'
   ) {
-    super(types, config, fieldType);
+    super(types, config, globalConfig, fieldType);
     this.config = config;
   }
 

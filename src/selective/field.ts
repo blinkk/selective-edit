@@ -1,4 +1,5 @@
 import {DEFAULT_ZONE_KEY, Validation, ValidationLevel} from './validation';
+import {GlobalConfig, SelectiveEditor} from './editor';
 import {RuleConfig, Rules} from './validationRules';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
@@ -6,7 +7,6 @@ import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
 import {EVENT_RENDER} from './events';
-import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
@@ -70,11 +70,15 @@ export interface FieldConfig {
 
 export interface FieldComponent {
   template: Template;
-
-  /**
-   * Field can define any properties or methods they need.
-   */
-  [x: string]: any;
+  key: string;
+  isClean: boolean;
+  isValid: boolean;
+  lock(): void;
+  render(): void;
+  updateOriginal(editor: SelectiveEditor, data: DeepObject): void;
+  unlock(): void;
+  uuid: string;
+  value: any;
 }
 
 export type FieldConstructor = (
@@ -86,6 +90,7 @@ export class Field
   extends UuidMixin(DataMixin(Base))
   implements FieldComponent {
   config: FieldConfig;
+  globalConfig: GlobalConfig;
   protected currentValue?: any;
   protected isLocked: boolean;
   protected isDeepLinked: boolean;
@@ -97,10 +102,16 @@ export class Field
   validation?: Validation;
   zoneToKey?: Record<string, string>;
 
-  constructor(types: Types, config: FieldConfig, fieldType = 'unknown') {
+  constructor(
+    types: Types,
+    config: FieldConfig,
+    globalConfig: GlobalConfig,
+    fieldType = 'unknown'
+  ) {
     super();
     this.types = types;
     this.config = config;
+    this.globalConfig = globalConfig;
     this.fieldType = fieldType;
 
     this.isLocked = false;

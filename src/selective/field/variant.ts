@@ -2,6 +2,7 @@ import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldConfig} from '../field';
 import {TemplateResult, html} from 'lit-html';
 import {FieldsComponent} from '../fields';
+import {GlobalConfig} from '../editor';
 import {SelectiveEditor} from '../..';
 import {Types} from '../types';
 import {findParentByClassname} from '../../utility/dom';
@@ -40,8 +41,13 @@ export class VariantField extends Field {
   usingAutoFields: boolean;
   variant?: string;
 
-  constructor(types: Types, config: VariantFieldConfig, fieldType = 'variant') {
-    super(types, config, fieldType);
+  constructor(
+    types: Types,
+    config: VariantFieldConfig,
+    globalConfig: GlobalConfig,
+    fieldType = 'variant'
+  ) {
+    super(types, config, globalConfig, fieldType);
     this.config = config;
     this.usingAutoFields = false;
   }
@@ -63,11 +69,15 @@ export class VariantField extends Field {
     const variantConfig = this.config.variants[variant] || {};
     const fieldConfigs: Array<FieldConfig> = variantConfig.fields || [];
 
-    return new this.types.globals.FieldsCls(this.types, {
-      fields: fieldConfigs,
-      isGuessed: this.usingAutoFields,
-      parentKey: this.fullKey,
-    });
+    return new this.types.globals.FieldsCls(
+      this.types,
+      {
+        fields: fieldConfigs,
+        isGuessed: this.usingAutoFields,
+        parentKey: this.fullKey,
+      },
+      this.globalConfig
+    );
   }
 
   protected ensureFields() {

@@ -16,18 +16,33 @@ export interface EditorConfig {
   fields?: Array<FieldConfig>;
 }
 
+/**
+ * Allow for passing global configuration to all the fields.
+ *
+ * This allows for passing things that fields will need access to
+ * such as an api.
+ */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface GlobalConfig {}
+
 export class SelectiveEditor extends DataMixin(Base) {
   config: EditorConfig;
+  globalConfig: GlobalConfig;
   container?: HTMLElement;
   fields: FieldsComponent;
   isPendingRender: boolean;
   isRendering: boolean;
   types: Types;
 
-  constructor(config: EditorConfig, container?: HTMLElement) {
+  constructor(
+    config: EditorConfig,
+    globalConfig: GlobalConfig,
+    container?: HTMLElement
+  ) {
     super();
     this.container = container;
     this.config = config;
+    this.globalConfig = globalConfig;
     this.types = {
       fields: new ClassManager<FieldConstructor, FieldComponent>(),
       globals: {
@@ -46,10 +61,14 @@ export class SelectiveEditor extends DataMixin(Base) {
       this.types.rules.registerClasses(this.config.ruleTypes);
     }
 
-    this.fields = new Fields(this.types, {
-      fields: this.config.fields,
-      parentKey: '',
-    });
+    this.fields = new Fields(
+      this.types,
+      {
+        fields: this.config.fields,
+        parentKey: '',
+      },
+      this.globalConfig
+    );
   }
 
   addFieldType(key: string, FieldCls: FieldConstructor) {
@@ -121,10 +140,14 @@ export class SelectiveEditor extends DataMixin(Base) {
   }
 
   resetFields(): void {
-    this.fields = new Fields(this.types, {
-      fields: this.config.fields,
-      parentKey: '',
-    });
+    this.fields = new Fields(
+      this.types,
+      {
+        fields: this.config.fields,
+        parentKey: '',
+      },
+      this.globalConfig
+    );
     this.render();
   }
 

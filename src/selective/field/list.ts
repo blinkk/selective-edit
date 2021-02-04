@@ -1,11 +1,11 @@
 import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldComponent, FieldConfig} from '../field';
+import {GlobalConfig, SelectiveEditor} from '../..';
+import {SortableFieldComponent, SortableMixin} from '../../mixins/sortable';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../../mixins';
 import {EVENT_UNLOCK} from '../events';
 import {FieldsComponent} from '../fields';
-import {SelectiveEditor} from '../..';
-import {SortableMixin} from '../../mixins/sortable';
 import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
 import {repeat} from 'lit-html/directives/repeat';
@@ -33,8 +33,13 @@ export interface ListFieldConfig extends FieldConfig {
   fields?: Array<FieldConfig>;
 }
 
+export interface ListFieldComponent extends FieldComponent {
+  allowSimple: boolean;
+  handleDeleteItem(evt: Event, index: number): void;
+}
+
 export interface ListItemComponent {
-  field: FieldComponent;
+  field: ListFieldComponent & SortableFieldComponent;
   fields: FieldsComponent;
   isExpanded: boolean;
   template: (
@@ -47,17 +52,27 @@ export interface ListItemComponent {
 }
 
 export interface ListItemConstructor {
-  new (field: FieldComponent, fields: FieldsComponent): ListItemComponent;
+  new (
+    field: ListFieldComponent & SortableFieldComponent,
+    fields: FieldsComponent
+  ): ListItemComponent;
 }
 
-export class ListField extends SortableMixin(Field) {
+export class ListField
+  extends SortableMixin(Field)
+  implements ListFieldComponent {
   config: ListFieldConfig;
   protected items: Array<ListItemComponent> | null;
   protected ListItemCls: ListItemConstructor;
   usingAutoFields: boolean;
 
-  constructor(types: Types, config: ListFieldConfig, fieldType = 'list') {
-    super(types, config, fieldType);
+  constructor(
+    types: Types,
+    config: ListFieldConfig,
+    globalConfig: GlobalConfig,
+    fieldType = 'list'
+  ) {
+    super(types, config, globalConfig, fieldType);
     this.config = config;
     this.items = null;
     this.usingAutoFields = false;
@@ -73,11 +88,15 @@ export class ListField extends SortableMixin(Field) {
   }
 
   protected createFields(fieldConfigs: Array<any>): FieldsComponent {
-    return new this.types.globals.FieldsCls(this.types, {
-      fields: fieldConfigs,
-      isGuessed: this.usingAutoFields,
-      parentKey: this.fullKey,
-    });
+    return new this.types.globals.FieldsCls(
+      this.types,
+      {
+        fields: fieldConfigs,
+        isGuessed: this.usingAutoFields,
+        parentKey: this.fullKey,
+      },
+      this.globalConfig
+    );
   }
 
   protected ensureItems(editor: SelectiveEditor): Array<ListItemComponent> {
@@ -395,11 +414,14 @@ export class ListField extends SortableMixin(Field) {
 }
 
 class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
-  field: FieldComponent;
+  field: ListFieldComponent & SortableFieldComponent;
   fields: FieldsComponent;
   isExpanded: boolean;
 
-  constructor(field: FieldComponent, fields: FieldsComponent) {
+  constructor(
+    field: ListFieldComponent & SortableFieldComponent,
+    fields: FieldsComponent
+  ) {
     super();
     this.field = field;
     this.fields = fields;

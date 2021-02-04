@@ -1,9 +1,9 @@
 import {Field, FieldConfig} from '../field';
+import {GlobalConfig, SelectiveEditor} from '../editor';
 import {Option, OptionMixin, OptionUIConfig} from '../../mixins/option';
 import {TemplateResult, html} from 'lit-html';
 import {DataType} from '../../utility/dataType';
 import {DeepObject} from '../../utility/deepObject';
-import {SelectiveEditor} from '../..';
 import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
 import {findParentByClassname} from '../../utility/dom';
@@ -19,8 +19,13 @@ export interface SelectFieldConfig extends FieldConfig {
 export class SelectField extends OptionMixin(Field) {
   config: SelectFieldConfig;
 
-  constructor(types: Types, config: SelectFieldConfig, fieldType = 'select') {
-    super(types, config, fieldType);
+  constructor(
+    types: Types,
+    config: SelectFieldConfig,
+    globalConfig: GlobalConfig,
+    fieldType = 'select'
+  ) {
+    super(types, config, globalConfig, fieldType);
     this.config = config;
   }
 

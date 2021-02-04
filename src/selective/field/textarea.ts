@@ -1,7 +1,7 @@
 import {Field, FieldConfig} from '../field';
+import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
 import {DeepObject} from '../../utility/deepObject';
-import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
 
@@ -22,9 +22,10 @@ export class TextareaField extends Field {
   constructor(
     types: Types,
     config: TextAreaFieldConfig,
+    globalConfig: GlobalConfig,
     fieldType = 'textarea'
   ) {
-    super(types, config, fieldType);
+    super(types, config, globalConfig, fieldType);
     this.config = config;
   }
 

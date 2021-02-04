@@ -1,7 +1,7 @@
 import {Field, FieldConfig} from '../field';
+import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
 import {DeepObject} from '../../utility/deepObject';
-import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
 
@@ -27,8 +27,13 @@ export interface NumberFieldConfig extends FieldConfig {
 export class NumberField extends Field {
   config: NumberFieldConfig;
 
-  constructor(types: Types, config: NumberFieldConfig, fieldType = 'text') {
-    super(types, config, fieldType);
+  constructor(
+    types: Types,
+    config: NumberFieldConfig,
+    globalConfig: GlobalConfig,
+    fieldType = 'text'
+  ) {
+    super(types, config, globalConfig, fieldType);
     this.config = config;
   }
 

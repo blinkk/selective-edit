@@ -3,6 +3,10 @@ import {Listeners} from '../utility/listeners';
 import {UuidMixin} from './uuid';
 import {findParentDraggable} from '../utility/dom';
 
+export interface SortableFieldComponent {
+  sortableUi: SortableUiComponent;
+}
+
 export interface SortableUiComponent {
   listeners: Listeners;
   handleDragEnter(evt: DragEvent): void;
@@ -15,7 +19,7 @@ export interface SortableUiComponent {
 export type SortableHandler = (startIndex: number, endIndex: number) => void;
 
 export function SortableMixin<TBase extends Constructor>(Base: TBase) {
-  return class SortableClass extends Base {
+  return class SortableClass extends Base implements SortableFieldComponent {
     _sortableUi?: SortableUiComponent;
 
     get sortableUi(): SortableUiComponent {

@@ -1,8 +1,8 @@
 import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldConfig} from '../field';
+import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
 import {FieldsComponent} from '../fields';
-import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
 import merge from 'lodash.merge';
@@ -23,18 +23,27 @@ export class GroupField extends Field {
   fields?: FieldsComponent;
   usingAutoFields: boolean;
 
-  constructor(types: Types, config: GroupFieldConfig, fieldType = 'group') {
-    super(types, config, fieldType);
+  constructor(
+    types: Types,
+    config: GroupFieldConfig,
+    globalConfig: GlobalConfig,
+    fieldType = 'group'
+  ) {
+    super(types, config, globalConfig, fieldType);
     this.config = config;
     this.usingAutoFields = false;
   }
 
   protected createFields(fieldConfigs: Array<any>): FieldsComponent {
-    return new this.types.globals.FieldsCls(this.types, {
-      fields: fieldConfigs,
-      isGuessed: this.usingAutoFields,
-      parentKey: this.fullKey,
-    });
+    return new this.types.globals.FieldsCls(
+      this.types,
+      {
+        fields: fieldConfigs,
+        isGuessed: this.usingAutoFields,
+        parentKey: this.fullKey,
+      },
+      this.globalConfig
+    );
   }
 
   protected ensureFields() {

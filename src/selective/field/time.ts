@@ -1,8 +1,8 @@
 import {Field, FieldConfig} from '../field';
+import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
 import {DataType} from '../../utility/dataType';
 import {DeepObject} from '../../utility/deepObject';
-import {SelectiveEditor} from '../editor';
 import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
 
@@ -11,8 +11,13 @@ export type TimeFieldConfig = FieldConfig;
 export class TimeField extends Field {
   config: TimeFieldConfig;
 
-  constructor(types: Types, config: TimeFieldConfig, fieldType = 'text') {
-    super(types, config, fieldType);
+  constructor(
+    types: Types,
+    config: TimeFieldConfig,
+    globalConfig: GlobalConfig,
+    fieldType = 'text'
+  ) {
+    super(types, config, globalConfig, fieldType);
     this.config = config;
   }
 

@@ -1,10 +1,10 @@
 import {FieldComponent, FieldConfig} from './field';
+import {GlobalConfig, SelectiveEditor} from './editor';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
 import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
-import {SelectiveEditor} from './editor';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
@@ -41,7 +41,11 @@ export interface FieldsComponent {
 }
 
 export interface FieldsConstructor {
-  new (types: Types, config: FieldsConfig): FieldsComponent;
+  new (
+    types: Types,
+    config: FieldsConfig,
+    globalConfig: GlobalConfig
+  ): FieldsComponent;
 }
 
 /**
@@ -51,16 +55,18 @@ export class Fields
   extends UuidMixin(DataMixin(Base))
   implements FieldsComponent {
   config: FieldsConfig;
+  globalConfig: GlobalConfig;
   private currentValue?: DeepObject;
   fields: Array<FieldComponent>;
   private isLocked: boolean;
   private originalValue?: DeepObject;
   types: Types;
 
-  constructor(types: Types, config: FieldsConfig) {
+  constructor(types: Types, config: FieldsConfig, globalConfig: GlobalConfig) {
     super();
     this.types = types;
     this.config = config;
+    this.globalConfig = globalConfig;
 
     this.isLocked = false;
     this.fields = [];
@@ -78,7 +84,8 @@ export class Fields
     const newField = this.types.fields.newFromKey(
       fieldConfig.type,
       this.types,
-      fieldConfig
+      fieldConfig,
+      this.globalConfig
     );
 
     if (!newField) {
