@@ -127,6 +127,11 @@ export class DroppableUi
       }
     }
 
+    if (!files.length) {
+      // No valid files. No need to trigger the files.
+      return;
+    }
+
     // Trigger with dropped files.
     this.listeners.trigger('files', files);
   }
