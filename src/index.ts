@@ -1,15 +1,18 @@
+import {DataMixin} from './mixins/data';
+
 /**
  * Selective structured data editor.
  *
  * Exports for using selective in other projects.
  */
 export {SelectiveEditor, EditorConfig, GlobalConfig} from './selective/editor';
+export {Types} from './selective/types';
 
 /**
  * Selective Fields
  */
 export {Field} from './selective/field';
-export {FieldComponent, FieldConstructor} from './selective/field';
+export {FieldComponent, FieldConfig, FieldConstructor} from './selective/field';
 export {CheckboxField} from './selective/field/checkbox';
 export {ColorField} from './selective/field/color';
 export {DateField} from './selective/field/date';
@@ -39,6 +42,15 @@ export {RequireRule} from './selective/rule/require';
  */
 export {DeepObject} from './utility/deepObject';
 export {findParentByClassname} from './utility/dom';
+
+/**
+ * Selective mixins.
+ */
+export {DataMixin} from './mixins/data';
+export {DroppableMixin} from './mixins/droppable';
+export {OptionMixin} from './mixins/option';
+export {SortableMixin} from './mixins/sortable';
+export {UuidMixin} from './mixins/uuid';
 
 // Cannot use lit-html libraries across different package installs.
 // Instead need to export any of the lit-html pieces here.

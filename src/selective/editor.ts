@@ -10,6 +10,10 @@ import {DeepObject} from '../utility/deepObject';
 import {EVENT_RENDER_COMPLETE} from './events';
 import {Types} from './types';
 
+/**
+ * Globally accessible configuration. Allow for passing arbitrary
+ * information to fields.
+ */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface GlobalConfig {}
 
