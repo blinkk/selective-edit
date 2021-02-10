@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>mixins/data | @blinkk/selective-edit</title>
+	<title>mixins/droppable | @blinkk/selective-edit</title>
 	<meta name="description" content="Documentation for @blinkk/selective-edit">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -53,10 +53,10 @@
 					<a href="../modules.html">@blinkk/selective-edit</a>
 				</li>
 				<li>
-					<a href="mixins_data.html">mixins/data</a>
+					<a href="mixins_droppable.html">mixins/droppable</a>
 				</li>
 			</ul>
-			<h1>Module mixins/data</h1>
+			<h1>Module mixins/droppable</h1>
 		</div>
 	</div>
 </header>
@@ -68,27 +68,83 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/mixins_droppable.droppableui.html" class="tsd-kind-icon">Droppable<wbr>Ui</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/mixins_droppable.droppablefieldcomponent.html" class="tsd-kind-icon">Droppable<wbr>Field<wbr>Component</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/mixins_droppable.droppableuicomponent.html" class="tsd-kind-icon">Droppable<wbr>UiComponent</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="mixins_droppable.html#droppablehandler" class="tsd-kind-icon">Droppable<wbr>Handler</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="mixins_data.html#datamixin" class="tsd-kind-icon">Data<wbr>Mixin</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="mixins_droppable.html#droppablemixin" class="tsd-kind-icon">Droppable<wbr>Mixin</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="droppablehandler" class="tsd-anchor"></a>
+					<h3>Droppable<wbr>Handler</h3>
+					<div class="tsd-signature tsd-kind-icon">Droppable<wbr>Handler<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>startIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, endIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ea3cdcc/src/mixins/droppable.ts#L18">mixins/droppable.ts:18</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>startIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, endIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>startIndex: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5>endIndex: <span class="tsd-signature-type">number</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-					<a name="datamixin" class="tsd-anchor"></a>
-					<h3>Data<wbr>Mixin</h3>
+					<a name="droppablemixin" class="tsd-anchor"></a>
+					<h3>Droppable<wbr>Mixin</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">Data<wbr>Mixin&lt;TBase&gt;<span class="tsd-signature-symbol">(</span>Base<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TBase</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>prototype<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">TBase</span></li>
+						<li class="tsd-signature tsd-kind-icon">Droppable<wbr>Mixin&lt;TBase&gt;<span class="tsd-signature-symbol">(</span>Base<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TBase</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>prototype<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">TBase</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ea3cdcc/src/mixins/data.ts#L4">mixins/data.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ea3cdcc/src/mixins/droppable.ts#L20">mixins/droppable.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -116,14 +172,26 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="mixins_data.html">mixins/data</a>
+						<a href="mixins_droppable.html">mixins/droppable</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/mixins_droppable.droppableui.html" class="tsd-kind-icon">Droppable<wbr>Ui</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/mixins_droppable.droppablefieldcomponent.html" class="tsd-kind-icon">Droppable<wbr>Field<wbr>Component</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/mixins_droppable.droppableuicomponent.html" class="tsd-kind-icon">Droppable<wbr>UiComponent</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="mixins_droppable.html#droppablehandler" class="tsd-kind-icon">Droppable<wbr>Handler</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="mixins_data.html#datamixin" class="tsd-kind-icon">Data<wbr>Mixin</a>
+						<a href="mixins_droppable.html#droppablemixin" class="tsd-kind-icon">Droppable<wbr>Mixin</a>
 					</li>
 				</ul>
 			</nav>
