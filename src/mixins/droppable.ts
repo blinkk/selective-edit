@@ -13,6 +13,7 @@ export interface DroppableUiComponent {
   handleDragLeave(evt: DragEvent): void;
   handleDragOver(evt: DragEvent): void;
   handleDrop(evt: DragEvent): void;
+  validTypes: Array<string>;
 }
 
 export type DroppableHandler = (startIndex: number, endIndex: number) => void;
@@ -38,10 +39,12 @@ export class DroppableUi
   extends UuidMixin(Base)
   implements DroppableUiComponent {
   listeners: Listeners;
+  validTypes: Array<string>;
 
   constructor() {
     super();
     this.listeners = new Listeners();
+    this.validTypes = [];
   }
 
   private findDropTarget(evt: DragEvent): HTMLElement | null {
@@ -111,18 +114,28 @@ export class DroppableUi
           continue;
         }
         const file = item.getAsFile();
-        if (file) {
+        if (file && this.isFileValid(file)) {
           files.push(file);
         }
       }
     } else {
       // Use DataTransfer interface to access the files.
       for (const file of evt.dataTransfer?.files || []) {
-        files.push(file);
+        if (this.isFileValid(file)) {
+          files.push(file);
+        }
       }
     }
 
     // Trigger with dropped files.
     this.listeners.trigger('files', files);
+  }
+
+  isFileValid(file: File): boolean {
+    // Check the file against a list of valid file types.
+    if (this.validTypes.length && !this.validTypes.includes(file.type)) {
+      return false;
+    }
+    return true;
   }
 }
