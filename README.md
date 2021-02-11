@@ -6,6 +6,8 @@ Selective editor for providing a rich UI for editing structured data.
 
 See the [typescript docs][tsdocs] or [example][example].
 
+[![codecov](https://codecov.io/gh/blinkkcode/selective-edit/branch/master/graph/badge.svg?token=VdpVUcYr4n)](https://codecov.io/gh/blinkkcode/selective-edit)
+
 ## Usage
 
 ### Styles
