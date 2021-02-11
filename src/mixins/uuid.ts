@@ -13,7 +13,7 @@ export function UuidMixin<TBase extends Constructor>(Base: TBase) {
     }
 
     get uid(): string {
-      return this.uuid.slice(0, 10);
+      return this.uuid.slice(0, 8);
     }
   };
 }
