@@ -40,17 +40,18 @@ export class NumberField extends Field {
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const value = this.currentValue || '';
     return html`${this.templateHelp(editor, data)}
-      <input
-        class=${classMap(this.classesForInput())}
-        type="number"
-        id="${this.uid}"
-        placeholder=${this.config.placeholder || ''}
-        @input=${this.handleInput.bind(this)}
-        max=${this.config.max || ''}
-        min=${this.config.min || ''}
-        step=${this.config.step || 1}
-        value=${value}
-      />
+      <div class=${classMap(this.classesForInput())}>
+        <input
+          type="number"
+          id="${this.uid}"
+          placeholder=${this.config.placeholder || ''}
+          @input=${this.handleInput.bind(this)}
+          max=${this.config.max || ''}
+          min=${this.config.min || ''}
+          step=${this.config.step || 1}
+          value=${value}
+        />
+      </div>
       ${this.templateErrors(editor, data)}`;
   }
 }

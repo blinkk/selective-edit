@@ -40,13 +40,14 @@ export class TimeField extends Field {
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const value = this.currentValue || '';
     return html`${this.templateHelp(editor, data)}
-      <input
-        class=${classMap(this.classesForInput())}
-        type="time"
-        id="${this.uid}"
-        @input=${this.handleInput.bind(this)}
-        value=${value}
-      />
+      <div class=${classMap(this.classesForInput())}>
+        <input
+          type="time"
+          id="${this.uid}"
+          @input=${this.handleInput.bind(this)}
+          value=${value}
+        />
+      </div>
       ${this.templateErrors(editor, data)}`;
   }
 }

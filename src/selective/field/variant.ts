@@ -155,7 +155,7 @@ export class VariantField extends Field {
     editor: SelectiveEditor,
     data: DeepObject
   ): TemplateResult {
-    return html`<div class="selective__field__input">
+    return html`<div class="selective__field__input__structure">
       ${this.templateVariants(editor, data)}${this.templateInput(editor, data)}
     </div>`;
   }
