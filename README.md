@@ -114,9 +114,11 @@ selective.fields.addField({
 
 Different field types have different configurations options:
 
+  - [Checkbox][doc_FieldConfig_CheckboxField]
+  - [CheckboxMulti][doc_FieldConfig_CheckboxMultiField]
   - [Group][doc_FieldConfig_GroupField]
   - [List][doc_FieldConfig_ListField]
-  - [Select][doc_FieldConfig_SelectField]
+  - [Radio][doc_FieldConfig_RadioField]
   - [Text][doc_FieldConfig_TextField]
   - [Textarea][doc_FieldConfig_TextareaField]
   - [Variant][doc_FieldConfig_VariantField]
@@ -146,9 +148,11 @@ yarn run dev
 ```
 
 [doc_Field]: https://blinkkcode.github.io/selective-edit/classes/selective_field.field.html
+[doc_FieldConfig_CheckboxField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_checkbox.checkboxfieldconfig.html
+[doc_FieldConfig_CheckboxMultiField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_checkboxMulti.checkboxmultifieldconfig.html
 [doc_FieldConfig_GroupField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_group.groupfieldconfig.html
 [doc_FieldConfig_ListField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_list.listfieldconfig.html
-[doc_FieldConfig_SelectField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_select.selectfieldconfig.html
+[doc_FieldConfig_RadioField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_radio.radiofieldconfig.html
 [doc_FieldConfig_TextField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_text.textfieldconfig.html
 [doc_FieldConfig_TextareaField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_textarea.textareafieldconfig.html
 [doc_FieldConfig_VariantField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_variant.variantfieldconfig.html

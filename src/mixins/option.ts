@@ -5,6 +5,7 @@ import {SelectiveEditor} from '../selective/editor';
 import {classMap} from 'lit-html/directives/class-map';
 import {ifDefined} from 'lit-html/directives/if-defined';
 import {repeat} from 'lit-html/directives/repeat';
+import {styleMap} from 'lit-html/directives/style-map';
 
 /**
  * Orientation for colors gradient.
@@ -110,13 +111,18 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
       return false;
     }
 
-    styleForOptionDot(config: OptionUIConfig, option: Option): string {
+    stylesForOptionDot(
+      config: OptionUIConfig,
+      option: Option
+    ): Record<string, string> {
       if (option.color) {
-        return `background-color: ${option.color};`;
+        return {
+          backgroundColor: option.color,
+        };
       }
 
       if (!option.gradient || !option.gradient.colors.length) {
-        return '';
+        return {};
       }
 
       const gradient = option.gradient;
@@ -154,9 +160,28 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
         breakpoints.push(`${gradient.colors[gradient.colors.length - 1]} 100%`);
       }
 
-      return `background: linear-gradient(${orientationAngle}, ${breakpoints.join(
-        ', '
-      )});`;
+      return {
+        background: `linear-gradient(${orientationAngle}, ${breakpoints.join(
+          ', '
+        )})`,
+      };
+    }
+
+    templateColorSwatch(
+      editor: SelectiveEditor,
+      data: DeepObject,
+      config: OptionUIConfig,
+      option: Option
+    ): TemplateResult {
+      if (!option.color && !option.gradient) {
+        return html``;
+      }
+
+      return html`<div
+        class="selective__swatch"
+        aria-label=${this.ariaLabelForOptionDot(config, option)}
+        style=${styleMap(this.stylesForOptionDot(config, option))}
+      ></div>`;
     }
 
     templateOption(
@@ -165,6 +190,15 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
       config: OptionUIConfig,
       option: Option
     ): TemplateResult {
+      let icon = '';
+      if (config.isOptionSelected(option)) {
+        icon = config.isMulti ? 'check_box' : 'radio_button_checked';
+      } else {
+        icon = config.isMulti
+          ? 'check_box_outline_blank'
+          : 'radio_button_unchecked';
+      }
+
       return html`<div
         class=${classMap(this.classesForOption(config, option))}
         aria-checked=${config.isOptionSelected(option)}
@@ -172,11 +206,8 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
         role=${config.isMulti ? 'checkbox' : 'radio'}
         @click=${config.handleInput}
       >
-        <div
-          class="selective__options__option__swatch"
-          aria-label=${this.ariaLabelForOptionDot(config, option)}
-          style=${this.styleForOptionDot(config, option)}
-        ></div>
+        <span class="material-icons">${icon}</span>
+        ${this.templateColorSwatch(editor, data, config, option)}
         <label>${option.label || '(Empty)'}</label>
       </div>`;
     }

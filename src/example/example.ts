@@ -1,5 +1,6 @@
 import {
   CheckboxField,
+  CheckboxMultiField,
   ColorField,
   DateField,
   DatetimeField,
@@ -9,6 +10,7 @@ import {
   MatchRule,
   NumberField,
   PatternRule,
+  RadioField,
   RangeRule,
   RequireRule,
   SelectiveEditor,
@@ -20,7 +22,6 @@ import {
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from '../selective/events';
 import {FieldConfig, FieldConstructor} from '../selective/field';
 import {RuleConstructor} from '../selective/validationRules';
-import {SelectField} from '../selective/field/select';
 import {autoDeepObject} from '../utility/deepObject';
 import merge from 'lodash.merge';
 
@@ -45,13 +46,14 @@ const editorConfig = merge(
   {
     fieldTypes: {
       checkbox: (CheckboxField as unknown) as FieldConstructor,
+      checkboxMulti: (CheckboxMultiField as unknown) as FieldConstructor,
       color: (ColorField as unknown) as FieldConstructor,
       date: (DateField as unknown) as FieldConstructor,
       datetime: (DatetimeField as unknown) as FieldConstructor,
       group: (GroupField as unknown) as FieldConstructor,
       list: (ListField as unknown) as FieldConstructor,
       number: (NumberField as unknown) as FieldConstructor,
-      select: (SelectField as unknown) as FieldConstructor,
+      radio: (RadioField as unknown) as FieldConstructor,
       text: (TextField as unknown) as FieldConstructor,
       textarea: (TextareaField as unknown) as FieldConstructor,
       time: (TimeField as unknown) as FieldConstructor,

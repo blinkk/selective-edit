@@ -133,7 +133,7 @@
   display: flex
   flex-flow: row
 
-.selective__options__option__swatch
+.selective__swatch
   background-repeat: no-repeat
   border: 1px solid $color-dark-border
   border-radius: 50%
@@ -153,14 +153,8 @@
   .selective__options__option--multiple &
     border-color: $color-light-border
 
-  .selective__options__option--selected &
-    background-color: $color-dark-border
-    box-shadow: 0px 0px 0px 2px $color-back, 0px 0px 0px (2px + 2px) $color-dark-border
-
-  .selective__options__option--selected.selective__options__option--low_contrast &
-    box-shadow: 0px 0px 0px 2px $color-back, 0px 0px 0px (2px + 2px) $color-dark-border
-
-
+@import './field/_checkbox'
+@import './field/_checkboxMulti'
 @import './field/_group'
 @import './field/_list'
-@import './field/_select'
+@import './field/_radio'
