@@ -203,8 +203,15 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
         class=${classMap(this.classesForOption(config, option))}
         aria-checked=${config.isOptionSelected(option)}
         data-value=${option.value}
+        tabindex="0"
         role=${config.isMulti ? 'checkbox' : 'radio'}
         @click=${config.handleInput}
+        @keypress=${(evt: KeyboardEvent) => {
+          if (evt.code === 'Space') {
+            evt.preventDefault();
+            config.handleInput(evt);
+          }
+        }}
       >
         <span class="material-icons">${icon}</span>
         ${this.templateColorSwatch(editor, data, config, option)}
