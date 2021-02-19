@@ -41,9 +41,7 @@
     "description": "Fields are varied depending on choice.",
     "_variant": "simple"
   },
-  "options": [
-    "fog"
-  ],
+  "style": "fog",
   "skyColors": [],
   "clouds": [
     {
@@ -155,10 +153,10 @@
       ]
     },
     {
-      "type": "select",
-      "key": "options",
-      "label": "Select single",
-      "help": "Cloud options.",
+      "type": "radio",
+      "key": "style",
+      "label": "Cloud style",
+      "help": "Cloud style.",
       "options": [
         {
           "label": "Fog",
@@ -175,11 +173,10 @@
       ]
     },
     {
-      "type": "select",
+      "type": "checkboxMulti",
       "key": "skyColors",
-      "label": "Select multi",
-      "help": "Sky colors.",
-      "isMulti": true,
+      "label": "Sky colors",
+      "help": "Colors in the sky right now.",
       "options": [
         {
           "label": "Cloudy sky",
