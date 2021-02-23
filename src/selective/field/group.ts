@@ -27,7 +27,7 @@ export interface GroupFieldConfig extends FieldConfig {
    * If no fields are provided the default list of preview keys will be
    * used to find sane default values to preview.
    */
-  preview_fields?: Array<string>;
+  previewFields?: Array<string>;
 }
 
 export class GroupField extends Field {
@@ -177,14 +177,14 @@ export class GroupField extends Field {
    * @param data Data provided to render the template.
    */
   templatePreview(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    if (!this.config.preview_fields) {
+    if (!this.config.previewFields) {
       return html`${this.templateHelp(editor, data)}`;
     }
 
     return html`${this.templateHelp(editor, data)}
       <div class="selective__field__preview">
         ${repeat(
-          this.config.preview_fields,
+          this.config.previewFields,
           key => key,
           key => {
             return this.templatePreviewField(editor, data, key);
