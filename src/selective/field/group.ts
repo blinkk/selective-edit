@@ -16,6 +16,8 @@ export interface GroupFieldConfig extends FieldConfig {
   fields?: Array<FieldConfig>;
   /**
    * Is the group expanded to show the fields?
+   *
+   * Set to `true` to expand the group by default.
    */
   isExpanded?: boolean;
   /**
@@ -24,8 +26,7 @@ export interface GroupFieldConfig extends FieldConfig {
    * When showing a preview of the group, use these field keys to determine
    * the value to show for the preview.
    *
-   * If no fields are provided the default list of preview keys will be
-   * used to find sane default values to preview.
+   * If no fields are no preview will be shown for the group when collapsed.
    */
   previewFields?: Array<string>;
 }

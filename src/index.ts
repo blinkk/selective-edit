@@ -7,23 +7,30 @@ export {SelectiveEditor, EditorConfig, GlobalConfig} from './selective/editor';
 export {Types} from './selective/types';
 
 /**
- * Selective Fields
+ * Selective Generic Field
  */
 export {Field} from './selective/field';
 export {FieldComponent, FieldConfig, FieldConstructor} from './selective/field';
-export {CheckboxField} from './selective/field/checkbox';
-export {CheckboxMultiField} from './selective/field/checkboxMulti';
-export {ColorField} from './selective/field/color';
-export {DateField} from './selective/field/date';
-export {DatetimeField} from './selective/field/datetime';
-export {GroupField} from './selective/field/group';
-export {ListField} from './selective/field/list';
-export {NumberField} from './selective/field/number';
-export {RadioField} from './selective/field/radio';
-export {TextField} from './selective/field/text';
-export {TextareaField} from './selective/field/textarea';
-export {TimeField} from './selective/field/time';
-export {VariantField} from './selective/field/variant';
+
+/**
+ * Selective Fields
+ */
+export {CheckboxField, CheckboxFieldConfig} from './selective/field/checkbox';
+export {
+  CheckboxMultiField,
+  CheckboxMultiFieldConfig,
+} from './selective/field/checkboxMulti';
+export {ColorField, ColorFieldConfig} from './selective/field/color';
+export {DateField, DateFieldConfig} from './selective/field/date';
+export {DatetimeField, DatetimeFieldConfig} from './selective/field/datetime';
+export {GroupField, GroupFieldConfig} from './selective/field/group';
+export {ListField, ListFieldConfig} from './selective/field/list';
+export {NumberField, NumberFieldConfig} from './selective/field/number';
+export {RadioField, RadioFieldConfig} from './selective/field/radio';
+export {TextField, TextFieldConfig} from './selective/field/text';
+export {TextareaField, TextAreaFieldConfig} from './selective/field/textarea';
+export {TimeField, TimeFieldConfig} from './selective/field/time';
+export {VariantField, VariantFieldConfig} from './selective/field/variant';
 
 /**
  * Selective Validation Rules
