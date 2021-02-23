@@ -112,13 +112,11 @@ export class ListField
           this.usingAutoFields = true;
 
           // Auto-guess fields based on the first item in the list.
-          const autoFields = new this.types.globals.AutoFieldsCls(
-            this.config.autoFields || {}
-          );
+          const autoFields = new this.types.globals.AutoFieldsCls({});
           fieldConfigs = autoFields.guessFields(value);
 
           // Store the the auto-guessed configs for new list items.
-          this.config?.set('fields', fieldConfigs);
+          this.config.fields = fieldConfigs;
         }
 
         const fields = this.createFields(fieldConfigs);

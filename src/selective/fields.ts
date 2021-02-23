@@ -1,4 +1,4 @@
-import {FieldComponent, FieldConfig} from './field';
+import {FieldComponent, FieldConfig, InternalFieldConfig} from './field';
 import {GlobalConfig, SelectiveEditor} from './editor';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
@@ -13,7 +13,7 @@ import merge from 'lodash.merge';
 import {repeat} from 'lit-html/directives/repeat';
 
 export interface FieldsConfig {
-  fields?: Array<FieldConfig>;
+  fields?: Array<FieldConfig & InternalFieldConfig>;
   isGuessed?: boolean;
   parentKey: string;
   preview_field?: string;
@@ -22,7 +22,7 @@ export interface FieldsConfig {
 
 export interface FieldsComponent {
   config: FieldsConfig;
-  addField(fieldConfig: FieldConfig): void;
+  addField(fieldConfig: FieldConfig & InternalFieldConfig): void;
   allowSimple: boolean;
   isClean: boolean;
   isValid: boolean;
@@ -77,7 +77,7 @@ export class Fields
     }
   }
 
-  addField(fieldConfig: FieldConfig) {
+  addField(fieldConfig: FieldConfig & InternalFieldConfig) {
     fieldConfig.parentKey = this.config.parentKey;
     fieldConfig.isGuessed = this.config.isGuessed;
 

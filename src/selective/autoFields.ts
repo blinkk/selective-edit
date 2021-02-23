@@ -1,5 +1,6 @@
 import {DataType} from '../utility/dataType';
 import {FieldConfig} from './field';
+import {ListFieldConfig} from './field/list';
 
 export interface AutoFieldsConfig {
   ignoreKeys?: Array<string>;
@@ -116,7 +117,7 @@ export class AutoFields implements AutoFieldsComponent {
     }
 
     if (fieldType === 'list') {
-      fieldConfig.fields = this.deepGuess(data);
+      (fieldConfig as ListFieldConfig).fields = this.deepGuess(data);
     }
 
     return fieldConfig;

@@ -20,7 +20,11 @@ import {
   VariantField,
 } from '../index';
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from '../selective/events';
-import {FieldConfig, FieldConstructor} from '../selective/field';
+import {
+  FieldConfig,
+  FieldConstructor,
+  InternalFieldConfig,
+} from '../selective/field';
 import {RuleConstructor} from '../selective/validationRules';
 import {autoDeepObject} from '../utility/deepObject';
 import merge from 'lodash.merge';
@@ -91,7 +95,7 @@ document.addEventListener(EVENT_RENDER_COMPLETE, () => {
 guessEl.addEventListener('click', () => {
   const configs = exampleSelective.guessFields();
 
-  const deepPrettyFields = (configs: Array<FieldConfig>) => {
+  const deepPrettyFields = (configs: Array<InternalFieldConfig>) => {
     const prettyFields = [];
     for (const config of configs) {
       if (config.fields) {

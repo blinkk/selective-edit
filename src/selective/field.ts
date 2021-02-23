@@ -32,11 +32,6 @@ export interface FieldConfig {
    */
   help?: string | Record<string, string>;
   /**
-   * Set by the editor when the field was guessed by the auto
-   * fields utility.
-   */
-  isGuessed?: boolean;
-  /**
    * Key to reference the field in the data.
    */
   key: string;
@@ -44,11 +39,6 @@ export interface FieldConfig {
    * Label for the field in the editor.
    */
   label?: string;
-  /**
-   * Set by the editor to allow for full reference to the
-   * current field structure.
-   */
-  parentKey?: string;
   /**
    * Type of field. Used to create the correct field in the
    * editor UI.
@@ -68,6 +58,30 @@ export interface FieldConfig {
   [x: string]: any;
 }
 
+/**
+ * Protected values for the field config.
+ *
+ * These are reserved for internal usage and should not be overwritten
+ * by individual field configurations.
+ *
+ * When adding new protected configs, they cannot be required as that would
+ * break the interface for the base `FieldConfig`.
+ */
+export interface FieldProtectedConfig {
+  /**
+   * Set by the editor when the field was guessed by the auto
+   * fields utility.
+   */
+  isGuessed?: boolean;
+  /**
+   * Set by the editor to allow for full reference to the
+   * current field structure.
+   */
+  parentKey?: string;
+}
+
+export type InternalFieldConfig = FieldConfig & FieldProtectedConfig;
+
 export interface FieldComponent {
   template: Template;
   key: string;
@@ -83,13 +97,13 @@ export interface FieldComponent {
 
 export type FieldConstructor = (
   types: Types,
-  config: FieldConfig
+  config: InternalFieldConfig
 ) => FieldComponent;
 
 export class Field
   extends UuidMixin(DataMixin(Base))
   implements FieldComponent {
-  config: FieldConfig;
+  config: InternalFieldConfig;
   globalConfig: GlobalConfig;
   protected currentValue?: any;
   protected isLocked: boolean;
@@ -104,7 +118,7 @@ export class Field
 
   constructor(
     types: Types,
-    config: FieldConfig,
+    config: InternalFieldConfig,
     globalConfig: GlobalConfig,
     fieldType = 'unknown'
   ) {
