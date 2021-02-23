@@ -51,11 +51,6 @@ export interface FieldConfig {
    * help text.
    */
   validation?: Array<RuleConfig> | Record<string, Array<RuleConfig>>;
-
-  /**
-   * Specific fields can index any property.
-   */
-  [x: string]: any;
 }
 
 /**

@@ -28,6 +28,7 @@ import {
 import {RuleConstructor} from '../selective/validationRules';
 import {autoDeepObject} from '../utility/deepObject';
 import merge from 'lodash.merge';
+import {ListFieldConfig} from '../selective/field/list';
 
 const configEl = document.querySelector('#config') as HTMLTextAreaElement;
 const dataEl = document.querySelector('#data') as HTMLTextAreaElement;
@@ -98,8 +99,10 @@ guessEl.addEventListener('click', () => {
   const deepPrettyFields = (configs: Array<InternalFieldConfig>) => {
     const prettyFields = [];
     for (const config of configs) {
-      if (config.fields) {
-        config.fields = deepPrettyFields(config.fields);
+      if ((config as ListFieldConfig).fields) {
+        (config as ListFieldConfig).fields = deepPrettyFields(
+          (config as ListFieldConfig).fields || []
+        );
       }
       config.parentKey = undefined;
       config.isGuessed = undefined;
