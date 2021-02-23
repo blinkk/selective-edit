@@ -46,8 +46,8 @@ export class NumberField extends Field {
           id="${this.uid}"
           placeholder=${this.config.placeholder || ''}
           @input=${this.handleInput.bind(this)}
-          max=${this.config.max || ''}
-          min=${this.config.min || ''}
+          max=${this.config.max === undefined ? '' : this.config.max}
+          min=${this.config.min === undefined ? '' : this.config.min}
           step=${this.config.step || 1}
           value=${value}
         />
