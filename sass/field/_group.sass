@@ -1,16 +1,25 @@
 .selective__field__type__group
   > .selective__field__header
     display: flex
-    flex-flow: row-reverse
+    cursor: pointer
+    flex-flow: row
     justify-content: space-between
 
     > .selective__field__label
       flex-grow: 1
 
-.selective__field__type__group
-  > .selective__field__header
-    cursor: pointer
-
-    > .selective__field__label
       label
         cursor: pointer
+
+  > .selective__field__input__structure
+    > .selective__field__preview
+      border-left: $border-size solid $color-light-border
+      color: $color-text-light
+      font-size: $font-size-small
+      padding: $pad 0 $pad $pad
+
+  &--expanded
+    > .selective__field__input__structure
+      > .selective__fields
+        border-left: $border-size solid $color-dark-border
+        padding: $pad/2 0 $pad/2 $pad

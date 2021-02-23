@@ -6,6 +6,8 @@ import {FieldsComponent} from '../fields';
 import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
 import merge from 'lodash.merge';
+import {repeat} from 'lit-html/directives/repeat';
+import {findPreviewValue} from '../../utility/preview';
 
 export interface GroupFieldConfig extends FieldConfig {
   /**
@@ -16,6 +18,16 @@ export interface GroupFieldConfig extends FieldConfig {
    * Is the group expanded to show the fields?
    */
   isExpanded?: boolean;
+  /**
+   * Preview field keys.
+   *
+   * When showing a preview of the group, use these field keys to determine
+   * the value to show for the preview.
+   *
+   * If no fields are provided the default list of preview keys will be
+   * used to find sane default values to preview.
+   */
+  preview_fields?: Array<string>;
 }
 
 export class GroupField extends Field {
@@ -32,6 +44,15 @@ export class GroupField extends Field {
     super(types, config, globalConfig, fieldType);
     this.config = config;
     this.usingAutoFields = false;
+  }
+
+  classesForField(): Record<string, boolean> {
+    const classes = super.classesForField();
+
+    classes[`selective__field__type__${this.fieldType}--expanded`] =
+      this.config.isExpanded || false;
+
+    return classes;
   }
 
   protected createFields(fieldConfigs: Array<any>): FieldsComponent {
@@ -73,7 +94,7 @@ export class GroupField extends Field {
 
     actions.push(html`<div class="selective__action selective__action__expand">
       <i class="material-icons"
-        >${this.config.isExpanded ? 'expand_less' : 'expand_more'}</i
+        >${this.config.isExpanded ? 'expand_more' : 'chevron_right'}</i
       >
     </div>`);
     return html`<div class="selective__field__actions">${actions}</div>`;
@@ -114,7 +135,7 @@ export class GroupField extends Field {
    */
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     if (!this.config.isExpanded) {
-      return this.templateHelp(editor, data);
+      return this.templatePreview(editor, data);
     }
 
     this.ensureFields();
@@ -145,5 +166,61 @@ export class GroupField extends Field {
       return this.originalValue;
     }
     return merge({}, this.originalValue, this.fields.value);
+  }
+
+  /**
+   * Template for rendering the field preview.
+   *
+   * When the group is collapsed, show a set of previews for a few values in the group.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templatePreview(editor: SelectiveEditor, data: DeepObject): TemplateResult {
+    if (!this.config.preview_fields) {
+      return html`${this.templateHelp(editor, data)}`;
+    }
+
+    return html`${this.templateHelp(editor, data)}
+      <div class="selective__field__preview">
+        ${repeat(
+          this.config.preview_fields,
+          key => key,
+          key => {
+            return this.templatePreviewField(editor, data, key);
+          }
+        )}
+      </div>`;
+  }
+
+  /**
+   * Template for rendering the field preview.
+   *
+   * When the group is collapsed, show a set of previews for a few values in the group.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  templatePreviewField(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    fieldKey: string
+  ): TemplateResult {
+    let previewLabel = fieldKey;
+    for (const fieldConfig of this.config.fields || []) {
+      if (fieldConfig.key === fieldKey) {
+        previewLabel = fieldConfig.label || previewLabel;
+        break;
+      }
+    }
+
+    return html`<div class="selective__field__preview__line">
+      <strong>${previewLabel}:</strong> ${findPreviewValue(
+        this.currentValue || {},
+        [fieldKey],
+        fieldKey
+      )}
+    </div>`;
   }
 }
