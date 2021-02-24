@@ -9,8 +9,18 @@ export {Types} from './selective/types';
 /**
  * Selective Generic Field
  */
-export {Field} from './selective/field';
-export {FieldComponent, FieldConfig, FieldConstructor} from './selective/field';
+export {
+  Field,
+  FieldComponent,
+  FieldConfig,
+  FieldConstructor,
+} from './selective/field';
+export {
+  Fields,
+  FieldsComponent,
+  FieldsConfig,
+  FieldsConstructor,
+} from './selective/fields';
 
 /**
  * Selective Fields
