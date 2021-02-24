@@ -129,7 +129,7 @@ export class Validation implements ValidationComponent {
     for (const rule of this.rules.getRulesForZone(zoneKey)) {
       const result = rule.validate(value);
       if (result) {
-        this.addResult(new ValidationResult(result, rule.level));
+        this.addResult(new ValidationResult(result, rule.level), zoneKey);
         hasErrors = true;
       }
     }

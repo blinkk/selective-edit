@@ -251,9 +251,10 @@ export class Field
         this.validation.validate(this.currentValue);
       } else {
         // Complex field, validate each zone separately.
+        const value = this.currentValue || {};
         for (const zoneKey of Object.keys(this.zoneToKey)) {
           const valueKey = this.zoneToKey[zoneKey];
-          this.validation.validate(this.currentValue[valueKey], zoneKey);
+          this.validation.validate(value[valueKey], zoneKey);
         }
       }
     }
