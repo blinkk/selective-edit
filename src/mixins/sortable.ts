@@ -55,7 +55,7 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
     if (evt.dataTransfer?.types.includes(this.transferType)) {
       evt.preventDefault();
       evt.stopPropagation();
-      return target as HTMLElement;
+      return findParentDraggable(target as HTMLElement);
     }
 
     return null;
@@ -106,7 +106,14 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
 
   handleDragOver(evt: DragEvent): void {
     // Find the target and prevent the defaults if needed.
-    this.findDragTarget(evt);
+    const target = this.findDragTarget(evt);
+    if (!target) {
+      return;
+    }
+
+    if (evt.dataTransfer) {
+      evt.dataTransfer.dropEffect = 'move';
+    }
   }
 
   handleDragStart(evt: DragEvent): void {

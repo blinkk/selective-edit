@@ -543,6 +543,24 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
 
     // TODO: Check if allowed to delete items.
 
+    const preActions = [];
+    const postActions = [];
+
+    preActions.push(html`<div class="selective__list__item__drag">
+      <i class="material-icons">drag_indicator</i>
+    </div>`);
+
+    postActions.push(html`<div
+      class="selective__field__action selective__list__item__delete tooltip--left"
+      data-item-uid=${item.uid}
+      @click=${(evt: Event) => {
+        this.field.handleDeleteItem(evt, index);
+      }}
+      title="Delete item"
+    >
+      <i class="material-icons">delete</i>
+    </div>`);
+
     return html` <div
       class="selective__list__item selective__list__item--simple selective__sortable"
       draggable="true"
@@ -553,20 +571,9 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       @dragstart=${sortable.handleDragStart.bind(sortable)}
       @drop=${sortable.handleDrop.bind(sortable)}
     >
-      <div class="selective__list__item__drag">
-        <i class="material-icons">drag_indicator</i>
-      </div>
+      <div class="selective__field__actions">${preActions}</div>
       ${item.fields.template(editor, data)}
-      <div
-        class="selective__list__item__delete tooltip--left"
-        data-item-uid=${item.uid}
-        @click=${(evt: Event) => {
-          this.field.handleDeleteItem(evt, index);
-        }}
-        title="Delete item"
-      >
-        <i class="material-icons">delete</i>
-      </div>
+      <div class="selective__field__actions">${postActions}</div>
     </div>`;
   }
 }
