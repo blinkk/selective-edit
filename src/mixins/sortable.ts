@@ -73,6 +73,11 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
     const currentIndex = parseInt(target.dataset.index as string);
     const startIndex = parseInt(this.dragOrigin?.dataset.index as string);
 
+    //  Make sure that the event target comes from the main element.
+    if (target !== evt.target) {
+      return;
+    }
+
     // Hovering over self, ignore.
     if (currentIndex === startIndex) {
       return;

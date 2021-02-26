@@ -571,9 +571,13 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       @dragstart=${sortable.handleDragStart.bind(sortable)}
       @drop=${sortable.handleDrop.bind(sortable)}
     >
-      <div class="selective__field__actions">${preActions}</div>
+      <div class="selective__field__actions selective__field__actions--pre">
+        ${preActions}
+      </div>
       ${item.fields.template(editor, data)}
-      <div class="selective__field__actions">${postActions}</div>
+      <div class="selective__field__actions selective__field__actions--post">
+        ${postActions}
+      </div>
     </div>`;
   }
 }
