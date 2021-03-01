@@ -20,12 +20,6 @@ export interface RuleConfig {
   type: string;
 }
 
-export interface GeneralRuleConfig extends RuleConfig {
-  // Allow the generic rule config to accept all of the
-  // sub config properties.
-  [x: string]: any;
-}
-
 /**
  * Validation rules define the validation on the editor fields.
  *
@@ -67,11 +61,6 @@ export interface RuleComponent {
    * @param value Current value of the field.
    */
   validate(value: any): string | null;
-
-  /**
-   * Rules can define any properties or methods they need.
-   */
-  [x: string]: any;
 }
 
 export type RuleConstructor = (types: Types) => RuleComponent;
@@ -85,7 +74,7 @@ export class Rules {
     this.types = ruleTypes;
   }
 
-  addRuleFromConfig(ruleConfig: GeneralRuleConfig, zoneKey = DEFAULT_ZONE_KEY) {
+  addRuleFromConfig(ruleConfig: RuleConfig, zoneKey = DEFAULT_ZONE_KEY) {
     const newRule = this.types.newFromKey(ruleConfig.type, ruleConfig);
     if (!newRule) {
       console.error(

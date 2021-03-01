@@ -34,7 +34,21 @@ export interface ListFieldConfig extends FieldConfig {
 }
 
 export interface ListFieldComponent extends FieldComponent {
+  /**
+   * Allow simple display for fields in the list.
+   *
+   * For complex fields it is better to not allow the simple view
+   * since it makes the list crowded and hard to read. (ex: media field)
+   */
   allowSimple: boolean;
+  /**
+   * Can the list add more items?
+   */
+  allowAdd?: boolean;
+  /**
+   * Can the list remove items?
+   */
+  allowRemove?: boolean;
   handleDeleteItem(evt: Event, index: number): void;
 }
 
@@ -78,6 +92,28 @@ export class ListField
     this.usingAutoFields = false;
     this.ListItemCls = ListFieldItem;
     this.sortableUi.listeners.add('sort', this.handleSort.bind(this));
+  }
+
+  get allowAdd(): boolean {
+    // Check if validation rules allow for adding more items.
+    const value = this.value;
+    for (const rule of this.rules.getRulesForZone()) {
+      if (!rule.allowAdd(value)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  get allowRemove(): boolean {
+    // Check if validation rules allow for removing items.
+    const value = this.value;
+    for (const rule of this.rules.getRulesForZone()) {
+      if (!rule.allowRemove(value)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -127,7 +163,7 @@ export class ListField
         for (const field of fields.fields) {
           field.updateOriginal(
             editor,
-            autoDeepObject(value || fields.defaultValue)
+            autoDeepObject(value || fields.guessDefaultValue())
           );
         }
 
@@ -147,9 +183,8 @@ export class ListField
     // updated correctly so we need to manually call the data update.
     fields.updateOriginal(editor, data);
     for (const field of fields.fields) {
-      field.updateOriginal(editor, autoDeepObject(fields.defaultValue));
+      field.updateOriginal(editor, autoDeepObject(fields.guessDefaultValue()));
     }
-
     items.push(new ListFieldItem(this, fields));
     this.render();
   }
@@ -245,22 +280,40 @@ export class ListField
 
   get isClean(): boolean {
     // If there are no items, nothing has changed.
-    if (!this.items) {
+    if (this.items === null) {
       return true;
     }
-    for (const item of this.items) {
+
+    // When locked, the field is automatically considered dirty.
+    if (this.isLocked) {
+      return false;
+    }
+
+    // Check for a change in length.
+    if (
+      this.items !== null &&
+      this.originalValue &&
+      this.originalValue.length != this.items.length
+    ) {
+      return false;
+    }
+
+    // Check if all of the items are clean.
+    for (const item of this.items || []) {
       if (!item.fields.isClean) {
         return false;
       }
     }
+
     return true;
   }
 
   get isValid(): boolean {
     // If there are no items, nothing has changed.
-    if (!this.items) {
+    if (this.items === null) {
       return true;
     }
+
     for (const item of this.items) {
       if (!item.fields.isValid) {
         return false;
@@ -283,25 +336,13 @@ export class ListField
   }
 
   templateFooter(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    // Check if validation rules allow for adding more items.
-    const value = this.value;
-    const rules = this.rules.getRulesForZone();
-
-    let allowMore = true;
-    for (const rule of rules) {
-      if (!rule.allowMore(value)) {
-        allowMore = false;
-        break;
-      }
-    }
-
-    if (!allowMore) {
+    if (!this.allowAdd) {
       return html``;
     }
 
     return html`<div class="selective__field__actions">
       <button
-        class="selective__button--add"
+        class="selective__action--add"
         @click=${(evt: Event) => {
           this.handleAddItem(evt, editor, data);
         }}
@@ -387,7 +428,7 @@ export class ListField
             const itemValue = new DeepObject(
               index < this.originalValue?.length || 0
                 ? this.originalValue[index]
-                : item.fields.defaultValue
+                : item.fields.guessDefaultValue()
             );
             return item.template(editor, itemValue, item, index);
           }
@@ -486,17 +527,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       >
         ${this.fields.templatePreview(editor, data)}
       </div>
-      <div
-        class="selective__list__item__delete tooltip--left"
-        data-item-uid=${item.uid}
-        @click=${(evt: Event) => {
-          this.field.handleDeleteItem(evt, index);
-        }}
-        aria-label="Delete item"
-        data-tip="Delete item"
-      >
-        <i class="material-icons icon icon--delete">remove_circle</i>
-      </div>
+      ${this.templateRemove(editor, data, item, index)}
     </div>`;
   }
 
@@ -517,19 +548,32 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       @dragstart=${sortable.handleDragStart.bind(sortable)}
       @drop=${sortable.handleDrop.bind(sortable)}
     >
-      <div
-        class="selective__list__fields__label ${!item.fields.label
-          ? 'selective__list__fields__label--empty'
-          : ''}"
-        data-item-uid=${item.uid}
-        @click=${this.handleCollapseItem.bind(this)}
-      >
-        ${item.fields.label}
-      </div>
-
       <div class="selective__list__fields">
         ${item.fields.template(editor, data)}
       </div>
+    </div>`;
+  }
+
+  templateRemove(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    item: ListItemComponent,
+    index: number
+  ): TemplateResult {
+    if (!this.field.allowRemove) {
+      return html``;
+    }
+
+    return html`<div
+      class="selective__action--delete selective__tooltip--left"
+      data-item-uid=${item.uid}
+      @click=${(evt: Event) => {
+        this.field.handleDeleteItem(evt, index);
+      }}
+      aria-label="Delete item"
+      data-tip="Delete item"
+    >
+      <i class="material-icons icon icon--delete">remove_circle</i>
     </div>`;
   }
 
@@ -550,16 +594,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       <i class="material-icons">drag_indicator</i>
     </div>`);
 
-    postActions.push(html`<div
-      class="selective__field__action selective__list__item__delete tooltip--left"
-      data-item-uid=${item.uid}
-      @click=${(evt: Event) => {
-        this.field.handleDeleteItem(evt, index);
-      }}
-      title="Delete item"
-    >
-      <i class="material-icons">delete</i>
-    </div>`);
+    postActions.push(this.templateRemove(editor, data, item, index));
 
     return html` <div
       class="selective__list__item selective__list__item--simple selective__sortable"

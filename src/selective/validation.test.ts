@@ -1,6 +1,6 @@
+import {LengthRule, LengthRuleConfig} from './rule/length';
 import {RuleComponent, RuleConstructor, Rules} from './validationRules';
 import {ClassManager} from '../utility/classes';
-import {LengthRule} from './rule/length';
 import {Validation} from './validation';
 import test from 'ava';
 
@@ -21,7 +21,7 @@ test('validation errors are stored when there are errors', t => {
       value: 3,
       message: failMessage,
     },
-  });
+  } as LengthRuleConfig);
 
   const validation = new Validation(rules);
 

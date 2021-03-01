@@ -27,6 +27,7 @@ export class TextField extends Field {
 
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const value = this.currentValue || '';
+
     return html`${this.templateHelp(editor, data)}
       <div class=${classMap(this.classesForInput())}>
         <input

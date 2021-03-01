@@ -1,6 +1,6 @@
+import {LengthRule, LengthRuleConfig} from './rule/length';
 import {RuleComponent, RuleConstructor, Rules} from './validationRules';
 import {ClassManager} from '../utility/classes';
-import {LengthRule} from './rule/length';
 import test from 'ava';
 
 test('rules can add validation rules', t => {
@@ -20,7 +20,7 @@ test('rules can add validation rules', t => {
       value: 3,
       message: failMessage,
     },
-  });
+  } as LengthRuleConfig);
 
   t.is(rules.getRulesForZone().length, 1);
 });

@@ -580,6 +580,12 @@ export class Field
     // Clears the validation each time the original value is updated.
     this.validation = undefined;
 
+    // Where there is no key, just assume that the current value is undefined.
+    // if (!this.key) {
+    //   this.currentValue = undefined;
+    //   return;
+    // }
+
     let newValue = data.get(this.key);
 
     const isClean = this.isClean;

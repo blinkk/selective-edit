@@ -8,7 +8,7 @@ export class DeepObject {
   obj: Record<string, any>;
 
   constructor(obj?: Record<string, any>) {
-    this.obj = obj || {};
+    this.obj = obj === undefined ? {} : obj;
   }
 
   /**

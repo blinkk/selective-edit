@@ -45,13 +45,17 @@ export {VariantField, VariantFieldConfig} from './selective/field/variant';
 /**
  * Selective Validation Rules
  */
-export {Rule} from './selective/validationRules';
-export {RuleComponent, RuleConstructor} from './selective/validationRules';
-export {LengthRule} from './selective/rule/length';
-export {MatchRule} from './selective/rule/match';
-export {PatternRule} from './selective/rule/pattern';
-export {RangeRule} from './selective/rule/range';
-export {RequireRule} from './selective/rule/require';
+export {
+  Rule,
+  RuleComponent,
+  RuleConstructor,
+  RuleConfig,
+} from './selective/validationRules';
+export {LengthRule, LengthRuleConfig} from './selective/rule/length';
+export {MatchRule, MatchRuleConfig} from './selective/rule/match';
+export {PatternRule, PatternRuleConfig} from './selective/rule/pattern';
+export {RangeRule, RangeRuleConfig} from './selective/rule/range';
+export {RequireRule, RequireRuleConfig} from './selective/rule/require';
 
 /**
  * Selective Utilities

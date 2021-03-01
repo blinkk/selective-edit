@@ -37,6 +37,17 @@ export class NumberField extends Field {
     this.config = config;
   }
 
+  /**
+   * Handle when the input changes value.
+   *
+   * @param evt Input event from changing value.
+   */
+  handleInput(evt: Event) {
+    const target = evt.target as HTMLInputElement;
+    this.currentValue = parseFloat(target.value) || undefined;
+    this.render();
+  }
+
   templateInput(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const value = this.currentValue || '';
     return html`${this.templateHelp(editor, data)}

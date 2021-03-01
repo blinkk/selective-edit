@@ -24,8 +24,12 @@ export interface FieldsComponent {
   config: FieldsConfig;
   addField(fieldConfig: FieldConfig & InternalFieldConfig): void;
   allowSimple: boolean;
+  fields: Array<FieldComponent>;
   isClean: boolean;
+  isSimple: boolean;
   isValid: boolean;
+  guessDefaultValue(): string | Record<string, any>;
+  lock(): void;
   template: Template;
   templatePreview: Template;
   updateOriginal(
@@ -33,11 +37,8 @@ export interface FieldsComponent {
     data: DeepObject,
     deep?: boolean
   ): void;
-
-  /**
-   * Fields can define any properties or methods they need.
-   */
-  [x: string]: any;
+  value: any;
+  unlock(): void;
 }
 
 export interface FieldsConstructor {
@@ -257,7 +258,7 @@ export class Fields
       return null;
     }
 
-    if (this.isSimple && !this.fields[0].key) {
+    if (this.allowSimple && this.isSimple && !this.fields[0].key) {
       return this.fields[0].value;
     }
 
