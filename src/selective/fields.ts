@@ -31,7 +31,7 @@ export interface FieldsComponent {
   guessDefaultValue(): string | Record<string, any>;
   lock(): void;
   template: Template;
-  templatePreview(
+  templatePreviewValue(
     editor: SelectiveEditor,
     data: DeepObject,
     index?: number
@@ -217,7 +217,7 @@ export class Fields
    * @param data Data provided to render the template.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  templatePreview(
+  templatePreviewValue(
     editor: SelectiveEditor,
     data: DeepObject,
     index?: number

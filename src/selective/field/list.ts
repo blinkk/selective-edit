@@ -64,13 +64,12 @@ export interface ListFieldComponent extends FieldComponent {
 }
 
 export interface ListItemComponent {
-  field: ListFieldComponent & SortableFieldComponent;
+  listField: ListFieldComponent & SortableFieldComponent;
   fields: FieldsComponent;
   isExpanded: boolean;
   template: (
     editor: SelectiveEditor,
     data: DeepObject,
-    item: ListItemComponent,
     index: number
   ) => TemplateResult;
   uid: string;
@@ -78,7 +77,7 @@ export interface ListItemComponent {
 
 export interface ListItemConstructor {
   new (
-    field: ListFieldComponent & SortableFieldComponent,
+    listField: ListFieldComponent & SortableFieldComponent,
     fields: FieldsComponent
   ): ListItemComponent;
 }
@@ -178,7 +177,7 @@ export class ListField
           );
         }
 
-        this.items.push(new ListFieldItem(this, fields));
+        this.items.push(new this.ListItemCls(this, fields));
       }
     }
 
@@ -196,7 +195,7 @@ export class ListField
     for (const field of fields.fields) {
       field.updateOriginal(editor, autoDeepObject(fields.guessDefaultValue()));
     }
-    const newItem = new ListFieldItem(this, fields);
+    const newItem = new this.ListItemCls(this, fields);
     newItem.isExpanded = true;
     items.push(newItem);
     this.render();
@@ -306,7 +305,7 @@ export class ListField
     if (
       this.items !== null &&
       this.originalValue &&
-      this.originalValue.length != this.items.length
+      this.originalValue.length !== this.items.length
     ) {
       return false;
     }
@@ -446,13 +445,13 @@ export class ListField
         ${repeat(
           this.items || [],
           item => item.uid,
-          (item: ListItemComponent, index) => {
+          (item, index) => {
             const itemValue = new DeepObject(
               index < this.originalValue?.length || 0
                 ? this.originalValue[index]
                 : item.fields.guessDefaultValue()
             );
-            return item.template(editor, itemValue, item, index);
+            return item.template(editor, itemValue, index);
           }
         )}
         ${this.items?.length ? '' : this.templateEmpty(editor, data, 0)}
@@ -475,58 +474,56 @@ export class ListField
 }
 
 class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
-  field: ListFieldComponent & SortableFieldComponent;
+  listField: ListFieldComponent & SortableFieldComponent;
   fields: FieldsComponent;
   isExpanded: boolean;
 
   constructor(
-    field: ListFieldComponent & SortableFieldComponent,
+    listField: ListFieldComponent & SortableFieldComponent,
     fields: FieldsComponent
   ) {
     super();
-    this.field = field;
+    this.listField = listField;
     this.fields = fields;
     this.isExpanded = false;
   }
 
   handleCollapseItem() {
     this.isExpanded = false;
-    this.field.render();
+    this.listField.render();
   }
 
   handleExpandItem() {
     this.isExpanded = true;
-    this.field.render();
+    this.listField.render();
   }
 
   template(
     editor: SelectiveEditor,
     data: DeepObject,
-    item: ListItemComponent,
     index: number
   ): TemplateResult {
     if (
-      this.field.allowSimple && // The list field allows for simple fields.
-      item.fields.allowSimple && // The fields allows for simple fields.
-      item.fields.isSimple // The fields are simple.
+      this.listField.allowSimple && // The list field allows for simple fields.
+      this.fields.allowSimple && // The fields allows for simple fields.
+      this.fields.isSimple // The fields are simple.
     ) {
-      return this.templateSimple(editor, data, item, index);
+      return this.templateSimple(editor, data, index);
     } else if (this.isExpanded) {
-      return this.templateExpanded(editor, data, item, index);
+      return this.templateExpanded(editor, data, index);
     }
-    return this.templateCollapsed(editor, data, item, index);
+    return this.templateCollapsed(editor, data, index);
   }
 
   templateCollapsed(
     editor: SelectiveEditor,
     data: DeepObject,
-    item: ListItemComponent,
     index: number
   ): TemplateResult {
     // Need to update the original value on the collapsed items.
-    item.fields.updateOriginal(editor, data, true);
-    const canDrag = this.field.length > 1;
-    const sortable = this.field.sortableUi;
+    this.fields.updateOriginal(editor, data, true);
+    const canDrag = this.listField.length > 1;
+    const sortable = this.listField.sortableUi;
     const preActions = [];
     const postActions = [];
 
@@ -536,13 +533,13 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       </div>`);
     }
 
-    postActions.push(this.templateRemove(editor, data, item, index));
+    postActions.push(this.templateRemove(editor, data, index));
 
     return html` <div
       class=${classMap({
         selective__list__item: true,
         'selective__list__item--collapsed': true,
-        'selective__list__item--no-drag': this.field.length <= 1,
+        'selective__list__item--no-drag': this.listField.length <= 1,
         selective__sortable: true,
       })}
       draggable=${canDrag ? 'true' : 'false'}
@@ -561,7 +558,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
         data-item-uid=${this.uid}
         @click=${this.handleExpandItem.bind(this)}
       >
-        ${this.fields.templatePreview(editor, data, index)}
+        ${this.fields.templatePreviewValue(editor, data, index)}
       </div>
       <div class="selective__field__actions selective__field__actions--post">
         ${postActions}
@@ -572,10 +569,9 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
   templateExpanded(
     editor: SelectiveEditor,
     data: DeepObject,
-    item: ListItemComponent,
     index: number
   ): TemplateResult {
-    const sortable = this.field.sortableUi;
+    const sortable = this.listField.sortableUi;
     return html` <div
       class="selective__list__item selective__list__item--expanded selective__sortable"
       data-index=${index}
@@ -588,10 +584,11 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
         class="selective__list__fields__header"
         @click=${this.handleCollapseItem.bind(this)}
       >
-        ${this.fields.templatePreview(editor, data, index)}
+        <span class="material-icons">keyboard_arrow_down</span>
+        ${this.fields.templatePreviewValue(editor, data, index)}
       </div>
       <div class="selective__list__fields">
-        ${item.fields.template(editor, data)}
+        ${this.fields.template(editor, data)}
       </div>
     </div>`;
   }
@@ -599,18 +596,17 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
   templateRemove(
     editor: SelectiveEditor,
     data: DeepObject,
-    item: ListItemComponent,
     index: number
   ): TemplateResult {
-    if (!this.field.allowRemove) {
+    if (!this.listField.allowRemove) {
       return html``;
     }
 
     return html`<div
       class="selective__action selective__action--delete selective__tooltip--left"
-      data-item-uid=${item.uid}
+      data-item-uid=${this.uid}
       @click=${(evt: Event) => {
-        this.field.handleDeleteItem(evt, index);
+        this.listField.handleDeleteItem(evt, index);
       }}
       aria-label="Delete item"
       data-tip="Delete item"
@@ -622,11 +618,10 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
   templateSimple(
     editor: SelectiveEditor,
     data: DeepObject,
-    item: ListItemComponent,
     index: number
   ): TemplateResult {
-    const canDrag = this.field.length > 1;
-    const sortable = this.field.sortableUi;
+    const canDrag = this.listField.length > 1;
+    const sortable = this.listField.sortableUi;
     const preActions = [];
     const postActions = [];
 
@@ -636,7 +631,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       </div>`);
     }
 
-    postActions.push(this.templateRemove(editor, data, item, index));
+    postActions.push(this.templateRemove(editor, data, index));
 
     return html` <div
       class="selective__list__item selective__list__item--simple selective__sortable"
@@ -651,7 +646,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       <div class="selective__field__actions selective__field__actions--pre">
         ${preActions}
       </div>
-      ${item.fields.template(editor, data)}
+      ${this.fields.template(editor, data)}
       <div class="selective__field__actions selective__field__actions--post">
         ${postActions}
       </div>

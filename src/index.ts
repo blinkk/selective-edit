@@ -38,6 +38,8 @@ export {
   ListField,
   ListFieldComponent,
   ListFieldConfig,
+  ListItemComponent,
+  ListItemConstructor,
 } from './selective/field/list';
 export {NumberField, NumberFieldConfig} from './selective/field/number';
 export {RadioField, RadioFieldConfig} from './selective/field/radio';
@@ -64,16 +66,31 @@ export {RequireRule, RequireRuleConfig} from './selective/rule/require';
 /**
  * Selective Utilities
  */
-export {DeepObject} from './utility/deepObject';
+export {DeepObject, autoDeepObject} from './utility/deepObject';
 export {findParentByClassname} from './utility/dom';
 
 /**
  * Selective mixins.
  */
+export {Base} from './mixins/index';
 export {DataMixin} from './mixins/data';
-export {DroppableMixin} from './mixins/droppable';
-export {OptionMixin} from './mixins/option';
-export {SortableMixin} from './mixins/sortable';
+export {
+  DroppableMixin,
+  DroppableFieldComponent,
+  DroppableUi,
+  DroppableUiComponent,
+} from './mixins/droppable';
+export {
+  OptionMixin,
+  Option,
+  OptionUiComponent,
+  OptionUIConfig,
+} from './mixins/option';
+export {
+  SortableMixin,
+  SortableFieldComponent,
+  SortableUi,
+} from './mixins/sortable';
 export {UuidMixin} from './mixins/uuid';
 
 // Cannot use lit-html libraries across different package installs.
