@@ -78,15 +78,55 @@ export interface FieldProtectedConfig {
 export type InternalFieldConfig = FieldConfig & FieldProtectedConfig;
 
 export interface FieldComponent {
+  /**
+   * Template for rendering the field.
+   */
   template: Template;
+  /**
+   * Key to use to retrieve and save the value in the data.
+   */
   key: string;
+  /**
+   * Is the field clean?
+   *
+   * The field is considered clean if there are no changes from the original.
+   *
+   * This is used by the editor to determine if there are changes pending.
+   */
   isClean: boolean;
+  /**
+   * Is the field simple?
+   *
+   * Complex fields usually have multiple inputs. This is used to determine how
+   * the field is shown in non-trivial view. For example, lists will not show a
+   * 'simple' view of list items if it uses a complex field.
+   */
+  isSimple: boolean;
+  /**
+   * Has the field passed all relative validation rules.
+   */
   isValid: boolean;
+  /**
+   * Internal lock for fields that can get messed up. For example list fields.
+   */
   lock(): void;
   render(): void;
   updateOriginal(editor: SelectiveEditor, data: DeepObject): void;
+  /**
+   * Internal unlock for fields that can get messed up. For example list fields.
+   */
   unlock(): void;
+  /**
+   * Unique id value for the field. Usually a shortened form of the UUID.
+   */
+  uid: string;
+  /**
+   * UUID value for the field.
+   */
   uuid: string;
+  /**
+   * Current value of the field.
+   */
   value: any;
 }
 
@@ -238,6 +278,11 @@ export class Field
     }
 
     return stringify(this.currentValue) === stringify(this.originalValue);
+  }
+
+  get isSimple(): boolean {
+    // Normal fields are not complex.
+    return true;
   }
 
   get isValid(): boolean {

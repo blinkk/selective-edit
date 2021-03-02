@@ -131,7 +131,19 @@ export class Fields
    * Checks if the fields are simple and can be simplified in the display.
    */
   get isSimple(): boolean {
-    return this.fields.length <= 1;
+    // Cannot be simple if there are more than one field.
+    if (this.fields.length > 1) {
+      return false;
+    }
+
+    // Allow the field to mark it as complex.
+    for (const field of this.fields) {
+      if (!field.isSimple) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /**

@@ -8,6 +8,7 @@ import {EVENT_UNLOCK} from '../events';
 import {FieldsComponent} from '../fields';
 import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
+import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
 
 export interface ListFieldConfig extends FieldConfig {
@@ -49,7 +50,17 @@ export interface ListFieldComponent extends FieldComponent {
    * Can the list remove items?
    */
   allowRemove?: boolean;
+  /**
+   * Event handler for deleting items.
+   *
+   * @param evt Click event from delete action.
+   * @param index Item index being deleted.
+   */
   handleDeleteItem(evt: Event, index: number): void;
+  /**
+   * Number of items in the list.
+   */
+  length: number;
 }
 
 export interface ListItemComponent {
@@ -322,6 +333,13 @@ export class ListField
     return true;
   }
 
+  /**
+   * Length of the list.
+   */
+  get length(): number {
+    return this.items?.length || 0;
+  }
+
   templateEmpty(
     editor: SelectiveEditor,
     data: DeepObject,
@@ -331,7 +349,7 @@ export class ListField
       class="selective__list__item selective__list__item--empty"
       data-index=${index}
     >
-      ${this.config.emptyLabel || '{ Empty }'}
+      ${this.config.emptyLabel || 'No items in list'}
     </div>`;
   }
 
@@ -394,7 +412,8 @@ export class ListField
 
     actions.push(html`<div
       ?disabled=${areAllExpanded}
-      class="selective__action selective__action__expand"
+      class="selective__action selective__action--expand selective__tooltip--bottom-left"
+      data-tip="Expand all"
       @click=${handleExpandAll}
     >
       <i class="material-icons">unfold_more</i>
@@ -409,7 +428,8 @@ export class ListField
 
     actions.push(html`<div
       ?disabled=${areAllCollapsed}
-      class="selective__action selective__action__collapse"
+      class="selective__action selective__action--collapse selective__tooltip--bottom-left"
+      data-tip="Collapse all"
       @click=${handleCollapseAll}
     >
       <i class="material-icons">unfold_less</i>
@@ -503,13 +523,27 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
   ): TemplateResult {
     // Need to update the original value on the collapsed items.
     item.fields.updateOriginal(editor, data, true);
+    const canDrag = this.field.length > 1;
     const sortable = this.field.sortableUi;
+    const preActions = [];
+    const postActions = [];
 
-    // TODO: Check if allowed to delete items.
+    if (canDrag) {
+      preActions.push(html`<div class="selective__list__item__drag">
+        <i class="material-icons">drag_indicator</i>
+      </div>`);
+    }
+
+    postActions.push(this.templateRemove(editor, data, item, index));
 
     return html` <div
-      class="selective__list__item selective__list__item--collapsed selective__sortable"
-      draggable="true"
+      class=${classMap({
+        selective__list__item: true,
+        'selective__list__item--collapsed': true,
+        'selective__list__item--no-drag': this.field.length <= 1,
+        selective__sortable: true,
+      })}
+      draggable=${canDrag ? 'true' : 'false'}
       data-index=${index}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
@@ -517,8 +551,8 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       @dragstart=${sortable.handleDragStart.bind(sortable)}
       @drop=${sortable.handleDrop.bind(sortable)}
     >
-      <div class="selective__list__item__drag">
-        <i class="material-icons">drag_indicator</i>
+      <div class="selective__field__actions selective__field__actions--pre">
+        ${preActions}
       </div>
       <div
         class="selective__list__item__preview"
@@ -527,7 +561,9 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
       >
         ${this.fields.templatePreview(editor, data)}
       </div>
-      ${this.templateRemove(editor, data, item, index)}
+      <div class="selective__field__actions selective__field__actions--post">
+        ${postActions}
+      </div>
     </div>`;
   }
 
@@ -539,15 +575,19 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
   ): TemplateResult {
     const sortable = this.field.sortableUi;
     return html` <div
-      class="selective__list__item selective__sortable"
-      draggable="true"
+      class="selective__list__item selective__list__item--expanded selective__sortable"
       data-index=${index}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
       @dragover=${sortable.handleDragOver.bind(sortable)}
-      @dragstart=${sortable.handleDragStart.bind(sortable)}
       @drop=${sortable.handleDrop.bind(sortable)}
     >
+      <div
+        class="selective__list__fields__header"
+        @click=${this.handleCollapseItem.bind(this)}
+      >
+        ${this.fields.templatePreview(editor, data)}
+      </div>
       <div class="selective__list__fields">
         ${item.fields.template(editor, data)}
       </div>
@@ -565,7 +605,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
     }
 
     return html`<div
-      class="selective__action--delete selective__tooltip--left"
+      class="selective__action selective__action--delete selective__tooltip--left"
       data-item-uid=${item.uid}
       @click=${(evt: Event) => {
         this.field.handleDeleteItem(evt, index);
@@ -583,22 +623,22 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
     item: ListItemComponent,
     index: number
   ): TemplateResult {
+    const canDrag = this.field.length > 1;
     const sortable = this.field.sortableUi;
-
-    // TODO: Check if allowed to delete items.
-
     const preActions = [];
     const postActions = [];
 
-    preActions.push(html`<div class="selective__list__item__drag">
-      <i class="material-icons">drag_indicator</i>
-    </div>`);
+    if (canDrag) {
+      preActions.push(html`<div class="selective__list__item__drag">
+        <i class="material-icons">drag_indicator</i>
+      </div>`);
+    }
 
     postActions.push(this.templateRemove(editor, data, item, index));
 
     return html` <div
       class="selective__list__item selective__list__item--simple selective__sortable"
-      draggable="true"
+      draggable=${canDrag ? 'true' : 'false'}
       data-index=${index}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
