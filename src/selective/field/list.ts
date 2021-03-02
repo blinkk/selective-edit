@@ -196,7 +196,9 @@ export class ListField
     for (const field of fields.fields) {
       field.updateOriginal(editor, autoDeepObject(fields.guessDefaultValue()));
     }
-    items.push(new ListFieldItem(this, fields));
+    const newItem = new ListFieldItem(this, fields);
+    newItem.isExpanded = true;
+    items.push(newItem);
     this.render();
   }
 
@@ -559,7 +561,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
         data-item-uid=${this.uid}
         @click=${this.handleExpandItem.bind(this)}
       >
-        ${this.fields.templatePreview(editor, data)}
+        ${this.fields.templatePreview(editor, data, index)}
       </div>
       <div class="selective__field__actions selective__field__actions--post">
         ${postActions}
@@ -586,7 +588,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
         class="selective__list__fields__header"
         @click=${this.handleCollapseItem.bind(this)}
       >
-        ${this.fields.templatePreview(editor, data)}
+        ${this.fields.templatePreview(editor, data, index)}
       </div>
       <div class="selective__list__fields">
         ${item.fields.template(editor, data)}

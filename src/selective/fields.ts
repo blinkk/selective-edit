@@ -31,7 +31,11 @@ export interface FieldsComponent {
   guessDefaultValue(): string | Record<string, any>;
   lock(): void;
   template: Template;
-  templatePreview: Template;
+  templatePreview(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    index?: number
+  ): TemplateResult;
   updateOriginal(
     editor: SelectiveEditor,
     data: DeepObject,
@@ -213,8 +217,16 @@ export class Fields
    * @param data Data provided to render the template.
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  templatePreview(editor: SelectiveEditor, data: DeepObject): TemplateResult {
-    return html`${findPreviewValue(this.value, this.previewFields, '{ Item }')}`;
+  templatePreview(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    index?: number
+  ): TemplateResult {
+    return html`${findPreviewValue(
+      this.value,
+      this.previewFields,
+      `{ Item ${index !== undefined ? index + 1 : ''} }`
+    )}`;
   }
 
   /**
