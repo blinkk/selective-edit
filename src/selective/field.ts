@@ -361,6 +361,26 @@ export class Field
   /**
    * Template for determining how to render the field.
    *
+   * The default field template has several levels of templates
+   * to make it easier for individual fields to override parts of
+   * template without needing to replicate a lot of internal template
+   * features.
+   *
+   * Base field template structure:
+   *
+   * ```
+   * template
+   * └── templateWrapper
+   *     └── templateStructure
+   *         ├── templateHeaderStructure
+   *         │   ├── templateHeader
+   *         │   └── templateLabel
+   *         ├── templateInputStructure
+   *         │   └── templateInput
+   *         └── templateFooterStructure
+   *             └── templateFooter
+   * ```
+   *
    * @param editor Selective editor used to render the template.
    * @param data Data provided to render the template.
    */

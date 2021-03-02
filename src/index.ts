@@ -34,7 +34,11 @@ export {ColorField, ColorFieldConfig} from './selective/field/color';
 export {DateField, DateFieldConfig} from './selective/field/date';
 export {DatetimeField, DatetimeFieldConfig} from './selective/field/datetime';
 export {GroupField, GroupFieldConfig} from './selective/field/group';
-export {ListField, ListFieldConfig} from './selective/field/list';
+export {
+  ListField,
+  ListFieldComponent,
+  ListFieldConfig,
+} from './selective/field/list';
 export {NumberField, NumberFieldConfig} from './selective/field/number';
 export {RadioField, RadioFieldConfig} from './selective/field/radio';
 export {TextField, TextFieldConfig} from './selective/field/text';
