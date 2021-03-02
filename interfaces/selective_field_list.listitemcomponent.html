@@ -81,9 +81,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listitemcomponent.html#field" class="tsd-kind-icon">field</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listitemcomponent.html#fields" class="tsd-kind-icon">fields</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listitemcomponent.html#isexpanded" class="tsd-kind-icon">is<wbr>Expanded</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listitemcomponent.html#listfield" class="tsd-kind-icon">list<wbr>Field</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listitemcomponent.html#template" class="tsd-kind-icon">template</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listitemcomponent.html#uid" class="tsd-kind-icon">uid</a></li>
 							</ul>
@@ -94,22 +94,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="field" class="tsd-anchor"></a>
-					<h3>field</h3>
-					<div class="tsd-signature tsd-kind-icon">field<span class="tsd-signature-symbol">:</span> <a href="selective_field_list.listfieldcomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">ListFieldComponent</a><span class="tsd-signature-symbol"> &amp; </span><a href="mixins_sortable.sortablefieldcomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">SortableFieldComponent</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/564cdc6/src/selective/field/list.ts#L67">selective/field/list.ts:67</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="fields" class="tsd-anchor"></a>
 					<h3>fields</h3>
 					<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <a href="selective_fields.fieldscomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldsComponent</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/564cdc6/src/selective/field/list.ts#L68">selective/field/list.ts:68</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/d5bb35b/src/selective/field/list.ts#L68">selective/field/list.ts:68</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -119,17 +109,27 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Expanded<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/564cdc6/src/selective/field/list.ts#L69">selective/field/list.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/d5bb35b/src/selective/field/list.ts#L69">selective/field/list.ts:69</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="listfield" class="tsd-anchor"></a>
+					<h3>list<wbr>Field</h3>
+					<div class="tsd-signature tsd-kind-icon">list<wbr>Field<span class="tsd-signature-symbol">:</span> <a href="selective_field_list.listfieldcomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">ListFieldComponent</a><span class="tsd-signature-symbol"> &amp; </span><a href="mixins_sortable.sortablefieldcomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">SortableFieldComponent</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/d5bb35b/src/selective/field/list.ts#L67">selective/field/list.ts:67</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="template" class="tsd-anchor"></a>
 					<h3>template</h3>
-					<div class="tsd-signature tsd-kind-icon">template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>editor<span class="tsd-signature-symbol">: </span><a href="../classes/selective_editor.selectiveeditor.html" class="tsd-signature-type" data-tsd-kind="Class">SelectiveEditor</a>, data<span class="tsd-signature-symbol">: </span><a href="../classes/utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a>, item<span class="tsd-signature-symbol">: </span><a href="selective_field_list.listitemcomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">ListItemComponent</a>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">TemplateResult</span></div>
+					<div class="tsd-signature tsd-kind-icon">template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>editor<span class="tsd-signature-symbol">: </span><a href="../classes/selective_editor.selectiveeditor.html" class="tsd-signature-type" data-tsd-kind="Class">SelectiveEditor</a>, data<span class="tsd-signature-symbol">: </span><a href="../classes/utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">TemplateResult</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/564cdc6/src/selective/field/list.ts#L70">selective/field/list.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/d5bb35b/src/selective/field/list.ts#L70">selective/field/list.ts:70</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -137,7 +137,7 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-signature">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>editor<span class="tsd-signature-symbol">: </span><a href="../classes/selective_editor.selectiveeditor.html" class="tsd-signature-type" data-tsd-kind="Class">SelectiveEditor</a>, data<span class="tsd-signature-symbol">: </span><a href="../classes/utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a>, item<span class="tsd-signature-symbol">: </span><a href="selective_field_list.listitemcomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">ListItemComponent</a>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>editor<span class="tsd-signature-symbol">: </span><a href="../classes/selective_editor.selectiveeditor.html" class="tsd-signature-type" data-tsd-kind="Class">SelectiveEditor</a>, data<span class="tsd-signature-symbol">: </span><a href="../classes/utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateResult</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -148,9 +148,6 @@
 											</li>
 											<li>
 												<h5>data: <a href="../classes/utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></h5>
-											</li>
-											<li>
-												<h5>item: <a href="selective_field_list.listitemcomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">ListItemComponent</a></h5>
 											</li>
 											<li>
 												<h5>index: <span class="tsd-signature-type">number</span></h5>
@@ -169,7 +166,7 @@
 					<div class="tsd-signature tsd-kind-icon">uid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/564cdc6/src/selective/field/list.ts#L76">selective/field/list.ts:76</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/d5bb35b/src/selective/field/list.ts#L75">selective/field/list.ts:75</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -203,13 +200,13 @@
 						<a href="selective_field_list.listitemcomponent.html" class="tsd-kind-icon">List<wbr>Item<wbr>Component</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="selective_field_list.listitemcomponent.html#field" class="tsd-kind-icon">field</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="selective_field_list.listitemcomponent.html#fields" class="tsd-kind-icon">fields</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="selective_field_list.listitemcomponent.html#isexpanded" class="tsd-kind-icon">is<wbr>Expanded</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="selective_field_list.listitemcomponent.html#listfield" class="tsd-kind-icon">list<wbr>Field</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="selective_field_list.listitemcomponent.html#template" class="tsd-kind-icon">template</a>
