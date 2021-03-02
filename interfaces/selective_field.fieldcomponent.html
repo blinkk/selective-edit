@@ -93,9 +93,11 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field.fieldcomponent.html#isclean" class="tsd-kind-icon">is<wbr>Clean</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field.fieldcomponent.html#issimple" class="tsd-kind-icon">is<wbr>Simple</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field.fieldcomponent.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field.fieldcomponent.html#key" class="tsd-kind-icon">key</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field.fieldcomponent.html#template" class="tsd-kind-icon">template</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field.fieldcomponent.html#uid" class="tsd-kind-icon">uid</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field.fieldcomponent.html#uuid" class="tsd-kind-icon">uuid</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field.fieldcomponent.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
@@ -120,9 +122,34 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Clean<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L83">selective/field.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L96">selective/field.ts:96</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is the field clean?</p>
+						</div>
+						<p>The field is considered clean if there are no changes from the original.</p>
+						<p>This is used by the editor to determine if there are changes pending.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="issimple" class="tsd-anchor"></a>
+					<h3>is<wbr>Simple</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Simple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L104">selective/field.ts:104</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is the field simple?</p>
+						</div>
+						<p>Complex fields usually have multiple inputs. This is used to determine how
+							the field is shown in non-trivial view. For example, lists will not show a
+						&#39;simple&#39; view of list items if it uses a complex field.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="isvalid" class="tsd-anchor"></a>
@@ -130,9 +157,14 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L84">selective/field.ts:84</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L108">selective/field.ts:108</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Has the field passed all relative validation rules.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="key" class="tsd-anchor"></a>
@@ -140,9 +172,14 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L82">selective/field.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L88">selective/field.ts:88</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Key to use to retrieve and save the value in the data.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="template" class="tsd-anchor"></a>
@@ -150,9 +187,29 @@
 					<div class="tsd-signature tsd-kind-icon">template<span class="tsd-signature-symbol">:</span> <a href="selective_template.template.html" class="tsd-signature-type" data-tsd-kind="Interface">Template</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L81">selective/field.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L84">selective/field.ts:84</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Template for rendering the field.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="uid" class="tsd-anchor"></a>
+					<h3>uid</h3>
+					<div class="tsd-signature tsd-kind-icon">uid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L122">selective/field.ts:122</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Unique id value for the field. Usually a shortened form of the UUID.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="uuid" class="tsd-anchor"></a>
@@ -160,9 +217,14 @@
 					<div class="tsd-signature tsd-kind-icon">uuid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L89">selective/field.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L126">selective/field.ts:126</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>UUID value for the field.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="value" class="tsd-anchor"></a>
@@ -170,9 +232,14 @@
 					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L90">selective/field.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L130">selective/field.ts:130</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Current value of the field.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -187,9 +254,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L85">selective/field.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L112">selective/field.ts:112</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Internal lock for fields that can get messed up. For example list fields.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -204,7 +276,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L86">selective/field.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L113">selective/field.ts:113</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -221,9 +293,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L88">selective/field.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L118">selective/field.ts:118</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Internal unlock for fields that can get messed up. For example list fields.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -238,7 +315,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L87">selective/field.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L114">selective/field.ts:114</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -281,6 +358,9 @@
 								<a href="selective_field.fieldcomponent.html#isclean" class="tsd-kind-icon">is<wbr>Clean</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="selective_field.fieldcomponent.html#issimple" class="tsd-kind-icon">is<wbr>Simple</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="selective_field.fieldcomponent.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -288,6 +368,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="selective_field.fieldcomponent.html#template" class="tsd-kind-icon">template</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="selective_field.fieldcomponent.html#uid" class="tsd-kind-icon">uid</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="selective_field.fieldcomponent.html#uuid" class="tsd-kind-icon">uuid</a>

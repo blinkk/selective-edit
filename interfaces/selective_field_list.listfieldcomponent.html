@@ -96,9 +96,12 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listfieldcomponent.html#allowremove" class="tsd-kind-icon">allow<wbr>Remove</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listfieldcomponent.html#allowsimple" class="tsd-kind-icon">allow<wbr>Simple</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="selective_field_list.listfieldcomponent.html#isclean" class="tsd-kind-icon">is<wbr>Clean</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="selective_field_list.listfieldcomponent.html#issimple" class="tsd-kind-icon">is<wbr>Simple</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="selective_field_list.listfieldcomponent.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="selective_field_list.listfieldcomponent.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_field_list.listfieldcomponent.html#length" class="tsd-kind-icon">length</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="selective_field_list.listfieldcomponent.html#template" class="tsd-kind-icon">template</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="selective_field_list.listfieldcomponent.html#uid" class="tsd-kind-icon">uid</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="selective_field_list.listfieldcomponent.html#uuid" class="tsd-kind-icon">uuid</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="selective_field_list.listfieldcomponent.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
@@ -124,7 +127,7 @@
 					<div class="tsd-signature tsd-kind-icon">allow<wbr>Add<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field/list.ts#L47">selective/field/list.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field/list.ts#L48">selective/field/list.ts:48</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -139,7 +142,7 @@
 					<div class="tsd-signature tsd-kind-icon">allow<wbr>Remove<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field/list.ts#L51">selective/field/list.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field/list.ts#L52">selective/field/list.ts:52</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -154,7 +157,7 @@
 					<div class="tsd-signature tsd-kind-icon">allow<wbr>Simple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field/list.ts#L43">selective/field/list.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field/list.ts#L44">selective/field/list.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -172,9 +175,35 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#isclean">isClean</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L83">selective/field.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L96">selective/field.ts:96</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is the field clean?</p>
+						</div>
+						<p>The field is considered clean if there are no changes from the original.</p>
+						<p>This is used by the editor to determine if there are changes pending.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="issimple" class="tsd-anchor"></a>
+					<h3>is<wbr>Simple</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Simple<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#issimple">isSimple</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L104">selective/field.ts:104</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is the field simple?</p>
+						</div>
+						<p>Complex fields usually have multiple inputs. This is used to determine how
+							the field is shown in non-trivial view. For example, lists will not show a
+						&#39;simple&#39; view of list items if it uses a complex field.</p>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="isvalid" class="tsd-anchor"></a>
@@ -183,9 +212,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#isvalid">isValid</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L84">selective/field.ts:84</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L108">selective/field.ts:108</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Has the field passed all relative validation rules.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="key" class="tsd-anchor"></a>
@@ -194,9 +228,29 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#key">key</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L82">selective/field.ts:82</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L88">selective/field.ts:88</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Key to use to retrieve and save the value in the data.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="length" class="tsd-anchor"></a>
+					<h3>length</h3>
+					<div class="tsd-signature tsd-kind-icon">length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field/list.ts#L63">selective/field/list.ts:63</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Number of items in the list.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="template" class="tsd-anchor"></a>
@@ -205,9 +259,30 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#template">template</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L81">selective/field.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L84">selective/field.ts:84</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Template for rendering the field.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="uid" class="tsd-anchor"></a>
+					<h3>uid</h3>
+					<div class="tsd-signature tsd-kind-icon">uid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#uid">uid</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L122">selective/field.ts:122</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Unique id value for the field. Usually a shortened form of the UUID.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="uuid" class="tsd-anchor"></a>
@@ -216,9 +291,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#uuid">uuid</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L89">selective/field.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L126">selective/field.ts:126</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>UUID value for the field.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="value" class="tsd-anchor"></a>
@@ -227,9 +307,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#value">value</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L90">selective/field.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L130">selective/field.ts:130</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Current value of the field.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -244,16 +329,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field/list.ts#L52">selective/field/list.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field/list.ts#L59">selective/field/list.ts:59</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Event handler for deleting items.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>evt: <span class="tsd-signature-type">Event</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Click event from delete action.</p>
+									</div>
 								</li>
 								<li>
 									<h5>index: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Item index being deleted.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -271,9 +367,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#lock">lock</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L85">selective/field.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L112">selective/field.ts:112</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Internal lock for fields that can get messed up. For example list fields.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -289,7 +390,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#render">render</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L86">selective/field.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L113">selective/field.ts:113</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -307,9 +408,14 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#unlock">unlock</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L88">selective/field.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L118">selective/field.ts:118</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Internal unlock for fields that can get messed up. For example list fields.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -325,7 +431,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_field.fieldcomponent.html">FieldComponent</a>.<a href="selective_field.fieldcomponent.html#updateoriginal">updateOriginal</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/ce61acd/src/selective/field.ts#L87">selective/field.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/796ef7f/src/selective/field.ts#L114">selective/field.ts:114</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -377,13 +483,22 @@
 								<a href="selective_field_list.listfieldcomponent.html#isclean" class="tsd-kind-icon">is<wbr>Clean</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="selective_field_list.listfieldcomponent.html#issimple" class="tsd-kind-icon">is<wbr>Simple</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="selective_field_list.listfieldcomponent.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="selective_field_list.listfieldcomponent.html#key" class="tsd-kind-icon">key</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="selective_field_list.listfieldcomponent.html#length" class="tsd-kind-icon">length</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="selective_field_list.listfieldcomponent.html#template" class="tsd-kind-icon">template</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="selective_field_list.listfieldcomponent.html#uid" class="tsd-kind-icon">uid</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="selective_field_list.listfieldcomponent.html#uuid" class="tsd-kind-icon">uuid</a>
