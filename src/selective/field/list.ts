@@ -253,6 +253,8 @@ export class ListField
         // Leave in the same order.
         newListItems[i] = oldListItems[i];
 
+        // Lock the fields to prevent the values from being updated at the same
+        // time as the original value.
         newListItems[i].fields.lock();
       } else if (i === endIndex) {
         // This element is being moved to, place the moved value here.
