@@ -14,6 +14,12 @@ export interface TextAreaFieldConfig extends FieldConfig {
    * Number of rows to use when displaying the textarea.
    */
   rows?: number;
+  /**
+   * Textarea text wrap strategy.
+   *
+   * Browser defaults to soft wrapping.
+   */
+  wrap?: string;
 }
 
 export class TextareaField extends Field {
@@ -38,6 +44,7 @@ export class TextareaField extends Field {
           rows=${this.config.rows || 6}
           placeholder=${this.config.placeholder || ''}
           @input=${this.handleInput.bind(this)}
+          wrap=${this.config.wrap ? 'hard' : 'soft'}
         >
 ${value}</textarea
         >
