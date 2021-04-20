@@ -1,6 +1,6 @@
 {
   "name": "@blinkk/selective-edit",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "license": "MIT",
   "homepage": "https://blinkkcode.github.com/selective-edit",
   "description": "Selective structured text editor.",
