@@ -560,7 +560,7 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
         data-item-uid=${this.uid}
         @click=${this.handleExpandItem.bind(this)}
       >
-        ${this.fields.templatePreviewValue(editor, data, index)}
+        ${this.templatePreviewValue(editor, data, index)}
       </div>
       <div class="selective__field__actions selective__field__actions--post">
         ${postActions}
@@ -587,12 +587,26 @@ class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
         @click=${this.handleCollapseItem.bind(this)}
       >
         <span class="material-icons">keyboard_arrow_down</span>
-        ${this.fields.templatePreviewValue(editor, data, index)}
+        ${this.templatePreviewValue(editor, data, index)}
       </div>
       <div class="selective__list__fields">
         ${this.fields.template(editor, data)}
       </div>
     </div>`;
+  }
+
+  /**
+   * Template for how to render a preview.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templatePreviewValue(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    index?: number
+  ): TemplateResult {
+    return this.fields.templatePreviewValue(editor, data, index);
   }
 
   templateRemove(

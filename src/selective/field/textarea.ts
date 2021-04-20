@@ -19,7 +19,7 @@ export interface TextAreaFieldConfig extends FieldConfig {
    *
    * Browser defaults to soft wrapping.
    */
-  wrap?: string;
+  wrap?: 'hard' | 'soft';
 }
 
 export class TextareaField extends Field {
@@ -44,7 +44,7 @@ export class TextareaField extends Field {
           rows=${this.config.rows || 6}
           placeholder=${this.config.placeholder || ''}
           @input=${this.handleInput.bind(this)}
-          wrap=${this.config.wrap ? 'hard' : 'soft'}
+          wrap=${this.config.wrap === undefined ? 'soft' : this.config.wrap}
         >
 ${value}</textarea
         >
