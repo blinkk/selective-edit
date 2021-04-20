@@ -475,7 +475,9 @@ export class ListField
   }
 }
 
-class ListFieldItem extends UuidMixin(Base) implements ListItemComponent {
+export class ListFieldItem
+  extends UuidMixin(Base)
+  implements ListItemComponent {
   listField: ListFieldComponent & SortableFieldComponent;
   fields: FieldsComponent;
   isExpanded: boolean;
