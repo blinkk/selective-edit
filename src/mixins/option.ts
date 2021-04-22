@@ -161,7 +161,7 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
       }
 
       return {
-        background: `linear-gradient(${orientationAngle}, ${breakpoints.join(
+        backgroundImage: `linear-gradient(${orientationAngle}, ${breakpoints.join(
           ', '
         )})`,
       };
