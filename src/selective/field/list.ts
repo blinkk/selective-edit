@@ -6,6 +6,7 @@ import {TemplateResult, html} from 'lit-html';
 import {Base} from '../../mixins';
 import {EVENT_UNLOCK} from '../events';
 import {FieldsComponent} from '../fields';
+import {PreviewTypes} from '../../utility/preview';
 import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map';
@@ -32,6 +33,9 @@ export interface ListFieldConfig extends FieldConfig {
    * Field definitions for each item in the list.
    */
   fields?: Array<FieldConfig>;
+  previewField?: string;
+  previewFields?: Array<string>;
+  previewType?: PreviewTypes;
 }
 
 export interface ListFieldComponent extends FieldComponent {
@@ -140,6 +144,9 @@ export class ListField
         fields: fieldConfigs,
         isGuessed: this.usingAutoFields,
         parentKey: this.fullKey,
+        previewField: this.config.previewField,
+        previewFields: this.config.previewFields,
+        previewType: this.config.previewType,
       },
       this.globalConfig
     );
@@ -589,7 +596,9 @@ export class ListFieldItem
         @click=${this.handleCollapseItem.bind(this)}
       >
         <span class="material-icons">keyboard_arrow_down</span>
-        ${this.templatePreviewValue(editor, data, index)}
+        <div class="selective__list__item__preview">
+          ${this.templatePreviewValue(editor, data, index)}
+        </div>
       </div>
       <div class="selective__list__fields">
         ${this.fields.template(editor, data)}

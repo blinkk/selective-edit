@@ -25,6 +25,11 @@ const VIDEO_EXT = [
   'webm',
 ];
 
+export enum PreviewTypes {
+  Image = 'image',
+  Text = 'text',
+}
+
 function guessPreviewForObject(obj: Record<string, any>): any {
   const deepObj = autoDeepObject(obj);
   let previewValue = obj;
@@ -52,7 +57,29 @@ export function findPreviewValue(
   value: Record<string, any>,
   previewFieldKeys: Array<string>,
   defaultValue: string
-): string | TemplateResult {
+): string {
+  value = autoDeepObject(value);
+  let previewValue = null;
+
+  if (previewFieldKeys) {
+    for (const fieldKey of previewFieldKeys) {
+      previewValue = value.get(fieldKey);
+
+      // First matching field key becomes the value.
+      if (previewValue) {
+        return previewValue;
+      }
+    }
+  }
+
+  return defaultValue;
+}
+
+export function findOrGuessPreviewValue(
+  value: Record<string, any>,
+  previewFieldKeys: Array<string>,
+  defaultValue: string
+): string {
   value = autoDeepObject(value);
   let previewValue = null;
 
@@ -68,7 +95,7 @@ export function findPreviewValue(
   }
 
   if (!previewValue) {
-    previewValue = value.obj;
+    return value.obj;
   }
 
   if (previewValue) {
@@ -86,10 +113,10 @@ export function findPreviewValue(
 
 export function templatePreviewValue(
   previewValue: string,
-  previewType: string,
+  previewType: PreviewTypes,
   defaultValue: string
-): string | TemplateResult {
-  if (previewType === 'image') {
+): TemplateResult {
+  if (previewType === PreviewTypes.Image) {
     if (previewValue.startsWith('http') || previewValue.startsWith('//')) {
       for (const videoExt of VIDEO_EXT) {
         if (previewValue.endsWith(`.${videoExt}`)) {
@@ -117,5 +144,5 @@ export function templatePreviewValue(
     }
   }
 
-  return previewValue || defaultValue;
+  return html`${previewValue || defaultValue}`;
 }

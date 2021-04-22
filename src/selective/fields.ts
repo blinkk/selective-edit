@@ -1,5 +1,10 @@
 import {FieldComponent, FieldConfig, InternalFieldConfig} from './field';
 import {GlobalConfig, SelectiveEditor} from './editor';
+import {
+  PreviewTypes,
+  findOrGuessPreviewValue,
+  templatePreviewValue,
+} from '../utility/preview';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
 import {DataMixin} from '../mixins/data';
@@ -8,7 +13,6 @@ import {DeepObject} from '../utility/deepObject';
 import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
-import {findPreviewValue} from '../utility/preview';
 import merge from 'lodash.merge';
 import {repeat} from 'lit-html/directives/repeat';
 
@@ -16,8 +20,9 @@ export interface FieldsConfig {
   fields?: Array<FieldConfig & InternalFieldConfig>;
   isGuessed?: boolean;
   parentKey: string;
-  preview_field?: string;
-  preview_fields?: Array<string>;
+  previewField?: string;
+  previewFields?: Array<string>;
+  previewType?: PreviewTypes;
 }
 
 export interface FieldsComponent {
@@ -103,7 +108,7 @@ export class Fields
   }
 
   get allowSimple(): boolean {
-    return !this.config.preview_field && !this.config.preview_fields;
+    return !this.config.previewField && !this.config.previewFields;
   }
 
   /**
@@ -177,7 +182,7 @@ export class Fields
 
   get previewFields(): Array<string> {
     let previewFields =
-      this.config.preview_field || this.config.preview_fields || [];
+      this.config.previewField || this.config.previewFields || [];
     if (!DataType.isArray(previewFields)) {
       previewFields = [previewFields as string];
     }
@@ -222,11 +227,17 @@ export class Fields
     data: DeepObject,
     index?: number
   ): TemplateResult {
-    return html`${findPreviewValue(
+    const defaultValue = `{ Item ${index !== undefined ? index + 1 : ''} }`;
+    const previewValue = findOrGuessPreviewValue(
       this.value,
       this.previewFields,
-      `{ Item ${index !== undefined ? index + 1 : ''} }`
-    )}`;
+      defaultValue
+    );
+    return templatePreviewValue(
+      previewValue,
+      this.config.previewType ? this.config.previewType : PreviewTypes.Text,
+      defaultValue
+    ) as TemplateResult;
   }
 
   /**
