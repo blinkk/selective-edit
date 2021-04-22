@@ -92,7 +92,7 @@ const findPreviewValue = (mainConfig, subConfig, value, defaultValue) => {
 }
 
 const templatePreviewValue = (previewValue, previewType, defaultValue) => {
-  if (previewType == 'image' && previewValue) {
+  if (previewType == 'image' && typeof previewValue === 'string') {
     if (previewValue.startsWith('http') || previewValue.startsWith('//')) {
       for (const videoExt of VIDEO_EXT) {
         if (previewValue.endsWith(`.${videoExt}`)) {
