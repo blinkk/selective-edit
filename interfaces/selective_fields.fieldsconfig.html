@@ -84,8 +84,9 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_fields.fieldsconfig.html#fields" class="tsd-kind-icon">fields</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_fields.fieldsconfig.html#isguessed" class="tsd-kind-icon">is<wbr>Guessed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_fields.fieldsconfig.html#parentkey" class="tsd-kind-icon">parent<wbr>Key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_fields.fieldsconfig.html#preview_field" class="tsd-kind-icon">preview_<wbr>field</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_fields.fieldsconfig.html#preview_fields" class="tsd-kind-icon">preview_<wbr>fields</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_fields.fieldsconfig.html#previewfield" class="tsd-kind-icon">preview<wbr>Field</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_fields.fieldsconfig.html#previewfields" class="tsd-kind-icon">preview<wbr>Fields</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="selective_fields.fieldsconfig.html#previewtype" class="tsd-kind-icon">preview<wbr>Type</a></li>
 							</ul>
 						</section>
 					</div>
@@ -99,7 +100,7 @@
 					<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><a href="selective_field.fieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldConfig</a><span class="tsd-signature-symbol"> &amp; </span><a href="selective_field.fieldprotectedconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldProtectedConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/05ebb25/src/selective/fields.ts#L16">selective/fields.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/c48344b/src/selective/fields.ts#L20">selective/fields.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -109,7 +110,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Guessed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/05ebb25/src/selective/fields.ts#L17">selective/fields.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/c48344b/src/selective/fields.ts#L21">selective/fields.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -119,27 +120,37 @@
 					<div class="tsd-signature tsd-kind-icon">parent<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/05ebb25/src/selective/fields.ts#L18">selective/fields.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/c48344b/src/selective/fields.ts#L22">selective/fields.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="preview_field" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> preview_<wbr>field</h3>
-					<div class="tsd-signature tsd-kind-icon">preview_<wbr>field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="previewfield" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> preview<wbr>Field</h3>
+					<div class="tsd-signature tsd-kind-icon">preview<wbr>Field<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/05ebb25/src/selective/fields.ts#L19">selective/fields.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/c48344b/src/selective/fields.ts#L23">selective/fields.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="preview_fields" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> preview_<wbr>fields</h3>
-					<div class="tsd-signature tsd-kind-icon">preview_<wbr>fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="previewfields" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> preview<wbr>Fields</h3>
+					<div class="tsd-signature tsd-kind-icon">preview<wbr>Fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/05ebb25/src/selective/fields.ts#L20">selective/fields.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/c48344b/src/selective/fields.ts#L24">selective/fields.ts:24</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="previewtype" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> preview<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">preview<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../enums/utility_preview.previewtypes.html#image" class="tsd-signature-type" data-tsd-kind="Enumeration member">Image</a><span class="tsd-signature-symbol"> | </span><a href="../enums/utility_preview.previewtypes.html#text" class="tsd-signature-type" data-tsd-kind="Enumeration member">Text</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/c48344b/src/selective/fields.ts#L25">selective/fields.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -179,10 +190,13 @@
 								<a href="selective_fields.fieldsconfig.html#parentkey" class="tsd-kind-icon">parent<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="selective_fields.fieldsconfig.html#preview_field" class="tsd-kind-icon">preview_<wbr>field</a>
+								<a href="selective_fields.fieldsconfig.html#previewfield" class="tsd-kind-icon">preview<wbr>Field</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="selective_fields.fieldsconfig.html#preview_fields" class="tsd-kind-icon">preview_<wbr>fields</a>
+								<a href="selective_fields.fieldsconfig.html#previewfields" class="tsd-kind-icon">preview<wbr>Fields</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="selective_fields.fieldsconfig.html#previewtype" class="tsd-kind-icon">preview<wbr>Type</a>
 							</li>
 						</ul>
 					</li>
