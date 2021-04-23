@@ -116,7 +116,7 @@ export function templatePreviewValue(
   previewType: PreviewTypes,
   defaultValue: string
 ): TemplateResult {
-  if (previewType === PreviewTypes.Image) {
+  if (previewType === PreviewTypes.Image && DataType.isString(previewValue)) {
     if (previewValue.startsWith('http') || previewValue.startsWith('//')) {
       for (const videoExt of VIDEO_EXT) {
         if (previewValue.endsWith(`.${videoExt}`)) {
