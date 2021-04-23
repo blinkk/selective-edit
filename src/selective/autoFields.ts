@@ -44,18 +44,11 @@ export class AutoFields implements AutoFieldsComponent {
     this.config = config || {};
   }
 
-  protected deepGuess(
-    data: string,
-    keyBase?: Array<string>
-  ): Array<FieldConfig> {
+  protected deepGuess(data: any, keyBase?: Array<string>): Array<FieldConfig> {
     keyBase = keyBase || [];
 
-    // Handle arrays by guessing for first element.
     if (DataType.isArray(data)) {
-      if (!data.length) {
-        return [];
-      }
-      return this.deepGuess(data[0], keyBase);
+      return this.deepGuessArray(data, keyBase);
     }
 
     // Object are guessed based on keys.
@@ -68,6 +61,19 @@ export class AutoFields implements AutoFieldsComponent {
 
     // Default to guessing as a single field.
     return [this.guessField(keyBase.join('.'), data)];
+  }
+
+  protected deepGuessArray(
+    data: Array<any>,
+    keyBase?: Array<string>
+  ): Array<FieldConfig> {
+    keyBase = keyBase || [];
+
+    if (!data.length) {
+      return [];
+    }
+    // Handle arrays by guessing for first element.
+    return this.deepGuess(data[0], keyBase);
   }
 
   protected deepGuessObject(

@@ -95,7 +95,7 @@ export function findOrGuessPreviewValue(
   }
 
   if (!previewValue) {
-    return value.obj;
+    previewValue = value.obj;
   }
 
   if (previewValue) {
