@@ -86,13 +86,13 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="selective_editor.selectiveeditor.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="selective_editor.selectiveeditor.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_editor.selectiveeditor.html#_data" class="tsd-kind-icon">_data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="selective_editor.selectiveeditor.html#_data" class="tsd-kind-icon">_data</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_editor.selectiveeditor.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_editor.selectiveeditor.html#container" class="tsd-kind-icon">container</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="selective_editor.selectiveeditor.html#fields" class="tsd-kind-icon">fields</a></li>
@@ -128,17 +128,18 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 						<li class="tsd-signature tsd-kind-icon">new <wbr>Selective<wbr>Editor<span class="tsd-signature-symbol">(</span>config<span class="tsd-signature-symbol">: </span><a href="../interfaces/selective_editor.editorconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">EditorConfig</a>, container<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="selective_editor.selectiveeditor.html" class="tsd-signature-type" data-tsd-kind="Class">SelectiveEditor</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides DataMixin(Base).constructor</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L48">selective/editor.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L48">selective/editor.ts:48</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -157,13 +158,14 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="_data" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> _data</h3>
-					<div class="tsd-signature tsd-kind-icon">_data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></div>
+					<div class="tsd-signature tsd-kind-icon">_data<span class="tsd-signature-symbol">:</span> <a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></div>
 					<aside class="tsd-sources">
+						<p>Inherited from DataMixin(Base)._data</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/mixins/data.ts#L6">mixins/data.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/mixins/data.ts#L6">mixins/data.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -173,17 +175,17 @@
 					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_editor.editorconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">EditorConfig</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L43">selective/editor.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L43">selective/editor.ts:43</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="container" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> container</h3>
-					<div class="tsd-signature tsd-kind-icon">container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLElement</span></div>
+					<div class="tsd-signature tsd-kind-icon">container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">HTMLElement</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L44">selective/editor.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L44">selective/editor.ts:44</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -193,7 +195,7 @@
 					<div class="tsd-signature tsd-kind-icon">fields<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_fields.fieldscomponent.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldsComponent</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L45">selective/editor.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L45">selective/editor.ts:45</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -203,7 +205,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Pending<wbr>Render<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L46">selective/editor.ts:46</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L46">selective/editor.ts:46</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -213,7 +215,7 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Rendering<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L47">selective/editor.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L47">selective/editor.ts:47</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -223,7 +225,7 @@
 					<div class="tsd-signature tsd-kind-icon">types<span class="tsd-signature-symbol">:</span> <a href="../interfaces/selective_types.types.html" class="tsd-signature-type" data-tsd-kind="Interface">Types</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L48">selective/editor.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L48">selective/editor.ts:48</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -241,7 +243,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/mixins/data.ts#L8">mixins/data.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/mixins/data.ts#L8">mixins/data.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="utility_deepobject.deepobject.html" class="tsd-signature-type" data-tsd-kind="Class">DeepObject</a></h4>
@@ -249,7 +251,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/mixins/data.ts#L12">mixins/data.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/mixins/data.ts#L12">mixins/data.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -272,7 +274,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L107">selective/editor.ts:107</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L107">selective/editor.ts:107</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -289,7 +291,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L111">selective/editor.ts:111</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L111">selective/editor.ts:111</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -306,7 +308,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L162">selective/editor.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L162">selective/editor.ts:162</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -326,7 +328,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L82">selective/editor.ts:82</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L82">selective/editor.ts:82</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -352,7 +354,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L87">selective/editor.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L87">selective/editor.ts:87</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -375,7 +377,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L92">selective/editor.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L92">selective/editor.ts:92</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -401,7 +403,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L96">selective/editor.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L96">selective/editor.ts:96</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -424,7 +426,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L100">selective/editor.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L100">selective/editor.ts:100</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/selective_field.fieldconfig.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldConfig</a><span class="tsd-signature-symbol">[]</span></h4>
@@ -441,7 +443,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L121">selective/editor.ts:121</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L121">selective/editor.ts:121</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -458,7 +460,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L150">selective/editor.ts:150</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L150">selective/editor.ts:150</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -475,7 +477,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/e41511d/src/selective/editor.ts#L115">selective/editor.ts:115</a></li>
+									<li>Defined in <a href="https://github.com/blinkkcode/selective-edit/blob/75c8b90/src/selective/editor.ts#L115">selective/editor.ts:115</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -511,10 +513,10 @@
 					<li class="current tsd-kind-class tsd-parent-kind-module">
 						<a href="selective_editor.selectiveeditor.html" class="tsd-kind-icon">Selective<wbr>Editor</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
 								<a href="selective_editor.selectiveeditor.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_editor.selectiveeditor.html#_data" class="tsd-kind-icon">_data</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -609,6 +611,9 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 			</ul>
 		</div>
 	</div>
