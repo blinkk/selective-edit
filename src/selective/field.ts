@@ -636,14 +636,15 @@ export class Field
    * @param data Data provided to render the template.
    */
   updateOriginal(editor: SelectiveEditor, data: DeepObject) {
+    // Clears the validation each time the original value is updated.
+    // Needs to happen every time, even for locked fields.
+    this.validation = undefined;
+
     // Manual locking prevents the original value overwriting the value
     // in special cases when it should not.
     if (this.isLocked) {
       return;
     }
-
-    // Clears the validation each time the original value is updated.
-    this.validation = undefined;
 
     // Where there is no key, just assume that the current value is undefined.
     // if (!this.key) {
