@@ -20,15 +20,11 @@ import {
   VariantField,
 } from '../index';
 import {EVENT_RENDER, EVENT_RENDER_COMPLETE} from '../selective/events';
-import {
-  FieldConfig,
-  FieldConstructor,
-  InternalFieldConfig,
-} from '../selective/field';
+import {FieldConstructor, InternalFieldConfig} from '../selective/field';
+import {ListFieldConfig} from '../selective/field/list';
 import {RuleConstructor} from '../selective/validationRules';
 import {autoDeepObject} from '../utility/deepObject';
 import merge from 'lodash.merge';
-import {ListFieldConfig} from '../selective/field/list';
 
 const configEl = document.querySelector('#config') as HTMLTextAreaElement;
 const dataEl = document.querySelector('#data') as HTMLTextAreaElement;
