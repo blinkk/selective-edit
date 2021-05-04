@@ -37,6 +37,32 @@ test('ability to get missing key', t => {
   t.is(obj.get('foo'), undefined);
 });
 
+test('keys', t => {
+  const obj = new DeepObject({
+    foo: {
+      foofoo: {
+        foobar: true,
+        baz: true,
+      },
+      boo: true,
+    },
+    bar: 'test',
+    eel: [
+      {
+        ipo: true,
+      },
+    ],
+  });
+
+  t.deepEqual(obj.keys().sort(), [
+    'bar',
+    'eel',
+    'foo.boo',
+    'foo.foofoo.baz',
+    'foo.foofoo.foobar',
+  ]);
+});
+
 test('set new values on top keys', t => {
   const obj = new DeepObject();
   obj.set('foo', 'foo');

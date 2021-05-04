@@ -4,6 +4,8 @@
  * Example: obj.get('somthing.sub.key') would deeply reference the object.
  */
 
+import {DataType} from './dataType';
+
 export class DeepObject {
   obj: Record<string, any>;
 
@@ -33,6 +35,40 @@ export class DeepObject {
       root = root[part];
     }
     return root;
+  }
+
+  /**
+   * Determine all of the 'key' references for a deep object.
+   *
+   * ```
+   * { foo: { bar: true } } => ['foo.bar']
+   * ```
+   */
+  keys(): Array<string> {
+    return this.keysForRecord(this.obj, []);
+  }
+
+  protected keysForRecord(
+    record: Record<string, any>,
+    parentKeys: Array<string>
+  ): Array<string> {
+    const keys = [];
+
+    for (const [key, value] of Object.entries(record)) {
+      const currentKey = [...parentKeys, key];
+
+      if (DataType.isObject(value)) {
+        // Value is another record, find it's keys and add them to the keys.
+        const recordKeys = this.keysForRecord(value, currentKey);
+        for (const subKey of recordKeys) {
+          keys.push(subKey);
+        }
+      } else {
+        keys.push(currentKey.join('.'));
+      }
+    }
+
+    return keys;
   }
 
   /**
