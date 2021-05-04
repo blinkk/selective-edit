@@ -106,17 +106,17 @@ yarn run dev
 
 [doc_Field]: https://blinkkcode.github.io/selective-edit/classes/selective_field.field.html
 [doc_FieldConfig_CheckboxField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_checkbox.checkboxfieldconfig.html
-[doc_FieldConfig_CheckboxMultiField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_checkboxMulti.checkboxmultifieldconfig.html
-[doc_FieldConfig_ColorField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_color.colorconfig.html
-[doc_FieldConfig_DateField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_date.dateconfig.html
-[doc_FieldConfig_DatetimeField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_datetime.datetimeconfig.html
+[doc_FieldConfig_CheckboxMultiField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_checkboxmulti.checkboxmultifieldconfig.html
+[doc_FieldConfig_ColorField]: https://blinkkcode.github.io/selective-edit/modules/selective_field_color.html#colorfieldconfig
+[doc_FieldConfig_DateField]: https://blinkkcode.github.io/selective-edit/modules/selective_field_date.html#datefieldconfig
+[doc_FieldConfig_DatetimeField]: https://blinkkcode.github.io/selective-edit/modules/selective_field_datetime.html#datetimefieldconfig
 [doc_FieldConfig_GroupField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_group.groupfieldconfig.html
 [doc_FieldConfig_ListField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_list.listfieldconfig.html
 [doc_FieldConfig_NumberField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_number.numberfieldconfig.html
 [doc_FieldConfig_RadioField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_radio.radiofieldconfig.html
 [doc_FieldConfig_TextField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_text.textfieldconfig.html
 [doc_FieldConfig_TextareaField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_textarea.textareafieldconfig.html
-[doc_FieldConfig_TimeField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_time.timefieldconfig.html
+[doc_FieldConfig_TimeField]: https://blinkkcode.github.io/selective-edit/modules/selective_field_time.html#timefieldconfig
 [doc_FieldConfig_VariantField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_variant.variantfieldconfig.html
 [doc_FieldComponent]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field.fieldcomponent.html
 [doc_RuleComponent]: https://blinkkcode.github.io/selective-edit/interfaces/selective_validationrules.rulecomponent.html
