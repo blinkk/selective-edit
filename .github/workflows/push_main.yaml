@@ -2,9 +2,8 @@ name: 'Push to main'
 
 on:
   push:
-    # TODO: Fix.
-    branches-ignore:
-      - main
+    branches:
+    - main
 
 jobs:
   gh-pages:
