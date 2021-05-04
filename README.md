@@ -80,30 +80,6 @@ Different field types have different configurations options:
   - [Time][doc_FieldConfig_TimeField]
   - [Variant][doc_FieldConfig_VariantField]
 
-## Development
-
-To get started, run the `yarn install` command.
-
-### Example server
-
-The local server provides the ability to test changes to the fields while developing
-the field types, validation types, etc.
-
-```sh
-yarn run serve
-```
-
-Then visit [localhost:8888](http://localhost:8888/) to view example page.
-
-### Writing tests
-
-When writing tests or to have tests be automatically run while making changes use the
-`dev` script.
-
-```sh
-yarn run dev
-```
-
 [doc_Field]: https://blinkkcode.github.io/selective-edit/classes/selective_field.field.html
 [doc_FieldConfig_CheckboxField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_checkbox.checkboxfieldconfig.html
 [doc_FieldConfig_CheckboxMultiField]: https://blinkkcode.github.io/selective-edit/interfaces/selective_field_checkboxmulti.checkboxmultifieldconfig.html
