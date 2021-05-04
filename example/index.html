@@ -6,26 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/css/example.min.css">
+    <link rel="stylesheet" href="example.min.css">
   </head>
-  <body class="mdc-typography front_matter">
+  <body class="front_matter">
     <div class="container">
       <div class="content">
         <div class="content__section content__data">
-          <div class="mdc-text-field text-field mdc-text-field--textarea">
-            <textarea id="data" class="mdc-text-field__input" rows="6">{
+          <label for="data">Input data (JSON)</label>
+          <textarea id="data" rows="6">{
   "title": "The stuff dreams are made of.",
   "description": "Fluffy stuff. Wispy stuff. Flying stuff. Falling stuff. Weird stuff.",
   "body": "A field of sparkling fluffy _bunnies_ with horns.",
-  "extra": {
-    "nested": "Some things just shouldn't be changed.",
-    "listed": [
-      "Values",
-      "In",
-      "A",
-      "List"
+  "areCloudsToday": true,
+  "lookedForCloudsAt": "2021-02-03T06:21",
+  "cloudViewingDay": "2021-05-18",
+  "bestViewingTime": "09:38",
+  "cloudsInTheSky": 100,
+  "skyColor": "#006beb",
+  "storm": {
+    "meta": "Do not change values that are not part of the fields.",
+    "chasers": [
+      "Bill Kessler",
+      "Cindy Dewees",
+      "Gregg Potter",
+      "Laura Dean"
     ]
   },
+  "extra": {
+    "title": "Something more",
+    "description": "Hidden by default."
+  },
+  "varied": {
+    "title": "Varied life",
+    "description": "Fields are varied depending on choice.",
+    "_variant": "simple"
+  },
+  "style": "fog",
+  "skyColors": [],
   "clouds": [
     {
       "title": "Cirrus fibratus radiatus",
@@ -45,47 +62,83 @@
     }
   ]
 }</textarea>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch" style=""><label class="mdc-floating-label" for="data" style="">Input data</label></div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-          </div>
         </div>
 
         <div class="content__section content__data__actions">
-          <button class="mdc-button mdc-button--outlined"><span class="mdc-button__ripple"></span>Guess Config from Data</button>
+          <button>Guess Config from Data</button>
         </div>
 
         <div class="content__section content__config">
-          <div class="mdc-text-field text-field mdc-text-field--textarea">
-            <textarea id="config" class="mdc-text-field__input" rows="6">{
+          <label for="config" style="">Configuration (JSON)</label>
+          <textarea id="config" rows="6">{
   "fields": [
     {
       "type": "text",
       "key": "title",
-      "label": "Title"
+      "label": "Title",
+      "help": "Title for the data."
     },
     {
       "type": "textarea",
       "key": "description",
-      "label": "Description"
+      "label": "Description",
+      "help": "Description for the data."
+    },
+    {
+      "type": "checkbox",
+      "key": "areCloudsToday",
+      "label": "Are there clouds today?"
+    },
+    {
+      "type": "datetime",
+      "key": "lookedForCloudsAt",
+      "label": "Looked for clouds on this day"
+    },
+    {
+      "type": "date",
+      "key": "cloudViewingDay",
+      "label": "Cloud viewing day"
+    },
+    {
+      "type": "time",
+      "key": "bestViewingTime",
+      "label": "Best cloud viewing time"
+    },
+    {
+      "type": "color",
+      "key": "skyColor",
+      "label": "Current color of the sky"
+    },
+    {
+      "type": "number",
+      "key": "cloudsInTheSky",
+      "label": "How many clouds are in the sky?",
+      "min": "0",
+      "max": 10000
     },
     {
       "type": "list",
-      "key": "extra.listed",
-      "label": "Simple List",
+      "key": "storm.chasers",
+      "label": "Storm chasers",
       "fields": [
         {
-          "type": "text"
+          "type": "text",
+          "validation": [{
+            "type": "length",
+            "max": {
+              "message": "Cannot be more than 50 characters.",
+              "value": 50
+            }
+          }]
         }
       ]
     },
     {
       "type": "list",
       "key": "clouds",
-      "label": "Complex List",
+      "label": "Clouds",
       "preview_field": "title",
+      "help": "List of cloud information.",
       "fields": [
         {
           "type": "text",
@@ -100,48 +153,140 @@
       ]
     },
     {
-      "type": "markdown",
-      "key": "body",
-      "label": "Body"
+      "type": "radio",
+      "key": "style",
+      "label": "Cloud style",
+      "help": "Cloud style.",
+      "options": [
+        {
+          "label": "Fog",
+          "value": "fog"
+        },
+        {
+          "label": "Low clouds",
+          "value": "low"
+        },
+        {
+          "label": "High clouds",
+          "value": "high"
+        }
+      ]
+    },
+    {
+      "type": "checkboxMulti",
+      "key": "skyColors",
+      "label": "Sky colors",
+      "help": "Colors in the sky right now.",
+      "options": [
+        {
+          "label": "Cloudy sky",
+          "value": "cloudy",
+          "color": "#dde5f2"
+        },
+        {
+          "label": "Blue sky",
+          "value": "blue",
+          "color": "#006beb"
+        },
+        {
+          "label": "Night sky",
+          "value": "night",
+          "color": "#131862"
+        },
+        {
+          "label": "Stormy sky",
+          "value": "stormy",
+          "gradient": {
+            "colors": [
+              "#57728f",
+              "#2e5073",
+              "#24405c"
+            ],
+            "isSmooth": true
+          }
+        },
+        {
+          "label": "Sunset sky",
+          "value": "sunset",
+          "gradient": {
+            "colors": [
+              "#e85566",
+              "#f47b5a",
+              "#f9ac5e"
+            ],
+            "orientation": "slope"
+          }
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "key": "extra",
+      "label": "Extra Group",
+      "help": "Extra information.",
+      "preview_fields": ["title"],
+      "fields": [
+        {
+          "type": "text",
+          "key": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "key": "description",
+          "label": "Description"
+        }
+      ]
+    },
+    {
+      "type": "variant",
+      "key": "varied",
+      "label": "Variant",
+      "help": "Variant fields change based on variant.",
+      "default": "simple",
+      "variants": {
+        "simple":{
+          "label": "Simple",
+          "fields": [
+            {
+              "type": "text",
+              "key": "title",
+              "label": "Title"
+            }
+          ]
+        },
+        "multi":{
+          "label": "Multiple",
+          "fields": [
+            {
+              "type": "text",
+              "key": "title",
+              "label": "Title"
+            },
+            {
+              "type": "textarea",
+              "key": "description",
+              "label": "Description"
+            }
+          ]
+        }
+      }
     }
   ]
 }</textarea>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch" style=""><label class="mdc-floating-label" for="config" style="">Configuration</label></div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-          </div>
         </div>
+
         <div class="content__section content__value">
-          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--no-label mdc-text-field--textarea">
-            <textarea id="value" class="mdc-text-field__input" rows="6">{
-  "fields": [
-    {
-      "type": "text",
-      "key": "title",
-      "label": "Title"
-    },
-    {
-      "type": "textarea",
-      "key": "description",
-      "label": "Description"
-    },
-    {
-      "type": "markdown",
-      "key": "body",
-      "label": "Body"
-    }
-  ]
-}</textarea>
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-              <div class="mdc-notched-outline__leading"></div>
-              <div class="mdc-notched-outline__notch"><label class="mdc-floating-label" for="value" style="">Edited value</label></div>
-              <div class="mdc-notched-outline__trailing"></div>
-            </div>
-          </div>
+          <label for="value" style="">Edited value</label>
+          <textarea id="value" rows="6"></textarea>
+        </div>
+
+        <div class="content__section status">
+          <div>Is clean? <span class="status__clean status--true">True</span></div>
+          <div>Is valid? <span class="status__valid status--true">True</span></div>
         </div>
       </div>
+
       <div class="sidebar">
         <div class="sidebar__content">
           <div id="fields"></div>
@@ -149,6 +294,6 @@
       </div>
     </div>
 
-    <script src="/js/example.min.js"></script>
+    <script src="example.min.js"></script>
   </body>
 </html>

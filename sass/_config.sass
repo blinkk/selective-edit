@@ -1,0 +1,142 @@
+// Primary Colors
+$color-primary: #48a0f4 !default
+$color-primary-light: #84d1ff !default
+$color-primary-dark: #0072c1 !default
+$color-on-primary: #ffffff !default
+$color-on-primary-light: #000000 !default
+$color-on-primary-dark: #ffffff !default
+
+// Secondary Colors
+$color-secondary: #2c2c2c !default
+$color-secondary-light: #555555 !default
+$color-secondary-dark: #000000 !default
+$color-on-secondary: #ffffff !default
+$color-on-secondary-light: #ffffff !default
+$color-on-secondary-dark: #ffffff !default
+
+// Utility Colors
+$color-text: #455a64 !default
+$color-text-light: lighten($color-text, 15%) !default
+$color-back: #ffffff !default
+$color-back-light: #e5e5e5 !default
+$color-back-dark: darken($color-back, 15%) !default
+$color-back-highlight: #e1fc8d !default
+$color-on-back: #000000 !default
+$color-on-back-subtle: darken($color-back, 25%) !default
+$color-on-back-light: #455a64 !default
+$color-on-back-dark: lighten($color-on-back-light, 15%) !default
+
+$color-dark-border: rgba(0,0,0,0.6) !default
+$color-light-border: rgba(0,0,0,0.3) !default
+$color-bar: rgba(0,0,0,0.1) !default
+
+// Input colors
+$color-field-back: rgba($color-back-light, .5) !default
+$color-field-back-alt: $color-back !default
+$color-on-field-back: $color-text !default
+$color-on-field-back-alt: $color-text !default
+
+// Icon Colors
+$color-icon-on-back: darken($color-back, 25%) !default
+$color-icon-on-back-selected: darken($color-icon-on-back, 25%) !default
+$color-icon-on-back-light: darken($color-back-light, 25%) !default
+$color-icon-on-back-light-selected: darken($color-icon-on-back-light, 25%) !default
+
+// Speeds
+$speed-fast: 150ms !default
+$speed-slow: 400ms !default
+$speed-slower: 1500ms !default
+
+// Transistions
+$timing-cubic-bezier: cubic-bezier(0, 1, 0.5, 1) !default
+
+// Padding unit
+$pad: 1em !default
+
+// Typography
+$font-family: Roboto !default
+$font-family-mono: "Roboto Mono", monospace !default
+$font-size: 12px !default
+$font-size-small: $font-size * .8 !default
+$font-size-icon: 18px !default
+$font-size-icon-small: 14px !default
+$line-height: 14px !default
+
+// Shadows
+$shadow-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !default
+$shadow-2: 0 3px 6px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !default
+$shadow-3: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !default
+$shadow-4: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !default
+$shadow-5: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22) !default
+
+// Borders
+$border-size: 1px !default
+$border-size-thick: 2px !default
+
+// Focus rings
+$focus-shadow-primary: 0px 0px 0px 2px rgba(66,133,244,0.15) !default
+$focus-shadow-secondary: 0px 0px 0px 2px rgba(126,126,126,0.15) !default
+
+// Radius
+$radius-1: 2px !default
+$radius-2: 3px !default
+$radius-3: 4px !default
+$radius-4: 5px !default
+$radius-5: 6px !default
+
+// Device; keep consistent with `previewSize` in editor.js.
+$device-width: 411px !default
+$device-height: 731px !default
+
+// Edit Column
+$edit-column-max-width: 500px !default
+$edit-column-min-width: 250px !default
+
+$header-height: 38px !default
+
+// Empty bar height
+$bar-height: 10px !default
+
+// Loading
+$loading-size: 50px !default
+$loading-border-size: 4px !default
+
+=field-border
+  border: $border-size solid transparent
+  border-radius: $radius-2
+
+  &:focus
+    border: $border-size solid $color-primary
+    outline: none
+
+  &:hover
+    border: $border-size solid $color-light-border
+
+    &:focus
+      border: $border-size solid $color-primary
+
+=field-clickable
+  cursor: pointer
+
+=field-control
+  background: $color-field-back
+  color: $color-on-field-back
+  padding: $pad/2
+  width: 100%
+
+=field-color
+  &:focus
+    color: $color-primary
+
+  &:hover
+    color: $color-light-border
+
+    &:focus
+      color: $color-primary
+
+  &--checked,
+  &--selected
+    color: $color-primary
+
+    &:hover
+      color: $color-primary

@@ -1,0 +1,118 @@
+@import "../config"
+
+body
+  background-color: $color-back
+  font-family: 'Roboto', sans-serif
+  margin: 0
+  padding: 0
+
+  &.localhost
+    background-image: radial-gradient(circle, #cdcdcd 1px, rgba(0, 0, 0, 0) 1px)
+    background-size: 20px 20px
+
+  *
+    border-box
+
+.container
+  display: flex
+  flex-flow: row
+  min-height: 100vh
+
+.content
+  display: flex
+  flex-flow: column
+  flex-grow: 1
+
+.content__section
+  align-items: stretch
+  display: flex
+  flex-flow: column
+  flex-grow: 1
+  padding: $pad
+
+.content__data__actions
+  flex-grow: 0
+  flex-shrink: 1
+  padding: $pad
+
+.content textarea
+  width: 100%
+  flex-grow: 1
+
+.sidebar
+  display: flex
+  flex-flow: column
+  max-height: 100vh
+  max-width: 650px
+  flex-basis: 40vw
+
+.sidebar__content
+  flex-grow: 1
+  overflow-y: auto
+  padding: $pad
+
+  .info
+    flex-grow: 1
+
+.sidebar__action
+  align-items: center
+  display: flex
+  flex-flow: row
+
+  i:last-child
+    margin-right: 1rem
+
+.info
+  background-color: $color-back
+  border-radius: $pad/2
+  color: $color-on-back
+  margin: $pad
+  padding: $pad
+
+.info__info
+  background-color: #e1f5fe
+
+.list__items
+  margin: $pad 0
+
+.list__add
+  align-items: center
+  display: flex
+  flex-flow: row
+  justify-content: center
+  padding: $pad
+
+
+.selective__field--dirty
+  .localhost &
+    box-shadow: 0 0 0 1px #D78528
+
+.list__label
+  font-size: 1.2rem
+
+.status
+  align-items: center
+  display: flex
+  flex-flow: row
+  flex-grow: 0
+  flex-shrink: 1
+
+  > div
+    margin-right: $pad
+
+  span
+    border: 2px solid
+    border-radius: 5px
+    display: inline-block
+    font-weight: bold
+    min-width: $pad*4
+    padding: $pad/4
+    text-align: center
+
+    &.status--true
+      color: #D78528
+
+    &.status--false
+      color: #C71F25
+
+@import "../selective"

@@ -1,0 +1,85 @@
+// Styling for list field.
+
+.selective__field__type__list
+  > .selective__field__header
+    display: flex
+    flex-flow: row-reverse
+    justify-content: space-between
+
+    > .selective__field__label
+      flex-grow: 1
+
+.selective__list
+  &--auto
+    .editor--highlight &
+      .selective__list__item
+        background-color: $color-back-highlight !important
+
+.selective__list__item
+  background: $color-field-back
+  border: $border-size solid transparent
+  border-radius: $radius-2
+  color: $color-on-field-back
+  margin: $pad/2 0
+  padding: $pad
+
+  &:hover
+    box-shadow: $shadow-1
+
+  &--empty
+    background: none
+    border: 1px dashed $color-field-back
+
+    &:hover
+      box-shadow: none !important
+      cursor: default
+
+  &--collapsed,
+  &--simple
+    align-items: center
+    display: flex
+    flex-flow: row
+    align-items: center
+    padding: $pad/2 0
+
+    .selective__field
+      flex-grow: 1
+      margin: 0
+
+  &--simple
+    padding: $pad/4 0
+
+.selective__list__item__delete,
+.selective__list__item__drag
+  padding: 0 $pad/2
+
+  .material-icons
+    +field-clickable
+    +field-color
+    font-size: $font-size-icon-small
+
+.selective__list__item__label
+  +field-clickable
+  flex-basis: 25%
+  flex-grow: 1
+  font-weight: bold
+  padding-right: $pad
+
+.selective__list__item__preview
+  +field-clickable
+  flex-basis: 75%
+  flex-shrink: 1
+  flex-grow: 1
+  overflow: hidden
+  text-overflow: ellipsis
+
+.selective__list__fields__label
+  font-weight: 700
+
+  &--empty
+    +field-clickable
+    background: $color-bar
+    border-radius: $radius-2 $radius-2 0 0
+    height: $bar-height
+    margin: (-$pad) (-$pad) $pad (-$pad)
+    width: calc(100% + #{$pad*2})

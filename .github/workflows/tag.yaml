@@ -1,0 +1,19 @@
+name: 'Tag'
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: bahmutov/npm-install@v1
+    - run: |
+        yarn test
+        yarn run compile
+    - uses: JS-DevTools/npm-publish@v1
+      with:
+        token: ${{ secrets.NPM_TOKEN }}
