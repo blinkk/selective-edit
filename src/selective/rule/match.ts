@@ -1,4 +1,5 @@
 import {AllowExcludeRuleConfig, Rule, RuleConfig} from '../validationRules';
+import {DataType} from '../../utility/dataType';
 
 export interface MatchRuleConfig extends RuleConfig {
   allowed?: AllowExcludeRuleConfig;
@@ -41,8 +42,21 @@ export class MatchRule extends Rule {
       }
 
       // Matching specific values only.
-      if (matchConfig.values) {
-        if (!matchConfig.values.includes(value)) {
+      if (matchConfig.values && matchConfig.values.length) {
+        let inValues = false;
+        for (const possibleValue of matchConfig.values) {
+          if (DataType.isRegExp(possibleValue)) {
+            if ((possibleValue as RegExp).test(value)) {
+              inValues = true;
+              break;
+            }
+          } else if (possibleValue === value) {
+            inValues = true;
+            break;
+          }
+        }
+
+        if (!inValues) {
           return matchConfig.message || this.message;
         }
       }
@@ -60,8 +74,14 @@ export class MatchRule extends Rule {
 
       // Matching specific values NOT allowed.
       if (matchConfig.values) {
-        if (matchConfig.values.includes(value)) {
-          return matchConfig.message || this.message;
+        for (const possibleValue of matchConfig.values) {
+          if (DataType.isRegExp(possibleValue)) {
+            if ((possibleValue as RegExp).test(value)) {
+              return matchConfig.message || this.message;
+            }
+          } else if (possibleValue === value) {
+            return matchConfig.message || this.message;
+          }
         }
       }
     }

@@ -6,7 +6,7 @@ import {Types} from './types';
 export interface AllowExcludeRuleConfig {
   message?: string;
   pattern?: string;
-  values?: Array<string>;
+  values?: Array<string | RegExp>;
 }
 
 export interface MinMaxRuleConfig {
