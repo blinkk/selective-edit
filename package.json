@@ -2,7 +2,7 @@
   "name": "@blinkk/selective-edit",
   "version": "1.1.2",
   "license": "MIT",
-  "homepage": "https://blinkkcode.github.com/selective-edit",
+  "homepage": "https://blinkk.github.com/selective-edit",
   "description": "Selective structured text editor.",
   "keywords": [
     "structured",
@@ -11,13 +11,13 @@
     "editor"
   ],
   "bugs": {
-    "url": "https://github.com/blinkkcode/selective-edit/issues"
+    "url": "https://github.com/blinkk/selective-edit/issues"
   },
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blinkkcode/selective-edit.git"
+    "url": "git+https://github.com/blinkk/selective-edit.git"
   },
   "directories": {
     "example": "example"
