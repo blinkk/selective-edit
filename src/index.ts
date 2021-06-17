@@ -67,6 +67,8 @@ export {RequireRule, RequireRuleConfig} from './selective/rule/require';
  * Selective Utilities
  */
 export {DeepObject, autoDeepObject} from './utility/deepObject';
+export {DataType} from './utility/dataType';
+export {Listeners} from './utility/listeners';
 export {findParentByClassname} from './utility/dom';
 
 /**
