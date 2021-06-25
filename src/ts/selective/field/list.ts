@@ -1,6 +1,6 @@
 import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldComponent, FieldConfig} from '../field';
-import {GlobalConfig, SelectiveEditor} from '../..';
+import {GlobalConfig, SelectiveEditor} from '../editor';
 import {SortableFieldComponent, SortableMixin} from '../../mixins/sortable';
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../../mixins';
@@ -88,7 +88,8 @@ export interface ListItemConstructor {
 
 export class ListField
   extends SortableMixin(Field)
-  implements ListFieldComponent {
+  implements ListFieldComponent
+{
   config: ListFieldConfig;
   protected items: Array<ListItemComponent> | null;
   protected ListItemCls: ListItemConstructor;
@@ -484,7 +485,8 @@ export class ListField
 
 export class ListFieldItem
   extends UuidMixin(Base)
-  implements ListItemComponent {
+  implements ListItemComponent
+{
   listField: ListFieldComponent & SortableFieldComponent;
   fields: FieldsComponent;
   isExpanded: boolean;

@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    example: './src/example/example.ts',
+    example: './src/ts/example/example.ts',
   },
   mode: 'development',
   module: {
@@ -15,7 +15,7 @@ module.exports = {
     ],
   },
   output: {
-    path: path.resolve(__dirname, './dist/src/'),
+    path: path.resolve(__dirname, './dist/'),
     filename: '[name].min.js',
   },
   resolve: {

@@ -1,9 +1,8 @@
 import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldConfig} from '../field';
+import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
 import {FieldsComponent} from '../fields';
-import {GlobalConfig} from '../editor';
-import {SelectiveEditor} from '../..';
 import {Types} from '../types';
 import {findParentByClassname} from '../../utility/dom';
 import merge from 'lodash.merge';
