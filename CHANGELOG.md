@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/blinkk/selective-edit/compare/v1.2.1...v2.0.0) (2021-06-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* move `sass` into `src`, change export root for ts
+
+### Code Refactoring
+
+* move `sass` into `src`, change export root for ts ([1f3733c](https://www.github.com/blinkk/selective-edit/commit/1f3733c257e5f6c388454b523c96f8b103a1620a))
+
 ### [1.2.1](https://www.github.com/blinkk/selective-edit/compare/v1.2.0...v1.2.1) (2021-06-17)
 
 
