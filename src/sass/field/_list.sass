@@ -20,7 +20,7 @@
   border: $border-size solid transparent
   border-radius: $radius-2
   color: $color-on-field-back
-  margin: $pad/2 0
+  margin: math.div($pad, 2) 0
   padding: $pad
 
   &:hover
@@ -40,18 +40,18 @@
     display: flex
     flex-flow: row
     align-items: center
-    padding: $pad/2 0
+    padding: math.div($pad, 2) 0
 
     .selective__field
       flex-grow: 1
       margin: 0
 
   &--simple
-    padding: $pad/4 0
+    padding: math.div($pad, 4) 0
 
 .selective__list__item__delete,
 .selective__list__item__drag
-  padding: 0 $pad/2
+  padding: 0 math.div($pad, 2)
 
   .material-icons
     +field-clickable
