@@ -13,8 +13,8 @@
   "bugs": {
     "url": "https://github.com/blinkk/selective-edit/issues"
   },
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/blinkk/selective-edit.git"
@@ -26,21 +26,21 @@
     "node": ">=14"
   },
   "files": [
-    "dist/src",
-    "dist/css"
+    "dist"
   ],
   "scripts": {
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "tsc && npx gulp compile && webpack --config webpack.prod.js",
-    "copy": "mkdir -p dist/src/static; cp src/static/* dist/src/static",
+    "compile": "tsc && yarn run sass:build && webpack --config webpack.prod.js",
     "coverage": "codecov",
     "dev": "concurrently \"npx ava --watch\" \"tsc --watch\"",
     "docs": "typedoc",
     "fix": "node ./node_modules/eslint/bin/eslint --fix src/**/*.ts",
     "prepare": "yarn run compile",
     "prepublish": "tsc",
-    "serve": "concurrently \"webpack serve --config webpack.dev.js\" \"npx gulp watch\"",
+    "sass:build": "sass --no-source-map ./src/sass/:./dist/css --style compressed",
+    "sass:watch": "sass --watch --no-source-map ./src/sass/:./dist/css --style compressed",
+    "serve": "concurrently \"webpack serve --config webpack.dev.js\" \"yarn run sass:watch\"",
     "test": "nyc ava",
     "test-ci": "nyc --reporter=lcov ava && codecov"
   },
@@ -69,11 +69,8 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-sort-class-members": "^1.11.0",
     "gts": "^3.1.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^8.0.0",
-    "gulp-rename": "^2.0.0",
-    "gulp-sass": "^4.1.0",
     "nyc": "^15.1.0",
+    "sass": "^1.35.1",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "typedoc": "^0.20.37",
