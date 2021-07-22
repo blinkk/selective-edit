@@ -371,7 +371,7 @@ export class ListField
 
     return html`<div class="selective__field__actions">
       <button
-        class="selective__action--add"
+        class="selective__action selective__action--add"
         @click=${(evt: Event) => {
           this.handleAddItem(evt, editor, data);
         }}

@@ -54,7 +54,7 @@ export class SelectiveEditor extends DataMixin(Base) {
     this.types = {
       fields: new ClassManager<FieldConstructor, FieldComponent>(),
       globals: {
-        FieldsCls: (Fields as unknown) as FieldsConstructor,
+        FieldsCls: Fields as unknown as FieldsConstructor,
         AutoFieldsCls: AutoFields,
       },
       rules: new ClassManager<RuleConstructor, RuleComponent>(),

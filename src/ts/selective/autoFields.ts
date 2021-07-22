@@ -54,7 +54,7 @@ export class AutoFields implements AutoFieldsComponent {
     // Object are guessed based on keys.
     if (DataType.isObject(data)) {
       return this.deepGuessObject(
-        (data as unknown) as Record<string, any>,
+        data as unknown as Record<string, any>,
         keyBase
       );
     }
