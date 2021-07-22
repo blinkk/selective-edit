@@ -1,5 +1,6 @@
+import {DeepObject, autoDeepObject} from '../utility/deepObject';
+
 import {Constructor} from './index';
-import {DeepObject} from '../utility/deepObject';
 
 export function DataMixin<TBase extends Constructor>(Base: TBase) {
   return class DataClass extends Base {
@@ -10,7 +11,11 @@ export function DataMixin<TBase extends Constructor>(Base: TBase) {
     }
 
     set data(data: DeepObject | undefined) {
-      this._data = data;
+      if (data === undefined) {
+        this._data = undefined;
+      } else {
+        this._data = autoDeepObject(data);
+      }
     }
   };
 }
