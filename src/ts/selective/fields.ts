@@ -63,7 +63,8 @@ export interface FieldsConstructor {
  */
 export class Fields
   extends UuidMixin(DataMixin(Base))
-  implements FieldsComponent {
+  implements FieldsComponent
+{
   config: FieldsConfig;
   globalConfig: GlobalConfig;
   private currentValue?: DeepObject;
@@ -187,6 +188,10 @@ export class Fields
       previewFields = [previewFields as string];
     }
     return previewFields as Array<string>;
+  }
+
+  reset(): void {
+    this.fields = [];
   }
 
   /**
