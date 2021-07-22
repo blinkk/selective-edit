@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.0.2](https://www.github.com/blinkk/selective-edit/compare/v2.0.1...v2.0.2) (2021-07-22)
+
+
+### Bug Fixes
+
+* no auto guess when there is no value ([#33](https://www.github.com/blinkk/selective-edit/issues/33)) ([179eef8](https://www.github.com/blinkk/selective-edit/commit/179eef8c398a91135d63e8e3b3d4aceb94b60716))
+* reset the fields without having to recreate the class ([#34](https://www.github.com/blinkk/selective-edit/issues/34)) ([b0d0c5a](https://www.github.com/blinkk/selective-edit/commit/b0d0c5a3d5076b0db662e89dbebc2e1f4dcfa01d))
+
 ### [2.0.1](https://www.github.com/blinkk/selective-edit/compare/v2.0.0...v2.0.1) (2021-07-22)
 
 
