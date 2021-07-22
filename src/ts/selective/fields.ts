@@ -190,6 +190,10 @@ export class Fields
     return previewFields as Array<string>;
   }
 
+  reset(): void {
+    this.fields = [];
+  }
+
   /**
    * Template for determining how to render the fields.
    *
