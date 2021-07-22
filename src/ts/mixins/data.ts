@@ -10,7 +10,7 @@ export function DataMixin<TBase extends Constructor>(Base: TBase) {
       return this._data;
     }
 
-    set data(data: DeepObject | undefined) {
+    set data(data: DeepObject | Record<string, any> | undefined) {
       if (data === undefined) {
         this._data = undefined;
       } else {
