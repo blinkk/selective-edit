@@ -35,6 +35,7 @@ export interface FieldsComponent {
   isValid: boolean;
   guessDefaultValue(): string | Record<string, any>;
   lock(): void;
+  reset(): void;
   template: Template;
   templatePreviewValue(
     editor: SelectiveEditor,
