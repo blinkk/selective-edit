@@ -99,6 +99,13 @@ export class SelectiveEditor extends DataMixin(Base) {
 
   guessFields(): Array<FieldConfig> {
     const autoFields = new this.types.globals.AutoFieldsCls({});
+
+    if (!this.data) {
+      this.config.fields = [];
+      this.resetFields();
+      return this.config.fields;
+    }
+
     this.config.fields = autoFields.guessFields(this.data?.obj);
     this.resetFields();
     return this.config.fields;
