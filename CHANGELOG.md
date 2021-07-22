@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/blinkk/selective-edit/compare/v2.0.0...v2.0.1) (2021-07-22)
+
+
+### Bug Fixes
+
+* value needs to be auto deep object ([f25b67f](https://www.github.com/blinkk/selective-edit/commit/f25b67f10055d8ed2eb70173ee597e741eae7dd5))
+
 ## [2.0.0](https://www.github.com/blinkk/selective-edit/compare/v1.2.1...v2.0.0) (2021-06-25)
 
 
