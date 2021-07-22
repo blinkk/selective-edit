@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.3](https://www.github.com/blinkk/selective-edit/compare/v2.0.2...v2.0.3) (2021-07-22)
+
+
+### Bug Fixes
+
+* reset method on FieldsComponent definiton ([d3d3760](https://www.github.com/blinkk/selective-edit/commit/d3d3760af1657362b345881b1680bb6913ce2343))
+
 ### [2.0.2](https://www.github.com/blinkk/selective-edit/compare/v2.0.1...v2.0.2) (2021-07-22)
 
 
