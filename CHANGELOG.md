@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/blinkk/selective-edit/compare/v2.0.3...v2.1.0) (2021-07-23)
+
+
+### Features
+
+* utility method for combining the preview keys ([01000bd](https://www.github.com/blinkk/selective-edit/commit/01000bd427e769c15d44e6771648679e4863bcdd))
+
 ### [2.0.3](https://www.github.com/blinkk/selective-edit/compare/v2.0.2...v2.0.3) (2021-07-22)
 
 
