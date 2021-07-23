@@ -76,6 +76,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="utility_preview.html#combinepreviewkeys" class="tsd-kind-icon">combine<wbr>Preview<wbr>Keys</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="utility_preview.html#findorguesspreviewvalue" class="tsd-kind-icon">find<wbr>OrGuess<wbr>Preview<wbr>Value</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="utility_preview.html#findpreviewvalue" class="tsd-kind-icon">find<wbr>Preview<wbr>Value</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="utility_preview.html#templatepreviewvalue" class="tsd-kind-icon">template<wbr>Preview<wbr>Value</a></li>
@@ -87,6 +88,45 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="combinepreviewkeys" class="tsd-anchor"></a>
+					<h3>combine<wbr>Preview<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">combine<wbr>Preview<wbr>Keys<span class="tsd-signature-symbol">(</span>previewKeys<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, previewKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/01000bd/src/ts/utility/preview.ts#L41">utility/preview.ts:41</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>In the editor configuration it allows for providing a list of preview keys
+										or a single preview key to use for finding the preview value. This method
+									combines them into a single array to normalize the value for other methods.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> previewKeys: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Array of preview keys to use for previewing a field.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> previewKey: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Preview key to use for previewing a field.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="findorguesspreviewvalue" class="tsd-anchor"></a>
 					<h3>find<wbr>OrGuess<wbr>Preview<wbr>Value</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -96,7 +136,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/0bed30c/src/ts/utility/preview.ts#L78">utility/preview.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/01000bd/src/ts/utility/preview.ts#L98">utility/preview.ts:98</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -125,7 +165,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/0bed30c/src/ts/utility/preview.ts#L56">utility/preview.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/01000bd/src/ts/utility/preview.ts#L76">utility/preview.ts:76</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -154,7 +194,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/0bed30c/src/ts/utility/preview.ts#L114">utility/preview.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/01000bd/src/ts/utility/preview.ts#L134">utility/preview.ts:134</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -190,6 +230,9 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-enum tsd-parent-kind-module">
 						<a href="../enums/utility_preview.previewtypes.html" class="tsd-kind-icon">Preview<wbr>Types</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="utility_preview.html#combinepreviewkeys" class="tsd-kind-icon">combine<wbr>Preview<wbr>Keys</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="utility_preview.html#findorguesspreviewvalue" class="tsd-kind-icon">find<wbr>OrGuess<wbr>Preview<wbr>Value</a>
