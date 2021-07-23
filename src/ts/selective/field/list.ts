@@ -33,8 +33,23 @@ export interface ListFieldConfig extends FieldConfig {
    * Field definitions for each item in the list.
    */
   fields?: Array<FieldConfig>;
+  /**
+   * Preview field key.
+   *
+   * When showing a preview of the list items, use this key to determine
+   * the value to show for the preview.
+   */
   previewField?: string;
+  /**
+   * Preview field keys.
+   *
+   * When showing a preview of the list items, use these keys to determine
+   * the value to show for the preview.
+   */
   previewFields?: Array<string>;
+  /**
+   * Control how the editor displays the preview for the list items.
+   */
   previewType?: PreviewTypes;
 }
 
