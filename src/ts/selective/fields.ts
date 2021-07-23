@@ -2,6 +2,7 @@ import {FieldComponent, FieldConfig, InternalFieldConfig} from './field';
 import {GlobalConfig, SelectiveEditor} from './editor';
 import {
   PreviewTypes,
+  combinePreviewKeys,
   findOrGuessPreviewValue,
   templatePreviewValue,
 } from '../utility/preview';
@@ -183,12 +184,10 @@ export class Fields
   }
 
   get previewFields(): Array<string> {
-    let previewFields =
-      this.config.previewField || this.config.previewFields || [];
-    if (!DataType.isArray(previewFields)) {
-      previewFields = [previewFields as string];
-    }
-    return previewFields as Array<string>;
+    return combinePreviewKeys(
+      this.config.previewFields,
+      this.config.previewField
+    );
   }
 
   reset(): void {
