@@ -30,6 +30,26 @@ export enum PreviewTypes {
   Text = 'text',
 }
 
+/**
+ * In the editor configuration it allows for providing a list of preview keys
+ * or a single preview key to use for finding the preview value. This method
+ * combines them into a single array to normalize the value for other methods.
+ *
+ * @param previewKeys Array of preview keys to use for previewing a field.
+ * @param previewKey Preview key to use for previewing a field.
+ */
+export function combinePreviewKeys(
+  previewKeys?: Array<string>,
+  previewKey?: string
+): Array<string> {
+  // Copy the array to prevent modifying the original array.
+  const allKeys = [...(previewKeys ?? [])];
+  if (previewKey) {
+    allKeys.push(previewKey);
+  }
+  return allKeys;
+}
+
 function guessPreviewForObject(obj: Record<string, any>): any {
   const deepObj = autoDeepObject(obj);
   let previewValue = obj;
