@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/blinkk/selective-edit/compare/v2.1.0...v2.1.1) (2021-07-24)
+
+
+### Bug Fixes
+
+* use the shortcut method to combine field keys. ([a577dff](https://www.github.com/blinkk/selective-edit/commit/a577dff28fff5e448bcefcd3366964e4978794d2))
+
 ## [2.1.0](https://www.github.com/blinkk/selective-edit/compare/v2.0.3...v2.1.0) (2021-07-23)
 
 
