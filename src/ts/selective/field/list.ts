@@ -3,6 +3,7 @@ import {Field, FieldComponent, FieldConfig} from '../field';
 import {GlobalConfig, SelectiveEditor} from '../editor';
 import {SortableFieldComponent, SortableMixin} from '../../mixins/sortable';
 import {TemplateResult, html} from 'lit-html';
+
 import {Base} from '../../mixins';
 import {EVENT_UNLOCK} from '../events';
 import {FieldsComponent} from '../fields';
@@ -391,7 +392,7 @@ export class ListField
           this.handleAddItem(evt, editor, data);
         }}
       >
-        ${this.config.addLabel || 'Add'}
+        <span>${this.config.addLabel || 'Add'}</span>
       </button>
     </div>`;
   }

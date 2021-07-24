@@ -2,6 +2,7 @@ import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldConfig} from '../field';
 import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
+
 import {FieldsComponent} from '../fields';
 import {Types} from '../types';
 import {findParentByClassname} from '../../utility/dom';
@@ -186,7 +187,7 @@ export class VariantField extends Field {
             data-variant=${variantKey}
             @click=${this.handleVariantClick.bind(this)}
           >
-            ${variants[variantKey].label || variantKey}
+            <span>${variants[variantKey].label || variantKey}</span>
           </button>
         `
       )}
