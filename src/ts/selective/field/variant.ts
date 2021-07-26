@@ -105,6 +105,16 @@ export class VariantField extends Field {
     this.render();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleVariantClear(evt: Event) {
+    this.variant = undefined;
+
+    // Reset the fields so they can be recreated next render.
+    this.fields = undefined;
+
+    this.render();
+  }
+
   get isClean(): boolean {
     // If there are no fields, nothing has changed.
     if (!this.fields) {
@@ -172,7 +182,9 @@ export class VariantField extends Field {
     const variantKeys = Object.keys(variants).sort();
 
     return html`<div class="selective__variant__variants">
-      <label>${this.config.variantLabel || 'Variant'}:</label>
+      ${this.config.variantLabel
+        ? html`<label>${this.config.variantLabel}:</label>`
+        : ''}
       ${repeat(
         variantKeys,
         variantKey => variantKey,
@@ -191,6 +203,15 @@ export class VariantField extends Field {
           </button>
         `
       )}
+      ${this.variant
+        ? html`<div
+            class="selective__variant__clear"
+            data-tip="Clear"
+            @click=${this.handleVariantClear.bind(this)}
+          >
+            <span class="material-icons">clear</span>
+          </div>`
+        : ''}
     </div>`;
   }
 
