@@ -31,7 +31,7 @@
   "scripts": {
     "check": "gts check",
     "clean": "gts clean",
-    "compile": "tsc && yarn run sass:build && webpack --config webpack.prod.js",
+    "compile": "concurrently \"tsc\" \"yarn run sass:build\" \"webpack --config webpack.prod.js\"",
     "coverage": "codecov",
     "dev": "concurrently \"npx ava --watch\" \"tsc --watch\"",
     "docs": "typedoc",
