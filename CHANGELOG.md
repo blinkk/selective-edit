@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/blinkk/selective-edit/compare/v2.1.3...v2.2.0) (2021-07-26)
+
+
+### Features
+
+* optional label for variant and ability to clear variant ([#41](https://www.github.com/blinkk/selective-edit/issues/41)) ([2a74527](https://www.github.com/blinkk/selective-edit/commit/2a745275ffb3d516d21c08df66d3ec7eb686c2f9))
+
 ### [2.1.3](https://www.github.com/blinkk/selective-edit/compare/v2.1.2...v2.1.3) (2021-07-26)
 
 
