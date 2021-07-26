@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.2](https://www.github.com/blinkk/selective-edit/compare/v2.1.1...v2.1.2) (2021-07-26)
+
+
+### Bug Fixes
+
+* guess label from key if not defined in config ([a550b12](https://www.github.com/blinkk/selective-edit/commit/a550b129345fe3d0e44fd05ce119f4d5d3063469))
+
 ### [2.1.1](https://www.github.com/blinkk/selective-edit/compare/v2.1.0...v2.1.1) (2021-07-24)
 
 
