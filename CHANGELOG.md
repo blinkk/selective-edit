@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.1.3](https://www.github.com/blinkk/selective-edit/compare/v2.1.2...v2.1.3) (2021-07-26)
+
+
+### Bug Fixes
+
+* test breakage for the label guessing ([0902426](https://www.github.com/blinkk/selective-edit/commit/09024265fa148357b1e4019159bb53f6f65599d6))
+
 ### [2.1.2](https://www.github.com/blinkk/selective-edit/compare/v2.1.1...v2.1.2) (2021-07-26)
 
 
