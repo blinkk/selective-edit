@@ -11,6 +11,7 @@ import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map';
+import {guessLabel} from '../utility/preview';
 import {repeat} from 'lit-html/directives/repeat';
 import stringify from 'json-stable-stringify';
 
@@ -137,7 +138,8 @@ export type FieldConstructor = (
 
 export class Field
   extends UuidMixin(DataMixin(Base))
-  implements FieldComponent {
+  implements FieldComponent
+{
   config: InternalFieldConfig;
   globalConfig: GlobalConfig;
   protected currentValue?: any;
@@ -583,6 +585,11 @@ export class Field
     if (!this.config.label) {
       return html``;
     }
+
+    if (!this.config.label) {
+      this.config.label = guessLabel(this.config.key);
+    }
+
     return html`<div class=${classMap(this.classesForLabel())}>
       ${this.templateIconDeepLink(editor, data)}
       ${this.templateIconValidation(editor, data)}

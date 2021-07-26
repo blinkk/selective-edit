@@ -131,6 +131,23 @@ export function findOrGuessPreviewValue(
   return defaultValue;
 }
 
+/**
+ * From the key guess the label of the field.
+ *
+ * ex: key.subKey => Key SubKey
+ */
+export function guessLabel(key: string): string {
+  key = key.replace(/\./g, ' ');
+  key = key.replace(/-/g, ' ');
+  key = key.replace(/_/g, ' ');
+  return key
+    .split(' ')
+    .map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
+}
+
 export function templatePreviewValue(
   previewValue: string,
   previewType: PreviewTypes,
