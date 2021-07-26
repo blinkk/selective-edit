@@ -2,6 +2,7 @@ import {DEFAULT_ZONE_KEY, Validation, ValidationLevel} from './validation';
 import {GlobalConfig, SelectiveEditor} from './editor';
 import {RuleConfig, Rules} from './validationRules';
 import {TemplateResult, html} from 'lit-html';
+
 import {Base} from '../mixins';
 import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
@@ -11,7 +12,7 @@ import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map';
-import {guessLabel} from '../utility/preview';
+import {guessLabel} from './autoFields';
 import {repeat} from 'lit-html/directives/repeat';
 import stringify from 'json-stable-stringify';
 

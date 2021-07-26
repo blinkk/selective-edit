@@ -1,7 +1,6 @@
 import {DataType} from '../utility/dataType';
 import {FieldConfig} from './field';
 import {ListFieldConfig} from './field/list';
-import {guessLabel} from '../utility/preview';
 
 export interface AutoFieldsConfig {
   ignoreKeys?: Array<string>;
@@ -176,4 +175,21 @@ export class AutoFields implements AutoFieldsComponent {
 
     return false;
   }
+}
+
+/**
+ * From the key guess the label of the field.
+ *
+ * ex: key.subKey => Key SubKey
+ */
+export function guessLabel(key: string): string {
+  key = key.replace(/\./g, ' ');
+  key = key.replace(/-/g, ' ');
+  key = key.replace(/_/g, ' ');
+  return key
+    .split(' ')
+    .map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(' ');
 }
