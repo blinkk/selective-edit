@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://www.github.com/blinkk/selective-edit/compare/v2.2.0...v2.2.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* shared deep reference fix by deep cloning the values. ([549eacc](https://www.github.com/blinkk/selective-edit/commit/549eacc023f918fcd3558b508b3825d92dff6f0a))
+
 ## [2.2.0](https://www.github.com/blinkk/selective-edit/compare/v2.1.3...v2.2.0) (2021-07-26)
 
 
