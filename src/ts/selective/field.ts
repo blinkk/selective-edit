@@ -12,6 +12,7 @@ import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map';
+import cloneDeep from 'lodash.clonedeep';
 import {guessLabel} from './autoFields';
 import {repeat} from 'lit-html/directives/repeat';
 import stringify from 'json-stable-stringify';
@@ -248,12 +249,8 @@ export class Field
    * @param value Original value from the source.
    */
   cleanOriginalValue(value: any): any {
-    // Copy the array to prevent shared array.
-    if (DataType.isArray(value)) {
-      value = [...value];
-    }
-
-    return value;
+    // Deep copy the value to prevent shared reference modification.
+    return cloneDeep(value);
   }
 
   get fullKey(): string {
