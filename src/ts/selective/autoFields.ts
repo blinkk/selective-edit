@@ -26,11 +26,6 @@ export interface AutoFieldsComponent {
    * @param data Data to use for guessing field configurations.
    */
   guessFields(data: any): Array<FieldConfig>;
-
-  /**
-   * AutoFields can define any properties or methods they need.
-   */
-  [x: string]: any;
 }
 
 export interface AutoFieldsConstructor {
