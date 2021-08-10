@@ -12,6 +12,7 @@ import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
+import {DataType} from '../../utility/dataType';
 
 export interface ListFieldConfig extends FieldConfig {
   /**
@@ -344,6 +345,17 @@ export class ListField
     }
 
     return true;
+  }
+
+  /**
+   * Check if the data format is invalid for what the field expects to edit.
+   */
+  get isDataFormatValid(): boolean {
+    if (this.originalValue === undefined || this.originalValue === null) {
+      return true;
+    }
+
+    return DataType.isArray(this.originalValue);
   }
 
   get isValid(): boolean {

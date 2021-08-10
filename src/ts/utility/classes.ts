@@ -57,16 +57,14 @@ export class ClassManager<T, R> {
   newFromKey(key: string, ...args: any): R | null {
     // Create based on the provided key if defined.
     if (this.classes[key]) {
-      return new ((this.classes[key] as unknown) as ClassConstructor)(
+      return new (this.classes[key] as unknown as ClassConstructor)(
         ...args
       ) as R;
     }
 
     // Fall back to the default class when defined.
     if (this.DefaultCls) {
-      return new ((this.DefaultCls as unknown) as ClassConstructor)(
-        ...args
-      ) as R;
+      return new (this.DefaultCls as unknown as ClassConstructor)(...args) as R;
     }
 
     return null;
