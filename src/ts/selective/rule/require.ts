@@ -2,6 +2,10 @@ import {Rule, RuleConfig} from '../validationRules';
 import {DataType} from '../../utility/dataType';
 
 export interface RequireRuleConfig extends RuleConfig {
+  /**
+   * For some fields a blank is not an empty value. Allow for setting
+   * alternative values that are also considered as being empty.
+   */
   alternativeEmpties?: Array<string>;
 }
 
@@ -12,6 +16,13 @@ export class RequireRule extends Rule {
   constructor(config: RequireRuleConfig) {
     super(config);
     this.config = config;
+  }
+
+  /**
+   * Required rule makes the field required.
+   */
+  get isRequired(): boolean {
+    return true;
   }
 
   validate(value: any): string | null {

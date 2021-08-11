@@ -78,6 +78,18 @@ export class Validation implements ValidationComponent {
     return resultsForZone.filter(filterFunc);
   }
 
+  /**
+   * Checks each of the rules to see if the field is required.
+   */
+  isRequired(zoneKey?: string): boolean {
+    for (const rule of this.rules.getRulesForZone(zoneKey)) {
+      if (rule.isRequired) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   getResults(
     zoneKey?: string,
     maxLevel?: ValidationLevel

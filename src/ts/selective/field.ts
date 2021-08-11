@@ -190,6 +190,7 @@ export class Field
       'selective__field--guess': this.config.isGuessed || false,
       'selective__field--invalid': !this.isValid,
       'selective__field--linked': this.isDeepLinked,
+      'selective__field--required': this.validation?.isRequired() || false,
     };
 
     classes[`selective__field__type__${this.fieldType}`] = true;
@@ -636,10 +637,18 @@ export class Field
       this.config.label = guessLabel(this.config.key);
     }
 
+    let requiredMark = html``;
+
+    if (this.validation?.isRequired()) {
+      requiredMark = html`<span class="selective__field__label__required"
+        >*</span
+      >`;
+    }
+
     return html`<div class=${classMap(this.classesForLabel())}>
       ${this.templateIconDeepLink(editor, data)}
       ${this.templateIconValidation(editor, data)}
-      <label for=${this.uid}>${this.config.label}</label>
+      <label for=${this.uid}>${this.config.label}${requiredMark}</label>
     </div>`;
   }
 
