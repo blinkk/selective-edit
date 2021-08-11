@@ -43,6 +43,7 @@ export class TextareaField extends Field {
           id=${this.uid}
           rows=${this.config.rows || 6}
           placeholder=${this.config.placeholder || ''}
+          @blur=${this.handleBlur.bind(this)}
           @input=${this.handleInput.bind(this)}
           wrap=${this.config.wrap === undefined ? 'soft' : this.config.wrap}
         >

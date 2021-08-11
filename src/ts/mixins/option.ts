@@ -52,6 +52,7 @@ export interface OptionUiComponent {
 }
 
 export interface OptionUIConfig {
+  handleBlur: (evt: Event) => void;
   handleInput: (evt: Event) => void;
   isMulti?: boolean;
   isOptionSelected: (option: Option) => boolean;
@@ -205,6 +206,7 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
         data-value=${option.value}
         tabindex="0"
         role=${config.isMulti ? 'checkbox' : 'radio'}
+        @blur=${config.handleBlur}
         @click=${config.handleInput}
         @keypress=${(evt: KeyboardEvent) => {
           if (evt.code === 'Space') {

@@ -44,6 +44,7 @@ export class DateField extends Field {
         <input
           type="date"
           id="${this.uid}"
+          @blur=${this.handleBlur.bind(this)}
           @input=${this.handleInput.bind(this)}
           value=${value}
         />

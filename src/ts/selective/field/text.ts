@@ -34,6 +34,7 @@ export class TextField extends Field {
           type="text"
           id="${this.uid}"
           placeholder=${this.config.placeholder || ''}
+          @blur=${this.handleBlur.bind(this)}
           @input=${this.handleInput.bind(this)}
           value=${value}
         />
