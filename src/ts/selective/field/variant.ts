@@ -165,9 +165,14 @@ export class VariantField extends Field {
     editor: SelectiveEditor,
     data: DeepObject
   ): TemplateResult {
-    return html`<div class="selective__field__input__structure">
-      ${this.templateVariants(editor, data)}${this.templateInput(editor, data)}
-    </div>`;
+    const parts: Array<TemplateResult> = [];
+    if (!this.isDataFormatValid) {
+      parts.push(this.templateDataFormatInvalid(editor, data));
+    } else {
+      parts.push(this.templateVariants(editor, data));
+      parts.push(this.templateInput(editor, data));
+    }
+    return html`<div class="selective__field__input__structure">${parts}</div>`;
   }
 
   /**
