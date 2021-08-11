@@ -37,7 +37,8 @@ export function DroppableMixin<TBase extends Constructor>(Base: TBase) {
 
 export class DroppableUi
   extends UuidMixin(Base)
-  implements DroppableUiComponent {
+  implements DroppableUiComponent
+{
   listeners: Listeners;
   validTypes: Array<string>;
 

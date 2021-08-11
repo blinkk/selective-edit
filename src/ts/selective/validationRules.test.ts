@@ -5,13 +5,11 @@ import test from 'ava';
 
 test('rules can add validation rules', t => {
   const failMessage = 'failed';
-  const classManager: ClassManager<
-    RuleConstructor,
-    RuleComponent
-  > = new ClassManager();
+  const classManager: ClassManager<RuleConstructor, RuleComponent> =
+    new ClassManager();
   classManager.registerClass(
     'length',
-    (LengthRule as unknown) as RuleConstructor
+    LengthRule as unknown as RuleConstructor
   );
   const rules = new Rules(classManager);
   rules.addRuleFromConfig({

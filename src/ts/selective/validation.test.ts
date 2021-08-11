@@ -6,13 +6,11 @@ import test from 'ava';
 
 test('validation errors are stored when there are errors', t => {
   const failMessage = 'failed';
-  const classManager: ClassManager<
-    RuleConstructor,
-    RuleComponent
-  > = new ClassManager();
+  const classManager: ClassManager<RuleConstructor, RuleComponent> =
+    new ClassManager();
   classManager.registerClass(
     'length',
-    (LengthRule as unknown) as RuleConstructor
+    LengthRule as unknown as RuleConstructor
   );
   const rules = new Rules(classManager);
   rules.addRuleFromConfig({
