@@ -101,6 +101,7 @@
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_rule_match.MatchRule.html#isRequired" class="tsd-kind-icon">is<wbr>Required</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_rule_match.MatchRule.html#level" class="tsd-kind-icon">level</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited"><a href="selective_rule_match.MatchRule.html#message" class="tsd-kind-icon">message</a></li>
 							</ul>
@@ -130,7 +131,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="selective_validationRules.Rule.html">Rule</a>.<a href="selective_validationRules.Rule.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/rule/match.ts#L14">selective/rule/match.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/rule/match.ts#L14">selective/rule/match.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -153,7 +154,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="selective_validationRules.Rule.html">Rule</a>.<a href="selective_validationRules.Rule.html#config">config</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/rule/match.ts#L10">selective/rule/match.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/rule/match.ts#L10">selective/rule/match.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -164,7 +165,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="selective_validationRules.Rule.html">Rule</a>.<a href="selective_validationRules.Rule.html#defaultLevel">defaultLevel</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/validationRules.ts#L104">selective/validationRules.ts:104</a></li>
+							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/validationRules.ts#L116">selective/validationRules.ts:116</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -175,7 +176,7 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="selective_validationRules.Rule.html">Rule</a>.<a href="selective_validationRules.Rule.html#defaultMessage">defaultMessage</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/rule/match.ts#L11">selective/rule/match.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/rule/match.ts#L11">selective/rule/match.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -185,13 +186,36 @@
 					<div class="tsd-signature tsd-kind-icon">pattern<wbr>Cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/rule/match.ts#L12">selective/rule/match.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/rule/match.ts#L12">selective/rule/match.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+					<a name="isRequired" class="tsd-anchor"></a>
+					<h3>is<wbr>Required</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> isRequired<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/validationRules.ts#L151">selective/validationRules.ts:151</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Does the rule make the value required?</p>
+								</div>
+								<p>By default, a validation rule does not make the value required.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 					<a name="level" class="tsd-anchor"></a>
 					<h3>level</h3>
@@ -202,7 +226,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/validationRules.ts#L137">selective/validationRules.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/validationRules.ts#L158">selective/validationRules.ts:158</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -224,7 +248,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/validationRules.ts#L144">selective/validationRules.ts:144</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/validationRules.ts#L165">selective/validationRules.ts:165</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -250,7 +274,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_validationRules.Rule.html">Rule</a>.<a href="selective_validationRules.Rule.html#allowAdd">allowAdd</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/validationRules.ts#L120">selective/validationRules.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/validationRules.ts#L132">selective/validationRules.ts:132</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -282,7 +306,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="selective_validationRules.Rule.html">Rule</a>.<a href="selective_validationRules.Rule.html#allowRemove">allowRemove</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/validationRules.ts#L130">selective/validationRules.ts:130</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/validationRules.ts#L142">selective/validationRules.ts:142</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -313,7 +337,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/rule/match.ts#L20">selective/rule/match.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/rule/match.ts#L20">selective/rule/match.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -340,7 +364,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="selective_validationRules.Rule.html">Rule</a>.<a href="selective_validationRules.Rule.html#validate">validate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/47f39a4/src/ts/selective/rule/match.ts#L27">selective/rule/match.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/c23bc55/src/ts/selective/rule/match.ts#L27">selective/rule/match.ts:27</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -394,6 +418,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="selective_rule_match.MatchRule.html#patternCache" class="tsd-kind-icon">pattern<wbr>Cache</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
+								<a href="selective_rule_match.MatchRule.html#isRequired" class="tsd-kind-icon">is<wbr>Required</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-inherited">
 								<a href="selective_rule_match.MatchRule.html#level" class="tsd-kind-icon">level</a>
