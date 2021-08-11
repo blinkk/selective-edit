@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/blinkk/selective-edit/compare/v2.2.1...v2.3.0) (2021-08-11)
+
+
+### Features
+
+* Data format checking for existing values. ([#46](https://www.github.com/blinkk/selective-edit/issues/46)) ([d584b86](https://www.github.com/blinkk/selective-edit/commit/d584b86b9e2af80a58a779fa20f730470ec0bcfe))
+
 ### [2.2.1](https://www.github.com/blinkk/selective-edit/compare/v2.2.0...v2.2.1) (2021-08-02)
 
 
