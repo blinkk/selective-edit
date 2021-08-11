@@ -5,6 +5,7 @@ import {SortableFieldComponent, SortableMixin} from '../../mixins/sortable';
 import {TemplateResult, html} from 'lit-html';
 
 import {Base} from '../../mixins';
+import {DataType} from '../../utility/dataType';
 import {EVENT_UNLOCK} from '../events';
 import {FieldsComponent} from '../fields';
 import {PreviewTypes} from '../../utility/preview';
@@ -12,7 +13,6 @@ import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
-import {DataType} from '../../utility/dataType';
 
 export interface ListFieldConfig extends FieldConfig {
   /**
@@ -171,6 +171,11 @@ export class ListField
   }
 
   protected ensureItems(editor: SelectiveEditor): Array<ListItemComponent> {
+    // Cannot initialize items without valid data format.
+    if (!this.isDataFormatValid) {
+      return [];
+    }
+
     if (this.items === null) {
       this.items = [];
 
