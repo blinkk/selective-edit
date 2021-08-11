@@ -3,6 +3,7 @@ import {Field, FieldConfig} from '../field';
 import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
 
+import {DataType} from '../../utility/dataType';
 import {FieldsComponent} from '../fields';
 import {Types} from '../types';
 import {findParentByClassname} from '../../utility/dom';
@@ -127,6 +128,17 @@ export class VariantField extends Field {
     }
 
     return this.fields.isClean;
+  }
+
+  /**
+   * Check if the data format is invalid for what the field expects to edit.
+   */
+  get isDataFormatValid(): boolean {
+    if (this.originalValue === undefined || this.originalValue === null) {
+      return true;
+    }
+
+    return DataType.isObject(this.originalValue);
   }
 
   get isValid(): boolean {
