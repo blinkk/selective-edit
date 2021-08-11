@@ -53,6 +53,13 @@ export class RangeRule extends Rule {
     return value;
   }
 
+  /**
+   * Field is considered required when there is a min value..
+   */
+  get isRequired(): boolean {
+    return Boolean(this.config.min && this.config.min.value > 0);
+  }
+
   validate(value: any): string | null {
     // Allow for empty fields.
     // Use the required rule for making sure it exists.

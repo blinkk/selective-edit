@@ -48,6 +48,18 @@ export interface RuleComponent {
   allowRemove(value: any): boolean;
 
   /**
+   * Does the rule make the value required?
+   *
+   * The UI needs to be able to mark fields that are required
+   * without needing to show the entire error state.
+   *
+   * If a validation rule makes it required, this allows the
+   * UI to flag the field for the user without a full error
+   * display.
+   */
+  isRequired: boolean;
+
+  /**
    * Validation level used if the validation fails.
    */
   level: ValidationLevel;
@@ -129,6 +141,15 @@ export class Rule extends Base implements RuleComponent {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   allowRemove(value: any): boolean {
     return true;
+  }
+
+  /**
+   * Does the rule make the value required?
+   *
+   * By default, a validation rule does not make the value required.
+   */
+  get isRequired(): boolean {
+    return false;
   }
 
   /**
