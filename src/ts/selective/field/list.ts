@@ -5,6 +5,7 @@ import {SortableFieldComponent, SortableMixin} from '../../mixins/sortable';
 import {TemplateResult, html} from 'lit-html';
 
 import {Base} from '../../mixins';
+import {DataType} from '../../utility/dataType';
 import {EVENT_UNLOCK} from '../events';
 import {FieldsComponent} from '../fields';
 import {PreviewTypes} from '../../utility/preview';
@@ -170,6 +171,11 @@ export class ListField
   }
 
   protected ensureItems(editor: SelectiveEditor): Array<ListItemComponent> {
+    // Cannot initialize items without valid data format.
+    if (!this.isDataFormatValid) {
+      return [];
+    }
+
     if (this.items === null) {
       this.items = [];
 
@@ -344,6 +350,17 @@ export class ListField
     }
 
     return true;
+  }
+
+  /**
+   * Check if the data format is invalid for what the field expects to edit.
+   */
+  get isDataFormatValid(): boolean {
+    if (this.originalValue === undefined || this.originalValue === null) {
+      return true;
+    }
+
+    return DataType.isArray(this.originalValue);
   }
 
   get isValid(): boolean {

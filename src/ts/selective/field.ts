@@ -1,6 +1,7 @@
 import {DEFAULT_ZONE_KEY, Validation, ValidationLevel} from './validation';
 import {GlobalConfig, SelectiveEditor} from './editor';
 import {RuleConfig, Rules} from './validationRules';
+import {Template, templateInfo} from './template';
 import {TemplateResult, html} from 'lit-html';
 
 import {Base} from '../mixins';
@@ -8,7 +9,6 @@ import {DataMixin} from '../mixins/data';
 import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
 import {EVENT_RENDER} from './events';
-import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map';
@@ -97,6 +97,13 @@ export interface FieldComponent {
    * This is used by the editor to determine if there are changes pending.
    */
   isClean: boolean;
+  /**
+   * Is the data provided to the field in the correct format?
+   *
+   * If a field recieves data that is not in the format expected the field
+   * will show a message instead of the normal inputs.
+   */
+  isDataFormatValid: boolean;
   /**
    * Is the field simple?
    *
@@ -280,6 +287,27 @@ export class Field
     return stringify(this.currentValue) === stringify(this.originalValue);
   }
 
+  /**
+   * Check if the data format is invalid for what the field expects to edit.
+   */
+  get isDataFormatValid(): boolean {
+    // If there is no value, it is considered valid.
+    if (this.originalValue === undefined || this.originalValue === null) {
+      return true;
+    }
+
+    // Simple fields cannot handle complex data like objects and arrays.
+    if (
+      this.isSimple &&
+      (DataType.isObject(this.originalValue) ||
+        DataType.isArray(this.originalValue))
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
   get isSimple(): boolean {
     // Normal fields are not complex.
     return true;
@@ -388,6 +416,22 @@ export class Field
     // Update the original every time the template is used.
     this.updateOriginal(editor, data);
     return this.templateWrapper(editor, data);
+  }
+
+  /**
+   * Template for showing the invalid data format messaging.
+   *
+   * @param editor Selective editor used to render the template.
+   * @param data Data provided to render the template.
+   */
+  templateDataFormatInvalid(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    editor: SelectiveEditor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    data: DeepObject
+  ): TemplateResult {
+    return templateInfo(html`The value for this field is not in the expected
+    format and cannot be edited in the editor interface.`);
   }
 
   /**
@@ -568,9 +612,13 @@ export class Field
     editor: SelectiveEditor,
     data: DeepObject
   ): TemplateResult {
-    return html`<div class="selective__field__input__structure">
-      ${this.templateInput(editor, data)}
-    </div>`;
+    const parts: Array<TemplateResult> = [];
+    if (!this.isDataFormatValid) {
+      parts.push(this.templateDataFormatInvalid(editor, data));
+    } else {
+      parts.push(this.templateInput(editor, data));
+    }
+    return html`<div class="selective__field__input__structure">${parts}</div>`;
   }
 
   /**

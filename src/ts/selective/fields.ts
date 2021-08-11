@@ -9,7 +9,6 @@ import {
 import {TemplateResult, html} from 'lit-html';
 import {Base} from '../mixins';
 import {DataMixin} from '../mixins/data';
-import {DataType} from '../utility/dataType';
 import {DeepObject} from '../utility/deepObject';
 import {Template} from './template';
 import {Types} from './types';

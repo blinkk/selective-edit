@@ -2,6 +2,8 @@ import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldConfig} from '../field';
 import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
+
+import {DataType} from '../../utility/dataType';
 import {FieldsComponent} from '../fields';
 import {Types} from '../types';
 import {classMap} from 'lit-html/directives/class-map';
@@ -82,6 +84,17 @@ export class GroupField extends Field {
     return this.fields.isClean;
   }
 
+  /**
+   * Check if the data format is invalid for what the field expects to edit.
+   */
+  get isDataFormatValid(): boolean {
+    if (this.originalValue === undefined || this.originalValue === null) {
+      return true;
+    }
+
+    return DataType.isObject(this.originalValue);
+  }
+
   get isValid(): boolean {
     // If there are no fields, nothing has changed.
     if (!this.fields) {
@@ -90,6 +103,7 @@ export class GroupField extends Field {
     return this.fields.isValid;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templateHeader(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     const actions = [];
 

@@ -3,6 +3,7 @@ import {Field, FieldConfig} from '../field';
 import {GlobalConfig, SelectiveEditor} from '../editor';
 import {TemplateResult, html} from 'lit-html';
 
+import {DataType} from '../../utility/dataType';
 import {FieldsComponent} from '../fields';
 import {Types} from '../types';
 import {findParentByClassname} from '../../utility/dom';
@@ -129,6 +130,17 @@ export class VariantField extends Field {
     return this.fields.isClean;
   }
 
+  /**
+   * Check if the data format is invalid for what the field expects to edit.
+   */
+  get isDataFormatValid(): boolean {
+    if (this.originalValue === undefined || this.originalValue === null) {
+      return true;
+    }
+
+    return DataType.isObject(this.originalValue);
+  }
+
   get isValid(): boolean {
     // If there are no fields, nothing has changed.
     if (!this.fields) {
@@ -165,9 +177,14 @@ export class VariantField extends Field {
     editor: SelectiveEditor,
     data: DeepObject
   ): TemplateResult {
-    return html`<div class="selective__field__input__structure">
-      ${this.templateVariants(editor, data)}${this.templateInput(editor, data)}
-    </div>`;
+    const parts: Array<TemplateResult> = [];
+    if (!this.isDataFormatValid) {
+      parts.push(this.templateDataFormatInvalid(editor, data));
+    } else {
+      parts.push(this.templateVariants(editor, data));
+      parts.push(this.templateInput(editor, data));
+    }
+    return html`<div class="selective__field__input__structure">${parts}</div>`;
   }
 
   /**
