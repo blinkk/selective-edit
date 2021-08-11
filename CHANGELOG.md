@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/blinkk/selective-edit/compare/v2.3.0...v3.0.0) (2021-08-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Focus tracking for field validation and gloval validation marking.
+
+### Features
+
+* Focus tracking for field validation and gloval validation marking. ([8d903a5](https://www.github.com/blinkk/selective-edit/commit/8d903a5688a124bf8e7a90c73f95e079c52a219e)), closes [#44](https://www.github.com/blinkk/selective-edit/issues/44)
+* Use validation rules to determine if a field is required. ([#48](https://www.github.com/blinkk/selective-edit/issues/48)) ([c23bc55](https://www.github.com/blinkk/selective-edit/commit/c23bc552ea7a3c7e1f066b15dec9df994645392d))
+
 ## [2.3.0](https://www.github.com/blinkk/selective-edit/compare/v2.2.1...v2.3.0) (2021-08-11)
 
 
