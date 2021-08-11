@@ -36,6 +36,7 @@
     "dev": "concurrently \"npx ava --watch\" \"tsc --watch\"",
     "docs": "typedoc",
     "fix": "node ./node_modules/eslint/bin/eslint --fix src/**/*.ts",
+    "lint": "npx eslint src/ts/**/*.ts",
     "prepare": "yarn run compile",
     "prepublish": "tsc",
     "sass:build": "sass --no-source-map ./src/sass/:./dist/css --style compressed",
