@@ -27,6 +27,7 @@ export class ColorField extends Field {
         <input
           type="color"
           id="${this.uid}"
+          @blur=${this.handleBlur.bind(this)}
           @input=${this.handleInput.bind(this)}
           value=${value}
         />

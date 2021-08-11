@@ -44,6 +44,7 @@ export class DatetimeField extends Field {
         <input
           type="datetime-local"
           id="${this.uid}"
+          @blur=${this.handleBlur.bind(this)}
           @input=${this.handleInput.bind(this)}
           value=${value}
         />

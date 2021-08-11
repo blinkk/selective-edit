@@ -43,6 +43,14 @@ export class SelectiveEditor extends DataMixin(Base) {
   config: EditorConfig;
   container?: HTMLElement;
   fields: FieldsComponent;
+  /**
+   * Controls when the validation should be checked across all the
+   * fields in the editor.
+   *
+   * **Note:** Render cycle needs to complete before the validation can
+   * be trusted.
+   */
+  markValidation?: boolean;
   isPendingRender: boolean;
   isRendering: boolean;
   types: Types;

@@ -44,6 +44,7 @@ export class TimeField extends Field {
         <input
           type="time"
           id="${this.uid}"
+          @blur=${this.handleBlur.bind(this)}
           @input=${this.handleInput.bind(this)}
           value=${value}
         />

@@ -65,6 +65,7 @@ export class CheckboxMultiField extends OptionMixin(Field) {
       editor,
       data,
       {
+        handleBlur: this.handleBlur.bind(this),
         handleInput: this.handleInput.bind(this),
         isMulti: true, // Treat it as multi-check option to show as checkboxes.
         isOptionSelected: (option: Option) => value.includes(option.value),
