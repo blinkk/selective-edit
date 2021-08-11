@@ -44,6 +44,7 @@ export class RadioField extends OptionMixin(Field) {
       editor,
       data,
       {
+        handleBlur: this.handleBlur.bind(this),
         handleInput: this.handleInput.bind(this),
         isMulti: false,
         isOptionSelected: (option: Option) =>

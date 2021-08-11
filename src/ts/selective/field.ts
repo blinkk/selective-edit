@@ -90,6 +90,13 @@ export interface FieldComponent {
    */
   key: string;
   /**
+   * Track when an input has lost focus.
+   *
+   * This allows for the UI to only show an error message after the user has
+   * attempted to change the value.
+   */
+  hasLostFocus(zoneKey?: string): boolean;
+  /**
    * Is the field clean?
    *
    * The field is considered clean if there are no changes from the original.
@@ -120,6 +127,13 @@ export interface FieldComponent {
    * Internal lock for fields that can get messed up. For example list fields.
    */
   lock(): void;
+  /**
+   * Mark the zone as having lost focus.
+   *
+   * This allows for the UI to only show an error message after the user has
+   * attempted to change the value.
+   */
+  lostFocus(zoneKey?: string): void;
   render(): void;
   updateOriginal(editor: SelectiveEditor, data: DeepObject): void;
   /**
@@ -145,6 +159,11 @@ export type FieldConstructor = (
   config: InternalFieldConfig
 ) => FieldComponent;
 
+export interface ZoneInfo {
+  key: string;
+  hasLostFocus?: boolean;
+}
+
 export class Field
   extends UuidMixin(DataMixin(Base))
   implements FieldComponent
@@ -160,7 +179,7 @@ export class Field
   types: Types;
   usingAutoFields: boolean;
   validation?: Validation;
-  zoneToKey?: Record<string, string>;
+  zones?: Record<string, ZoneInfo>;
 
   constructor(
     types: Types,
@@ -261,6 +280,41 @@ export class Field
     return cloneDeep(value);
   }
 
+  /**
+   * Store the validation to keep from having to repeat the validation.
+   *
+   * Validation is reset every time the updateOriginal is called (every render).
+   *
+   * @param editor Selective editor being rendered.
+   */
+  protected ensureValidation(editor?: SelectiveEditor) {
+    if (!this.validation) {
+      this.validation = new Validation(this.rules);
+    }
+
+    // Only validate when the editor is marked for validation
+    // or the field has lost the user focus for a better
+    // untouched user experience.
+    if (this.hasLostFocus() || editor?.markValidation) {
+      const zoneKeys = Object.keys(this.zones ?? {});
+      const onlyDefaultZone =
+        !this.zones ||
+        (zoneKeys.length === 1 && zoneKeys[0] === DEFAULT_ZONE_KEY);
+
+      if (!this.zones || onlyDefaultZone) {
+        // Simple field with only the default zone.
+        this.validation.validate(this.currentValue);
+      } else {
+        // Complex field, validate each zone separately.
+        const value = this.currentValue || {};
+        for (const zoneKey of zoneKeys) {
+          const valueKey = this.zones[zoneKey].key;
+          this.validation.validate(value[valueKey], zoneKey);
+        }
+      }
+    }
+  }
+
   get fullKey(): string {
     if (this.config.parentKey) {
       return `${this.config.parentKey}.${this.key}`;
@@ -277,6 +331,29 @@ export class Field
     const target = evt.target as HTMLInputElement;
     this.currentValue = target.value;
     this.render();
+  }
+
+  /**
+   * Handle when the input loses focus.
+   */
+  handleBlur() {
+    // Mark that the field has lost focus.
+    this.lostFocus();
+    this.render();
+  }
+
+  /**
+   * Determines if the field has lost focus before for a zone.
+   *
+   * This is used for UI to determine when to display validation
+   * messsages for a better UX when they have not interacted with
+   * the field.
+   */
+  hasLostFocus(zoneKey = DEFAULT_ZONE_KEY): boolean {
+    if (!this.zones) {
+      return false;
+    }
+    return this.zones[zoneKey].hasLostFocus ?? false;
   }
 
   get isClean(): boolean {
@@ -315,25 +392,9 @@ export class Field
   }
 
   get isValid(): boolean {
-    // Store the validation to keep from having to repeat the validation.
-    // Is reset every time the updateOriginal is called (every render).
-    if (!this.validation) {
-      this.validation = new Validation(this.rules);
-
-      if (!this.zoneToKey) {
-        // Simple field, only the default zone.
-        this.validation.validate(this.currentValue);
-      } else {
-        // Complex field, validate each zone separately.
-        const value = this.currentValue || {};
-        for (const zoneKey of Object.keys(this.zoneToKey)) {
-          const valueKey = this.zoneToKey[zoneKey];
-          this.validation.validate(value[valueKey], zoneKey);
-        }
-      }
-    }
     // Is valid if there are no results in any zone.
-    return !this.validation.hasAnyResults(null);
+    // When the validation has not been triggered it is also valid.
+    return !this.validation || !this.validation.hasAnyResults(null);
   }
 
   get key(): string {
@@ -341,11 +402,26 @@ export class Field
   }
 
   /**
-   * Certain cases require the field to be locked while updating to prevent bad
-   * data mixing. This allows for manually locking the fields.
+   * Certain cases require the field to be locked while updating to prevent
+   * bad data mixing. This allows for manually locking the fields.
    */
   lock() {
     this.isLocked = true;
+  }
+
+  /**
+   * Mark that the field has lost focus for a zone.
+   *
+   * This is used for UI to determine when to display validation
+   * messsages for a better UX when they have not interacted with
+   * the field.
+   */
+  lostFocus(zoneKey = DEFAULT_ZONE_KEY) {
+    this.zones = this.zones ?? {};
+    this.zones[zoneKey] = this.zones[zoneKey] ?? {
+      key: zoneKey,
+    };
+    this.zones[zoneKey].hasLostFocus = true;
   }
 
   /**
@@ -416,6 +492,7 @@ export class Field
   template(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     // Update the original every time the template is used.
     this.updateOriginal(editor, data);
+    this.ensureValidation(editor);
     return this.templateWrapper(editor, data);
   }
 

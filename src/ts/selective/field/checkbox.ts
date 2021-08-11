@@ -51,7 +51,7 @@ export class CheckboxField extends OptionMixin(Field) {
     return value === this.config.value;
   }
 
-  handleInput(evt: Event) {
+  handleInput() {
     if (this.isChecked) {
       this.currentValue =
         this.config.valueUnchecked !== undefined
@@ -69,6 +69,7 @@ export class CheckboxField extends OptionMixin(Field) {
       editor,
       data,
       {
+        handleBlur: this.handleBlur.bind(this),
         handleInput: this.handleInput.bind(this),
         isMulti: true, // Treat it as multi-check option to show as checkbox.
         isOptionSelected: () => this.isChecked,
@@ -84,6 +85,7 @@ export class CheckboxField extends OptionMixin(Field) {
    * @param editor Selective editor used to render the template.
    * @param data Data provided to render the template.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templateLabel(editor: SelectiveEditor, data: DeepObject): TemplateResult {
     return html``;
   }
