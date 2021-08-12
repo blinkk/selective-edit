@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.2.0](https://www.github.com/blinkk/selective-edit/compare/v3.1.0...v3.2.0) (2021-08-12)
+
+
+### Features
+
+* Delay validation on a form until it is marked for validation. ([#56](https://www.github.com/blinkk/selective-edit/issues/56)) ([24de0cb](https://www.github.com/blinkk/selective-edit/commit/24de0cbc46e73cf538a1ed014cf727230e721d0f))
+
+
+### Bug Fixes
+
+* Ensure the found preview value is a string. ([#57](https://www.github.com/blinkk/selective-edit/issues/57)) ([12c3c63](https://www.github.com/blinkk/selective-edit/commit/12c3c631bbf71310e326a218da10fa71eb7ab110))
+* Sortable items can bind the focus in/out to control draggable. ([#59](https://www.github.com/blinkk/selective-edit/issues/59)) ([d259f16](https://www.github.com/blinkk/selective-edit/commit/d259f169cdff7df1f489f5188e548a5921b6f797)), closes [#58](https://www.github.com/blinkk/selective-edit/issues/58)
+
 ## [3.1.0](https://www.github.com/blinkk/selective-edit/compare/v3.0.1...v3.1.0) (2021-08-12)
 
 
