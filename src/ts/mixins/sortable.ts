@@ -8,12 +8,25 @@ export interface SortableFieldComponent {
 }
 
 export interface SortableUiComponent {
+  /**
+   * Is the sortable component currently draggable?
+   *
+   * If a user is focused inside a draggable object don't allow the
+   * item to be dragged.
+   *
+   * For instance, if there is an `input` inside of a draggable item
+   * you do not want to allow it to be dragged while in the input
+   * as that would mess up things like selecting text using the mouse.
+   */
+  canDrag: boolean;
   listeners: Listeners;
   handleDragEnter(evt: DragEvent): void;
   handleDragLeave(evt: DragEvent): void;
   handleDragOver(evt: DragEvent): void;
   handleDragStart(evt: DragEvent): void;
   handleDrop(evt: DragEvent): void;
+  handleFocusIn(evt: FocusEvent): void;
+  handleFocusOut(evt: FocusEvent): void;
 }
 
 export type SortableHandler = (startIndex: number, endIndex: number) => void;
@@ -37,10 +50,12 @@ export function SortableMixin<TBase extends Constructor>(Base: TBase) {
 
 export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
   private dragOrigin?: HTMLElement;
+  private dragFocused?: boolean;
   listeners: Listeners;
 
   constructor() {
     super();
+    this.dragFocused = false;
     this.listeners = new Listeners();
   }
 
@@ -59,6 +74,9 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
     }
 
     return null;
+  }
+  get canDrag(): boolean {
+    return !this.dragFocused;
   }
 
   handleDragEnter(evt: DragEvent): void {
@@ -149,6 +167,21 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
         evt.dataTransfer.setDragImage(previewEl, 0, 0);
       }
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleFocusIn(evt: FocusEvent) {
+    // Do not allow dragging if the target is a form input.
+    const inputElement = (evt.target as HTMLElement).closest(
+      'input, textarea, [contenteditable="true"]'
+    );
+
+    this.dragFocused = Boolean(inputElement);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleFocusOut(evt: FocusEvent) {
+    this.dragFocused = false;
   }
 
   handleDrop(evt: DragEvent): void {
