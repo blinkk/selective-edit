@@ -86,7 +86,7 @@ export function findPreviewValue(
       previewValue = value.get(fieldKey);
 
       // First matching field key becomes the value.
-      if (previewValue) {
+      if (previewValue && DataType.isString(previewValue)) {
         return previewValue;
       }
     }
@@ -165,8 +165,16 @@ export function templatePreviewValue(
     }
   }
 
-  return html`${index !== undefined
+  // Prevent having `[Object]` style preview values.
+  if (!DataType.isString(previewValue)) {
+    previewValue = defaultValue;
+  }
+
+  return html`${templateIndex(index)}${previewValue || defaultValue}`;
+}
+
+export function templateIndex(index?: number): TemplateResult {
+  return index !== undefined
     ? html`<span class="selective__index">${index + 1}</span>`
-    : ''}
-  ${previewValue || defaultValue}`;
+    : html``;
 }
