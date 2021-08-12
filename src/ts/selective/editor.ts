@@ -37,6 +37,18 @@ export interface EditorConfig {
    * such as an api or additional global meta information.
    */
   global?: GlobalConfig;
+  /**
+   * Delay the validation until marked for validation.
+   *
+   * The default for the editor is to show validation messages after
+   * the user has left the fields. This provides a better user
+   * experience for longer forms but can be disruptive on smaller forms.
+   *
+   * By delaying the validation the editor will not run the field
+   * validation until the `markValidation` is set to `true` and
+   * the editor is re-rendered.
+   */
+  delayValidation?: boolean;
 }
 
 export class SelectiveEditor extends DataMixin(Base) {

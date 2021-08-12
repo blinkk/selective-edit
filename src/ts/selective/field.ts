@@ -293,9 +293,11 @@ export class Field
     }
 
     // Only validate when the editor is marked for validation
-    // or the field has lost the user focus for a better
-    // untouched user experience.
-    if (this.hasLostFocus() || editor?.markValidation) {
+    // or the field has lost the user focus unless delayed.
+    if (
+      (!editor?.config.delayValidation && this.hasLostFocus()) ||
+      editor?.markValidation
+    ) {
       const zoneKeys = Object.keys(this.zones ?? {});
       const onlyDefaultZone =
         !this.zones ||
