@@ -2,7 +2,7 @@ import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldComponent, FieldConfig} from '../field';
 import {GlobalConfig, SelectiveEditor} from '../editor';
 import {SortableFieldComponent, SortableMixin} from '../../mixins/sortable';
-import {TemplateResult, html} from 'lit-html';
+import {TemplateResult, html, render} from 'lit-html';
 
 import {Base} from '../../mixins';
 import {DataType} from '../../utility/dataType';
@@ -588,13 +588,21 @@ export class ListFieldItem
         'selective__list__item--no-drag': this.listField.length <= 1,
         selective__sortable: true,
       })}
-      draggable=${canDrag ? 'true' : 'false'}
+      draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
       @dragover=${sortable.handleDragOver.bind(sortable)}
       @dragstart=${sortable.handleDragStart.bind(sortable)}
       @drop=${sortable.handleDrop.bind(sortable)}
+      @focusin=${(evt: FocusEvent) => {
+        sortable.handleFocusIn(evt);
+        this.listField.render();
+      }}
+      @focusout=${(evt: FocusEvent) => {
+        sortable.handleFocusOut(evt);
+        this.listField.render();
+      }}
     >
       <div class="selective__field__actions selective__field__actions--pre">
         ${preActions}
@@ -617,14 +625,26 @@ export class ListFieldItem
     data: DeepObject,
     index: number
   ): TemplateResult {
+    const canDrag = this.listField.length > 1;
     const sortable = this.listField.sortableUi;
+
     return html` <div
       class="selective__list__item selective__list__item--expanded selective__sortable"
+      draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
       @dragover=${sortable.handleDragOver.bind(sortable)}
+      @dragstart=${sortable.handleDragStart.bind(sortable)}
       @drop=${sortable.handleDrop.bind(sortable)}
+      @focusin=${(evt: FocusEvent) => {
+        sortable.handleFocusIn(evt);
+        this.listField.render();
+      }}
+      @focusout=${(evt: FocusEvent) => {
+        sortable.handleFocusOut(evt);
+        this.listField.render();
+      }}
     >
       <div
         class="selective__list__fields__header"
@@ -697,13 +717,21 @@ export class ListFieldItem
 
     return html` <div
       class="selective__list__item selective__list__item--simple selective__sortable"
-      draggable=${canDrag ? 'true' : 'false'}
+      draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
       @dragover=${sortable.handleDragOver.bind(sortable)}
       @dragstart=${sortable.handleDragStart.bind(sortable)}
       @drop=${sortable.handleDrop.bind(sortable)}
+      @focusin=${(evt: FocusEvent) => {
+        sortable.handleFocusIn(evt);
+        this.listField.render();
+      }}
+      @focusout=${(evt: FocusEvent) => {
+        sortable.handleFocusOut(evt);
+        this.listField.render();
+      }}
     >
       <div class="selective__field__actions selective__field__actions--pre">
         ${preActions}

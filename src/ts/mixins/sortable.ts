@@ -8,12 +8,15 @@ export interface SortableFieldComponent {
 }
 
 export interface SortableUiComponent {
+  canDrag: boolean;
   listeners: Listeners;
   handleDragEnter(evt: DragEvent): void;
   handleDragLeave(evt: DragEvent): void;
   handleDragOver(evt: DragEvent): void;
   handleDragStart(evt: DragEvent): void;
   handleDrop(evt: DragEvent): void;
+  handleFocusIn(evt: FocusEvent): void;
+  handleFocusOut(evt: FocusEvent): void;
 }
 
 export type SortableHandler = (startIndex: number, endIndex: number) => void;
@@ -37,10 +40,12 @@ export function SortableMixin<TBase extends Constructor>(Base: TBase) {
 
 export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
   private dragOrigin?: HTMLElement;
+  private dragFocused?: boolean;
   listeners: Listeners;
 
   constructor() {
     super();
+    this.dragFocused = false;
     this.listeners = new Listeners();
   }
 
@@ -59,6 +64,10 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
     }
 
     return null;
+  }
+
+  get canDrag(): boolean {
+    return !this.dragFocused;
   }
 
   handleDragEnter(evt: DragEvent): void {
@@ -151,6 +160,21 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleFocusIn(evt: FocusEvent) {
+    // Do not allow dragging if the target is a form input.
+    const inputElement = (evt.target as HTMLElement).closest(
+      'input, textarea, [contenteditable="true"]'
+    );
+
+    this.dragFocused = Boolean(inputElement);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleFocusOut(evt: FocusEvent) {
+    this.dragFocused = false;
+  }
+
   handleDrop(evt: DragEvent): void {
     const target = this.findDragTarget(evt);
     if (!target) {
@@ -169,6 +193,9 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
 
     // Reset the drag element.
     this.dragOrigin = undefined;
+
+    // Reset the can drag check.
+    this.dragFocused = false;
 
     this.listeners.trigger('sort', startIndex, currentIndex, target);
   }
