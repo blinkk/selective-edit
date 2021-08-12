@@ -87,6 +87,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mixins_sortable.SortableUiComponent.html#canDrag" class="tsd-kind-icon">can<wbr>Drag</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="mixins_sortable.SortableUiComponent.html#listeners" class="tsd-kind-icon">listeners</a></li>
 							</ul>
 						</section>
@@ -98,6 +99,8 @@
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="mixins_sortable.SortableUiComponent.html#handleDragOver" class="tsd-kind-icon">handle<wbr>Drag<wbr>Over</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="mixins_sortable.SortableUiComponent.html#handleDragStart" class="tsd-kind-icon">handle<wbr>Drag<wbr>Start</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="mixins_sortable.SortableUiComponent.html#handleDrop" class="tsd-kind-icon">handle<wbr>Drop</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="mixins_sortable.SortableUiComponent.html#handleFocusIn" class="tsd-kind-icon">handle<wbr>Focus<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="mixins_sortable.SortableUiComponent.html#handleFocusOut" class="tsd-kind-icon">handle<wbr>Focus<wbr>Out</a></li>
 							</ul>
 						</section>
 					</div>
@@ -106,12 +109,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="canDrag" class="tsd-anchor"></a>
+					<h3>can<wbr>Drag</h3>
+					<div class="tsd-signature tsd-kind-icon">can<wbr>Drag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L21">mixins/sortable.ts:21</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is the sortable component currently draggable?</p>
+						</div>
+						<p>If a user is focused inside a draggable object don&#39;t allow the
+						item to be dragged.</p>
+						<p>For instance, if there is an <code>input</code> inside of a draggable item
+							you do not want to allow it to be dragged while in the input
+						as that would mess up things like selecting text using the mouse.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="listeners" class="tsd-anchor"></a>
 					<h3>listeners</h3>
 					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <a href="../classes/utility_listeners.Listeners.html" class="tsd-signature-type" data-tsd-kind="Class">Listeners</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/12c3c63/src/ts/mixins/sortable.ts#L11">mixins/sortable.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L22">mixins/sortable.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -128,7 +151,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/12c3c63/src/ts/mixins/sortable.ts#L12">mixins/sortable.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L23">mixins/sortable.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -151,7 +174,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/12c3c63/src/ts/mixins/sortable.ts#L13">mixins/sortable.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L24">mixins/sortable.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -174,7 +197,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/12c3c63/src/ts/mixins/sortable.ts#L14">mixins/sortable.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L25">mixins/sortable.ts:25</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -197,7 +220,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/12c3c63/src/ts/mixins/sortable.ts#L15">mixins/sortable.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L26">mixins/sortable.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -220,13 +243,59 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/12c3c63/src/ts/mixins/sortable.ts#L16">mixins/sortable.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L27">mixins/sortable.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>evt: <span class="tsd-signature-type">DragEvent</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="handleFocusIn" class="tsd-anchor"></a>
+					<h3>handle<wbr>Focus<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Focus<wbr>In<span class="tsd-signature-symbol">(</span>evt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FocusEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L28">mixins/sortable.ts:28</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>evt: <span class="tsd-signature-type">FocusEvent</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="handleFocusOut" class="tsd-anchor"></a>
+					<h3>handle<wbr>Focus<wbr>Out</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Focus<wbr>Out<span class="tsd-signature-symbol">(</span>evt<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FocusEvent</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/blinkk/selective-edit/blob/d259f16/src/ts/mixins/sortable.ts#L29">mixins/sortable.ts:29</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>evt: <span class="tsd-signature-type">FocusEvent</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -260,6 +329,9 @@
 						<a href="mixins_sortable.SortableUiComponent.html" class="tsd-kind-icon">Sortable<wbr>UiComponent</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="mixins_sortable.SortableUiComponent.html#canDrag" class="tsd-kind-icon">can<wbr>Drag</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="mixins_sortable.SortableUiComponent.html#listeners" class="tsd-kind-icon">listeners</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
@@ -276,6 +348,12 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
 								<a href="mixins_sortable.SortableUiComponent.html#handleDrop" class="tsd-kind-icon">handle<wbr>Drop</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="mixins_sortable.SortableUiComponent.html#handleFocusIn" class="tsd-kind-icon">handle<wbr>Focus<wbr>In</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="mixins_sortable.SortableUiComponent.html#handleFocusOut" class="tsd-kind-icon">handle<wbr>Focus<wbr>Out</a>
 							</li>
 						</ul>
 					</li>
