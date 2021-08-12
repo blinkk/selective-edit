@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://www.github.com/blinkk/selective-edit/compare/v3.0.1...v3.1.0) (2021-08-12)
+
+
+### Features
+
+* Index in list item preview to show order in list. ([#53](https://www.github.com/blinkk/selective-edit/issues/53)) ([7b035e7](https://www.github.com/blinkk/selective-edit/commit/7b035e7ea8f8446537b3afa708db806d5a7e405d))
+
 ### [3.0.1](https://www.github.com/blinkk/selective-edit/compare/v3.0.0...v3.0.1) (2021-08-12)
 
 
