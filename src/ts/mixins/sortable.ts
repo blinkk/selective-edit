@@ -8,6 +8,16 @@ export interface SortableFieldComponent {
 }
 
 export interface SortableUiComponent {
+  /**
+   * Is the sortable component currently draggable?
+   *
+   * If a user is focused inside a draggable object don't allow the
+   * item to be dragged.
+   *
+   * For instance, if there is an `input` inside of a draggable item
+   * you do not want to allow it to be dragged while in the input
+   * as that would mess up things like selecting text using the mouse.
+   */
   canDrag: boolean;
   listeners: Listeners;
   handleDragEnter(evt: DragEvent): void;
@@ -65,7 +75,6 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
 
     return null;
   }
-
   get canDrag(): boolean {
     return !this.dragFocused;
   }
