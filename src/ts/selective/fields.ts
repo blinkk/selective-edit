@@ -225,13 +225,14 @@ export class Fields
    * @param editor Selective editor used to render the template.
    * @param data Data provided to render the template.
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   templatePreviewValue(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     editor: SelectiveEditor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     data: DeepObject,
     index?: number
   ): TemplateResult {
-    const defaultValue = `{ Item ${index !== undefined ? index + 1 : ''} }`;
+    const defaultValue = 'Untitled item';
     const previewValue = findOrGuessPreviewValue(
       this.value,
       this.previewFields,
@@ -240,7 +241,8 @@ export class Fields
     return templatePreviewValue(
       previewValue,
       this.config.previewType ? this.config.previewType : PreviewTypes.Text,
-      defaultValue
+      defaultValue,
+      index
     ) as TemplateResult;
   }
 
