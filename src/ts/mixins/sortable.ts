@@ -203,9 +203,6 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
     // Reset the drag element.
     this.dragOrigin = undefined;
 
-    // Reset the can drag check.
-    this.dragFocused = false;
-
     this.listeners.trigger('sort', startIndex, currentIndex, target);
   }
 
