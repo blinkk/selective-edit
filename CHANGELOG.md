@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.1](https://www.github.com/blinkk/selective-edit/compare/v3.0.0...v3.0.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* Lost focus check for unused zones failed since it was undefined. ([b9a0210](https://www.github.com/blinkk/selective-edit/commit/b9a021058cade926588920f5e92d9194b9906761))
+
 ## [3.0.0](https://www.github.com/blinkk/selective-edit/compare/v2.3.0...v3.0.0) (2021-08-11)
 
 
