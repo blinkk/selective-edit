@@ -353,7 +353,7 @@ export class Field
     if (!this.zones) {
       return false;
     }
-    return this.zones[zoneKey].hasLostFocus ?? false;
+    return this.zones[zoneKey]?.hasLostFocus ?? false;
   }
 
   get isClean(): boolean {
