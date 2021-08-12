@@ -2,7 +2,7 @@ import {DeepObject, autoDeepObject} from '../../utility/deepObject';
 import {Field, FieldComponent, FieldConfig} from '../field';
 import {GlobalConfig, SelectiveEditor} from '../editor';
 import {SortableFieldComponent, SortableMixin} from '../../mixins/sortable';
-import {TemplateResult, html, render} from 'lit-html';
+import {TemplateResult, html} from 'lit-html';
 
 import {Base} from '../../mixins';
 import {DataType} from '../../utility/dataType';
