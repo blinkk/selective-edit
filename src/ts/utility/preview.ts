@@ -134,7 +134,8 @@ export function findOrGuessPreviewValue(
 export function templatePreviewValue(
   previewValue: string,
   previewType: PreviewTypes,
-  defaultValue: string
+  defaultValue: string,
+  index?: number
 ): TemplateResult {
   if (previewType === PreviewTypes.Image && DataType.isString(previewValue)) {
     if (previewValue.startsWith('http') || previewValue.startsWith('//')) {
@@ -164,5 +165,8 @@ export function templatePreviewValue(
     }
   }
 
-  return html`${previewValue || defaultValue}`;
+  return html`${index !== undefined
+    ? html`<span class="selective__index">${index + 1}</span>`
+    : ''}
+  ${previewValue || defaultValue}`;
 }
