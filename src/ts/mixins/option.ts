@@ -217,7 +217,7 @@ export function OptionMixin<TBase extends Constructor>(Base: TBase) {
       >
         <span class="material-icons">${icon}</span>
         ${this.templateColorSwatch(editor, data, config, option)}
-        <label>${option.label || '(Empty)'}</label>
+        <label>${option.label || option.value || '(Empty)'}</label>
       </div>`;
     }
 
