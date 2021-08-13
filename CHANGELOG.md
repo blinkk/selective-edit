@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.1](https://www.github.com/blinkk/selective-edit/compare/v3.2.0...v3.2.1) (2021-08-13)
+
+
+### Bug Fixes
+
+* Use the value as a fallback for options if there is no label. ([#62](https://www.github.com/blinkk/selective-edit/issues/62)) ([31b153c](https://www.github.com/blinkk/selective-edit/commit/31b153ccc77698776fe85a4b17081d1da7a345c6)), closes [#133](https://www.github.com/blinkk/selective-edit/issues/133)
+
 ## [3.2.0](https://www.github.com/blinkk/selective-edit/compare/v3.1.0...v3.2.0) (2021-08-12)
 
 
