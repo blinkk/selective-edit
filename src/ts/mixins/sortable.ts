@@ -75,6 +75,7 @@ export class SortableUi extends UuidMixin(Base) implements SortableUiComponent {
 
     return null;
   }
+
   get canDrag(): boolean {
     return !this.dragFocused;
   }

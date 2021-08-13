@@ -13,6 +13,7 @@ import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map';
 import {repeat} from 'lit-html/directives/repeat';
+import stringify from 'json-stable-stringify';
 
 export interface ListFieldConfig extends FieldConfig {
   /**
@@ -272,6 +273,11 @@ export class ListField
     const maxIndex = Math.max(endIndex, startIndex);
     const minIndex = Math.min(endIndex, startIndex);
 
+    // Did not move, don't need to sort.
+    if (startIndex === endIndex) {
+      return;
+    }
+
     // Determine which direction to shift misplaced items.
     let modifier = 1;
     if (startIndex > endIndex) {
@@ -318,6 +324,30 @@ export class ListField
       },
       {once: true}
     );
+
+    // Check if sorted back to original value.
+    if (this.items.length === this.originalValue.length) {
+      let isSame = true;
+      for (let i = 0; i < this.items.length; i++) {
+        if (
+          stringify(this.items[i].fields.value) !==
+          stringify(this.originalValue[i])
+        ) {
+          isSame = false;
+          break;
+        }
+      }
+
+      // If the list items are the same across new values and original then it
+      // has been sorted back to original and needs to be unlocked.
+      if (isSame) {
+        this.unlock();
+
+        for (const item of newListItems) {
+          item.fields.unlock();
+        }
+      }
+    }
 
     this.render();
   }
