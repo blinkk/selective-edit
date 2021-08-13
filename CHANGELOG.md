@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.2](https://www.github.com/blinkk/selective-edit/compare/v3.2.1...v3.2.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* List sorting without changing positions does not change dirty. ([#65](https://www.github.com/blinkk/selective-edit/issues/65)) ([523489a](https://www.github.com/blinkk/selective-edit/commit/523489a3db9dc06affbe8ad87a199a6ddb5c6d40)), closes [#64](https://www.github.com/blinkk/selective-edit/issues/64)
+
 ### [3.2.1](https://www.github.com/blinkk/selective-edit/compare/v3.2.0...v3.2.1) (2021-08-13)
 
 
