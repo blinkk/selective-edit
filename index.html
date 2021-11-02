@@ -1,304 +1,72 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@blinkk/selective-edit</title>
-	<meta name="description" content="Documentation for @blinkk/selective-edit">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">@blinkk/selective-edit</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>@blinkk/selective-edit</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#selective-editor" id="selective-editor" style="color: inherit; text-decoration: none;">
-					<h1>Selective Editor</h1>
-				</a>
-				<p>Experimental.</p>
-				<p>Selective editor for providing a rich UI for editing structured data.</p>
-				<p>See the <a href="https://blinkk.github.io/selective-edit/">typescript docs</a> or <a href="https://blinkk.github.io/selective-edit/example/">example</a>.</p>
-				<p><a href="https://codecov.io/gh/blinkk/selective-edit"><img src="https://codecov.io/gh/blinkk/selective-edit/branch/main/graph/badge.svg?token=VdpVUcYr4n" alt="codecov"></a></p>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<a href="#styles" id="styles" style="color: inherit; text-decoration: none;">
-					<h3>Styles</h3>
-				</a>
-				<p>For an out-of-box experience you can instead use the styling used by the example.</p>
-				<pre><code class="language-sass"><span style="color: #AF00DB">@import</span><span style="color: #0000FF"> &quot;selective-edit/sass/selective&quot;</span>
+<!DOCTYPE html><html class="default no-js"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@blinkk/selective-edit</title><meta name="description" content="Documentation for @blinkk/selective-edit"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@blinkk/selective-edit</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@blinkk/selective-edit</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#selective-editor" id="selective-editor" style="color: inherit; text-decoration: none;">
+  <h1>Selective Editor</h1>
+</a>
+<p>Experimental.</p>
+<p>Selective editor for providing a rich UI for editing structured data.</p>
+<p>See the <a href="https://blinkk.github.io/selective-edit/">typescript docs</a> or <a href="https://blinkk.github.io/selective-edit/example/">example</a>.</p>
+<p><a href="https://codecov.io/gh/blinkk/selective-edit"><img src="https://codecov.io/gh/blinkk/selective-edit/branch/main/graph/badge.svg?token=VdpVUcYr4n" alt="codecov"></a></p>
+
+<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+  <h2>Usage</h2>
+</a>
+
+<a href="#styles" id="styles" style="color: inherit; text-decoration: none;">
+  <h3>Styles</h3>
+</a>
+<p>For an out-of-box experience you can instead use the styling used by the example.</p>
+<pre><code class="language-sass"><span class="hl-0">@import</span><span class="hl-1"> &quot;selective-edit/sass/selective&quot;</span>
 </code></pre>
-				<p>If you desire full control over the styling there are a few basic style rules
-				that the selective editor requires in order to function correctly.</p>
-				<p>They are available in the <code>/sass/selective-core.sass</code> file.</p>
-				<pre><code class="language-sass"><span style="color: #AF00DB">@import</span><span style="color: #0000FF"> &quot;selective-edit/sass/selective-core&quot;</span>
+<p>If you desire full control over the styling there are a few basic style rules
+that the selective editor requires in order to function correctly.</p>
+<p>They are available in the <code>/sass/selective-core.sass</code> file.</p>
+<pre><code class="language-sass"><span class="hl-0">@import</span><span class="hl-1"> &quot;selective-edit/sass/selective-core&quot;</span>
 </code></pre>
-				<a href="#javascript" id="javascript" style="color: inherit; text-decoration: none;">
-					<h3>Javascript</h3>
-				</a>
-				<p>See the <a href="https://blinkk.github.io/selective-edit/example/">example</a> and <a href="https://github.com/blinkk/selective-edit/blob/main/src/example/example.ts">example source</a> to see how to
-				create a selective editor with an assortment of fields and validation rules.</p>
-				<a href="#field-types" id="field-types" style="color: inherit; text-decoration: none;">
-					<h2>Field types</h2>
-				</a>
-				<p>The selective editor comes with several standard field types which can be used
-					directly or extended and customized. Custom field types can also be designed
-				and used with the selective editor.</p>
-				<p>Custom field types can extend one of the existing field types, the base
-				<a href="https://blinkk.github.io/selective-edit/classes/selective_field.field.html">Field</a>, or follow the <a href="https://blinkk.github.io/selective-edit/interfaces/selective_field.fieldcomponent.html">FieldComponent</a> interface.</p>
-				<p>Selective edit uses the <a href="https://lit-html.polymer-project.org/"><code>html-lit</code> library</a> to handle the UI of the editor.</p>
-				<a href="#validation-rule-types" id="validation-rule-types" style="color: inherit; text-decoration: none;">
-					<h2>Validation rule types</h2>
-				</a>
-				<p>Every field can be validated. Selective edit comes with some basic rules
-					(length, matching, pattern matching, range, required), but projects can also define
-					their own validation rules. Follow the <a href="https://blinkk.github.io/selective-edit/interfaces/selective_validationrules.rulecomponent.html">RuleComponent</a> interface to
-				create a custom rule or extend one of the existing rules to improve it for your needs.</p>
-				<a href="#field-config" id="field-config" style="color: inherit; text-decoration: none;">
-					<h2>Field config</h2>
-				</a>
-				<p>The editor uses field configurations to control what to display in the editor.</p>
-				<pre><code class="language-js"><span style="color: #008000">// Add a field for the editor to display.</span>
-<span style="color: #001080">selective</span><span style="color: #000000">.</span><span style="color: #001080">fields</span><span style="color: #000000">.</span><span style="color: #795E26">addField</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;text&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;title&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">label:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Title&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">help:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Title for the data.&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">})</span>
+
+<a href="#javascript" id="javascript" style="color: inherit; text-decoration: none;">
+  <h3>Javascript</h3>
+</a>
+<p>See the <a href="https://blinkk.github.io/selective-edit/example/">example</a> and <a href="https://github.com/blinkk/selective-edit/blob/main/src/example/example.ts">example source</a> to see how to
+create a selective editor with an assortment of fields and validation rules.</p>
+
+<a href="#field-types" id="field-types" style="color: inherit; text-decoration: none;">
+  <h2>Field types</h2>
+</a>
+<p>The selective editor comes with several standard field types which can be used
+directly or extended and customized. Custom field types can also be designed
+and used with the selective editor.</p>
+<p>Custom field types can extend one of the existing field types, the base
+<a href="https://blinkk.github.io/selective-edit/classes/selective_field.field.html">Field</a>, or follow the <a href="https://blinkk.github.io/selective-edit/interfaces/selective_field.fieldcomponent.html">FieldComponent</a> interface.</p>
+<p>Selective edit uses the <a href="https://lit-html.polymer-project.org/"><code>html-lit</code> library</a> to handle the UI of the editor.</p>
+
+<a href="#validation-rule-types" id="validation-rule-types" style="color: inherit; text-decoration: none;">
+  <h2>Validation rule types</h2>
+</a>
+<p>Every field can be validated. Selective edit comes with some basic rules
+(length, matching, pattern matching, range, required), but projects can also define
+their own validation rules. Follow the <a href="https://blinkk.github.io/selective-edit/interfaces/selective_validationrules.rulecomponent.html">RuleComponent</a> interface to
+create a custom rule or extend one of the existing rules to improve it for your needs.</p>
+
+<a href="#field-config" id="field-config" style="color: inherit; text-decoration: none;">
+  <h2>Field config</h2>
+</a>
+<p>The editor uses field configurations to control what to display in the editor.</p>
+<pre><code class="language-js"><span class="hl-2">// Add a field for the editor to display.</span><br/><span class="hl-3">selective</span><span class="hl-4">.</span><span class="hl-3">fields</span><span class="hl-4">.</span><span class="hl-5">addField</span><span class="hl-4">({</span><br/><span class="hl-4">  </span><span class="hl-3">type:</span><span class="hl-4"> </span><span class="hl-6">&quot;text&quot;</span><span class="hl-4">,</span><br/><span class="hl-4">  </span><span class="hl-3">key:</span><span class="hl-4"> </span><span class="hl-6">&quot;title&quot;</span><span class="hl-4">,</span><br/><span class="hl-4">  </span><span class="hl-3">label:</span><span class="hl-4"> </span><span class="hl-6">&quot;Title&quot;</span><span class="hl-4">,</span><br/><span class="hl-4">  </span><span class="hl-3">help:</span><span class="hl-4"> </span><span class="hl-6">&quot;Title for the data.&quot;</span><span class="hl-4">,</span><br/><span class="hl-4">})</span>
 </code></pre>
-				<p>Different field types have different configurations options:</p>
-				<ul>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_checkbox.checkboxfieldconfig.html">Checkbox</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_checkboxmulti.checkboxmultifieldconfig.html">CheckboxMulti</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/modules/selective_field_color.html#colorfieldconfig">Color</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/modules/selective_field_date.html#datefieldconfig">Date</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/modules/selective_field_datetime.html#datetimefieldconfig">Datetime</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_group.groupfieldconfig.html">Group</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_list.listfieldconfig.html">List</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_number.numberfieldconfig.html">Number</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_radio.radiofieldconfig.html">Radio</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_text.textfieldconfig.html">Text</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_textarea.textareafieldconfig.html">Textarea</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/modules/selective_field_time.html#timefieldconfig">Time</a></li>
-					<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_variant.variantfieldconfig.html">Variant</a></li>
-				</ul>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Modules</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/index.html">index</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/mixins.html">mixins</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/mixins_data.html">mixins/data</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/mixins_droppable.html">mixins/droppable</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/mixins_option.html">mixins/option</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/mixins_sortable.html">mixins/sortable</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/mixins_uuid.html">mixins/uuid</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_autoFields.html">selective/auto<wbr>Fields</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_editor.html">selective/editor</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_events.html">selective/events</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field.html">selective/field</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_checkbox.html">selective/field/checkbox</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_checkboxMulti.html">selective/field/checkbox<wbr>Multi</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_color.html">selective/field/color</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_date.html">selective/field/date</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_datetime.html">selective/field/datetime</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_group.html">selective/field/group</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_list.html">selective/field/list</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_number.html">selective/field/number</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_radio.html">selective/field/radio</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_text.html">selective/field/text</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_textarea.html">selective/field/textarea</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_time.html">selective/field/time</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_field_variant.html">selective/field/variant</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_fields.html">selective/fields</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_rule_length.html">selective/rule/length</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_rule_match.html">selective/rule/match</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_rule_pattern.html">selective/rule/pattern</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_rule_range.html">selective/rule/range</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_rule_require.html">selective/rule/require</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_template.html">selective/template</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_types.html">selective/types</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_validation.html">selective/validation</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/selective_validationRules.html">selective/validation<wbr>Rules</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_classes.html">utility/classes</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_dataType.html">utility/data<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_deepObject.html">utility/deep<wbr>Object</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_defer.html">utility/defer</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_dom.html">utility/dom</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_listeners.html">utility/listeners</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_preview.html">utility/preview</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_throttle.html">utility/throttle</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/utility_uuid.html">utility/uuid</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+<p>Different field types have different configurations options:</p>
+<ul>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_checkbox.checkboxfieldconfig.html">Checkbox</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_checkboxmulti.checkboxmultifieldconfig.html">CheckboxMulti</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/modules/selective_field_color.html#colorfieldconfig">Color</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/modules/selective_field_date.html#datefieldconfig">Date</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/modules/selective_field_datetime.html#datetimefieldconfig">Datetime</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_group.groupfieldconfig.html">Group</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_list.listfieldconfig.html">List</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_number.numberfieldconfig.html">Number</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_radio.radiofieldconfig.html">Radio</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_text.textfieldconfig.html">Text</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_textarea.textareafieldconfig.html">Textarea</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/modules/selective_field_time.html#timefieldconfig">Time</a></li>
+<li><a href="https://blinkk.github.io/selective-edit/interfaces/selective_field_variant.variantfieldconfig.html">Variant</a></li>
+</ul>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/Base.html" class="tsd-kind-icon">Base</a></li><li class="tsd-kind-class"><a href="classes/CheckboxField.html" class="tsd-kind-icon">Checkbox<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/CheckboxMultiField.html" class="tsd-kind-icon">Checkbox<wbr/>Multi<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/ColorField.html" class="tsd-kind-icon">Color<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/DataType.html" class="tsd-kind-icon">Data<wbr/>Type</a></li><li class="tsd-kind-class"><a href="classes/DateField.html" class="tsd-kind-icon">Date<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/DatetimeField.html" class="tsd-kind-icon">Datetime<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/DeepObject.html" class="tsd-kind-icon">Deep<wbr/>Object</a></li><li class="tsd-kind-class"><a href="classes/DroppableUi.html" class="tsd-kind-icon">Droppable<wbr/>Ui</a></li><li class="tsd-kind-class"><a href="classes/Field.html" class="tsd-kind-icon">Field</a></li><li class="tsd-kind-class"><a href="classes/Fields.html" class="tsd-kind-icon">Fields</a></li><li class="tsd-kind-class"><a href="classes/GroupField.html" class="tsd-kind-icon">Group<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/LengthRule.html" class="tsd-kind-icon">Length<wbr/>Rule</a></li><li class="tsd-kind-class"><a href="classes/ListField.html" class="tsd-kind-icon">List<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/Listeners.html" class="tsd-kind-icon">Listeners</a></li><li class="tsd-kind-class"><a href="classes/MatchRule.html" class="tsd-kind-icon">Match<wbr/>Rule</a></li><li class="tsd-kind-class"><a href="classes/NumberField.html" class="tsd-kind-icon">Number<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/PatternRule.html" class="tsd-kind-icon">Pattern<wbr/>Rule</a></li><li class="tsd-kind-class"><a href="classes/RadioField.html" class="tsd-kind-icon">Radio<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/RangeRule.html" class="tsd-kind-icon">Range<wbr/>Rule</a></li><li class="tsd-kind-class"><a href="classes/RequireRule.html" class="tsd-kind-icon">Require<wbr/>Rule</a></li><li class="tsd-kind-class"><a href="classes/Rule.html" class="tsd-kind-icon">Rule</a></li><li class="tsd-kind-class"><a href="classes/SelectiveEditor.html" class="tsd-kind-icon">Selective<wbr/>Editor</a></li><li class="tsd-kind-class"><a href="classes/SortableUi.html" class="tsd-kind-icon">Sortable<wbr/>Ui</a></li><li class="tsd-kind-class"><a href="classes/TextField.html" class="tsd-kind-icon">Text<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/TextareaField.html" class="tsd-kind-icon">Textarea<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/TimeField.html" class="tsd-kind-icon">Time<wbr/>Field</a></li><li class="tsd-kind-class"><a href="classes/VariantField.html" class="tsd-kind-icon">Variant<wbr/>Field</a></li><li class="tsd-kind-interface"><a href="interfaces/CheckboxFieldConfig.html" class="tsd-kind-icon">Checkbox<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/CheckboxMultiFieldConfig.html" class="tsd-kind-icon">Checkbox<wbr/>Multi<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/DroppableFieldComponent.html" class="tsd-kind-icon">Droppable<wbr/>Field<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/DroppableUiComponent.html" class="tsd-kind-icon">Droppable<wbr/>Ui<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/EditorConfig.html" class="tsd-kind-icon">Editor<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/FieldComponent.html" class="tsd-kind-icon">Field<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/FieldConfig.html" class="tsd-kind-icon">Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/FieldsComponent.html" class="tsd-kind-icon">Fields<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/FieldsConfig.html" class="tsd-kind-icon">Fields<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/FieldsConstructor.html" class="tsd-kind-icon">Fields<wbr/>Constructor</a></li><li class="tsd-kind-interface"><a href="interfaces/GlobalConfig.html" class="tsd-kind-icon">Global<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/GroupFieldConfig.html" class="tsd-kind-icon">Group<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/LengthRuleConfig.html" class="tsd-kind-icon">Length<wbr/>Rule<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/ListFieldComponent.html" class="tsd-kind-icon">List<wbr/>Field<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/ListFieldConfig.html" class="tsd-kind-icon">List<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/ListItemComponent.html" class="tsd-kind-icon">List<wbr/>Item<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/ListItemConstructor.html" class="tsd-kind-icon">List<wbr/>Item<wbr/>Constructor</a></li><li class="tsd-kind-interface"><a href="interfaces/MatchRuleConfig.html" class="tsd-kind-icon">Match<wbr/>Rule<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/NumberFieldConfig.html" class="tsd-kind-icon">Number<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/Option.html" class="tsd-kind-icon">Option</a></li><li class="tsd-kind-interface"><a href="interfaces/OptionUIConfig.html" class="tsd-kind-icon">OptionUIConfig</a></li><li class="tsd-kind-interface"><a href="interfaces/OptionUiComponent.html" class="tsd-kind-icon">Option<wbr/>Ui<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/PatternRuleConfig.html" class="tsd-kind-icon">Pattern<wbr/>Rule<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/RadioFieldConfig.html" class="tsd-kind-icon">Radio<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/RangeRuleConfig.html" class="tsd-kind-icon">Range<wbr/>Rule<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/RequireRuleConfig.html" class="tsd-kind-icon">Require<wbr/>Rule<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/RuleComponent.html" class="tsd-kind-icon">Rule<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/RuleConfig.html" class="tsd-kind-icon">Rule<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/SortableFieldComponent.html" class="tsd-kind-icon">Sortable<wbr/>Field<wbr/>Component</a></li><li class="tsd-kind-interface"><a href="interfaces/TextAreaFieldConfig.html" class="tsd-kind-icon">Text<wbr/>Area<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/TextFieldConfig.html" class="tsd-kind-icon">Text<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-interface"><a href="interfaces/Types.html" class="tsd-kind-icon">Types</a></li><li class="tsd-kind-interface"><a href="interfaces/VariantFieldConfig.html" class="tsd-kind-icon">Variant<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-type-alias"><a href="modules.html#ColorFieldConfig" class="tsd-kind-icon">Color<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-type-alias"><a href="modules.html#DateFieldConfig" class="tsd-kind-icon">Date<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-type-alias"><a href="modules.html#DatetimeFieldConfig" class="tsd-kind-icon">Datetime<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-type-alias"><a href="modules.html#FieldConstructor" class="tsd-kind-icon">Field<wbr/>Constructor</a></li><li class="tsd-kind-type-alias"><a href="modules.html#RuleConstructor" class="tsd-kind-icon">Rule<wbr/>Constructor</a></li><li class="tsd-kind-type-alias"><a href="modules.html#TimeFieldConfig" class="tsd-kind-icon">Time<wbr/>Field<wbr/>Config</a></li><li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#DataMixin" class="tsd-kind-icon">Data<wbr/>Mixin</a></li><li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#DroppableMixin" class="tsd-kind-icon">Droppable<wbr/>Mixin</a></li><li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#OptionMixin" class="tsd-kind-icon">Option<wbr/>Mixin</a></li><li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#SortableMixin" class="tsd-kind-icon">Sortable<wbr/>Mixin</a></li><li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#UuidMixin" class="tsd-kind-icon">Uuid<wbr/>Mixin</a></li><li class="tsd-kind-function"><a href="modules.html#autoDeepObject" class="tsd-kind-icon">auto<wbr/>Deep<wbr/>Object</a></li><li class="tsd-kind-function"><a href="modules.html#findParentByClassname" class="tsd-kind-icon">find<wbr/>Parent<wbr/>By<wbr/>Classname</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li><li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li><li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li><li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
