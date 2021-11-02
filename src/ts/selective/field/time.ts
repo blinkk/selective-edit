@@ -4,7 +4,7 @@ import {TemplateResult, html} from 'lit-html';
 import {DataType} from '../../utility/dataType';
 import {DeepObject} from '../../utility/deepObject';
 import {Types} from '../types';
-import {classMap} from 'lit-html/directives/class-map';
+import {classMap} from 'lit-html/directives/class-map.js';
 
 export type TimeFieldConfig = FieldConfig;
 

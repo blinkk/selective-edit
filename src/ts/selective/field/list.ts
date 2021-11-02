@@ -11,8 +11,8 @@ import {FieldsComponent} from '../fields';
 import {PreviewTypes} from '../../utility/preview';
 import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
-import {classMap} from 'lit-html/directives/class-map';
-import {repeat} from 'lit-html/directives/repeat';
+import {classMap} from 'lit-html/directives/class-map.js';
+import {repeat} from 'lit-html/directives/repeat.js';
 import stringify from 'json-stable-stringify';
 
 export interface ListFieldConfig extends FieldConfig {

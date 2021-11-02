@@ -6,10 +6,10 @@ import {TemplateResult, html} from 'lit-html';
 import {DataType} from '../../utility/dataType';
 import {FieldsComponent} from '../fields';
 import {Types} from '../types';
-import {classMap} from 'lit-html/directives/class-map';
+import {classMap} from 'lit-html/directives/class-map.js';
 import {findPreviewValue} from '../../utility/preview';
 import merge from 'lodash.merge';
-import {repeat} from 'lit-html/directives/repeat';
+import {repeat} from 'lit-html/directives/repeat.js';
 
 export interface GroupFieldConfig extends FieldConfig {
   /**

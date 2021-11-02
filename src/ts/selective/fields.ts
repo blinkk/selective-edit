@@ -14,7 +14,7 @@ import {Template} from './template';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
 import merge from 'lodash.merge';
-import {repeat} from 'lit-html/directives/repeat';
+import {repeat} from 'lit-html/directives/repeat.js';
 
 export interface FieldsConfig {
   fields?: Array<FieldConfig & InternalFieldConfig>;

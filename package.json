@@ -83,6 +83,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "eslint-plugin-node": "^11.1.0",
     "json-stable-stringify": "^1.0.1",
     "lit-html": "^2.0.1",
     "lodash.clonedeep": "^4.5.0",

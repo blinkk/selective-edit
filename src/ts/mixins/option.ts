@@ -2,10 +2,10 @@ import {TemplateResult, html} from 'lit-html';
 import {Constructor} from './index';
 import {DeepObject} from '../utility/deepObject';
 import {SelectiveEditor} from '../selective/editor';
-import {classMap} from 'lit-html/directives/class-map';
-import {ifDefined} from 'lit-html/directives/if-defined';
-import {repeat} from 'lit-html/directives/repeat';
-import {styleMap} from 'lit-html/directives/style-map';
+import {classMap} from 'lit-html/directives/class-map.js';
+import {ifDefined} from 'lit-html/directives/if-defined.js';
+import {repeat} from 'lit-html/directives/repeat.js';
+import {styleMap} from 'lit-html/directives/style-map.js';
 
 /**
  * Orientation for colors gradient.

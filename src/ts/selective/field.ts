@@ -11,10 +11,10 @@ import {DeepObject} from '../utility/deepObject';
 import {EVENT_RENDER} from './events';
 import {Types} from './types';
 import {UuidMixin} from '../mixins/uuid';
-import {classMap} from 'lit-html/directives/class-map';
+import {classMap} from 'lit-html/directives/class-map.js';
 import cloneDeep from 'lodash.clonedeep';
 import {guessLabel} from './autoFields';
-import {repeat} from 'lit-html/directives/repeat';
+import {repeat} from 'lit-html/directives/repeat.js';
 import stringify from 'json-stable-stringify';
 
 export interface FieldConfig {
@@ -175,11 +175,11 @@ export class Field
   protected isDeepLinked: boolean;
   readonly fieldType: string;
   protected originalValue?: any;
-  protected _rules?: Rules;
   types: Types;
   usingAutoFields: boolean;
   validation?: Validation;
   zones?: Record<string, ZoneInfo>;
+  protected _rules?: Rules;
 
   constructor(
     types: Types,
