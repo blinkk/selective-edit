@@ -50,7 +50,7 @@ export class MatchRule extends Rule {
               inValues = true;
               break;
             }
-          } else if (possibleValue === value) {
+          } else if (possibleValue == value) {
             inValues = true;
             break;
           }
@@ -79,7 +79,7 @@ export class MatchRule extends Rule {
             if ((possibleValue as RegExp).test(value)) {
               return matchConfig.message || this.message;
             }
-          } else if (possibleValue === value) {
+          } else if (possibleValue == value) {
             return matchConfig.message || this.message;
           }
         }

@@ -14,6 +14,7 @@ import {UuidMixin} from '../../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map.js';
 import {repeat} from 'lit-html/directives/repeat.js';
 import stringify from 'json-stable-stringify';
+import cloneDeep from 'lodash.clonedeep';
 
 export interface ListFieldConfig extends FieldConfig {
   /**
@@ -160,7 +161,9 @@ export class ListField
     return new this.types.globals.FieldsCls(
       this.types,
       {
-        fields: fieldConfigs,
+        // Field configs should not be 'shared'. Duplicate the field configs
+        // before creating the fields.
+        fields: cloneDeep(fieldConfigs),
         isGuessed: this.usingAutoFields,
         parentKey: this.fullKey,
         previewField: this.config.previewField,

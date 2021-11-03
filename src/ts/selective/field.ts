@@ -299,12 +299,9 @@ export class Field
       editor?.markValidation
     ) {
       const zoneKeys = Object.keys(this.zones ?? {});
-      const onlyDefaultZone =
-        !this.zones ||
-        (zoneKeys.length === 1 && zoneKeys[0] === DEFAULT_ZONE_KEY);
 
-      if (!this.zones || onlyDefaultZone) {
-        // Simple field with only the default zone.
+      if (!this.zones) {
+        // Simple field.
         this.validation.validate(this.currentValue);
       } else {
         // Complex field, validate each zone separately.
