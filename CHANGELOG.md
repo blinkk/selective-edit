@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.3](https://www.github.com/blinkk/selective-edit/compare/v3.2.2...v3.2.3) (2021-11-03)
+
+
+### Bug Fixes
+
+* Duplicate configuration for list items. ([#67](https://www.github.com/blinkk/selective-edit/issues/67)) ([d0f04bb](https://www.github.com/blinkk/selective-edit/commit/d0f04bbe33375b593614e143a49eaf15147ee10d))
+
 ### [3.2.2](https://www.github.com/blinkk/selective-edit/compare/v3.2.1...v3.2.2) (2021-08-13)
 
 
