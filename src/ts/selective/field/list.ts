@@ -12,9 +12,9 @@ import {PreviewTypes} from '../../utility/preview';
 import {Types} from '../types';
 import {UuidMixin} from '../../mixins/uuid';
 import {classMap} from 'lit-html/directives/class-map.js';
+import cloneDeep from 'lodash.clonedeep';
 import {repeat} from 'lit-html/directives/repeat.js';
 import stringify from 'json-stable-stringify';
-import cloneDeep from 'lodash.clonedeep';
 
 export interface ListFieldConfig extends FieldConfig {
   /**
@@ -73,6 +73,13 @@ export interface ListFieldComponent extends FieldComponent {
    * Can the list remove items?
    */
   allowRemove?: boolean;
+  /**
+   * Handle adding a new item to the list.
+   * @param evt Event triggering the add.
+   * @param editor Editor instance.
+   * @param data Data object.
+   */
+  handleAddItem(evt: Event, editor: SelectiveEditor, data: DeepObject): void;
   /**
    * Event handler for deleting items.
    *
