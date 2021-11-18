@@ -300,7 +300,15 @@ export class Field
     ) {
       const zoneKeys = Object.keys(this.zones ?? {});
 
-      if (!this.zones) {
+      // If there is only the default zone with a default key use simple validation.
+      const onlySimpleDefaultZone =
+        !this.zones ||
+        (zoneKeys.length === 1 &&
+          zoneKeys[0] === DEFAULT_ZONE_KEY &&
+          this.zones[DEFAULT_ZONE_KEY].key === DEFAULT_ZONE_KEY);
+
+      if (!this.zones || onlySimpleDefaultZone) {
+        // Simple field with only the default zone.
         // Simple field.
         this.validation.validate(this.currentValue);
       } else {
