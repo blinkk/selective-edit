@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.4](https://www.github.com/blinkk/selective-edit/compare/v3.2.3...v3.2.4) (2021-11-18)
+
+
+### Bug Fixes
+
+* Validation for default zones. ([e95f683](https://www.github.com/blinkk/selective-edit/commit/e95f6831de10ed3c43ab0ddf137da6b818d6e271))
+
 ### [3.2.3](https://www.github.com/blinkk/selective-edit/compare/v3.2.2...v3.2.3) (2021-11-03)
 
 
