@@ -96,6 +96,20 @@ export interface ListFieldComponent extends FieldComponent {
 export interface ListItemComponent {
   listField: ListFieldComponent & SortableFieldComponent;
   fields: FieldsComponent;
+  /**
+   * Event handler for hovering off an item.
+   *
+   * @param evt Event from mouse action.
+   * @param index Item index.
+   */
+  handleHoverOffItem(evt: MouseEvent, index: number): void;
+  /**
+   * Event handler for hovering over an item.
+   *
+   * @param evt Event from mouse action.
+   * @param index Item index.
+   */
+  handleHoverOnItem(evt: MouseEvent, index: number): void;
   isExpanded: boolean;
   template: (
     editor: SelectiveEditor,
@@ -584,6 +598,16 @@ export class ListFieldItem
     this.listField.render();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleHoverOffItem(evt: MouseEvent, index: number) {
+    // Do nothing.
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleHoverOnItem(evt: MouseEvent, index: number) {
+    // Do nothing.
+  }
+
   template(
     editor: SelectiveEditor,
     data: DeepObject,
@@ -630,6 +654,7 @@ export class ListFieldItem
       })}
       draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
+      data-item-uid=${this.uid}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
       @dragover=${sortable.handleDragOver.bind(sortable)}
@@ -642,6 +667,12 @@ export class ListFieldItem
       @focusout=${(evt: FocusEvent) => {
         sortable.handleFocusOut(evt);
         this.listField.render();
+      }}
+      @mouseenter=${(evt: MouseEvent) => {
+        this.handleHoverOnItem(evt, index);
+      }}
+      @mouseleave=${(evt: MouseEvent) => {
+        this.handleHoverOffItem(evt, index);
       }}
     >
       <div class="selective__field__actions selective__field__actions--pre">
@@ -672,6 +703,7 @@ export class ListFieldItem
       class="selective__list__item selective__list__item--expanded selective__sortable"
       draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
+      data-item-uid=${this.uid}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
       @dragover=${sortable.handleDragOver.bind(sortable)}
@@ -684,6 +716,12 @@ export class ListFieldItem
       @focusout=${(evt: FocusEvent) => {
         sortable.handleFocusOut(evt);
         this.listField.render();
+      }}
+      @mouseenter=${(evt: MouseEvent) => {
+        this.handleHoverOnItem(evt, index);
+      }}
+      @mouseleave=${(evt: MouseEvent) => {
+        this.handleHoverOffItem(evt, index);
       }}
     >
       <div
@@ -759,6 +797,7 @@ export class ListFieldItem
       class="selective__list__item selective__list__item--simple selective__sortable"
       draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
+      data-item-uid=${this.uid}
       @dragenter=${sortable.handleDragEnter.bind(sortable)}
       @dragleave=${sortable.handleDragLeave.bind(sortable)}
       @dragover=${sortable.handleDragOver.bind(sortable)}
@@ -771,6 +810,12 @@ export class ListFieldItem
       @focusout=${(evt: FocusEvent) => {
         sortable.handleFocusOut(evt);
         this.listField.render();
+      }}
+      @mouseenter=${(evt: MouseEvent) => {
+        this.handleHoverOnItem(evt, index);
+      }}
+      @mouseleave=${(evt: MouseEvent) => {
+        this.handleHoverOffItem(evt, index);
       }}
     >
       <div class="selective__field__actions selective__field__actions--pre">
