@@ -170,7 +170,7 @@ export function templatePreviewValue(
     previewValue = defaultValue;
   }
 
-  return html`${templateIndex(index)}${previewValue || defaultValue}`;
+  return html`${previewValue || defaultValue}`;
 }
 
 export function templateIndex(index?: number): TemplateResult {

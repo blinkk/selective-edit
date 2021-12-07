@@ -4,6 +4,7 @@ import {GlobalConfig, SelectiveEditor} from '../editor';
 import {SortableFieldComponent, SortableMixin} from '../../mixins/sortable';
 import {TemplateResult, html} from 'lit-html';
 
+import {Actions} from '../../utility/actions';
 import {Base} from '../../mixins';
 import {DataType} from '../../utility/dataType';
 import {EVENT_UNLOCK} from '../events';
@@ -588,6 +589,165 @@ export class ListFieldItem
     this.isExpanded = false;
   }
 
+  actionsCollapsedPre(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    index: number
+  ): Actions {
+    const canDrag = this.listField.length > 1;
+    const actions = new Actions({
+      modifier: 'pre',
+    });
+
+    if (canDrag) {
+      actions.add(html`<div class="selective__list__item__drag">
+        <i class="material-icons">drag_indicator</i>
+      </div>`);
+    }
+
+    if (index !== undefined) {
+      actions.add(html`<div class="selective__list__item__index">
+        ${index + 1}
+      </div>`);
+    }
+
+    return actions;
+  }
+
+  actionsCollapsedPost(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    index: number
+  ): Actions {
+    const actions = new Actions({
+      modifier: 'post',
+    });
+
+    actions.add(this.templateRemove(editor, data, index));
+
+    return actions;
+  }
+
+  actionsExpandedPre(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    index: number
+  ): Actions {
+    const actions = new Actions({
+      modifier: 'pre',
+    });
+
+    if (index !== undefined) {
+      actions.add(html`<div class="selective__list__item__index">
+        ${index + 1}
+      </div>`);
+    }
+
+    return actions;
+  }
+
+  actionsExpandedPost(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    editor: SelectiveEditor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    data: DeepObject,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    index: number
+  ): Actions {
+    const actions = new Actions({
+      modifier: 'post',
+    });
+
+    actions.add(html`<span class="material-icons">keyboard_arrow_down</span>`);
+
+    return actions;
+  }
+
+  actionsSimplePre(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    index: number
+  ): Actions {
+    const canDrag = this.listField.length > 1;
+    const actions = new Actions({
+      modifier: 'pre',
+    });
+
+    if (canDrag) {
+      actions.add(html`<div class="selective__list__item__drag">
+        <i class="material-icons">drag_indicator</i>
+      </div>`);
+    }
+
+    if (index !== undefined) {
+      actions.add(html`<div class="selective__list__item__index">
+        ${index + 1}
+      </div>`);
+    }
+
+    return actions;
+  }
+
+  actionsSimplePost(
+    editor: SelectiveEditor,
+    data: DeepObject,
+    index: number
+  ): Actions {
+    const actions = new Actions({
+      modifier: 'post',
+    });
+
+    actions.add(this.templateRemove(editor, data, index));
+
+    return actions;
+  }
+
+  classesCollpased(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    editor: SelectiveEditor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    data: DeepObject,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    index: number
+  ): Record<string, boolean> {
+    return {
+      selective__list__item: true,
+      'selective__list__item--collapsed': true,
+      'selective__list__item--no-drag': this.listField.length <= 1,
+      selective__sortable: true,
+    };
+  }
+
+  classesExpanded(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    editor: SelectiveEditor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    data: DeepObject,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    index: number
+  ): Record<string, boolean> {
+    return {
+      selective__list__item: true,
+      'selective__list__item--expanded': true,
+      selective__sortable: true,
+    };
+  }
+
+  classesSimple(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    editor: SelectiveEditor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    data: DeepObject,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    index: number
+  ): Record<string, boolean> {
+    return {
+      selective__list__item: true,
+      'selective__list__item--expanded': true,
+      selective__sortable: true,
+    };
+  }
+
   handleCollapseItem() {
     this.isExpanded = false;
     this.listField.render();
@@ -634,24 +794,9 @@ export class ListFieldItem
     this.fields.updateOriginal(editor, data, true);
     const canDrag = this.listField.length > 1;
     const sortable = this.listField.sortableUi;
-    const preActions = [];
-    const postActions = [];
-
-    if (canDrag) {
-      preActions.push(html`<div class="selective__list__item__drag">
-        <i class="material-icons">drag_indicator</i>
-      </div>`);
-    }
-
-    postActions.push(this.templateRemove(editor, data, index));
 
     return html` <div
-      class=${classMap({
-        selective__list__item: true,
-        'selective__list__item--collapsed': true,
-        'selective__list__item--no-drag': this.listField.length <= 1,
-        selective__sortable: true,
-      })}
+      class=${classMap(this.classesCollpased(editor, data, index))}
       draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
       data-item-uid=${this.uid}
@@ -675,9 +820,7 @@ export class ListFieldItem
         this.handleHoverOffItem(evt, index);
       }}
     >
-      <div class="selective__field__actions selective__field__actions--pre">
-        ${preActions}
-      </div>
+      ${this.actionsCollapsedPre(editor, data, index).template()}
       <div
         class="selective__list__item__preview"
         data-item-uid=${this.uid}
@@ -685,9 +828,7 @@ export class ListFieldItem
       >
         ${this.templatePreviewValue(editor, data, index)}
       </div>
-      <div class="selective__field__actions selective__field__actions--post">
-        ${postActions}
-      </div>
+      ${this.actionsCollapsedPost(editor, data, index).template()}
     </div>`;
   }
 
@@ -700,7 +841,7 @@ export class ListFieldItem
     const sortable = this.listField.sortableUi;
 
     return html` <div
-      class="selective__list__item selective__list__item--expanded selective__sortable"
+      class=${classMap(this.classesExpanded(editor, data, index))}
       draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
       data-item-uid=${this.uid}
@@ -728,10 +869,11 @@ export class ListFieldItem
         class="selective__list__fields__header"
         @click=${this.handleCollapseItem.bind(this)}
       >
-        <span class="material-icons">keyboard_arrow_down</span>
+        ${this.actionsExpandedPre(editor, data, index).template()}
         <div class="selective__list__item__preview">
           ${this.templatePreviewValue(editor, data, index)}
         </div>
+        ${this.actionsExpandedPost(editor, data, index).template()}
       </div>
       <div class="selective__list__fields">
         ${this.fields.template(editor, data)}
@@ -782,19 +924,9 @@ export class ListFieldItem
   ): TemplateResult {
     const canDrag = this.listField.length > 1;
     const sortable = this.listField.sortableUi;
-    const preActions = [];
-    const postActions = [];
-
-    if (canDrag) {
-      preActions.push(html`<div class="selective__list__item__drag">
-        <i class="material-icons">drag_indicator</i>
-      </div>`);
-    }
-
-    postActions.push(this.templateRemove(editor, data, index));
 
     return html` <div
-      class="selective__list__item selective__list__item--simple selective__sortable"
+      class=${classMap(this.classesSimple(editor, data, index))}
       draggable=${canDrag && sortable.canDrag ? 'true' : 'false'}
       data-index=${index}
       data-item-uid=${this.uid}
@@ -818,13 +950,9 @@ export class ListFieldItem
         this.handleHoverOffItem(evt, index);
       }}
     >
-      <div class="selective__field__actions selective__field__actions--pre">
-        ${preActions}
-      </div>
+      ${this.actionsSimplePre(editor, data, index).template()}
       ${this.fields.template(editor, data)}
-      <div class="selective__field__actions selective__field__actions--post">
-        ${postActions}
-      </div>
+      ${this.actionsSimplePost(editor, data, index).template()}
     </div>`;
   }
 }
