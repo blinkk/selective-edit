@@ -135,6 +135,7 @@ export function templatePreviewValue(
   previewValue: string,
   previewType: PreviewTypes,
   defaultValue: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   index?: number
 ): TemplateResult {
   if (previewType === PreviewTypes.Image && DataType.isString(previewValue)) {
