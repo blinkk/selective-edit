@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://www.github.com/blinkk/selective-edit/compare/v3.2.4...v3.3.0) (2021-12-08)
+
+
+### Features
+
+* List field hover events. ([#70](https://www.github.com/blinkk/selective-edit/issues/70)) ([23a29fb](https://www.github.com/blinkk/selective-edit/commit/23a29fbbe138fbdc663ac4c975def57a1a80ad27))
+
 ### [3.2.4](https://www.github.com/blinkk/selective-edit/compare/v3.2.3...v3.2.4) (2021-11-18)
 
 
