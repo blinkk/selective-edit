@@ -49,6 +49,9 @@
   &--simple
     padding: math.div($pad, 4) 0
 
+  > .selective__field__actions
+    margin: 0 math.div($pad, 2)
+
 .selective__list__item__delete,
 .selective__list__item__drag
   padding: 0 math.div($pad, 2)
@@ -73,6 +76,11 @@
   overflow: hidden
   text-overflow: ellipsis
 
+.selective__list__fields__header
+  display: flex
+  flex-flow: row
+  font-weight: 700
+
 .selective__list__fields__label
   font-weight: 700
 
@@ -83,3 +91,6 @@
     height: $bar-height
     margin: (-$pad) (-$pad) $pad (-$pad)
     width: calc(100% + #{$pad*2})
+
+.selective__list__item__index
+  padding: 0 math.div($pad, 2)

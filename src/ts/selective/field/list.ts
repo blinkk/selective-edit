@@ -743,7 +743,7 @@ export class ListFieldItem
   ): Record<string, boolean> {
     return {
       selective__list__item: true,
-      'selective__list__item--expanded': true,
+      'selective__list__item--simple': true,
       selective__sortable: true,
     };
   }
